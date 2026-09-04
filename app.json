@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "DRC Virtual Golf",
+    "slug": "drc-virtual-golf",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "com.drcvirtualgolf.app",
+      "versionCode": 1
+    }
+  }
+}
