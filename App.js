@@ -6475,4 +6475,1513 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+
+  fieldLabel: {
+    color: '#AAB4AE',
+    fontSize: 9,
+    fontWeight: '900',
+    letterSpacing: 0.8,
+    marginTop: 14,
+    marginBottom: 7,
+  },
+
+  greenText: {
+    color: '#00FF00',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+
+  smallGrey: {
+    color: '#7E8A84',
+    fontSize: 10,
+    fontWeight: '700',
+  },
+
+  bigWhite: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: '900',
+  },
+
+  greenBigSmall: {
+    color: '#00FF00',
+    fontSize: 20,
+    fontWeight: '900',
+  },
+
+  heroCard: {
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 14,
+    padding: 18,
+    marginBottom: 14,
+  },
+
+  heroSmall: {
+    color: '#D8B64D',
+    fontSize: 9,
+    fontWeight: '900',
+    letterSpacing: 1.4,
+  },
+
+  heroTitle: {
+    color: '#FFFFFF',
+    fontSize: 24,
+    fontWeight: '900',
+    marginTop: 6,
+  },
+
+  heroText: {
+    color: '#98A49D',
+    fontSize: 12,
+    lineHeight: 18,
+    marginTop: 7,
+  },
+
+  homeButton: {
+    width: '100%',
+    minHeight: 70,
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 11,
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    marginBottom: 10,
+  },
+
+  homeButtonCentered: {
+    alignItems: 'center',
+  },
+
+  homeButtonTitle: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '900',
+  },
+
+  homeButtonSub: {
+    color: '#78867F',
+    fontSize: 10,
+    marginTop: 4,
+  },
+
+  activeRoundStrip: {
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#D8B64D',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 14,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  activeRoundLeft: {
+    flex: 1,
+  },
+
+  activeRoundRight: {
+    alignItems: 'flex-end',
+  },
+
+  activeRoundLabel: {
+    color: '#D8B64D',
+    fontSize: 8,
+    fontWeight: '900',
+  },
+
+  activeRoundCourse: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '900',
+    marginTop: 3,
+  },
+
+  activeRoundHole: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+
+  activeRoundTap: {
+    color: '#78867F',
+    fontSize: 8,
+    marginTop: 3,
+  },
+
+  primaryButton: {
+    width: '100%',
+    minHeight: 50,
+    backgroundColor: '#00FF00',
+    borderRadius: 9,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 14,
+  },
+
+  primaryButtonText: {
+    color: '#000000',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+
+  secondaryButton: {
+    width: '100%',
+    minHeight: 48,
+    borderWidth: 1,
+    borderColor: '#35513F',
+    borderRadius: 9,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 12,
+  },
+
+  secondaryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 11,
+    fontWeight: '900',
+  },
+
+  darkCard: {
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 10,
+    padding: 14,
+    marginTop: 15,
+  },
+
+  selectorWrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 7,
+  },
+
+  selectorButton: {
+    minHeight: 38,
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 7,
+    backgroundColor: '#0B1A12',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  selectorButtonActive: {
+    backgroundColor: '#163822',
+    borderColor: '#00FF00',
+  },
+
+  selectorText: {
+    color: '#98A49D',
+    fontSize: 9,
+    fontWeight: '900',
+  },
+
+  selectorTextActive: {
+    color: '#00FF00',
+  },
+
+  stepperRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 9,
+  },
+
+  stepperButton: {
+    width: 54,
+    height: 54,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#36503E',
+    backgroundColor: '#102218',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  stepperButtonText: {
+    color: '#FFFFFF',
+    fontSize: 24,
+    fontWeight: '900',
+  },
+
+  stepperValueBox: {
+    flex: 1,
+    height: 64,
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#00FF00',
+    borderRadius: 9,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  stepperValue: {
+    color: '#FFFFFF',
+    fontSize: 24,
+    fontWeight: '900',
+  },
+
+  stepperUnit: {
+    color: '#00FF00',
+    fontSize: 9,
+    fontWeight: '900',
+    marginTop: 2,
+  },
+
+  caddieHero: {
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#00FF00',
+    borderRadius: 12,
+    padding: 18,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+
+  caddieTiny: {
+    color: '#7E8A84',
+    fontSize: 9,
+    fontWeight: '900',
+  },
+
+  caddieDistance: {
+    color: '#FFFFFF',
+    fontSize: 45,
+    fontWeight: '900',
+    lineHeight: 50,
+  },
+
+  caddieUnit: {
+    color: '#00FF00',
+    fontSize: 10,
+    fontWeight: '900',
+  },
+
+  caddieClub: {
+    color: '#D8B64D',
+    fontSize: 22,
+    fontWeight: '900',
+    marginTop: 10,
+  },
+
+  callCard: {
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#D8B64D',
+    borderRadius: 10,
+    padding: 15,
+    marginTop: 16,
+  },
+
+  callLabel: {
+    color: '#D8B64D',
+    fontSize: 9,
+    fontWeight: '900',
+  },
+
+  callClub: {
+    color: '#FFFFFF',
+    fontSize: 24,
+    fontWeight: '900',
+    marginTop: 4,
+  },
+
+  callText: {
+    color: '#95A198',
+    fontSize: 11,
+    marginTop: 5,
+  },
+
+  voiceCard: {
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 16,
+  },
+
+  voiceHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 9,
+  },
+
+  voiceTitle: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '900',
+  },
+
+  voiceStatus: {
+    color: '#77847C',
+    fontSize: 9,
+    fontWeight: '800',
+    marginTop: 3,
+  },
+
+  voiceDot: {
+    width: 11,
+    height: 11,
+    borderRadius: 6,
+    backgroundColor: '#4D5B52',
+  },
+
+  voiceDotLive: {
+    backgroundColor: '#00FF00',
+  },
+
+  voiceResponse: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    lineHeight: 21,
+    fontWeight: '700',
+  },
+
+  voiceTranscript: {
+    color: '#758078',
+    fontSize: 9,
+    marginTop: 8,
+  },
+
+  voiceButtonRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 12,
+  },
+
+  voiceButton: {
+    flex: 1,
+    minHeight: 43,
+    backgroundColor: '#00FF00',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  voiceButtonStop: {
+    backgroundColor: '#3D4741',
+  },
+
+  voiceButtonText: {
+    color: '#000000',
+    fontSize: 10,
+    fontWeight: '900',
+  },
+
+  voiceSpeakButton: {
+    flex: 1,
+    minHeight: 43,
+    borderWidth: 1,
+    borderColor: '#00FF00',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  voiceSpeakButtonText: {
+    color: '#00FF00',
+    fontSize: 10,
+    fontWeight: '900',
+  },
+
+  entryScreen: {
+    flex: 1,
+    backgroundColor: '#07130D',
+    paddingHorizontal: 24,
+    justifyContent: 'center',
+  },
+
+  entryTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 35,
+  },
+
+  entryBrand: {
+    color: '#D8B64D',
+    fontSize: 15,
+    fontWeight: '900',
+    letterSpacing: 1.2,
+  },
+
+  entryStep: {
+    color: '#78867F',
+    fontSize: 10,
+    fontWeight: '800',
+  },
+
+  onboardingCard: {
+    backgroundColor: '#102218',
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    padding: 24,
+  },
+
+  onboardingTitle: {
+    color: '#FFFFFF',
+    fontSize: 26,
+    fontWeight: '900',
+  },
+
+  onboardingText: {
+    color: '#9BA69F',
+    fontSize: 14,
+    lineHeight: 22,
+    marginTop: 11,
+  },
+
+  onboardingDots: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 7,
+    marginVertical: 25,
+  },
+
+  onboardingDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#324038',
+  },
+
+  onboardingDotActive: {
+    backgroundColor: '#D8B64D',
+  },
+
+  entryPrimaryButton: {
+    width: '100%',
+    minHeight: 52,
+    backgroundColor: '#1677FF',
+    borderRadius: 9,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 12,
+  },
+
+  entryPrimaryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+
+  authScroll: {
+    flex: 1,
+    backgroundColor: '#07130D',
+  },
+
+  authContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 25,
+    paddingVertical: 40,
+  },
+
+  authBrandBox: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+
+  authTour: {
+    color: '#D8B64D',
+    fontSize: 28,
+    fontWeight: '900',
+    letterSpacing: 1.2,
+  },
+
+  authElite: {
+    color: '#1677FF',
+    fontSize: 25,
+    fontWeight: '900',
+    letterSpacing: 3,
+  },
+
+  authTitle: {
+    color: '#FFFFFF',
+    fontSize: 23,
+    fontWeight: '900',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+
+  authSub: {
+    color: '#7C8981',
+    fontSize: 11,
+    textAlign: 'center',
+    marginBottom: 18,
+  },
+
+  authTextButton: {
+    alignItems: 'center',
+    paddingVertical: 12,
+  },
+
+  authTextButtonText: {
+    color: '#AEB8B1',
+    fontSize: 10,
+    fontWeight: '900',
+  },
+
+  passwordInputWrap: {
+    position: 'relative',
+    marginTop: 10,
+  },
+
+  passwordTextInput: {
+    paddingRight: 50,
+    marginTop: 0,
+  },
+
+  passwordEyeButton: {
+    position: 'absolute',
+    right: 0,
+    width: 48,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  passwordEyeText: {
+    fontSize: 18,
+  },
+
+  textInput: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    color: '#FFFFFF',
+    fontSize: 14,
+    marginTop: 10,
+  },  courseActionRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 12,
+  },
+
+  courseSmallButton: {
+    flex: 1,
+    minHeight: 42,
+    borderWidth: 1,
+    borderColor: '#D8B64D',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#102218',
+  },
+
+  courseSmallButtonText: {
+    color: '#D8B64D',
+    fontSize: 10,
+    fontWeight: '900',
+  },
+
+  courseStatus: {
+    color: '#00FF00',
+    fontSize: 10,
+    fontWeight: '800',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+
+  courseCardProfessional: {
+    width: '100%',
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 11,
+    padding: 12,
+    marginTop: 15,
+  },
+
+  courseCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  courseCardTitle: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '900',
+  },
+
+  courseCardSubtitle: {
+    color: '#758078',
+    fontSize: 8,
+    fontWeight: '800',
+    marginTop: 4,
+  },
+
+  courseTotalsBox: {
+    minWidth: 58,
+    minHeight: 50,
+    borderWidth: 1,
+    borderColor: '#D8B64D',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  courseTotalsLabel: {
+    color: '#8C967F',
+    fontSize: 8,
+    fontWeight: '900',
+  },
+
+  courseTotalsValue: {
+    color: '#D8B64D',
+    fontSize: 21,
+    fontWeight: '900',
+  },
+
+  courseNineBlock: {
+    width: '100%',
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 8,
+    padding: 7,
+    marginTop: 10,
+  },
+
+  courseNineTitle: {
+    color: '#D8B64D',
+    fontSize: 11,
+    fontWeight: '900',
+    marginBottom: 6,
+  },
+  courseSwipeHint: { color: '#7E8A84', fontSize: 9, fontWeight: '900', marginBottom: 6 },
+
+  courseTableRow: {
+    flexDirection: 'row',
+    minHeight: 39,
+  },
+
+  courseTableLabelCell: {
+    width: 52,
+    minHeight: 39,
+    backgroundColor: '#122119',
+    borderWidth: 0.5,
+    borderColor: '#294133',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  courseTableLabelText: {
+    color: '#8A968E',
+    fontSize: 9,
+    fontWeight: '900',
+  },
+
+  courseTableCell: {
+    width: 43,
+    minHeight: 39,
+    backgroundColor: '#122119',
+    borderWidth: 0.5,
+    borderColor: '#294133',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  courseTableHole: {
+    color: '#FFFFFF',
+    fontSize: 11,
+    fontWeight: '900',
+  },
+
+  courseTableParCell: {
+    backgroundColor: '#14281A',
+  },
+
+  courseTableParText: {
+    color: '#00FF00',
+    fontSize: 16,
+    fontWeight: '900',
+  },
+
+  courseDistanceCell: {
+    width: 43,
+    minHeight: 39,
+    backgroundColor: '#122119',
+    borderWidth: 0.5,
+    borderColor: '#294133',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  courseDistanceInput: {
+    width: 42,
+    height: 38,
+    paddingHorizontal: 1,
+    paddingVertical: 0,
+    color: '#FFFFFF',
+    fontSize: 11,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+
+  courseCardFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#294133',
+  },
+
+  courseFooterRight: {
+    alignItems: 'flex-end',
+  },
+
+  courseFooterLabel: {
+    color: '#758078',
+    fontSize: 8,
+    fontWeight: '900',
+  },
+
+  courseFooterValue: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '900',
+    marginTop: 2,
+  },
+
+  bagCard: {
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 10,
+    padding: 12,
+    marginTop: 14,
+  },
+
+  bagCompactRow: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#1D3A2A',
+    paddingVertical: 4,
+  },
+
+  bagCompactTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  bagCompactBottom: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 3,
+  },
+
+  bagClubCompact: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '900',
+  },
+
+  bagCarryCompact: {
+    color: '#00FF00',
+    fontSize: 11,
+    fontWeight: '900',
+  },
+
+  numberInputCompact: {
+    flex: 1,
+    height: 30,
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 7,
+    color: '#FFFFFF',
+    fontSize: 12,
+    textAlign: 'center',
+  },
+
+  smallSaveButtonCompact: {
+    width: 54,
+    height: 30,
+    backgroundColor: '#D8B64D',
+    borderRadius: 7,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  smallSaveText: {
+    color: '#000000',
+    fontSize: 9,
+    fontWeight: '900',
+  },
+  scoreSummary: {
+    flexDirection: 'row',
+    backgroundColor: '#102218',
+    borderRadius: 10,
+    paddingVertical: 12,
+    marginBottom: 16,
+  },
+
+  scoreSummaryBox: {
+    flex: 1,
+    alignItems: 'center',
+  },
+
+  holeGrid: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+
+  holeButton: {
+    width: '10%',
+    minHeight: 52,
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  holeButtonActive: {
+    backgroundColor: '#D8B64D',
+    borderColor: '#D8B64D',
+  },
+
+  holeNumber: {
+    color: '#FFFFFF',
+    fontSize: 11,
+    fontWeight: '900',
+  },
+
+  holeScore: {
+    color: '#7E8A84',
+    fontSize: 10,
+    marginTop: 3,
+  },
+
+  holeNumberActive: {
+    color: '#000000',
+  },  roundToolRow: {
+    flexDirection: 'row',
+    gap: 7,
+    marginTop: 10,
+    marginBottom: 4,
+  },
+
+  roundToolButton: {
+    flex: 1,
+    minHeight: 44,
+    borderWidth: 1,
+    borderColor: '#D8B64D',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#102218',
+  },
+
+  roundToolText: {
+    color: '#D8B64D',
+    fontSize: 10,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+
+  liveHoleCard: {
+    width: '100%',
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#1D3A2A',
+    borderRadius: 10,
+    padding: 15,
+    marginTop: 16,
+  },
+
+  holeHero: {
+    color: '#D8B64D',
+    fontSize: 24,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+
+  liveHoleCompactInfo: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 16,
+    marginTop: 8,
+    marginBottom: 2,
+  },
+
+  liveHoleCompactPar: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '900',
+  },
+
+  liveHoleCompactDistance: {
+    color: '#00FF00',
+    fontSize: 13,
+    fontWeight: '900',
+  },  twoColumn: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+
+  column: {
+    flex: 1,
+  },
+
+  scoreInput: {
+    width: '100%',
+    height: 58,
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#D8B64D',
+    borderRadius: 8,
+    color: '#FFFFFF',
+    fontSize: 24,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+
+  quickEntryCard: {
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 9,
+    padding: 12,
+    marginTop: 18,
+  },
+
+  quickEntryTitle: {
+    color: '#D8B64D',
+    fontSize: 13,
+    fontWeight: '900',
+  },
+
+  quickEntryHint: {
+    color: '#7E8A84',
+    fontSize: 10,
+    marginTop: 4,
+    marginBottom: 9,
+  },  quickEntryInput: {
+    width: '100%',
+    minHeight: 48,
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    color: '#FFFFFF',
+    paddingHorizontal: 12,
+    fontSize: 13,
+  },
+
+  quickApplyButton: {
+    minHeight: 44,
+    backgroundColor: '#D8B64D',
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 9,
+  },
+
+  quickApplyText: {
+    color: '#000000',
+    fontSize: 13,
+    fontWeight: '900',
+  },
+
+  horizontalClub: {
+    minHeight: 43,
+    paddingHorizontal: 14,
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    justifyContent: 'center',
+    marginRight: 8,
+  },
+
+  horizontalClubActive: {
+    borderColor: '#00FF00',
+    backgroundColor: '#163822',
+  },
+
+  horizontalClubText: {
+    color: '#C3CBC6',
+    fontSize: 12,
+    fontWeight: '900',
+  },  sequenceCard: {
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    padding: 11,
+    marginTop: 10,
+  },
+
+  sequenceTitle: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+
+  sequenceWrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 7,
+    marginTop: 9,
+  },
+
+  sequenceChip: {
+    backgroundColor: '#163822',
+    borderWidth: 1,
+    borderColor: '#00FF00',
+    borderRadius: 7,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+
+  sequenceChipText: {
+    color: '#00FF00',
+    fontSize: 11,
+    fontWeight: '900',
+  },  shotDetailCard: {
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 9,
+    padding: 12,
+    marginTop: 14,
+  },
+
+  shotDistanceInput: {
+    width: '100%',
+    height: 52,
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#00FF00',
+    borderRadius: 8,
+    color: '#00FF00',
+    fontSize: 20,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+
+  shotHistory: {
+    marginTop: 14,
+  },
+
+  shotHistoryRow: {
+    minHeight: 54,
+    borderTopWidth: 1,
+    borderTopColor: '#294133',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 9,
+  },
+
+  removeText: {
+    color: '#FF7777',
+    fontSize: 9,
+    fontWeight: '900',
+  },  notesInput: {
+    width: '100%',
+    minHeight: 80,
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    color: '#FFFFFF',
+    padding: 12,
+    textAlignVertical: 'top',
+  },
+
+  moveRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 18,
+  },
+
+  secondaryHalf: {
+    flex: 1,
+    minHeight: 48,
+    borderWidth: 1,
+    borderColor: '#35513F',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  primaryHalf: {
+    flex: 1,
+    minHeight: 48,
+    backgroundColor: '#00FF00',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },  finishRoundButton: {
+    width: '100%',
+    minHeight: 50,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#FF7777',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  finishRoundText: {
+    color: '#FF7777',
+    fontWeight: '900',
+    fontSize: 12,
+  },
+
+  historyItem: {
+    borderTopWidth: 1,
+    borderTopColor: '#294133',
+    paddingVertical: 11,
+  },  practiceTypeRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 10,
+  },
+
+  practiceTypeButton: {
+    minHeight: 42,
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    backgroundColor: '#102218',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  practiceTypeButtonActive: {
+    borderColor: '#D8B64D',
+    backgroundColor: '#2A2617',
+  },
+
+  practiceTypeText: {
+    color: '#C3CBC6',
+    fontSize: 11,
+    fontWeight: '900',
+  },
+
+  practiceTypeTextActive: {
+    color: '#D8B64D',
+  },  practiceShapeRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginTop: 10,
+  },
+
+  practiceShapeButton: {
+    flex: 1,
+    minHeight: 42,
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    backgroundColor: '#102218',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  practiceShapeButtonActive: {
+    borderColor: '#00FF00',
+    backgroundColor: '#163822',
+  },
+
+  practiceShapeText: {
+    color: '#C3CBC6',
+    fontSize: 11,
+    fontWeight: '900',
+  },
+
+  practiceShapeTextActive: {
+    color: '#00FF00',
+  },  practiceResultRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 7,
+    marginTop: 10,
+  },
+
+  practiceResultButton: {
+    minWidth: 74,
+    minHeight: 40,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    backgroundColor: '#102218',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  practiceResultButtonActive: {
+    borderColor: '#D8B64D',
+    backgroundColor: '#2A2617',
+  },
+
+  practiceResultText: {
+    color: '#C3CBC6',
+    fontSize: 10,
+    fontWeight: '900',
+  },
+
+  practiceResultTextActive: {
+    color: '#D8B64D',
+  },  practiceStatsCard: {
+    marginTop: 14,
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 9,
+    padding: 12,
+  },
+
+  practiceStatsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    minHeight: 36,
+  },
+
+  practiceStatsLabel: {
+    color: '#C3CBC6',
+    fontSize: 11,
+    fontWeight: '700',
+  },
+
+  practiceStatsValue: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '900',
+  },
+
+  practiceGoodValue: {
+    color: '#00FF00',
+  },
+
+  practiceBadValue: {
+    color: '#FF7777',
+  },  practiceHistoryItem: {
+    borderTopWidth: 1,
+    borderTopColor: '#294133',
+    paddingVertical: 11,
+  },
+
+  practiceHistoryTitle: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '900',
+  },
+
+  practiceHistoryMeta: {
+    color: '#7E8A84',
+    fontSize: 10,
+    marginTop: 3,
+  },
+
+  warmupStep: {
+    minHeight: 48,
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    backgroundColor: '#102218',
+    paddingHorizontal: 12,
+    marginBottom: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  warmupStepDone: {
+    borderColor: '#00FF00',
+    backgroundColor: '#163822',
+  },  warmupStepText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '800',
+    flex: 1,
+  },
+
+  warmupStepTextDone: {
+    color: '#00FF00',
+  },
+
+  warmupCheck: {
+    color: '#00FF00',
+    fontSize: 18,
+    fontWeight: '900',
+    marginLeft: 10,
+  },
+
+  routineItem: {
+    minHeight: 48,
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    backgroundColor: '#102218',
+    paddingHorizontal: 12,
+    marginBottom: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  routineItemDone: {
+    borderColor: '#D8B64D',
+    backgroundColor: '#2A2617',
+  },  routineText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '800',
+    flex: 1,
+  },
+
+  routineTextDone: {
+    color: '#D8B64D',
+  },
+
+  routineCheck: {
+    color: '#D8B64D',
+    fontSize: 18,
+    fontWeight: '900',
+    marginLeft: 10,
+  },
+
+  settingsRow: {
+    marginBottom: 14,
+  },
+
+  settingsLabel: {
+    color: '#C3CBC6',
+    fontSize: 11,
+    fontWeight: '800',
+    marginBottom: 7,
+  },
+
+  settingsOptions: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 7,
+  },
+
+  settingsButton: {
+    minHeight: 42,
+    paddingHorizontal: 14,
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 8,
+    backgroundColor: '#102218',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },  settingsButtonActive: {
+    borderColor: '#00FF00',
+    backgroundColor: '#163822',
+  },
+
+  settingsButtonText: {
+    color: '#C3CBC6',
+    fontSize: 11,
+    fontWeight: '900',
+  },
+
+  settingsButtonTextActive: {
+    color: '#00FF00',
+  },
+
+  profileCard: {
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 9,
+    padding: 12,
+    marginBottom: 14,
+  },
+
+  profileTitle: {
+    color: '#D8B64D',
+    fontSize: 13,
+    fontWeight: '900',
+    marginBottom: 8,
+  },
+
+  profileValue: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  warmupProgress: { marginTop: 8, marginBottom: 12 },
+  progressTrack: { height: 5, backgroundColor: '#1D3A2A', borderRadius: 4, overflow: 'hidden', marginTop: 6 },
+  progressFill: { height: '100%', backgroundColor: '#00FF00' },
+  warmupCard: { minHeight: 170, backgroundColor: '#102218', borderWidth: 1, borderColor: '#294133', borderRadius: 10, padding: 16, justifyContent: 'center' },
+  warmupTitle: { color: '#D8B64D', fontSize: 18, fontWeight: '900', marginBottom: 10 },
+  warmupText: { color: '#FFFFFF', fontSize: 14, lineHeight: 21, fontWeight: '600' },
+  routineEditCard: { backgroundColor: '#102218', borderWidth: 1, borderColor: '#294133', borderRadius: 10, padding: 10, marginTop: 8 },
+  routineEditRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8 },
+  routineEditNumber: { width: 24, color: '#D8B64D', fontSize: 13, fontWeight: '900', textAlign: 'center' },
+  routineEditInput: { flex: 1, minHeight: 42, backgroundColor: '#0B1A12', borderWidth: 1, borderColor: '#294133', borderRadius: 8, color: '#FFFFFF', fontSize: 13, paddingHorizontal: 10 },
+  routineHabitCard: { marginTop: 18, alignItems: 'center', paddingVertical: 18, borderTopWidth: 1, borderTopColor: '#294133' },
+  routineHabitTop: { color: '#D8B64D', fontSize: 14, fontWeight: '900', letterSpacing: 0.7, textAlign: 'center' },
+  routineHabitBottom: { color: '#FFFFFF', fontSize: 18, fontWeight: '900', marginTop: 5, letterSpacing: 1 },
+  practiceStrikeRow: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#102218', borderRadius: 8, padding: 10, marginTop: 10 },
+  practiceStrikeText: { color: '#D8B64D', fontSize: 10, fontWeight: '900' },
+
+  settingsInfoCard: {
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 10,
+    padding: 14,
+    marginTop: 14,
+  },
+  settingsInfoTitle: {
+    color: '#D8B64D',
+    fontSize: 13,
+    fontWeight: '900',
+  },
+  settingsInfoText: {
+    color: '#C3CBC6',
+    fontSize: 12,
+    lineHeight: 18,
+    marginTop: 7,
+  },
+  bunkerPinCard: {
+    backgroundColor: '#0B1A12',
+    borderWidth: 1,
+    borderColor: '#294133',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 14,
+  },
+  bunkerPinInput: {
+    height: 46,
+    backgroundColor: '#102218',
+    borderWidth: 1,
+    borderColor: '#D8B64D',
+    borderRadius: 8,
+    color: '#FFFFFF',
+    paddingHorizontal: 12,
+    fontSize: 16,
+    fontWeight: '800',
+    marginBottom: 7,
+  },
+});
+
+ 
   
