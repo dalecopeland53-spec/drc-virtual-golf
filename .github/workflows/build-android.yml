@@ -1,15 +1,14 @@
-name: Verify Tour Pro App
+name: Generate Expo QR Preview
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
-  verify:
+  preview:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -17,7 +16,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' 
+          node-version: '20'
 
       - name: Install Project Dependencies
         run: npm install --no-audit --no-fund
+
+      - name: Setup Expo Configuration
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: 6.x
+
+      - name: Create Live Application QR Code
+        run: npx expo export
