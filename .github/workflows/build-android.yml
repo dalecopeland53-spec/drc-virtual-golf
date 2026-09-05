@@ -19,12 +19,6 @@ jobs:
         with:
           node-version: '20' 
 
-      - name: Setup Java JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
       - name: Install Project Dependencies
         run: npm install --no-audit --no-fund
 
@@ -34,5 +28,5 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Build Android App (Local APK)
-        run: npx eas-cli build --platform android --profile preview --local
+      - name: Submit to Expo Cloud Build
+        run: npx eas-cli build --platform android --profile preview --non-interactive
