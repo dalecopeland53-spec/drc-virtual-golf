@@ -1,178 +1,200 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import { StrokesGainedEngine, LaunchMonitorBridge } from './GolfProEngine';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Image, StatusBar } from 'react-native';
 
 export default function App() {
-  // Application Data States
-  const [shots, setShots] = useState([]);
-  const [distanceInput, setDistanceInput] = useState('');
-  const [selectedLie, setSelectedLie] = useState('tee');
-  const [selectedClub, setSelectedClub] = useState('Driver');
-  
-  // Hardware Monitor State Simulation
-  const [simulatedTelemetry, setSimulatedTelemetry] = useState('No Device Data Connected');
-
-  // Adds a shot safely into the processing array
-  const handleAddShot = () => {
-    const distance = parseFloat(distanceInput);
-    if (isNaN(distance) || distance <= 0) {
-      alert('Please enter a valid remaining distance matrix yardage.');
-      return;
-    }
-
-    const newShot = {
-      id: Math.random().toString(36).substr(2, 9),
-      club: selectedClub,
-      lieType: selectedLie,
-      distanceRemainingYards: distance,
-    };
-
-    setShots([...shots, newShot]);
-    setDistanceInput('');
-  };
-
-  // Simulates a Bluetooth telemetry data packet coming from a TrackMan / Mevo+ launch monitor
-  const handleSimulateHardwareStream = () => {
-    const rawMockPacket = "SPEED:168.5,LAUNCH:11.8,SPIN:2380";
-    const parsedData = LaunchMonitorBridge.processHardwareTelemetry(rawMockPacket);
-    
-    if (parsedData) {
-      setSimulatedTelemetry(`Ball Speed: ${parsedData.ballSpeedMph}mph | Launch: ${parsedData.launchAngleDeg}° | Spin: ${parsedData.spinRateRpm}rpm`);
-    } else {
-      setSimulatedTelemetry('Error parsing hardware streaming metrics.');
-    }
-  };
-
-  // Resets the current scorecard array
-  const handleClearRound = () => {
-    setShots([]);
-    setSimulatedTelemetry('No Device Data Connected');
-  };
+  // Score Tracking States
+  const [score, setScore] = useState(0);
+  const [putts, setPutts] = useState(0);
+  const [gir, setGir] = useState(0);
+  const [fairway, setFairway] = useState(0);
+  const [penalty, setPenalty] = useState(0);
+  const [voiceCaddieOn, setVoiceCaddieOn] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>GOLF PRO PERFORMANCE</Text>
-        <Text style={styles.headerSubtitle}>Elite Shot Engine & Analytics</Text>
+      <StatusBar barStyle="light-content" />
+      
+      {/* 1. TOP BRANDING & WEATHER TELEMETRY BAR */}
+      <View style={styles.topBar}>
+        <Text style={styles.hamburgerMenu}>☰</Text>
+        <View style={styles.brandContainer}>
+          <Text style={styles.brandText}>TOUR PRO</Text>
+          <Text style={styles.subBrandText}>— ELITE —</Text>
+        </View>
+        <View style={styles.weatherContainer}>
+          <Text style={styles.weatherIcon}>☀️</Text>
+          <View>
+            <Text style={styles.weatherText}>24°C</Text>
+            <Text style={styles.windText}>Wind 8 km/h</Text>
+          </View>
+          <Text style={styles.weatherArrow}>❯</Text>
+        </View>
       </View>
 
-      <ScrollView style={styles.scrollArea}>
-        
-        {/* SECTION 1: LAUNCH MONITOR HARDWARE TEST */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>🛰️ Hardware Telemetry Stream</Text>
-          <Text style={styles.telemetryText}>{simulatedTelemetry}</Text>
-          <TouchableOpacity style={styles.simButton} onPress={handleSimulateHardwareStream}>
-            <Text style={styles.buttonText}>Simulate Launch Monitor Bluetooth Feed</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* SECTION 2: SHOT TRACKER ENTRY MODULE */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>🏌️ Record Practice Shot</Text>
+      <ScrollView style={styles.mainContent}>
+        <View style={styles.splitLayout}>
           
-          <Text style={styles.label}>Select Lie Type:</Text>
-          <View style={styles.row}>
-            {['tee', 'fairway', 'rough', 'sand', 'green'].map((lie) => (
-              <TouchableOpacity 
-                key={lie} 
-                style={[styles.chip, selectedLie === lie && styles.chipActive]} 
-                onPress={() => setSelectedLie(lie)}
-              >
-                <Text style={[styles.chipText, selectedLie === lie && styles.chipTextActive]}>{lie.toUpperCase()}</Text>
-              </TouchableOpacity>
-            ))}
+          {/* 2. LEFT SIDE: HOLE GRAPHIC / GPS CONTAINER */}
+          <View style={styles.leftColumn}>
+            <View style={styles.mapMockup}>
+              {/* Replace background color with <ImageBackground> or Mapview when tracking live */}
+              <View style={styles.placeholderMapGraphic}>
+                <Text style={styles.mapLabelPin}>🏁 498 m</Text>
+                <Text style={styles.mapLabelArc2}>• 280 m</Text>
+                <Text style={styles.mapLabelArc1}>• 230 m</Text>
+                <View style={styles.ballIndicatorDot} />
+              </View>
+              
+              {/* GPS / Aerial Toggle Switches */}
+              <View style={styles.toggleRow}>
+                <TouchableOpacity style={[styles.toggleBtn, styles.toggleBtnActive]}>
+                  <Text style={styles.toggleBtnTextActive}>🗺️ GPS</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.toggleBtn}>
+                  <Text style={styles.toggleBtnText}>Aerial</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
 
-          <Text style={styles.label}>Select Club:</Text>
-          <View style={styles.row}>
-            {['Driver', '7-Iron', 'Wedge', 'Putter'].map((club) => (
-              <TouchableOpacity 
-                key={club} 
-                style={[styles.chip, selectedClub === club && styles.chipActive]} 
-                onPress={() => setSelectedClub(club)}
-              >
-                <Text style={[styles.chipText, selectedClub === club && styles.chipTextActive]}>{club}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          <Text style={styles.label}>Distance Remaining to Hole (Yards):</Text>
-          <TextInput 
-            style={styles.input}
-            keyboardType="numeric"
-            placeholder="e.g. 150"
-            placeholderTextColor="#888"
-            value={distanceInput}
-            onChangeText={setDistanceInput}
-          />
-
-          <TouchableOpacity style={styles.addButton} onPress={handleAddShot}>
-            <Text style={styles.buttonText}>Log Shot Matrix</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* SECTION 3: LIVE ANALYTICS BREAKDOWN */}
-        <View style={styles.card}>
-          <View style={styles.rowBetween}>
-            <Text style={styles.cardTitle}>📊 Strokes Gained Summary</Text>
-            {shots.length > 0 && (
-              <TouchableOpacity onPress={handleClearRound}>
-                <Text style={styles.clearText}>Clear Log</Text>
-              </TouchableOpacity>
-            )}
-          </View>
-
-          {shots.length === 0 ? (
-            <Text style={styles.emptyText}>No shots logged yet. Enter your practice data above to compute Strokes Gained analytics.</Text>
-          ) : (
-            shots.map((shot, index) => {
-              const nextShot = shots[index + 1];
-              const strokesGained = StrokesGainedEngine.calculateShotStrokesGained(shot, nextShot);
-              const sgColor = strokesGained >= 0 ? '#2e7d32' : '#c62828';
-
-              return (
-                <View key={shot.id} style={styles.shotRow}>
-                  <Text style={styles.shotInfo}>
-                    Shot {index + 1}: <Text style={{fontWeight: 'bold'}}>{shot.club}</Text> from {shot.lieType.toUpperCase()} ({shot.distanceRemainingYards} yds)
-                  </Text>
-                  <Text style={[styles.shotSg, { color: sgColor }]}>
-                    {strokesGained >= 0 ? `+${strokesGained}` : strokesGained} SG
-                  </Text>
+          {/* 3. RIGHT SIDE: HOLE METRICS & AI VOICE CADDIE */}
+          <View style={styles.rightColumn}>
+            
+            {/* Hole & Distance Information Card */}
+            <View style={styles.holeInfoCard}>
+              <View style={styles.holeHeaderRow}>
+                <View>
+                  <Text style={styles.holeTitleText}>Hole 1</Text>
+                  <Text style={styles.holeSubText}>Par 5  |  S.I. 5</Text>
                 </View>
-              );
-            })
-          )}
+                <View style={styles.arrowBoxRow}>
+                  <TouchableOpacity style={styles.navArrow}><Text style={styles.arrowText}>❮</Text></TouchableOpacity>
+                  <TouchableOpacity style={styles.navArrow}><Text style={styles.arrowText}>❯</Text></TouchableOpacity>
+                </View>
+              </View>
+
+              <View style={styles.distanceMetricBlock}>
+                <Text style={styles.distanceLabel}>To Centre</Text>
+                <Text style={styles.distanceMainValue}>498 m</Text>
+              </View>
+
+              <View style={styles.yardageGrid}>
+                <View style={styles.gridCell}><Text style={styles.gridLabel}>Front</Text><Text style={styles.gridVal}>480 m</Text></View>
+                <View style={styles.gridCell}><Text style={styles.gridLabel}>Centre</Text><Text style={styles.gridVal}>498 m</Text></View>
+                <View style={styles.gridCell}><Text style={styles.gridLabel}>Back</Text><Text style={styles.gridVal}>512 m</Text></View>
+              </View>
+            </View>
+
+            {/* AI Voice Caddie Smart Engine */}
+            <View style={styles.caddieCard}>
+              <View style={styles.rowBetween}>
+                <Text style={styles.caddieCardTitle}>Voice Caddie</Text>
+                <TouchableOpacity 
+                  style={[styles.switchTrack, voiceCaddieOn ? styles.switchOn : styles.switchOff]}
+                  onPress={() => setVoiceCaddieOn(!voiceCaddieOn)}
+                >
+                  <View style={[styles.switchThumb, voiceCaddieOn ? styles.thumbRight : styles.thumbLeft]} />
+                </TouchableOpacity>
+              </View>
+
+              <TouchableOpacity style={styles.micButton}>
+                <Text style={styles.micIcon}>🎙️</Text>
+                <Text style={styles.micText}>Ask Caddie</Text>
+                <Text style={styles.micSubText}>Tap and speak</Text>
+              </TouchableOpacity>
+
+              <View style={styles.caddieSpeechBubble}>
+                <Text style={styles.speechText}>
+                  "498 metres to the centre. With a slight headwind, I'd suggest driver. Aim just right of centre."
+                </Text>
+              </View>
+            </View>
+
+            {/* Recommended Strategy Club Card */}
+            <View style={styles.clubCard}>
+              <Text style={styles.clubCardLabel}>Recommended Club</Text>
+              <View style={styles.clubDataRow}>
+                <Text style={styles.clubNameText}>Driver</Text>
+                <View style={styles.carryBox}>
+                  <Text style={styles.carryLabel}>Est. Carry</Text>
+                  <Text style={styles.carryVal}>230 m</Text>
+                </View>
+              </View>
+              <TouchableOpacity style={styles.dropdownSelector}>
+                <Text style={styles.dropdownText}>Use Another Club  ▼</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Last Shot Telemetry Log */}
+            <View style={styles.lastShotCard}>
+              <View style={styles.rowBetween}>
+                <Text style={styles.lastShotTitle}>Last Shot</Text>
+                <Text style={styles.editIcon}>✏️</Text>
+              </View>
+              <Text style={styles.lastShotPlaceholder}>-  No shot recorded</Text>
+            </View>
+
+          </View>
         </View>
 
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+        {/* 4. BOTTOM SECTION: COMPREHENSIVE SCORECARD INPUTS */}
+        <View style={styles.scorecardContainer}>
+          <View style={styles.statGridRow}>
+            
+            {/* Score Counter */}
+            <View style={styles.statInputCell}>
+              <Text style={styles.statInputLabel}>Score</Text>
+              <View style={styles.counterRow}>
+                <TouchableOpacity style={styles.counterBtn} onPress={() => setScore(Math.max(0, score - 1))}><Text style={styles.btnSymbol}>-</Text></TouchableOpacity>
+                <Text style={styles.counterVal}>{score}</Text>
+                <TouchableOpacity style={styles.counterBtn} onPress={() => setScore(score + 1)}><Text style={styles.btnSymbol}>+</Text></TouchableOpacity>
+              </View>
+            </View>
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f4f6f9' },
-  header: { padding: 20, backgroundColor: '#1a237e', alignItems: 'center' },
-  headerTitle: { color: '#fff', fontSize: 20, fontWeight: 'bold', letterSpacing: 1 },
-  headerSubtitle: { color: '#9fa8da', fontSize: 13, marginTop: 4 },
-  scrollArea: { flex: 1, padding: 12 },
-  card: { backgroundColor: '#fff', borderRadius: 12, padding: 16, marginBottom: 14, elevation: 2 },
-  cardTitle: { fontSize: 16, fontWeight: 'bold', color: '#333', marginBottom: 12 },
-  telemetryText: { backgroundColor: '#f5f5f5', padding: 12, borderRadius: 6, color: '#444', fontFamily: 'monospace', fontSize: 12, textAlign: 'center', marginBottom: 10 },
-  simButton: { backgroundColor: '#3949ab', padding: 12, borderRadius: 8, alignItems: 'center' },
-  addButton: { backgroundColor: '#2e7d32', padding: 14, borderRadius: 8, alignItems: 'center', marginTop: 10 },
-  buttonText: { color: '#fff', fontWeight: 'bold', fontSize: 14 },
-  label: { fontSize: 13, color: '#555', marginTop: 12, marginBottom: 6, fontWeight: '600' },
-  row: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: 4 },
-  rowBetween: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  chip: { paddingVertical: 6, paddingHorizontal: 12, borderRadius: 20, backgroundColor: '#eee' },
-  chipActive: { backgroundColor: '#1a237e' },
-  chipText: { fontSize: 12, color: '#555' },
-  chipTextActive: { color: '#fff', fontWeight: 'bold' },
-  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 6, padding: 10, color: '#000', fontSize: 15, backgroundColor: '#fafafa' },
-  emptyText: { color: '#777', fontStyle: 'italic', textAlign: 'center', paddingVertical: 10, fontSize: 13 },
-  shotRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#eee' },
-  shotInfo: { fontSize: 13, color: '#333', flex: 0.85 },
-  shotSg: { fontSize: 14, fontWeight: 'bold', flex: 0.15, textAlign: 'right' },
-  clearText: { color: '#c62828', fontSize: 13, fontWeight: 'bold' }
-});
+            {/* Putts Counter */}
+            <View style={styles.statInputCell}>
+              <Text style={styles.statInputLabel}>Putts</Text>
+              <View style={styles.counterRowSmall}>
+                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setPutts(Math.max(0, putts - 1))}><Text style={styles.btnSymbolSmall}>-</Text></TouchableOpacity>
+                <Text style={styles.counterValSmall}>{putts}</Text>
+                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setPutts(putts + 1)}><Text style={styles.btnSymbolSmall}>+</Text></TouchableOpacity>
+              </View>
+            </View>
+
+            {/* GIR Tracking */}
+            <View style={styles.statInputCell}>
+              <Text style={styles.statInputLabel}>GIR</Text>
+              <View style={styles.counterRowSmall}>
+                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setGir(Math.max(0, gir - 1))}><Text style={styles.btnSymbolSmall}>-</Text></TouchableOpacity>
+                <Text style={styles.counterValSmall}>{gir}</Text>
+                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setGir(gir + 1)}><Text style={styles.btnSymbolSmall}>+</Text></TouchableOpacity>
+              </View>
+            </View>
+
+            {/* Fairway Accuracy Tracking */}
+            <View style={styles.statInputCell}>
+              <Text style={styles.statInputLabel}>Fairway</Text>
+              <View style={styles.counterRowSmall}>
+                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setFairway(Math.max(0, fairway - 1))}><Text style={styles.btnSymbolSmall}>-</Text></TouchableOpacity>
+                <Text style={styles.counterValSmall}>{fairway}</Text>
+                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setFairway(fairway + 1)}><Text style={styles.btnSymbolSmall}>+</Text></TouchableOpacity>
+              </View>
+            </View>
+
+            {/* Penalty Strokes */}
+            <View style={styles.statInputCell}>
+              <Text style={styles.statInputLabel}>Penalty ⚠️</Text>
+              <View style={styles.counterRowSmall}>
+                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setPenalty(Math.max(0, penalty - 1))}><Text style={styles.btnSymbolSmall}>-</Text></TouchableOpacity>
+                <Text style={styles.counterValSmall}>{penalty}</Text>
+                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setPenalty(penalty + 1)}><Text style={styles.btnSymbolSmall}>+</Text></TouchableOpacity>
+              </View>
+            </View>
+
+          </View>
+
+          {/* Action Strategy Forward Buttons */}
+          <View style={styles.actionButtonRow}>
+            <TouchableOpacity style={styles.nextHoleButton}>
+              <Text style={styles.nextHoleText}>⛳ Next Hole</Text>
+            </TouchableOpacity>
