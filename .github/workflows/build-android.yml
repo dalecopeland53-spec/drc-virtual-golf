@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Force Reset Android APK
 
 on:
   push:
