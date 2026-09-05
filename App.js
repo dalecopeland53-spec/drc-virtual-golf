@@ -10,7 +10,7 @@ const COURSE_NAME = "Capricorn Resort";
 const HOLE_DATA = [
   {
     holeNumber: 1, par: 5, si: 5, distanceToCentre: 498, distanceFront: 480, distanceBack: 512,
-    elevationChange: 4, // +4 meters uphill
+    elevationChange: 4, 
     safeMissZone: "Right side of fairway or short of the green. Left is dense bush.",
     caddieText: "498 metres to the centre. With a slight headwind, I'd suggest driver. Aim just right of centre.",
     recommendedClub: "Driver", estCarry: 230, aerialImage: null,
@@ -18,7 +18,7 @@ const HOLE_DATA = [
   },
   {
     holeNumber: 2, par: 4, si: 11, distanceToCentre: 365, distanceFront: 350, distanceBack: 380,
-    elevationChange: -3, // -3 meters downhill
+    elevationChange: -3, 
     safeMissZone: "Short-left of the green avoids the deep greenside bunker on the right.",
     caddieText: "365 metres. Watch out for the fairway bunker on the left. A smooth 3-wood is perfect here.",
     recommendedClub: "3-Wood", estCarry: 210, aerialImage: null,
@@ -34,7 +34,7 @@ const HOLE_DATA = [
   },
   {
     holeNumber: 4, par: 4, si: 1, distanceToCentre: 410, distanceFront: 390, distanceBack: 425,
-    elevationChange: 6, // Significant uphill
+    elevationChange: 6, 
     safeMissZone: "Right-center off the tee. Left side blocks your second shot completely.",
     caddieText: "Stroke Index 1. Long par 4. Keep your tee shot right of the center line to avoid a total block out.",
     recommendedClub: "Driver", estCarry: 230, aerialImage: null,
@@ -98,7 +98,7 @@ const HOLE_DATA = [
   },
   {
     holeNumber: 12, par: 3, si: 18, distanceToCentre: 135, distanceFront: 125, distanceBack: 142,
-    elevationChange: -4, // Severe downhill drop
+    elevationChange: -4, 
     safeMissZone: "Long is fine. Anything short drops into deep sand or false front rolls.",
     caddieText: "The shortest par 3 on the course, but highly technical. Club down and focus entirely on target accuracy—falling short drops you straight into sand.",
     recommendedClub: "9-Iron", estCarry: 130, aerialImage: null,
@@ -122,7 +122,7 @@ const HOLE_DATA = [
   },
   {
     holeNumber: 15, par: 4, si: 2, distanceToCentre: 425, distanceFront: 405, distanceBack: 440,
-    elevationChange: 5, // Heavy uphill grind
+    elevationChange: 5, 
     safeMissZone: "Short-right chip is manageable. Left is completely blocked by hazard walls.",
     caddieText: "Ranked as the hardest par 4 on the back nine. It demands a long, straight tee shot. If you cannot reach in two, play safe and try to scramble for par.",
     recommendedClub: "Driver", estCarry: 230, aerialImage: null,
@@ -147,5 +147,10 @@ const HOLE_DATA = [
   {
     holeNumber: 18, par: 5, si: 14, distanceToCentre: 480, distanceFront: 460, distanceBack: 495,
     elevationChange: -2,
-    safeMissZone: "Lay up far left. Water completely completely locks down the front right.",
+    safeMissZone: "Lay up far left. Water completely locks down the front right.",
     caddieText: "Fantastic par 5 finishing hole right back toward the resort clubhouse. Water protects the front right of the green. Lay up safely left to secure a closing par or birdie putt!",
+    recommendedClub: "Driver", estCarry: 235, aerialImage: null,
+    markers: { green: { top: '11%', left: '44%' }, tee: { top: '85%', left: '56%' } }
+  }
+];
+
