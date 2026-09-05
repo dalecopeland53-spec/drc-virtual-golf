@@ -1,16 +1,42 @@
 {
   "expo": {
-    "name": "drc-virtual-golf",
-    "slug": "drc-virtual-golf",
+    "name": "Tour Pro Elite",
+    "slug": "tour-pro-elite",
     "version": "1.0.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#030812"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dalecopeland.tourproelite"
+    },
     "android": {
-      "package": "com.dal.drcvirtualgolf",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#030812"
+      },
+      "package": "com.dalecopeland.tourproelite",
       "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "RECORD_AUDIO",
+        "BLUETOOTH",
+        "BLUETOOTH_ADMIN",
+        "BLUETOOTH_CONNECT"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyFakeKey_ReplaceThisWithYourActualGoogleMapsKey"
+        }
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
     }
   }
 }
-
