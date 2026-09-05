@@ -1,1 +1,16 @@
+{
+  "expo": {
+    "name": "drc-virtual-golf",
+    "slug": "drc-virtual-golf",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.dal.drcvirtualgolf",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    }
+  }
+}
 
