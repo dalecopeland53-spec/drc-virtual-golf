@@ -6,11 +6,29 @@
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "android": {
-      "package": "com.drcvirtualgolf.app",
-      "versionCode": 1
+      "package": "com.drcvirtualgolf",
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "RECORD_AUDIO"
+      ]
     },
     "splash": {
       "backgroundColor": "#0F172A"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow DRC Virtual Golf to access your location for real-time golf course GPS mapping metrics."
+        }
+      ],
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Allow DRC Virtual Golf to use the microphone for dynamic caddie voice tracking commands."
+        }
+      ]
+    ]
   }
 }
