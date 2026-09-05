@@ -21,21 +21,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Project Dependencies
-        run: npm install --no-audit --no-fund
-
-      - name: Export Web Application Static Assets
-        run: npx expo export --platform web
-
       - name: Upload Static Web Bundle Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: '.'
 
       - name: Deploy Live Project Link to Web
         id: deployment
