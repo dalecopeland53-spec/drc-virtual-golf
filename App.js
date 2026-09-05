@@ -1,200 +1,200 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { StrokesGainedEngine } from './GolfProEngine';
 
 export default function App() {
-  // Score Tracking States
-  const [score, setScore] = useState(0);
-  const [putts, setPutts] = useState(0);
-  const [gir, setGir] = useState(0);
-  const [fairway, setFairway] = useState(0);
-  const [penalty, setPenalty] = useState(0);
-  const [voiceCaddieOn, setVoiceCaddieOn] = useState(true);
+  const [shots, setShots] = useState([]);
+  const [selectedLie, setSelectedLie] = useState('tee');
+  const [selectedClub, setSelectedClub] = useState('Driver');
+  const [currentDistance, setCurrentDistance] = useState(498);
+  
+  // Real-time environmental metrics 
+  const currentTemp = 24;
+  const currentWindSpeed = 8;
+  const headwindAngle = 0; 
+
+  const dynamicCarry = StrokesGainedEngine.calculateTrueCarryAdjustment(230, currentTemp, currentWindSpeed, headwindAngle);
+
+  const handleLogShot = () => {
+    const newShot = {
+      id: Math.random().toString(36).substr(2, 9),
+      club: selectedClub,
+      lieType: selectedLie,
+      distanceRemainingYards: currentDistance
+    };
+
+    let nextDistanceTarget = currentDistance - 230;
+    if (nextDistanceTarget < 0) nextDistanceTarget = 0;
+
+    setShots([...shots, newShot]);
+    setCurrentDistance(nextDistanceTarget);
+    setSelectedLie(nextDistanceTarget === 0 ? 'green' : 'fairway');
+    if (nextDistanceTarget <= 20 && nextDistanceTarget > 0) setSelectedClub('Wedge');
+    if (nextDistanceTarget === 0) setSelectedClub('Putter');
+  };
+
+  const handleResetRound = () => {
+    setShots([]);
+    setCurrentDistance(498);
+    setSelectedLie('tee');
+    setSelectedClub('Driver');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
       
-      {/* 1. TOP BRANDING & WEATHER TELEMETRY BAR */}
+      {/* HEADER TELEMETRY */}
       <View style={styles.topBar}>
-        <Text style={styles.hamburgerMenu}>☰</Text>
-        <View style={styles.brandContainer}>
-          <Text style={styles.brandText}>TOUR PRO</Text>
-          <Text style={styles.subBrandText}>— ELITE —</Text>
+        <Text style={styles.menuIcon}>☰</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleMain}>TOUR PRO</Text>
+          <Text style={styles.titleSub}>— ELITE —</Text>
         </View>
-        <View style={styles.weatherContainer}>
+        <View style={styles.weatherBox}>
           <Text style={styles.weatherIcon}>☀️</Text>
           <View>
-            <Text style={styles.weatherText}>24°C</Text>
-            <Text style={styles.windText}>Wind 8 km/h</Text>
+            <Text style={styles.weatherDeg}>{currentTemp}°C</Text>
+            <Text style={styles.weatherWind}>Wind {currentWindSpeed} km/h</Text>
           </View>
-          <Text style={styles.weatherArrow}>❯</Text>
         </View>
       </View>
 
-      <ScrollView style={styles.mainContent}>
-        <View style={styles.splitLayout}>
+      <ScrollView style={styles.scrollCanvas}>
+        <View style={styles.splitGrid}>
           
-          {/* 2. LEFT SIDE: HOLE GRAPHIC / GPS CONTAINER */}
-          <View style={styles.leftColumn}>
-            <View style={styles.mapMockup}>
-              {/* Replace background color with <ImageBackground> or Mapview when tracking live */}
-              <View style={styles.placeholderMapGraphic}>
-                <Text style={styles.mapLabelPin}>🏁 498 m</Text>
-                <Text style={styles.mapLabelArc2}>• 280 m</Text>
-                <Text style={styles.mapLabelArc1}>• 230 m</Text>
-                <View style={styles.ballIndicatorDot} />
+          {/* GRAPHIC RADAR COMPONENT */}
+          <View style={styles.leftCol}>
+            <View style={styles.mapCanvas}>
+              <View style={styles.mapPin}>
+                <Text style={styles.mapText}>⛳ {currentDistance}m</Text>
               </View>
-              
-              {/* GPS / Aerial Toggle Switches */}
-              <View style={styles.toggleRow}>
-                <TouchableOpacity style={[styles.toggleBtn, styles.toggleBtnActive]}>
-                  <Text style={styles.toggleBtnTextActive}>🗺️ GPS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.toggleBtn}>
-                  <Text style={styles.toggleBtnText}>Aerial</Text>
-                </TouchableOpacity>
-              </View>
+              <View style={styles.arcLine}><Text style={styles.arcText}>280 m</Text></View>
+              <View style={styles.arcLine}><Text style={styles.arcText}>230 m</Text></View>
+              <View style={styles.ballNode} />
             </View>
           </View>
 
-          {/* 3. RIGHT SIDE: HOLE METRICS & AI VOICE CADDIE */}
-          <View style={styles.rightColumn}>
-            
-            {/* Hole & Distance Information Card */}
-            <View style={styles.holeInfoCard}>
-              <View style={styles.holeHeaderRow}>
-                <View>
-                  <Text style={styles.holeTitleText}>Hole 1</Text>
-                  <Text style={styles.holeSubText}>Par 5  |  S.I. 5</Text>
-                </View>
-                <View style={styles.arrowBoxRow}>
-                  <TouchableOpacity style={styles.navArrow}><Text style={styles.arrowText}>❮</Text></TouchableOpacity>
-                  <TouchableOpacity style={styles.navArrow}><Text style={styles.arrowText}>❯</Text></TouchableOpacity>
-                </View>
-              </View>
-
-              <View style={styles.distanceMetricBlock}>
-                <Text style={styles.distanceLabel}>To Centre</Text>
-                <Text style={styles.distanceMainValue}>498 m</Text>
-              </View>
-
-              <View style={styles.yardageGrid}>
-                <View style={styles.gridCell}><Text style={styles.gridLabel}>Front</Text><Text style={styles.gridVal}>480 m</Text></View>
-                <View style={styles.gridCell}><Text style={styles.gridLabel}>Centre</Text><Text style={styles.gridVal}>498 m</Text></View>
-                <View style={styles.gridCell}><Text style={styles.gridLabel}>Back</Text><Text style={styles.gridVal}>512 m</Text></View>
-              </View>
+          {/* OPTIONS AND RECOMMENDATIONS */}
+          <View style={styles.rightCol}>
+            <View style={styles.cardInfo}>
+              <Text style={styles.cardHeader}>Hole 1 <Text style={styles.subInfoText}>Par 5</Text></Text>
+              <Text style={styles.metricLabel}>To Centre</Text>
+              <Text style={styles.metricValue}>{currentDistance} m</Text>
             </View>
 
-            {/* AI Voice Caddie Smart Engine */}
-            <View style={styles.caddieCard}>
-              <View style={styles.rowBetween}>
-                <Text style={styles.caddieCardTitle}>Voice Caddie</Text>
-                <TouchableOpacity 
-                  style={[styles.switchTrack, voiceCaddieOn ? styles.switchOn : styles.switchOff]}
-                  onPress={() => setVoiceCaddieOn(!voiceCaddieOn)}
-                >
-                  <View style={[styles.switchThumb, voiceCaddieOn ? styles.thumbRight : styles.thumbLeft]} />
-                </TouchableOpacity>
-              </View>
-
-              <TouchableOpacity style={styles.micButton}>
-                <Text style={styles.micIcon}>🎙️</Text>
-                <Text style={styles.micText}>Ask Caddie</Text>
-                <Text style={styles.micSubText}>Tap and speak</Text>
-              </TouchableOpacity>
-
-              <View style={styles.caddieSpeechBubble}>
-                <Text style={styles.speechText}>
-                  "498 metres to the centre. With a slight headwind, I'd suggest driver. Aim just right of centre."
-                </Text>
-              </View>
+            <View style={styles.cardInfo}>
+              <Text style={styles.cardHeader}>AI Target Strategy</Text>
+              <Text style={styles.caddieSpeech}>
+                "Target is {currentDistance}m. Dynamic adjusted carry range factors headwind down to {dynamicCarry}m output."
+              </Text>
             </View>
 
-            {/* Recommended Strategy Club Card */}
-            <View style={styles.clubCard}>
-              <Text style={styles.clubCardLabel}>Recommended Club</Text>
-              <View style={styles.clubDataRow}>
-                <Text style={styles.clubNameText}>Driver</Text>
-                <View style={styles.carryBox}>
-                  <Text style={styles.carryLabel}>Est. Carry</Text>
-                  <Text style={styles.carryVal}>230 m</Text>
-                </View>
-              </View>
-              <TouchableOpacity style={styles.dropdownSelector}>
-                <Text style={styles.dropdownText}>Use Another Club  ▼</Text>
-              </TouchableOpacity>
+            <View style={styles.cardInfo}>
+              <Text style={styles.cardHeader}>Recommended Club</Text>
+              <Text style={styles.clubName}>{selectedClub}</Text>
+              <Text style={styles.carrySub}>Est. Carry: {dynamicCarry}m</Text>
             </View>
-
-            {/* Last Shot Telemetry Log */}
-            <View style={styles.lastShotCard}>
-              <View style={styles.rowBetween}>
-                <Text style={styles.lastShotTitle}>Last Shot</Text>
-                <Text style={styles.editIcon}>✏️</Text>
-              </View>
-              <Text style={styles.lastShotPlaceholder}>-  No shot recorded</Text>
-            </View>
-
           </View>
+
         </View>
 
-        {/* 4. BOTTOM SECTION: COMPREHENSIVE SCORECARD INPUTS */}
-        <View style={styles.scorecardContainer}>
-          <View style={styles.statGridRow}>
-            
-            {/* Score Counter */}
-            <View style={styles.statInputCell}>
-              <Text style={styles.statInputLabel}>Score</Text>
-              <View style={styles.counterRow}>
-                <TouchableOpacity style={styles.counterBtn} onPress={() => setScore(Math.max(0, score - 1))}><Text style={styles.btnSymbol}>-</Text></TouchableOpacity>
-                <Text style={styles.counterVal}>{score}</Text>
-                <TouchableOpacity style={styles.counterBtn} onPress={() => setScore(score + 1)}><Text style={styles.btnSymbol}>+</Text></TouchableOpacity>
-              </View>
-            </View>
-
-            {/* Putts Counter */}
-            <View style={styles.statInputCell}>
-              <Text style={styles.statInputLabel}>Putts</Text>
-              <View style={styles.counterRowSmall}>
-                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setPutts(Math.max(0, putts - 1))}><Text style={styles.btnSymbolSmall}>-</Text></TouchableOpacity>
-                <Text style={styles.counterValSmall}>{putts}</Text>
-                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setPutts(putts + 1)}><Text style={styles.btnSymbolSmall}>+</Text></TouchableOpacity>
-              </View>
-            </View>
-
-            {/* GIR Tracking */}
-            <View style={styles.statInputCell}>
-              <Text style={styles.statInputLabel}>GIR</Text>
-              <View style={styles.counterRowSmall}>
-                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setGir(Math.max(0, gir - 1))}><Text style={styles.btnSymbolSmall}>-</Text></TouchableOpacity>
-                <Text style={styles.counterValSmall}>{gir}</Text>
-                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setGir(gir + 1)}><Text style={styles.btnSymbolSmall}>+</Text></TouchableOpacity>
-              </View>
-            </View>
-
-            {/* Fairway Accuracy Tracking */}
-            <View style={styles.statInputCell}>
-              <Text style={styles.statInputLabel}>Fairway</Text>
-              <View style={styles.counterRowSmall}>
-                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setFairway(Math.max(0, fairway - 1))}><Text style={styles.btnSymbolSmall}>-</Text></TouchableOpacity>
-                <Text style={styles.counterValSmall}>{fairway}</Text>
-                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setFairway(fairway + 1)}><Text style={styles.btnSymbolSmall}>+</Text></TouchableOpacity>
-              </View>
-            </View>
-
-            {/* Penalty Strokes */}
-            <View style={styles.statInputCell}>
-              <Text style={styles.statInputLabel}>Penalty ⚠️</Text>
-              <View style={styles.counterRowSmall}>
-                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setPenalty(Math.max(0, penalty - 1))}><Text style={styles.btnSymbolSmall}>-</Text></TouchableOpacity>
-                <Text style={styles.counterValSmall}>{penalty}</Text>
-                <TouchableOpacity style={styles.counterBtnSmall} onPress={() => setPenalty(penalty + 1)}><Text style={styles.btnSymbolSmall}>+</Text></TouchableOpacity>
-              </View>
-            </View>
-
+        {/* OPERATIONS MODULE */}
+        <View style={styles.controlPanel}>
+          <Text style={styles.panelTitle}>Operations Control Pipeline</Text>
+          
+          <View style={styles.selectorGroup}>
+            {['tee', 'fairway', 'rough', 'sand', 'green'].map((lie) => (
+              <TouchableOpacity 
+                key={lie} 
+                style={[styles.tileBtn, selectedLie === lie && styles.tileBtnActive]}
+                onPress={() => setSelectedLie(lie)}
+              >
+                <Text style={[styles.tileText, selectedLie === lie && styles.tileTextActive]}>{lie.toUpperCase()}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
 
-          {/* Action Strategy Forward Buttons */}
-          <View style={styles.actionButtonRow}>
-            <TouchableOpacity style={styles.nextHoleButton}>
-              <Text style={styles.nextHoleText}>⛳ Next Hole</Text>
+          <TouchableOpacity style={styles.actionCommitBtn} onPress={handleLogShot}>
+            <Text style={styles.actionCommitText}>Execute Matrix Shot Log</Text>
+          </TouchableOpacity>
+
+          {shots.length > 0 && (
+            <TouchableOpacity style={styles.resetBtn} onPress={handleResetRound}>
+              <Text style={styles.resetText}>Reset Hole Matrix</Text>
             </TouchableOpacity>
+          )}
+        </View>
+
+        {/* COMPRESSION RENDERING LOG DATA */}
+        <View style={styles.logContainer}>
+          <Text style={styles.logHeader}>Live Strokes Gained Data Pipeline</Text>
+          {shots.length === 0 ? (
+            <Text style={styles.emptyLogText}>Awaiting engine telemetry strings...</Text>
+          ) : (
+            shots.map((item, index) => {
+              const sgValue = StrokesGainedEngine.calculateShotStrokesGained(item, shots[index + 1]);
+              return (
+                <View key={item.id} style={styles.logRow}>
+                  <Text style={styles.logDetails}>Shot {index + 1}: {item.club} ({item.lieType})</Text>
+                  <Text style={[styles.logSg, { color: sgValue >= 0 ? '#4caf50' : '#f44336' }]}>
+                    {sgValue >= 0 ? `+${sgValue}` : sgValue} SG
+                  </Text>
+                </View>
+              );
+            })
+          )}
+        </View>
+
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#030812' },
+  topBar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 14, borderBottomWidth: 1, borderBottomColor: '#101a30' },
+  menuIcon: { color: '#fff', fontSize: 18 },
+  titleContainer: { alignItems: 'center' },
+  titleMain: { color: '#d4af37', fontSize: 15, fontWeight: 'bold', letterSpacing: 2 },
+  titleSub: { color: '#d4af37', fontSize: 8, letterSpacing: 3, marginTop: -2 },
+  weatherBox: { backgroundColor: '#0d1527', padding: 6, borderRadius: 6, flexDirection: 'row', alignItems: 'center' },
+  weatherIcon: { marginRight: 4 },
+  weatherDeg: { color: '#fff', fontSize: 10, fontWeight: 'bold' },
+  weatherWind: { color: '#8fa0c0', fontSize: 8 },
+  scrollCanvas: { flex: 1, padding: 8 },
+  splitGrid: { flexDirection: 'row', gap: 8 },
+  leftCol: { flex: 0.48 },
+  rightCol: { flex: 0.52, gap: 8 },
+  mapCanvas: { height: 360, backgroundColor: '#132913', borderRadius: 10, padding: 12, justifyContent: 'space-between', alignItems: 'center', position: 'relative' },
+  mapPin: { backgroundColor: 'rgba(0,0,0,0.7)', padding: 4, borderRadius: 4 },
+  mapText: { color: '#fff', fontSize: 10, fontWeight: 'bold' },
+  arcLine: { width: '100%', height: 1, backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center' },
+  arcText: { color: '#668866', fontSize: 8, marginTop: -12 },
+  ballNode: { width: 12, height: 12, backgroundColor: '#fff', borderRadius: 6, borderHorizontalWidth: 2, borderColor: '#1a73e8', position: 'absolute', bottom: 40 },
+  cardInfo: { backgroundColor: '#0d1527', borderRadius: 8, padding: 10, marginBottom: 8 },
+  cardHeader: { color: '#8fa0c0', fontSize: 11, fontWeight: 'bold', borderBottomWidth: 1, borderBottomColor: '#1a2744', paddingBottom: 4, marginBottom: 6 },
+  subInfoText: { color: '#fff', fontSize: 10 },
+  metricLabel: { color: '#607898', fontSize: 10 },
+  metricValue: { color: '#ffcc00', fontSize: 24, fontWeight: 'bold' },
+  caddieSpeech: { color: '#a0b2d6', fontSize: 10, fontStyle: 'italic', lineHeight: 14 },
+  clubName: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+  carrySub: { color: '#ffcc00', fontSize: 12 },
+  controlPanel: { backgroundColor: '#0a0f1d', borderRadius: 8, padding: 12, marginVertical: 10, borderHorizontalWidth: 1, borderColor: '#16223f' },
+  panelTitle: { color: '#8fa0c0', fontSize: 11, fontWeight: 'bold', marginBottom: 8, textAlign: 'center' },
+  selectorGroup: { flexDirection: 'row', flexWrap: 'wrap', gap: 4, justifyContent: 'center', marginBottom: 10 },
+  tileBtn: { backgroundColor: '#16223f', paddingVertical: 6, paddingHorizontal: 10, borderRadius: 4 },
+  tileBtnActive: { backgroundColor: '#d4af37' },
+  tileText: { color: '#8fa0c0', fontSize: 9, fontWeight: '600' },
+  tileTextActive: { color: '#030812', fontWeight: 'bold' },
+  actionCommitBtn: { backgroundColor: '#1a73e8', padding: 12, borderRadius: 6, alignItems: 'center' },
+  actionCommitText: { color: '#fff', fontWeight: 'bold', fontSize: 12 },
+  resetBtn: { marginTop: 8, alignItems: 'center' },
+  resetText: { color: '#f44336', fontSize: 11 },
+  logContainer: { backgroundColor: '#0d1527', borderRadius: 8, padding: 12, marginBottom: 20 },
+  logHeader: { color: '#fff', fontSize: 12, fontWeight: 'bold', marginBottom: 8 },
+  emptyLogText: { color: '#435875', fontSize: 11, fontStyle: 'italic', textAlign: 'center' },
+  logRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 6, borderBottomWidth: 1, borderBottomColor: '#16223f' },
+  logDetails: { color: '#fff', fontSize: 11 },
+  logSg: { fontSize: 11, fontWeight: 'bold' }
+});
