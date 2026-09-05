@@ -1,144 +1,148 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
-import * as Speech from 'expo-speech';
-
-// 1. EXPANDED GOLF COURSE DATA (CAPRICORN RESORT SAMPLE)
-const COURSE_NAME = "Capricorn Resort";
-const HOLE_DATA = [
-  {
-    holeNumber: 1,
-    par: 5,
-    si: 5,
-    caddieText: "Hole 1. 498 metres to the green. Heavy hazard on the left side. Aim for the safe miss zone on the right side of the fairway.",
-    recommendedClub: "Driver",
-    safeMissZone: "Right Fairway",
-  },
-  {
-    holeNumber: 2,
-    par: 4,
-    si: 11,
-    caddieText: "Hole 2. 365 metres. Bunkers guard the front right of the green. Keep your approach shot slightly left.",
-    recommendedClub: "3-Wood / Driver",
-    safeMissZone: "Left Green Side",
-  },
-  {
-    holeNumber: 3,
-    par: 3,
-    si: 17,
-    caddieText: "Hole 3. 145 metres par 3. Protected by water on the right. Take one extra club if the wind is coming off the ocean.",
-    recommendedClub: "7-Iron",
-    safeMissZone: "Short Left",
-  }
-];
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { StrokesGainedEngine, LaunchMonitorBridge } from './GolfProEngine';
 
 export default function App() {
-  const [currentHoleIndex, setCurrentHoleIndex] = useState(0);
-  const [scores, setScores] = useState({ 1: 0, 2: 0, 3: 0 });
-  const [putts, setPutts] = useState({ 1: 0, 2: 0, 3: 0 });
+  // Application Data States
+  const [shots, setShots] = useState([]);
+  const [distanceInput, setDistanceInput] = useState('');
+  const [selectedLie, setSelectedLie] = useState('tee');
+  const [selectedClub, setSelectedClub] = useState('Driver');
+  
+  // Hardware Monitor State Simulation
+  const [simulatedTelemetry, setSimulatedTelemetry] = useState('No Device Data Connected');
 
-  const currentHole = HOLE_DATA[currentHoleIndex];
-  const hNum = currentHole.holeNumber;
+  // Adds a shot safely into the processing array
+  const handleAddShot = () => {
+    const distance = parseFloat(distanceInput);
+    if (isNaN(distance) || distance <= 0) {
+      alert('Please enter a valid remaining distance matrix yardage.');
+      return;
+    }
 
-  // Audio guidance logic
-  const speakCaddieAdvice = () => {
-    Speech.stop(); 
-    Speech.speak(currentHole.caddieText, {
-      language: 'en-AU', // Australian voice
-      pitch: 1.0,
-      rate: 0.95,
-    });
+    const newShot = {
+      id: Math.random().toString(36).substr(2, 9),
+      club: selectedClub,
+      lieType: selectedLie,
+      distanceRemainingYards: distance,
+    };
+
+    setShots([...shots, newShot]);
+    setDistanceInput('');
   };
 
-  // Score adjusting helper functions
-  const adjustScore = (amount) => {
-    setScores(prev => ({ ...prev, [hNum]: Math.max(0, (prev[hNum] || currentHole.par) + amount) }));
-  };
-
-  const adjustPutts = (amount) => {
-    setPutts(prev => ({ ...prev, [hNum]: Math.max(0, (prev[hNum] || 2) + amount) }));
-  };
-
-  // Navigation handlers
-  const nextHole = () => {
-    if (currentHoleIndex < HOLE_DATA.length - 1) {
-      setCurrentHoleIndex(currentHoleIndex + 1);
+  // Simulates a Bluetooth telemetry data packet coming from a TrackMan / Mevo+ launch monitor
+  const handleSimulateHardwareStream = () => {
+    const rawMockPacket = "SPEED:168.5,LAUNCH:11.8,SPIN:2380";
+    const parsedData = LaunchMonitorBridge.processHardwareTelemetry(rawMockPacket);
+    
+    if (parsedData) {
+      setSimulatedTelemetry(`Ball Speed: ${parsedData.ballSpeedMph}mph | Launch: ${parsedData.launchAngleDeg}° | Spin: ${parsedData.spinRateRpm}rpm`);
+    } else {
+      setSimulatedTelemetry('Error parsing hardware streaming metrics.');
     }
   };
 
-  const prevHole = () => {
-    if (currentHoleIndex > 0) {
-      setCurrentHoleIndex(currentHoleIndex - 1);
-    }
+  // Resets the current scorecard array
+  const handleClearRound = () => {
+    setShots([]);
+    setSimulatedTelemetry('No Device Data Connected');
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>GOLF PRO PERFORMANCE</Text>
+        <Text style={styles.headerSubtitle}>Elite Shot Engine & Analytics</Text>
+      </View>
+
+      <ScrollView style={styles.scrollArea}>
         
-        {/* Course Header */}
-        <View style={styles.header}>
-          <Text style={styles.courseTitle}>{COURSE_NAME}</Text>
-          <View style={styles.navRow}>
-            <TouchableOpacity style={[styles.navButton, currentHoleIndex === 0 && styles.disabledBtn]} onPress={prevHole} disabled={currentHoleIndex === 0}>
-              <Text style={styles.navBtnText}>◀</Text>
-            </TouchableOpacity>
-            <Text style={styles.holeTitle}>Hole {hNum}</Text>
-            <TouchableOpacity style={[styles.navButton, currentHoleIndex === HOLE_DATA.length - 1 && styles.disabledBtn]} onPress={nextHole} disabled={currentHoleIndex === HOLE_DATA.length - 1}>
-              <Text style={styles.navBtnText}>▶</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Dynamic Course Stats Grid */}
-        <View style={styles.statsGrid}>
-          <View style={styles.statBox}>
-            <Text style={styles.statLabel}>PAR</Text>
-            <Text style={styles.statValue}>{currentHole.par}</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Text style={styles.statLabel}>INDEX (SI)</Text>
-            <Text style={styles.statValue}>{currentHole.si}</Text>
-          </View>
-        </View>
-
-        {/* Audio Caddie Assistant */}
-        <View style={styles.caddieCard}>
-          <Text style={styles.cardHeader}>🎙️ CADDIE STRATEGY</Text>
-          <Text style={styles.caddieText}>{currentHole.caddieText}</Text>
-          <TouchableOpacity style={styles.audioButton} onPress={speakCaddieAdvice}>
-            <Text style={styles.audioButtonText}>🔊 Play Audio Advice</Text>
+        {/* SECTION 1: LAUNCH MONITOR HARDWARE TEST */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>🛰️ Hardware Telemetry Stream</Text>
+          <Text style={styles.telemetryText}>{simulatedTelemetry}</Text>
+          <TouchableOpacity style={styles.simButton} onPress={handleSimulateHardwareStream}>
+            <Text style={styles.buttonText}>Simulate Launch Monitor Bluetooth Feed</Text>
           </TouchableOpacity>
         </View>
 
-        {/* Club & Target Zone Info */}
-        <View style={styles.tacticalCard}>
-          <Text style={styles.tacticalLabel}>Target Club: <Text style={styles.tacticalValue}>{currentHole.recommendedClub}</Text></Text>
-          <Text style={styles.tacticalLabel}>Safe Zone: <Text style={styles.safeValue}>{currentHole.safeMissZone}</Text></Text>
+        {/* SECTION 2: SHOT TRACKER ENTRY MODULE */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>🏌️ Record Practice Shot</Text>
+          
+          <Text style={styles.label}>Select Lie Type:</Text>
+          <View style={styles.row}>
+            {['tee', 'fairway', 'rough', 'sand', 'green'].map((lie) => (
+              <TouchableOpacity 
+                key={lie} 
+                style={[styles.chip, selectedLie === lie && styles.chipActive]} 
+                onPress={() => setSelectedLie(lie)}
+              >
+                <Text style={[styles.chipText, selectedLie === lie && styles.chipTextActive]}>{lie.toUpperCase()}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <Text style={styles.label}>Select Club:</Text>
+          <View style={styles.row}>
+            {['Driver', '7-Iron', 'Wedge', 'Putter'].map((club) => (
+              <TouchableOpacity 
+                key={club} 
+                style={[styles.chip, selectedClub === club && styles.chipActive]} 
+                onPress={() => setSelectedClub(club)}
+              >
+                <Text style={[styles.chipText, selectedClub === club && styles.chipTextActive]}>{club}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <Text style={styles.label}>Distance Remaining to Hole (Yards):</Text>
+          <TextInput 
+            style={styles.input}
+            keyboardType="numeric"
+            placeholder="e.g. 150"
+            placeholderTextColor="#888"
+            value={distanceInput}
+            onChangeText={setDistanceInput}
+          />
+
+          <TouchableOpacity style={styles.addButton} onPress={handleAddShot}>
+            <Text style={styles.buttonText}>Log Shot Matrix</Text>
+          </TouchableOpacity>
         </View>
 
-        {/* Interactive Digital Scorecard */}
-        <View style={styles.scorecard}>
-          <Text style={styles.scorecardHeader}>📝 LIVE SCORECARD</Text>
-          
-          {/* Total Strokes Counter */}
-          <View style={styles.counterRow}>
-            <Text style={styles.counterLabel}>Total Strokes:</Text>
-            <View style={styles.counterControls}>
-              <TouchableOpacity style={styles.counterBtn} onPress={() => adjustScore(-1)}><Text style={styles.counterBtnText}>-</Text></TouchableOpacity>
-              <Text style={styles.counterValue}>{scores[hNum] || currentHole.par}</Text>
-              <TouchableOpacity style={styles.counterBtn} onPress={() => adjustScore(1)}><Text style={styles.counterBtnText}>+</Text></TouchableOpacity>
-            </View>
+        {/* SECTION 3: LIVE ANALYTICS BREAKDOWN */}
+        <View style={styles.card}>
+          <View style={styles.rowBetween}>
+            <Text style={styles.cardTitle}>📊 Strokes Gained Summary</Text>
+            {shots.length > 0 && (
+              <TouchableOpacity onPress={handleClearRound}>
+                <Text style={styles.clearText}>Clear Log</Text>
+              </TouchableOpacity>
+            )}
           </View>
 
-          {/* Putts Counter */}
-          <View style={styles.counterRow}>
-            <Text style={styles.counterLabel}>Putts:</Text>
-            <View style={styles.counterControls}>
-              <TouchableOpacity style={styles.counterBtn} onPress={() => adjustPutts(-1)}><Text style={styles.counterBtnText}>-</Text></TouchableOpacity>
-              <Text style={styles.counterValue}>{putts[hNum] || 2}</Text>
-              <TouchableOpacity style={styles.counterBtn} onPress={() => adjustPutts(1)}><Text style={styles.counterBtnText}>+</Text></TouchableOpacity>
-            </View>
-          </View>
+          {shots.length === 0 ? (
+            <Text style={styles.emptyText}>No shots logged yet. Enter your practice data above to compute Strokes Gained analytics.</Text>
+          ) : (
+            shots.map((shot, index) => {
+              const nextShot = shots[index + 1];
+              const strokesGained = StrokesGainedEngine.calculateShotStrokesGained(shot, nextShot);
+              const sgColor = strokesGained >= 0 ? '#2e7d32' : '#c62828';
+
+              return (
+                <View key={shot.id} style={styles.shotRow}>
+                  <Text style={styles.shotInfo}>
+                    Shot {index + 1}: <Text style={{fontWeight: 'bold'}}>{shot.club}</Text> from {shot.lieType.toUpperCase()} ({shot.distanceRemainingYards} yds)
+                  </Text>
+                  <Text style={[styles.shotSg, { color: sgColor }]}>
+                    {strokesGained >= 0 ? `+${strokesGained}` : strokesGained} SG
+                  </Text>
+                </View>
+              );
+            })
+          )}
         </View>
 
       </ScrollView>
@@ -148,33 +152,27 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f4f6f9' },
-  scrollContent: { padding: 20 },
-  header: { alignItems: 'center', marginBottom: 20 },
-  courseTitle: { fontSize: 14, color: '#666', fontWeight: 'bold', letterSpacing: 1 },
-  navRow: { flexDirection: 'row', alignItems: 'center', marginTop: 10 },
-  navButton: { backgroundColor: '#2e7d32', paddingHorizontal: 20, paddingVertical: 10, borderRadius: 8, marginHorizontal: 20 },
-  disabledBtn: { backgroundColor: '#b0bec5' },
-  navBtnText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
-  holeTitle: { fontSize: 32, fontWeight: 'bold', color: '#1a1a1a' },
-  statsGrid: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 },
-  statBox: { flex: 1, backgroundColor: '#fff', padding: 15, borderRadius: 12, alignItems: 'center', marginHorizontal: 5, elevation: 2 },
-  statLabel: { fontSize: 12, color: '#888', fontWeight: 'bold' },
-  statValue: { fontSize: 24, fontWeight: 'bold', color: '#2e7d32' },
-  caddieCard: { backgroundColor: '#fff', padding: 20, borderRadius: 16, marginBottom: 20, elevation: 3 },
-  cardHeader: { fontSize: 13, fontWeight: 'bold', color: '#2e7d32', marginBottom: 10 },
-  caddieText: { fontSize: 16, color: '#333', lineHeight: 24, marginBottom: 15 },
-  audioButton: { backgroundColor: '#2e7d32', paddingVertical: 12, borderRadius: 8, alignItems: 'center' },
-  audioButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
-  tacticalCard: { backgroundColor: '#e8f5e9', padding: 15, borderRadius: 12, marginBottom: 20 },
-  tacticalLabel: { fontSize: 15, color: '#333', marginBottom: 5 },
-  tacticalValue: { fontWeight: 'bold', color: '#1b5e20' },
-  safeValue: { fontWeight: 'bold', color: '#c62828' },
-  scorecard: { backgroundColor: '#fff', padding: 20, borderRadius: 16, elevation: 3 },
-  scorecardHeader: { fontSize: 13, fontWeight: 'bold', color: '#37474f', marginBottom: 15 },
-  counterRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 },
-  counterLabel: { fontSize: 16, color: '#333', fontWeight: '500' },
-  counterControls: { flexDirection: 'row', alignItems: 'center' },
-  counterBtn: { backgroundColor: '#cfd8dc', width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center' },
-  counterBtnText: { fontSize: 20, fontWeight: 'bold', color: '#37474f' },
-  counterValue: { fontSize: 20, fontWeight: 'bold', marginHorizontal: 20, minWidth: 20, textAlign: 'center' }
+  header: { padding: 20, backgroundColor: '#1a237e', alignItems: 'center' },
+  headerTitle: { color: '#fff', fontSize: 20, fontWeight: 'bold', letterSpacing: 1 },
+  headerSubtitle: { color: '#9fa8da', fontSize: 13, marginTop: 4 },
+  scrollArea: { flex: 1, padding: 12 },
+  card: { backgroundColor: '#fff', borderRadius: 12, padding: 16, marginBottom: 14, elevation: 2 },
+  cardTitle: { fontSize: 16, fontWeight: 'bold', color: '#333', marginBottom: 12 },
+  telemetryText: { backgroundColor: '#f5f5f5', padding: 12, borderRadius: 6, color: '#444', fontFamily: 'monospace', fontSize: 12, textAlign: 'center', marginBottom: 10 },
+  simButton: { backgroundColor: '#3949ab', padding: 12, borderRadius: 8, alignItems: 'center' },
+  addButton: { backgroundColor: '#2e7d32', padding: 14, borderRadius: 8, alignItems: 'center', marginTop: 10 },
+  buttonText: { color: '#fff', fontWeight: 'bold', fontSize: 14 },
+  label: { fontSize: 13, color: '#555', marginTop: 12, marginBottom: 6, fontWeight: '600' },
+  row: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: 4 },
+  rowBetween: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  chip: { paddingVertical: 6, paddingHorizontal: 12, borderRadius: 20, backgroundColor: '#eee' },
+  chipActive: { backgroundColor: '#1a237e' },
+  chipText: { fontSize: 12, color: '#555' },
+  chipTextActive: { color: '#fff', fontWeight: 'bold' },
+  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 6, padding: 10, color: '#000', fontSize: 15, backgroundColor: '#fafafa' },
+  emptyText: { color: '#777', fontStyle: 'italic', textAlign: 'center', paddingVertical: 10, fontSize: 13 },
+  shotRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#eee' },
+  shotInfo: { fontSize: 13, color: '#333', flex: 0.85 },
+  shotSg: { fontSize: 14, fontWeight: 'bold', flex: 0.15, textAlign: 'right' },
+  clearText: { color: '#c62828', fontSize: 13, fontWeight: 'bold' }
 });
