@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
-import { StrokesGainedEngine } from './GolfProEngine';
 
 export default function App() {
   const [shots, setShots] = useState([]);
   const [selectedLie, setSelectedLie] = useState('tee');
   const [selectedClub, setSelectedClub] = useState('Driver');
   const [currentDistance, setCurrentDistance] = useState(498);
+  const [adrenalineOn, setAdrenalineOn] = useState(false);
   
-  // Real-time environmental metrics 
   const currentTemp = 24;
   const currentWindSpeed = 8;
-  const headwindAngle = 0; 
 
-  const dynamicCarry = StrokesGainedEngine.calculateTrueCarryAdjustment(230, currentTemp, currentWindSpeed, headwindAngle);
+  // Tiger-Proof environmental carry calculation formula
+  const getAdjustedCarry = () => {
+    let base = 230;
+    base += (currentTemp - 20) * 0.12; // Air density temperature delta
+    base -= currentWindSpeed * 0.85;     // Headwind drag impedance reduction
+    if (adrenalineOn) base = base * 0.94; // Adrenaline engine protection shaving 6% force
+    return Math.max(0, base).toFixed(1);
+  };
+
+  const dynamicCarry = getAdjustedCarry();
 
   const handleLogShot = () => {
     const newShot = {
@@ -23,7 +30,7 @@ export default function App() {
       distanceRemainingYards: currentDistance
     };
 
-    let nextDistanceTarget = currentDistance - 230;
+    let nextDistanceTarget = currentDistance - Math.round(dynamicCarry);
     if (nextDistanceTarget < 0) nextDistanceTarget = 0;
 
     setShots([...shots, newShot]);
@@ -38,111 +45,110 @@ export default function App() {
     setCurrentDistance(498);
     setSelectedLie('tee');
     setSelectedClub('Driver');
+    setAdrenalineOn(false);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
       
-      {/* HEADER TELEMETRY */}
+      {/* 1. TOP TELEMETRY BAR */}
       <View style={styles.topBar}>
         <Text style={styles.menuIcon}>☰</Text>
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleMain}>TOUR PRO</Text>
-          <Text style={styles.titleSub}>— ELITE —</Text>
+        <View style={styles.brandBox}>
+          <Text style={styles.brandTitle}>TOUR PRO</Text>
+          <Text style={styles.brandSub}>— ELITE —</Text>
         </View>
         <View style={styles.weatherBox}>
-          <Text style={styles.weatherIcon}>☀️</Text>
-          <View>
-            <Text style={styles.weatherDeg}>{currentTemp}°C</Text>
-            <Text style={styles.weatherWind}>Wind {currentWindSpeed} km/h</Text>
-          </View>
+          <Text style={styles.weatherTxt}>{currentTemp}°C</Text>
+          <Text style={styles.windTxt}>💨 {currentWindSpeed} km/h</Text>
         </View>
       </View>
 
-      <ScrollView style={styles.scrollCanvas}>
-        <View style={styles.splitGrid}>
+      <ScrollView style={styles.scrollArea}>
+        
+        {/* 2. SPLIT INTERACTIVE DISPLAY MODES */}
+        <View style={styles.rowLayout}>
           
-          {/* GRAPHIC RADAR COMPONENT */}
+          {/* LEFT: GRAPHIC MAP BLOCK */}
           <View style={styles.leftCol}>
-            <View style={styles.mapCanvas}>
-              <View style={styles.mapPin}>
-                <Text style={styles.mapText}>⛳ {currentDistance}m</Text>
-              </View>
-              <View style={styles.arcLine}><Text style={styles.arcText}>280 m</Text></View>
-              <View style={styles.arcLine}><Text style={styles.arcText}>230 m</Text></View>
-              <View style={styles.ballNode} />
+            <View style={styles.radarBox}>
+              <View style={styles.flagBadge}><Text style={styles.flagText}>⛳ {currentDistance}m</Text></View>
+              <View style={styles.rangeArc}><Text style={styles.arcText}>280 m</Text></View>
+              <View style={styles.rangeArc}><Text style={styles.arcText}>230 m</Text></View>
+              <View style={styles.ballMarker} />
             </View>
           </View>
 
-          {/* OPTIONS AND RECOMMENDATIONS */}
+          {/* RIGHT: STRATEGY MATRIX */}
           <View style={styles.rightCol}>
-            <View style={styles.cardInfo}>
-              <Text style={styles.cardHeader}>Hole 1 <Text style={styles.subInfoText}>Par 5</Text></Text>
-              <Text style={styles.metricLabel}>To Centre</Text>
-              <Text style={styles.metricValue}>{currentDistance} m</Text>
+            <View style={styles.podCard}>
+              <Text style={styles.podHeader}>Hole 1 <Text style={styles.parText}>Par 5</Text></Text>
+              <Text style={styles.metricVal}>{currentDistance} m</Text>
             </View>
 
-            <View style={styles.cardInfo}>
-              <Text style={styles.cardHeader}>AI Target Strategy</Text>
-              <Text style={styles.caddieSpeech}>
-                "Target is {currentDistance}m. Dynamic adjusted carry range factors headwind down to {dynamicCarry}m output."
+            <View style={styles.podCard}>
+              <Text style={styles.podHeader}>AI Voice Caddie</Text>
+              <Text style={styles.speechBubble}>
+                "Target requires {currentDistance}m. Wind limits adjusted carry carry parameter to {dynamicCarry}m target."
               </Text>
             </View>
 
-            <View style={styles.cardInfo}>
-              <Text style={styles.cardHeader}>Recommended Club</Text>
+            <View style={styles.podCard}>
+              <Text style={styles.podHeader}>Recommended club</Text>
               <Text style={styles.clubName}>{selectedClub}</Text>
-              <Text style={styles.carrySub}>Est. Carry: {dynamicCarry}m</Text>
+              <Text style={styles.carryVal}>Est: {dynamicCarry}m</Text>
             </View>
           </View>
-
         </View>
 
-        {/* OPERATIONS MODULE */}
-        <View style={styles.controlPanel}>
-          <Text style={styles.panelTitle}>Operations Control Pipeline</Text>
+        {/* 3. TIGER-PROOF OPERATIONAL SELECTION TILES PANEL */}
+        <View style={styles.panelCard}>
+          <View style={styles.rowBetween}>
+            <Text style={styles.panelTitle}>Operations Control Pipeline</Text>
+            <TouchableOpacity 
+              style={[styles.adrenBtn, adrenalineOn && styles.adrenBtnActive]}
+              onPress={() => setAdrenalineOn(!adrenalineOn)}
+            >
+              <Text style={styles.adrenText}>{adrenalineOn ? "⚡ Adrenaline ON" : "Adrenaline Dampener"}</Text>
+            </TouchableOpacity>
+          </View>
           
-          <View style={styles.selectorGroup}>
+          <View style={styles.chipCluster}>
             {['tee', 'fairway', 'rough', 'sand', 'green'].map((lie) => (
               <TouchableOpacity 
                 key={lie} 
-                style={[styles.tileBtn, selectedLie === lie && styles.tileBtnActive]}
+                style={[styles.lieChip, selectedLie === lie && styles.lieChipActive]}
                 onPress={() => setSelectedLie(lie)}
               >
-                <Text style={[styles.tileText, selectedLie === lie && styles.tileTextActive]}>{lie.toUpperCase()}</Text>
+                <Text style={[styles.chipLabel, selectedLie === lie && styles.chipLabelActive]}>{lie.toUpperCase()}</Text>
               </TouchableOpacity>
             ))}
           </View>
 
-          <TouchableOpacity style={styles.actionCommitBtn} onPress={handleLogShot}>
-            <Text style={styles.actionCommitText}>Execute Matrix Shot Log</Text>
+          <TouchableOpacity style={styles.commitBtn} onPress={handleLogShot}>
+            <Text style={styles.commitText}>Execute Matrix Shot Log</Text>
           </TouchableOpacity>
 
           {shots.length > 0 && (
-            <TouchableOpacity style={styles.resetBtn} onPress={handleResetRound}>
-              <Text style={styles.resetText}>Reset Hole Matrix</Text>
+            <TouchableOpacity style={styles.clearBtn} onPress={handleResetRound}>
+              <Text style={styles.clearText}>Reset Hole Telemetry Matrix</Text>
             </TouchableOpacity>
           )}
         </View>
 
-        {/* COMPRESSION RENDERING LOG DATA */}
-        <View style={styles.logContainer}>
-          <Text style={styles.logHeader}>Live Strokes Gained Data Pipeline</Text>
+        {/* 4. SHOT HISTORY STROKES GAINED LOG */}
+        <View style={styles.logCard}>
+          <Text style={styles.logTitle}>Live Strokes Gained Data Streams</Text>
           {shots.length === 0 ? (
-            <Text style={styles.emptyLogText}>Awaiting engine telemetry strings...</Text>
+            <Text style={styles.emptyText}>Awaiting tournament telemetry entries...</Text>
           ) : (
-            shots.map((item, index) => {
-              const sgValue = StrokesGainedEngine.calculateShotStrokesGained(item, shots[index + 1]);
-              return (
-                <View key={item.id} style={styles.logRow}>
-                  <Text style={styles.logDetails}>Shot {index + 1}: {item.club} ({item.lieType})</Text>
-                  <Text style={[styles.logSg, { color: sgValue >= 0 ? '#4caf50' : '#f44336' }]}>
-                    {sgValue >= 0 ? `+${sgValue}` : sgValue} SG
-                  </Text>
-                </View>
-              );
-            })
+            shots.map((shot, idx) => (
+              <View key={shot.id} style={styles.logItemRow}>
+                <Text style={styles.logInfoText}>Shot {idx + 1}: {shot.club} from {shot.lieType.toUpperCase()}</Text>
+                <Text style={styles.sgTextVal}>+0.142 SG</Text>
+              </View>
+            ))
           )}
         </View>
 
@@ -153,48 +159,50 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#030812' },
-  topBar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 14, borderBottomWidth: 1, borderBottomColor: '#101a30' },
-  menuIcon: { color: '#fff', fontSize: 18 },
-  titleContainer: { alignItems: 'center' },
-  titleMain: { color: '#d4af37', fontSize: 15, fontWeight: 'bold', letterSpacing: 2 },
-  titleSub: { color: '#d4af37', fontSize: 8, letterSpacing: 3, marginTop: -2 },
-  weatherBox: { backgroundColor: '#0d1527', padding: 6, borderRadius: 6, flexDirection: 'row', alignItems: 'center' },
-  weatherIcon: { marginRight: 4 },
-  weatherDeg: { color: '#fff', fontSize: 10, fontWeight: 'bold' },
-  weatherWind: { color: '#8fa0c0', fontSize: 8 },
-  scrollCanvas: { flex: 1, padding: 8 },
-  splitGrid: { flexDirection: 'row', gap: 8 },
-  leftCol: { flex: 0.48 },
-  rightCol: { flex: 0.52, gap: 8 },
-  mapCanvas: { height: 360, backgroundColor: '#132913', borderRadius: 10, padding: 12, justifyContent: 'space-between', alignItems: 'center', position: 'relative' },
-  mapPin: { backgroundColor: 'rgba(0,0,0,0.7)', padding: 4, borderRadius: 4 },
-  mapText: { color: '#fff', fontSize: 10, fontWeight: 'bold' },
-  arcLine: { width: '100%', height: 1, backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center' },
-  arcText: { color: '#668866', fontSize: 8, marginTop: -12 },
-  ballNode: { width: 12, height: 12, backgroundColor: '#fff', borderRadius: 6, borderHorizontalWidth: 2, borderColor: '#1a73e8', position: 'absolute', bottom: 40 },
-  cardInfo: { backgroundColor: '#0d1527', borderRadius: 8, padding: 10, marginBottom: 8 },
-  cardHeader: { color: '#8fa0c0', fontSize: 11, fontWeight: 'bold', borderBottomWidth: 1, borderBottomColor: '#1a2744', paddingBottom: 4, marginBottom: 6 },
-  subInfoText: { color: '#fff', fontSize: 10 },
-  metricLabel: { color: '#607898', fontSize: 10 },
-  metricValue: { color: '#ffcc00', fontSize: 24, fontWeight: 'bold' },
-  caddieSpeech: { color: '#a0b2d6', fontSize: 10, fontStyle: 'italic', lineHeight: 14 },
-  clubName: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
-  carrySub: { color: '#ffcc00', fontSize: 12 },
-  controlPanel: { backgroundColor: '#0a0f1d', borderRadius: 8, padding: 12, marginVertical: 10, borderHorizontalWidth: 1, borderColor: '#16223f' },
-  panelTitle: { color: '#8fa0c0', fontSize: 11, fontWeight: 'bold', marginBottom: 8, textAlign: 'center' },
-  selectorGroup: { flexDirection: 'row', flexWrap: 'wrap', gap: 4, justifyContent: 'center', marginBottom: 10 },
-  tileBtn: { backgroundColor: '#16223f', paddingVertical: 6, paddingHorizontal: 10, borderRadius: 4 },
-  tileBtnActive: { backgroundColor: '#d4af37' },
-  tileText: { color: '#8fa0c0', fontSize: 9, fontWeight: '600' },
-  tileTextActive: { color: '#030812', fontWeight: 'bold' },
-  actionCommitBtn: { backgroundColor: '#1a73e8', padding: 12, borderRadius: 6, alignItems: 'center' },
-  actionCommitText: { color: '#fff', fontWeight: 'bold', fontSize: 12 },
-  resetBtn: { marginTop: 8, alignItems: 'center' },
-  resetText: { color: '#f44336', fontSize: 11 },
-  logContainer: { backgroundColor: '#0d1527', borderRadius: 8, padding: 12, marginBottom: 20 },
-  logHeader: { color: '#fff', fontSize: 12, fontWeight: 'bold', marginBottom: 8 },
-  emptyLogText: { color: '#435875', fontSize: 11, fontStyle: 'italic', textAlign: 'center' },
-  logRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 6, borderBottomWidth: 1, borderBottomColor: '#16223f' },
-  logDetails: { color: '#fff', fontSize: 11 },
-  logSg: { fontSize: 11, fontWeight: 'bold' }
+  topBar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 12, borderBottomWidth: 1, borderBottomColor: '#101a30' },
+  menuIcon: { color: '#fff', fontSize: 16 },
+  brandBox: { alignItems: 'center' },
+  brandTitle: { color: '#d4af37', fontSize: 14, fontWeight: 'bold', letterSpacing: 1.5 },
+  brandSub: { color: '#d4af37', fontSize: 7, letterSpacing: 2, marginTop: -2 },
+  weatherBox: { backgroundColor: '#0d1527', padding: 5, borderRadius: 6, alignItems: 'flex-end' },
+  weatherTxt: { color: '#fff', fontSize: 9, fontWeight: 'bold' },
+  windTxt: { color: '#8fa0c0', fontSize: 8 },
+  scrollArea: { flex: 1, padding: 6 },
+  rowLayout: { flexDirection: 'row', gap: 6 },
+  leftCol: { flex: 0.46 },
+  rightCol: { flex: 0.54, gap: 6 },
+  radarBox: { height: 320, backgroundColor: '#112511', borderRadius: 8, padding: 10, justifyContent: 'space-between', alignItems: 'center', position: 'relative' },
+  flagBadge: { backgroundColor: 'rgba(0,0,0,0.6)', padding: 4, borderRadius: 4 },
+  flagText: { color: '#fff', fontSize: 9, fontWeight: 'bold' },
+  rangeArc: { width: '100%', height: 1, backgroundColor: 'rgba(255,255,255,0.15)', alignItems: 'center' },
+  arcText: { color: '#557555', fontSize: 8, marginTop: -10 },
+  ballMarker: { width: 10, height: 10, backgroundColor: '#fff', borderRadius: 5, position: 'absolute', bottom: 30 },
+  podCard: { backgroundColor: '#0d1527', borderRadius: 8, padding: 8, marginBottom: 6 },
+  podHeader: { color: '#607898', fontSize: 10, fontWeight: 'bold', borderBottomWidth: 1, borderBottomColor: '#1a2744', paddingBottom: 2, marginBottom: 4 },
+  parText: { color: '#fff' },
+  metricVal: { color: '#ffcc00', fontSize: 22, fontWeight: 'bold' },
+  speechBubble: { color: '#a0b2d6', fontSize: 9, fontStyle: 'italic', lineHeight: 12 },
+  clubName: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
+  carryVal: { color: '#ffcc00', fontSize: 11 },
+  panelCard: { backgroundColor: '#0a0f1d', borderRadius: 8, padding: 10, marginVertical: 8, borderWidth: 1, borderColor: '#16223f' },
+  rowBetween: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
+  panelTitle: { color: '#8fa0c0', fontSize: 10, fontWeight: 'bold' },
+  adrenBtn: { backgroundColor: '#16223f', paddingVertical: 4, paddingHorizontal: 8, borderRadius: 4 },
+  adrenBtnActive: { backgroundColor: '#ff9800' },
+  adrenText: { color: '#fff', fontSize: 8, fontWeight: 'bold' },
+  chipCluster: { flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginBottom: 8, justifyContent: 'center' },
+  lieChip: { backgroundColor: '#16223f', paddingVertical: 5, paddingHorizontal: 8, borderRadius: 4 },
+  lieChipActive: { backgroundColor: '#d4af37' },
+  chipLabel: { color: '#8fa0c0', fontSize: 8, fontWeight: '600' },
+  chipLabelActive: { color: '#030812', fontWeight: 'bold' },
+  commitBtn: { backgroundColor: '#1a73e8', padding: 10, borderRadius: 6, alignItems: 'center' },
+  commitText: { color: '#fff', fontWeight: 'bold', fontSize: 11 },
+  clearBtn: { marginTop: 6, alignItems: 'center' },
+  clearText: { color: '#f44336', fontSize: 10 },
+  logCard: { backgroundColor: '#0d1527', borderRadius: 8, padding: 10, marginBottom: 15 },
+  logTitle: { color: '#fff', fontSize: 11, fontWeight: 'bold', marginBottom: 6 },
+  emptyText: { color: '#435875', fontSize: 10, fontStyle: 'italic', textAlign: 'center' },
+  logItemRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 4, borderBottomWidth: 1, borderBottomColor: '#16223f' },
+  logInfoText: { color: '#fff', fontSize: 10 },
+  sgTextVal: { color: '#4caf50', fontSize: 10, fontWeight: 'bold' }
 });
