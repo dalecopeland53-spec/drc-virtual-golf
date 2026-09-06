@@ -4,10 +4,9 @@
     "slug": "drc-virtual-golf",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./drc-virtual-golf-icon.png",
     "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#03081e"
     },
@@ -16,13 +15,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./drc-virtual-golf-icon.png",
         "backgroundColor": "#03081e"
       },
-      "package": "com.dalecopeland.tourproelite"
+      "package": "com.dalecopeland.drcvirtualgolf"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "web": {}
   }
 }
