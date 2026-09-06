@@ -10,6 +10,7 @@
 
 <meta name="theme-color" content="#020913">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <style>
 *{
@@ -19,14 +20,17 @@
 }
 
 :root{
-  --bg:#020913;
-  --panel:#06111e;
-  --panel2:#091827;
-  --line:#1e3951;
-  --gold:#e7b941;
-  --blue:#1478ff;
+  --bg:#020812;
+  --panel:#071420;
+  --panel2:#0a1c2b;
+  --line:#1a344a;
+  --gold:#e4b83d;
+  --blue:#1678ff;
+  --blue2:#0b5bcc;
   --text:#ffffff;
-  --muted:#93a9bf;
+  --muted:#8fa7bd;
+  --green:#2bb673;
+  --red:#d94a4a;
 }
 
 html,body{
@@ -38,7 +42,7 @@ html,body{
 }
 
 body{
-  padding-bottom:84px;
+  padding-bottom:max(74px,env(safe-area-inset-bottom));
 }
 
 button,input,select{
@@ -52,24 +56,25 @@ button{
 
 .app{
   width:100%;
-  max-width:760px;
-  margin:auto;
+  max-width:620px;
+  margin:0 auto;
 }
 
 /* HEADER */
 
 .header{
-  height:68px;
+  min-height:61px;
   display:grid;
-  grid-template-columns:46px 1fr 105px;
+  grid-template-columns:38px 1fr 92px;
   align-items:center;
-  padding:5px 10px;
-  border-bottom:1px solid #15304a;
+  padding:5px 9px;
+  border-bottom:1px solid #12304a;
+  background:#020a13;
 }
 
 .menu{
-  color:#d8e2ec;
-  font-size:30px;
+  font-size:27px;
+  color:#d6e1eb;
 }
 
 .brand{
@@ -78,207 +83,211 @@ button{
 
 .brand-main{
   color:var(--gold);
-  font-size:19px;
-  font-weight:900;
-  letter-spacing:2px;
+  font-size:17px;
   line-height:1;
+  font-weight:900;
+  letter-spacing:1.8px;
+  white-space:nowrap;
 }
 
 .brand-sub{
-  color:#5a9df2;
-  font-size:10px;
-  letter-spacing:5px;
+  color:#428dea;
+  font-size:9px;
+  letter-spacing:4px;
   margin-top:5px;
 }
 
 .weather{
   text-align:right;
-  font-size:11px;
-  color:#d7e3ee;
-  line-height:1.45;
+  color:#dce6ee;
+  font-size:9px;
+  line-height:1.4;
 }
 
 .weather strong{
-  font-size:15px;
+  display:block;
+  font-size:13px;
 }
 
-/* MAIN */
+/* PAGE */
 
 .page{
-  padding:7px;
+  padding:6px;
 }
+
+/* MAIN PLAY AREA */
 
 .play-grid{
   display:grid;
-  grid-template-columns:49% 51%;
-  gap:7px;
-  align-items:stretch;
+  grid-template-columns:47% 53%;
+  gap:6px;
 }
 
-/* LEFT MAP */
+/* MAP */
 
 .map-card{
-  position:relative;
-  min-height:610px;
-  overflow:hidden;
+  height:490px;
+  border:1px solid #1b415d;
   border-radius:15px;
-  border:1px solid #1b4058;
+  overflow:hidden;
+  position:relative;
   background:
     linear-gradient(
       90deg,
-      #073a27 0%,
-      #0b5737 19%,
-      #138448 37%,
-      #33a85c 49%,
-      #16894c 61%,
-      #0b5737 80%,
-      #073a27 100%
+      #063625 0%,
+      #0b4f33 18%,
+      #146f42 34%,
+      #289857 50%,
+      #147746 66%,
+      #0a5135 83%,
+      #063625 100%
     );
 }
 
-.map-water{
+.water{
   position:absolute;
   top:0;
   right:0;
-  width:18%;
+  width:20%;
   height:100%;
-  background:linear-gradient(#15546e,#082e46);
+  background:linear-gradient(#145069,#072e47);
 }
 
 .fairway{
   position:absolute;
   top:0;
   bottom:0;
-  left:23%;
-  right:15%;
+  left:19%;
+  right:13%;
   background:linear-gradient(
     90deg,
-    #1c864a,
-    #39aa5f,
-    #47b86b,
-    #228f50
+    #208b4f,
+    #3faa61,
+    #55bc70,
+    #2d9a56
   );
 
   clip-path:polygon(
-    42% 100%,
-    66% 87%,
-    55% 74%,
-    72% 62%,
-    58% 48%,
-    70% 34%,
-    58% 18%,
-    62% 0,
+    40% 100%,
+    67% 87%,
+    55% 76%,
+    75% 63%,
+    60% 49%,
+    72% 36%,
+    58% 22%,
+    63% 0,
     35% 0,
-    39% 18%,
-    28% 35%,
-    39% 48%,
-    24% 63%,
+    40% 22%,
+    25% 36%,
+    39% 49%,
+    24% 64%,
     38% 77%,
-    28% 90%
+    27% 91%
   );
 }
 
 .green{
   position:absolute;
-  top:28px;
-  left:36%;
-  width:100px;
-  height:60px;
+  top:20px;
+  left:34%;
+  width:88px;
+  height:51px;
   border-radius:50%;
-  background:#68c96f;
+  background:#69ca72;
 }
 
 .bunker{
   position:absolute;
-  top:77px;
-  left:31%;
-  width:62px;
-  height:23px;
+  top:69px;
+  left:29%;
+  width:50px;
+  height:19px;
   border-radius:50%;
-  background:#d7cc91;
-  transform:rotate(-18deg);
+  background:#ddcf98;
+  transform:rotate(-20deg);
 }
 
 .flag{
   position:absolute;
-  top:37px;
-  left:51%;
+  top:27px;
+  left:50%;
   transform:translateX(-50%);
-  font-size:24px;
+  font-size:22px;
+  z-index:8;
+}
+
+.shot-line{
+  position:absolute;
+  top:65px;
+  bottom:62px;
+  left:50%;
+  width:2px;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,.58);
   z-index:5;
 }
 
-.map-line{
-  position:absolute;
-  top:74px;
-  bottom:85px;
-  left:50%;
-  width:2px;
-  background:rgba(255,255,255,.55);
-  transform:translateX(-50%);
-}
-
-.map-dot{
+.marker{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  width:8px;
-  height:8px;
+  width:7px;
+  height:7px;
   border-radius:50%;
   background:#fff;
-  z-index:6;
+  z-index:7;
 }
 
-.dot1{top:92px;}
-.dot2{top:265px;}
-.dot3{top:430px;}
+.marker.one{ top:105px; }
+.marker.two{ top:245px; }
+.marker.three{ top:368px; }
 
-.map-distance{
+.marker-label{
   position:absolute;
   left:55%;
-  color:white;
-  font-size:18px;
-  font-weight:800;
-  text-shadow:0 2px 4px #000;
-  z-index:7;
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  text-shadow:0 2px 3px #000;
+  z-index:8;
   white-space:nowrap;
 }
 
-.distance1{top:80px;}
-.distance2{top:252px;}
-.distance3{top:417px;}
+.marker-label.one{ top:93px; }
+.marker-label.two{ top:233px; }
+.marker-label.three{ top:356px; }
 
 .player-dot{
   position:absolute;
   left:50%;
-  bottom:70px;
+  bottom:51px;
   transform:translateX(-50%);
-  width:29px;
-  height:29px;
+  width:25px;
+  height:25px;
   border-radius:50%;
   background:var(--blue);
-  border:4px solid white;
-  box-shadow:0 0 0 3px rgba(20,120,255,.3);
-  z-index:8;
+  border:3px solid white;
+  box-shadow:0 0 0 3px rgba(22,120,255,.28);
+  z-index:9;
 }
 
 .map-switch{
   position:absolute;
-  left:9px;
-  bottom:10px;
+  left:7px;
+  bottom:7px;
+  background:#03101a;
+  border-radius:18px;
+  padding:3px;
   display:flex;
-  background:#03101c;
-  border-radius:24px;
-  padding:4px;
   z-index:10;
 }
 
 .map-switch button{
-  color:#cbd7e2;
   background:transparent;
-  padding:8px 11px;
-  border-radius:18px;
-  font-size:11px;
+  color:#c3d0dc;
+  border-radius:15px;
+  padding:6px 8px;
+  font-size:9px;
 }
 
 .map-switch .active{
@@ -286,273 +295,274 @@ button{
   color:white;
 }
 
-/* RIGHT COLUMN */
+/* RIGHT */
 
-.right-stack{
+.right{
   display:flex;
   flex-direction:column;
-  gap:7px;
+  gap:5px;
 }
 
 .panel{
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:14px;
+  border-radius:12px;
 }
 
 /* HOLE */
 
 .hole-panel{
-  min-height:92px;
-  padding:10px;
+  padding:8px;
+  min-height:73px;
   display:grid;
   grid-template-columns:1fr auto;
+  gap:5px;
   align-items:center;
 }
 
 .hole-title{
-  font-size:28px;
-  font-weight:900;
-}
-
-.hole-meta{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:2px;
-}
-
-.hole-buttons{
-  display:flex;
-  gap:6px;
-}
-
-.hole-buttons button{
-  width:42px;
-  height:42px;
-  background:#08131d;
-  color:var(--gold);
-  border:1px solid #87691c;
-  border-radius:11px;
-  font-size:26px;
-}
-
-/* DISTANCES */
-
-.distance-panel{
-  padding:10px;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  min-height:118px;
-}
-
-.to-centre{
-  padding-right:7px;
-  border-right:1px solid #183349;
-}
-
-.small-heading{
-  font-size:13px;
-  color:#dce5ee;
-}
-
-.big-distance{
-  margin-top:5px;
-  color:var(--gold);
-  font-size:39px;
-  line-height:1;
+  font-size:24px;
   font-weight:900;
   white-space:nowrap;
 }
 
+.hole-meta{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:2px;
+}
+
+.hole-nav{
+  display:flex;
+  gap:4px;
+}
+
+.hole-nav button{
+  width:32px;
+  height:36px;
+  border-radius:9px;
+  background:#07131f;
+  border:1px solid #85681f;
+  color:var(--gold);
+  font-size:22px;
+}
+
+/* DISTANCE */
+
+.distance-panel{
+  min-height:89px;
+  padding:8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.to-centre{
+  border-right:1px solid #173248;
+  padding-right:6px;
+}
+
+.label{
+  color:#dfe7ef;
+  font-size:10px;
+}
+
+.big-distance{
+  color:var(--gold);
+  font-weight:900;
+  font-size:32px;
+  line-height:1;
+  margin-top:5px;
+  white-space:nowrap;
+}
+
 .big-distance small{
-  font-size:19px;
+  font-size:14px;
 }
 
 .distance-list{
-  padding-left:9px;
-  font-size:12px;
-  color:#8da7bf;
+  padding-left:7px;
+  color:#8fa7bc;
+  font-size:9px;
   line-height:2;
 }
 
 .distance-list strong{
-  color:#fff;
   float:right;
+  color:white;
 }
 
 /* VOICE */
 
 .voice-panel{
-  padding:10px;
-  min-height:236px;
+  padding:8px;
+  min-height:185px;
 }
 
 .voice-top{
   display:grid;
   grid-template-columns:1fr auto;
-  gap:5px;
+  gap:4px;
   align-items:center;
 }
 
 .voice-title{
-  font-size:14px;
-  font-weight:800;
+  font-size:12px;
+  font-weight:900;
 }
 
-.voice-control{
+.voice-tools{
   display:flex;
-  gap:4px;
-  align-items:center;
+  gap:3px;
 }
 
 .voice-toggle{
   background:var(--blue);
   color:white;
-  border-radius:16px;
-  padding:6px 8px;
-  font-size:10px;
+  border-radius:13px;
+  padding:5px 7px;
+  font-size:8px;
   font-weight:900;
 }
 
 .voice-toggle.off{
-  background:#273a4c;
-  color:#9aabbc;
+  background:#263a4c;
+  color:#9badbd;
 }
 
-.caddie-input{
-  width:64px;
-  background:#07101b;
-  border:1px solid #294864;
+.caddie-name{
+  width:56px;
+  border:1px solid #294960;
+  border-radius:13px;
+  background:#06101a;
   color:white;
-  border-radius:16px;
-  padding:6px 7px;
   text-align:center;
-  font-size:11px;
+  padding:5px 4px;
+  font-size:9px;
 }
 
-.ask-box{
+.mic-area{
   text-align:center;
-  margin-top:8px;
+  margin-top:6px;
 }
 
 .mic{
-  width:64px;
-  height:64px;
+  width:52px;
+  height:52px;
   border-radius:50%;
   background:var(--blue);
   color:white;
-  font-size:29px;
+  font-size:24px;
 }
 
 .mic.listening{
-  background:#c93434;
+  background:var(--red);
 }
 
 .ask-name{
-  font-size:14px;
+  font-size:12px;
   font-weight:800;
-  margin-top:4px;
+  margin-top:3px;
 }
 
-.ask-sub{
+.tap-text{
   color:var(--muted);
-  font-size:10px;
+  font-size:8px;
 }
 
 .answer{
-  margin-top:7px;
-  background:#04101b;
-  border:1px solid #223f56;
-  border-radius:11px;
-  min-height:80px;
-  padding:8px;
-  font-size:11px;
-  line-height:1.45;
-  color:#d7e2eb;
+  margin-top:6px;
+  min-height:54px;
+  border:1px solid #213f55;
+  background:#04101a;
+  border-radius:9px;
+  padding:6px;
+  color:#dce5ed;
+  font-size:9px;
+  line-height:1.35;
 }
 
 /* CLUB */
 
 .club-panel{
-  padding:9px;
-  min-height:128px;
+  padding:8px;
+  min-height:103px;
 }
 
-.panel-title{
-  font-size:14px;
+.section-title{
+  font-size:12px;
   font-weight:900;
-  margin-bottom:7px;
+  margin-bottom:5px;
 }
 
 .club-row{
   display:grid;
-  grid-template-columns:38px 1fr auto;
-  gap:5px;
+  grid-template-columns:32px 1fr auto;
+  gap:4px;
   align-items:center;
 }
 
 .club-icon{
-  font-size:29px;
+  font-size:25px;
 }
 
 .club-name{
-  font-size:22px;
+  font-size:18px;
   font-weight:900;
 }
 
 .carry{
+  color:#90a7ba;
   text-align:right;
-  font-size:9px;
-  color:#95abc0;
+  font-size:8px;
 }
 
 .carry strong{
   display:block;
   color:var(--gold);
-  font-size:18px;
-  margin-top:2px;
+  font-size:15px;
+  margin-top:1px;
 }
 
 .club-select{
-  margin-top:6px;
   width:100%;
-  padding:7px;
-  border-radius:17px;
-  background:#09243c;
-  border:1px solid #20557d;
+  margin-top:5px;
+  background:#09243a;
   color:white;
-  font-size:10px;
+  border:1px solid #205278;
+  border-radius:14px;
+  padding:5px 6px;
+  font-size:8px;
 }
 
 /* LAST SHOT */
 
-.last-shot{
-  padding:9px;
-  min-height:67px;
+.last-shot-panel{
+  padding:7px;
+  min-height:56px;
 }
 
-.last-shot-text{
-  font-size:11px;
-  color:#9db0c3;
+.last-shot{
+  color:#9eb0c2;
+  font-size:9px;
 }
 
 /* SCORE */
 
 .score-panel{
-  margin-top:7px;
+  margin-top:6px;
   display:grid;
-  grid-template-columns:1.35fr repeat(4,1fr);
-  overflow:hidden;
+  grid-template-columns:1.25fr 1fr 1fr 1fr 1fr;
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:14px;
+  border-radius:12px;
+  overflow:hidden;
 }
 
 .score-cell{
-  min-height:105px;
-  padding:8px 3px;
+  min-height:82px;
+  border-right:1px solid #18334a;
   text-align:center;
-  border-right:1px solid #18354c;
+  padding:5px 2px;
 }
 
 .score-cell:last-child{
@@ -560,74 +570,74 @@ button{
 }
 
 .score-label{
-  font-size:11px;
+  font-size:9px;
   font-weight:800;
 }
 
 .score-number{
-  font-size:24px;
+  font-size:20px;
   font-weight:900;
-  margin-top:8px;
+  margin-top:5px;
 }
 
 .score-controls{
   display:flex;
   justify-content:center;
-  gap:4px;
-  margin-top:7px;
+  gap:3px;
+  margin-top:5px;
 }
 
 .score-btn{
-  width:29px;
-  height:29px;
+  width:25px;
+  height:25px;
+  border-radius:8px;
   background:#0a2941;
-  border:1px solid #265573;
+  border:1px solid #28546f;
   color:white;
-  border-radius:9px;
-  font-size:19px;
+  font-size:17px;
 }
 
-.circle-toggle{
-  width:35px;
-  height:35px;
+.circle{
+  width:31px;
+  height:31px;
   border-radius:50%;
-  margin-top:16px;
-  background:#0b2133;
-  border:1px solid #28506c;
-  color:#a8b9c8;
-  font-size:18px;
+  margin-top:12px;
+  background:#0d2639;
+  border:1px solid #2c566f;
+  color:#a8bac9;
+  font-size:15px;
 }
 
-.circle-toggle.active{
+.circle.active{
   background:var(--blue);
-  color:#fff;
+  color:white;
 }
 
-/* ACTION BUTTONS */
+/* ACTIONS */
 
 .actions{
   display:grid;
   grid-template-columns:1.35fr 1fr;
-  gap:7px;
-  margin-top:7px;
+  gap:6px;
+  margin-top:6px;
 }
 
-.next-hole{
-  padding:14px 5px;
-  border-radius:12px;
+.next{
   background:var(--gold);
-  color:#07101a;
-  font-size:15px;
+  color:#06101a;
+  padding:11px 5px;
+  border-radius:11px;
+  font-size:13px;
   font-weight:900;
 }
 
-.view-score{
-  padding:14px 5px;
-  border-radius:12px;
-  background:#071d30;
-  color:#fff;
-  border:1px solid #21557c;
-  font-size:12px;
+.scorecard{
+  background:#071e31;
+  color:white;
+  border:1px solid #22547a;
+  padding:11px 5px;
+  border-radius:11px;
+  font-size:10px;
   font-weight:800;
 }
 
@@ -635,21 +645,21 @@ button{
 
 .bottom-nav{
   position:fixed;
-  bottom:0;
   left:0;
   right:0;
-  height:76px;
+  bottom:0;
+  height:66px;
   display:grid;
   grid-template-columns:repeat(5,1fr);
   background:#020b13;
-  border-top:1px solid #163249;
+  border-top:1px solid #163149;
   z-index:100;
 }
 
 .bottom-nav button{
   background:transparent;
-  color:#8d9caf;
-  font-size:10px;
+  color:#8799aa;
+  font-size:9px;
 }
 
 .bottom-nav .active{
@@ -658,65 +668,54 @@ button{
 
 .nav-icon{
   display:block;
-  font-size:23px;
-  margin-bottom:3px;
+  font-size:20px;
+  margin-bottom:2px;
 }
 
-/* SMALLER PHONES */
+/* STATUS */
+
+.demo-note{
+  margin-top:5px;
+  text-align:center;
+  color:#53697d;
+  font-size:7px;
+}
 
 @media(max-width:380px){
 
+  .header{
+    grid-template-columns:33px 1fr 82px;
+  }
+
   .brand-main{
-    font-size:16px;
-  }
-
-  .brand-sub{
-    font-size:8px;
-  }
-
-  .weather{
-    font-size:9px;
+    font-size:15px;
   }
 
   .play-grid{
-    grid-template-columns:48% 52%;
-    gap:5px;
+    grid-template-columns:46% 54%;
+    gap:4px;
   }
 
   .map-card{
-    min-height:590px;
+    height:475px;
   }
 
   .hole-title{
-    font-size:24px;
-  }
-
-  .hole-buttons button{
-    width:36px;
-    height:38px;
+    font-size:21px;
   }
 
   .big-distance{
-    font-size:32px;
+    font-size:28px;
   }
 
-  .voice-title{
-    font-size:12px;
-  }
-
-  .caddie-input{
-    width:58px;
+  .voice-panel{
+    min-height:178px;
   }
 
   .club-name{
-    font-size:18px;
-  }
-
-  .score-btn{
-    width:26px;
+    font-size:16px;
   }
 }
-
 </style>
 </head>
 
@@ -724,410 +723,415 @@ button{
 
 <div class="app">
 
-  <header class="header">
+<header class="header">
 
-    <div class="menu">☰</div>
+  <div class="menu">☰</div>
 
-    <div class="brand">
-      <div class="brand-main">DRC VIRTUAL GOLF</div>
-      <div class="brand-sub">ELITE</div>
+  <div class="brand">
+    <div class="brand-main">DRC VIRTUAL GOLF</div>
+    <div class="brand-sub">ELITE</div>
+  </div>
+
+  <div class="weather">
+    <strong>☀️ 24°C</strong>
+    Wind 8 km/h
+  </div>
+
+</header>
+
+
+<main class="page">
+
+<section class="play-grid">
+
+  <!-- LEFT MAP -->
+
+  <div class="map-card">
+
+    <div class="water"></div>
+    <div class="fairway"></div>
+    <div class="green"></div>
+    <div class="bunker"></div>
+
+    <div class="shot-line"></div>
+    <div class="flag">🚩</div>
+
+    <div class="marker one"></div>
+    <div class="marker two"></div>
+    <div class="marker three"></div>
+
+    <div class="marker-label one">
+      <span id="mapFullDistance">498</span>
+      <span class="unit">m</span>
     </div>
 
-    <div class="weather">
-      <strong>☀️ 24°C</strong><br>
-      Wind 8 km/h
+    <div class="marker-label two">
+      <span id="mapMidDistance">280</span>
+      <span class="unit">m</span>
     </div>
 
-  </header>
+    <div class="marker-label three">
+      <span id="mapNearDistance">230</span>
+      <span class="unit">m</span>
+    </div>
+
+    <div class="player-dot"></div>
+
+    <div class="map-switch">
+      <button class="active">GPS</button>
+      <button>Aerial</button>
+    </div>
+
+  </div>
 
 
-  <main class="page">
+  <!-- RIGHT -->
 
-    <section class="play-grid">
+  <div class="right">
 
-      <!-- LEFT SIDE -->
+    <div class="panel hole-panel">
 
-      <div class="map-card">
+      <div>
+        <div class="hole-title">
+          Hole <span id="holeNumber">1</span>
+        </div>
 
-        <div class="map-water"></div>
-        <div class="fairway"></div>
-        <div class="green"></div>
-        <div class="bunker"></div>
+        <div class="hole-meta">
+          Par <span id="holePar">5</span>
+          &nbsp;|&nbsp;
+          SI <span id="holeSI">5</span>
+        </div>
+      </div>
 
-        <div class="map-line"></div>
+      <div class="hole-nav">
+        <button onclick="previousHole()">‹</button>
+        <button onclick="nextHole()">›</button>
+      </div>
 
-        <div class="flag">🚩</div>
+    </div>
 
-        <div class="map-dot dot1"></div>
-        <div class="map-dot dot2"></div>
-        <div class="map-dot dot3"></div>
 
-        <div class="map-distance distance1">
-          <span id="mapFullDistance">498</span>
+    <div class="panel distance-panel">
+
+      <div class="to-centre">
+
+        <div class="label">
+          To Centre
+        </div>
+
+        <div class="big-distance">
+          <span id="centreBig">498</span>
+          <small class="unit">m</small>
+        </div>
+
+      </div>
+
+      <div class="distance-list">
+
+        Front
+        <strong>
+          <span id="frontDistance">480</span>
           <span class="unit">m</span>
-        </div>
+        </strong>
+        <br>
 
-        <div class="map-distance distance2">
-          <span id="mapMidDistance">280</span>
+        Centre
+        <strong>
+          <span id="centreDistance">498</span>
           <span class="unit">m</span>
-        </div>
+        </strong>
+        <br>
 
-        <div class="map-distance distance3">
-          <span id="mapNearDistance">230</span>
+        Back
+        <strong>
+          <span id="backDistance">512</span>
           <span class="unit">m</span>
-        </div>
-
-        <div class="player-dot"></div>
-
-        <div class="map-switch">
-          <button class="active">GPS</button>
-          <button>Aerial</button>
-        </div>
+        </strong>
 
       </div>
 
+    </div>
 
-      <!-- RIGHT SIDE -->
 
-      <div class="right-stack">
+    <div class="panel voice-panel">
 
-        <div class="panel hole-panel">
+      <div class="voice-top">
 
-          <div>
-            <div class="hole-title">
-              Hole <span id="holeNumber">1</span>
-            </div>
-
-            <div class="hole-meta">
-              Par <span id="holePar">5</span>
-              &nbsp;|&nbsp;
-              S.I. <span id="holeSI">5</span>
-            </div>
-          </div>
-
-          <div class="hole-buttons">
-            <button onclick="previousHole()">‹</button>
-            <button onclick="nextHole()">›</button>
-          </div>
-
+        <div class="voice-title">
+          Voice Caddie
         </div>
 
-
-        <div class="panel distance-panel">
-
-          <div class="to-centre">
-
-            <div class="small-heading">
-              To Centre
-            </div>
-
-            <div class="big-distance">
-              <span id="centreBig">498</span>
-              <small class="unit">m</small>
-            </div>
-
-          </div>
-
-          <div class="distance-list">
-
-            Front
-            <strong>
-              <span id="frontDistance">480</span>
-              <span class="unit">m</span>
-            </strong>
-            <br>
-
-            Centre
-            <strong>
-              <span id="centreDistance">498</span>
-              <span class="unit">m</span>
-            </strong>
-            <br>
-
-            Back
-            <strong>
-              <span id="backDistance">512</span>
-              <span class="unit">m</span>
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        <div class="panel voice-panel">
-
-          <div class="voice-top">
-
-            <div class="voice-title">
-              Voice Caddie
-            </div>
-
-            <div class="voice-control">
-
-              <button
-                id="voiceToggle"
-                class="voice-toggle"
-                onclick="toggleVoice()">
-                ON
-              </button>
-
-              <input
-                id="caddieName"
-                class="caddie-input"
-                value="Steve"
-                maxlength="18"
-                onchange="saveCaddieName()"
-              >
-
-            </div>
-
-          </div>
-
-          <div class="ask-box">
-
-            <button
-              id="micButton"
-              class="mic"
-              onclick="askCaddie()">
-              🎤
-            </button>
-
-            <div class="ask-name">
-              Ask <span id="askName">Steve</span>
-            </div>
-
-            <div class="ask-sub">
-              Tap and speak
-            </div>
-
-          </div>
-
-          <div
-            id="caddieAnswer"
-            class="answer">
-            Ready. Ask Steve for the shot.
-          </div>
-
-        </div>
-
-
-        <div class="panel club-panel">
-
-          <div class="panel-title">
-            Recommended Club
-          </div>
-
-          <div class="club-row">
-
-            <div class="club-icon">🏌️</div>
-
-            <div
-              id="recommendedClub"
-              class="club-name">
-              Driver
-            </div>
-
-            <div class="carry">
-              Est. Carry
-              <strong id="recommendedCarry">
-                230 m
-              </strong>
-            </div>
-
-          </div>
-
-          <select
-            id="clubSelect"
-            class="club-select"
-            onchange="manualClubChange()">
-
-            <option>Driver</option>
-            <option>3 Wood</option>
-            <option>5 Wood</option>
-            <option>4 Iron</option>
-            <option>5 Iron</option>
-            <option>6 Iron</option>
-            <option>7 Iron</option>
-            <option>8 Iron</option>
-            <option>9 Iron</option>
-            <option>PW</option>
-            <option>GW</option>
-            <option>SW</option>
-            <option>LW</option>
-
-          </select>
-
-        </div>
-
-
-        <div class="panel last-shot">
-
-          <div class="panel-title">
-            Last Shot
-          </div>
-
-          <div
-            id="lastShot"
-            class="last-shot-text">
-            No shot recorded
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- SCORE -->
-
-    <section class="score-panel">
-
-      <div class="score-cell">
-
-        <div class="score-label">
-          Score
-        </div>
-
-        <div
-          id="scoreValue"
-          class="score-number">
-          0
-        </div>
-
-        <div class="score-controls">
+        <div class="voice-tools">
 
           <button
-            class="score-btn"
-            onclick="changeScore(-1)">
-            −
+            id="voiceToggle"
+            class="voice-toggle"
+            onclick="toggleVoice()">
+            ON
           </button>
 
-          <button
-            class="score-btn"
-            onclick="changeScore(1)">
-            +
-          </button>
+          <input
+            id="caddieName"
+            class="caddie-name"
+            maxlength="18"
+            value="Pete"
+            onchange="saveCaddieName()"
+          >
 
         </div>
 
       </div>
 
 
-      <div class="score-cell">
-
-        <div class="score-label">
-          Putts
-        </div>
-
-        <div
-          id="puttsValue"
-          class="score-number">
-          0
-        </div>
-
-        <div class="score-controls">
-
-          <button
-            class="score-btn"
-            onclick="changePutts(-1)">
-            −
-          </button>
-
-          <button
-            class="score-btn"
-            onclick="changePutts(1)">
-            +
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div class="score-cell">
-
-        <div class="score-label">
-          GIR
-        </div>
+      <div class="mic-area">
 
         <button
-          id="girButton"
-          class="circle-toggle"
-          onclick="toggleGir()">
-          ◎
+          id="micButton"
+          class="mic"
+          onclick="askCaddie()">
+          🎤
         </button>
 
-      </div>
-
-
-      <div class="score-cell">
-
-        <div class="score-label">
-          Fairway
+        <div class="ask-name">
+          Ask <span id="askName">Pete</span>
         </div>
 
-        <button
-          id="fairwayButton"
-          class="circle-toggle"
-          onclick="toggleFairway()">
-          ↗
-        </button>
+        <div class="tap-text">
+          Tap and speak
+        </div>
 
       </div>
 
 
-      <div class="score-cell">
+      <div
+        id="caddieAnswer"
+        class="answer">
+        Ready. Ask Pete for the shot.
+      </div>
 
-        <div class="score-label">
-          Penalty
+    </div>
+
+
+    <div class="panel club-panel">
+
+      <div class="section-title">
+        Recommended Club
+      </div>
+
+      <div class="club-row">
+
+        <div class="club-icon">
+          🏌️
         </div>
 
         <div
-          id="penaltyValue"
-          class="score-number">
-          0
+          id="recommendedClub"
+          class="club-name">
+          Driver
         </div>
 
-        <div class="score-controls">
-
-          <button
-            class="score-btn"
-            onclick="changePenalty(-1)">
-            −
-          </button>
-
-          <button
-            class="score-btn"
-            onclick="changePenalty(1)">
-            +
-          </button>
-
+        <div class="carry">
+          Est. Carry
+          <strong id="recommendedCarry">
+            230 m
+          </strong>
         </div>
 
       </div>
 
-    </section>
+      <select
+        id="clubSelect"
+        class="club-select"
+        onchange="manualClubChange()">
+
+        <option>Driver</option>
+        <option>3 Wood</option>
+        <option>5 Wood</option>
+        <option>4 Iron</option>
+        <option>5 Iron</option>
+        <option>6 Iron</option>
+        <option>7 Iron</option>
+        <option>8 Iron</option>
+        <option>9 Iron</option>
+        <option>PW</option>
+        <option>GW</option>
+        <option>SW</option>
+        <option>LW</option>
+
+      </select>
+
+    </div>
 
 
-    <section class="actions">
+    <div class="panel last-shot-panel">
+
+      <div class="section-title">
+        Last Shot
+      </div>
+
+      <div
+        id="lastShot"
+        class="last-shot">
+        No shot recorded
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="score-panel">
+
+  <div class="score-cell">
+
+    <div class="score-label">
+      Score
+    </div>
+
+    <div
+      id="scoreValue"
+      class="score-number">
+      0
+    </div>
+
+    <div class="score-controls">
 
       <button
-        class="next-hole"
-        onclick="nextHole()">
-        🏁 NEXT HOLE
+        class="score-btn"
+        onclick="changeScore(-1)">
+        −
       </button>
 
       <button
-        class="view-score"
-        onclick="showScorecard()">
-        ☷ VIEW SCORECARD
+        class="score-btn"
+        onclick="changeScore(1)">
+        +
       </button>
 
-    </section>
+    </div>
 
-  </main>
+  </div>
+
+
+  <div class="score-cell">
+
+    <div class="score-label">
+      Putts
+    </div>
+
+    <div
+      id="puttsValue"
+      class="score-number">
+      0
+    </div>
+
+    <div class="score-controls">
+
+      <button
+        class="score-btn"
+        onclick="changePutts(-1)">
+        −
+      </button>
+
+      <button
+        class="score-btn"
+        onclick="changePutts(1)">
+        +
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="score-cell">
+
+    <div class="score-label">
+      GIR
+    </div>
+
+    <button
+      id="girButton"
+      class="circle"
+      onclick="toggleGir()">
+      ◎
+    </button>
+
+  </div>
+
+
+  <div class="score-cell">
+
+    <div class="score-label">
+      Fairway
+    </div>
+
+    <button
+      id="fairwayButton"
+      class="circle"
+      onclick="toggleFairway()">
+      ↗
+    </button>
+
+  </div>
+
+
+  <div class="score-cell">
+
+    <div class="score-label">
+      Penalty
+    </div>
+
+    <div
+      id="penaltyValue"
+      class="score-number">
+      0
+    </div>
+
+    <div class="score-controls">
+
+      <button
+        class="score-btn"
+        onclick="changePenalty(-1)">
+        −
+      </button>
+
+      <button
+        class="score-btn"
+        onclick="changePenalty(1)">
+        +
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="actions">
+
+  <button
+    class="next"
+    onclick="nextHole()">
+    🏁 NEXT HOLE
+  </button>
+
+  <button
+    class="scorecard"
+    onclick="showScorecard()">
+    ☷ VIEW SCORECARD
+  </button>
+
+</section>
+
+<div class="demo-note">
+  Course map and hole distances are temporary until real DRC GPS/course data is connected.
+</div>
+
+</main>
 
 </div>
 
@@ -1176,8 +1180,8 @@ let unitMode =
 
 
 /*
-  TEMPORARY HOLE DATA.
-  We will replace this with real course/GPS data.
+  TEMPORARY DISPLAY DATA ONLY.
+  DO NOT TREAT THESE AS REAL COURSE DISTANCES.
 */
 
 const holes = [
@@ -1191,7 +1195,6 @@ const holes = [
   {hole:7,par:4,si:9,front:348,centre:361,back:374},
   {hole:8,par:4,si:3,front:382,centre:397,back:410},
   {hole:9,par:4,si:13,front:335,centre:349,back:362},
-
   {hole:10,par:4,si:6,front:368,centre:381,back:394},
   {hole:11,par:5,si:4,front:492,centre:508,back:523},
   {hole:12,par:3,si:16,front:151,centre:162,back:173},
@@ -1251,7 +1254,9 @@ function displayDistance(metres){
 
 function renderHole(){
 
-  const hole = holes[currentHole];
+  const hole =
+    holes[currentHole];
+
 
   document.getElementById("holeNumber").textContent =
     hole.hole;
@@ -1286,13 +1291,16 @@ function renderHole(){
     back.value;
 
 
+  /*
+    Temporary visual marker numbers.
+    Later these will come from real GPS targets.
+  */
+
   document.getElementById("mapFullDistance").textContent =
     centre.value;
 
-
   document.getElementById("mapMidDistance").textContent =
     Math.round(centre.value * 0.56);
-
 
   document.getElementById("mapNearDistance").textContent =
     Math.round(centre.value * 0.46);
@@ -1309,8 +1317,8 @@ function renderHole(){
 
 
   loadHoleScore();
-
   recommendClub();
+
 
   localStorage.setItem(
     "drcCurrentHole",
@@ -1352,6 +1360,8 @@ function previousHole(){
 }
 
 
+/* SCORE */
+
 function getScoreData(){
 
   const number =
@@ -1361,11 +1371,13 @@ function getScoreData(){
   if(!holeScores[number]){
 
     holeScores[number] = {
+
       score:0,
       putts:0,
       gir:false,
       fairway:false,
       penalty:0
+
     };
 
   }
@@ -1498,7 +1510,7 @@ function toggleFairway(){
 }
 
 
-/* CLUB */
+/* BAG */
 
 function recommendClub(){
 
@@ -1520,7 +1532,6 @@ function recommendClub(){
         Math.abs(
           target - carry
         );
-
 
       if(difference < smallest){
 
@@ -1547,8 +1558,10 @@ function recommendClub(){
 
 function setRecommendedClub(club){
 
-  document.getElementById("recommendedClub").textContent =
-    club;
+  document
+    .getElementById("recommendedClub")
+    .textContent =
+      club;
 
 
   const carry =
@@ -1557,14 +1570,18 @@ function setRecommendedClub(club){
     );
 
 
-  document.getElementById("recommendedCarry").textContent =
-    carry.value +
-    " " +
-    carry.unit;
+  document
+    .getElementById("recommendedCarry")
+    .textContent =
+      carry.value +
+      " " +
+      carry.unit;
 
 
-  document.getElementById("clubSelect").value =
-    club;
+  document
+    .getElementById("clubSelect")
+    .value =
+      club;
 
 }
 
@@ -1572,7 +1589,9 @@ function setRecommendedClub(club){
 function manualClubChange(){
 
   const club =
-    document.getElementById("clubSelect").value;
+    document
+      .getElementById("clubSelect")
+      .value;
 
   setRecommendedClub(club);
 
@@ -1589,7 +1608,7 @@ function getCaddieName(){
       .value
       .trim();
 
-  return value || "Steve";
+  return value || "Pete";
 
 }
 
@@ -1600,14 +1619,30 @@ function saveCaddieName(){
     getCaddieName();
 
 
+  document
+    .getElementById("caddieName")
+    .value =
+      name;
+
+
+  document
+    .getElementById("askName")
+    .textContent =
+      name;
+
+
   localStorage.setItem(
     "drcCaddieName",
     name
   );
 
 
-  document.getElementById("askName").textContent =
-    name;
+  document
+    .getElementById("caddieAnswer")
+    .textContent =
+      "Ready. Ask " +
+      name +
+      " for the shot.";
 
 }
 
@@ -1633,6 +1668,14 @@ function toggleVoice(){
   button.classList.toggle(
     "off",
     !voiceEnabled
+  );
+
+
+  localStorage.setItem(
+    "drcVoiceEnabled",
+    voiceEnabled
+      ? "true"
+      : "false"
   );
 
 }
@@ -1663,15 +1706,22 @@ function setupRecognition(){
   recognition.interimResults =
     false;
 
+  recognition.maxAlternatives =
+    1;
+
 
   recognition.onstart =
     function(){
 
-      listening = true;
+      listening =
+        true;
+
 
       document
         .getElementById("micButton")
-        .classList.add("listening");
+        .classList.add(
+          "listening"
+        );
 
 
       document
@@ -1699,12 +1749,24 @@ function setupRecognition(){
 
 
   recognition.onerror =
-    function(){
+    function(event){
+
+      let message =
+        "I couldn't hear that clearly.";
+
+
+      if(event.error === "not-allowed"){
+
+        message =
+          "Microphone permission is blocked.";
+
+      }
+
 
       document
         .getElementById("caddieAnswer")
         .textContent =
-          "I couldn't hear that clearly. Tap the microphone and try again.";
+          message;
 
     };
 
@@ -1712,11 +1774,15 @@ function setupRecognition(){
   recognition.onend =
     function(){
 
-      listening = false;
+      listening =
+        false;
+
 
       document
         .getElementById("micButton")
-        .classList.remove("listening");
+        .classList.remove(
+          "listening"
+        );
 
     };
 
@@ -1752,6 +1818,14 @@ function askCaddie(){
       return;
 
     }
+
+  }
+
+
+  if(listening){
+
+    recognition.stop();
+    return;
 
   }
 
@@ -1795,17 +1869,19 @@ function handleGolfCommand(command){
 
 
   if(
-    text.includes("headwind") ||
-    text.includes("wind")
+    text.includes("wind") ||
+    text.includes("headwind")
   ){
 
     advice +=
-      "Keep the flight controlled and avoid forcing the shot. ";
+      "Keep the flight controlled and don't force it. ";
 
   }
 
 
-  if(text.includes("rough")){
+  if(
+    text.includes("rough")
+  ){
 
     advice +=
       "Check the lie first and prioritise clean contact. ";
@@ -1824,10 +1900,20 @@ function handleGolfCommand(command){
   }
 
 
+  if(
+    text.includes("water")
+  ){
+
+    advice +=
+      "Take the penalty area out of play where possible. ";
+
+  }
+
+
   advice +=
-    "I suggest " +
+    "I like the " +
     club +
-    ". Aim for the safe side and commit to the swing.";
+    ". Commit to the target and swing freely.";
 
 
   document
@@ -1854,16 +1940,24 @@ function speak(text){
   window.speechSynthesis.cancel();
 
 
-  const voice =
-    new SpeechSynthesisUtterance(text);
+  const utterance =
+    new SpeechSynthesisUtterance(
+      text
+    );
 
 
-  voice.rate = 0.95;
-  voice.pitch = 1;
+  utterance.rate =
+    0.95;
+
+  utterance.pitch =
+    1;
+
+  utterance.volume =
+    1;
 
 
   window.speechSynthesis.speak(
-    voice
+    utterance
   );
 
 }
@@ -1873,14 +1967,35 @@ function speak(text){
 
 function showScorecard(){
 
+  let totalScore =
+    0;
+
+  let totalPar =
+    0;
+
   let text =
-    "DRC VIRTUAL GOLF\\n\\n";
+    "DRC VIRTUAL GOLF\n\n";
 
 
   holes.forEach(hole => {
 
     const data =
       holeScores[hole.hole];
+
+
+    totalPar +=
+      hole.par;
+
+
+    const score =
+      data
+        ? data.score
+        : 0;
+
+
+    if(score > 0){
+      totalScore += score;
+    }
 
 
     text +=
@@ -1890,13 +2005,27 @@ function showScorecard(){
       hole.par +
       " | Score " +
       (
-        data && data.score
-          ? data.score
+        score > 0
+          ? score
           : "-"
       ) +
-      "\\n";
+      "\n";
 
   });
+
+
+  text +=
+    "\nPar: " +
+    totalPar;
+
+
+  if(totalScore > 0){
+
+    text +=
+      "\nRecorded Score: " +
+      totalScore;
+
+  }
 
 
   alert(text);
@@ -1908,21 +2037,47 @@ function showScorecard(){
 
 function loadSettings(){
 
-  const caddie =
+  const savedCaddie =
     localStorage.getItem(
       "drcCaddieName"
     );
 
 
-  if(caddie){
+  if(savedCaddie){
 
-    document.getElementById("caddieName").value =
-      caddie;
+    document
+      .getElementById("caddieName")
+      .value =
+        savedCaddie;
 
   }
 
 
-  saveCaddieName();
+  const savedVoice =
+    localStorage.getItem(
+      "drcVoiceEnabled"
+    );
+
+
+  if(savedVoice === "false"){
+
+    voiceEnabled =
+      false;
+
+
+    document
+      .getElementById("voiceToggle")
+      .textContent =
+        "OFF";
+
+
+    document
+      .getElementById("voiceToggle")
+      .classList.add(
+        "off"
+      );
+
+  }
 
 
   const savedHole =
@@ -1943,6 +2098,24 @@ function loadSettings(){
       savedHole;
 
   }
+
+
+  const name =
+    getCaddieName();
+
+
+  document
+    .getElementById("askName")
+    .textContent =
+      name;
+
+
+  document
+    .getElementById("caddieAnswer")
+    .textContent =
+      "Ready. Ask " +
+      name +
+      " for the shot.";
 
 }
 
