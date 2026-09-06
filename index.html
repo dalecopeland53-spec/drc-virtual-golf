@@ -177,37 +177,15 @@
       border-color: #d4af37;
     }
 
-    .voice-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .voice-toggle,
     .ask-button {
-      padding: 12px 8px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .voice-toggle {
-      background: #13224f;
-      color: #ffffff;
-      border: 1px solid #294372;
-    }
-
-    .voice-toggle.on {
-      background: #d4af37;
-      color: #071126;
-      border-color: #d4af37;
-    }
-
-    .ask-button {
+      width: 100%;
       background: #1769e0;
       color: #ffffff;
       border: 1px solid #3e8aff;
+      padding: 13px 10px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 800;
     }
 
     .ask-button.listening {
@@ -216,6 +194,7 @@
     }
 
     .voice-status {
+      margin-top: 10px;
       background: #071126;
       border: 1px solid #1e2d5a;
       border-radius: 8px;
@@ -415,26 +394,16 @@
       <div class="card">
         <div class="card-header">Voice Caddie</div>
 
-        <div class="voice-row">
-          <button
-            id="voiceToggle"
-            class="voice-toggle on"
-            onclick="toggleVoice()"
-          >
-            VOICE ON
-          </button>
-
-          <button
-            id="askButton"
-            class="ask-button"
-            onclick="askCaddie()"
-          >
-            🎤 ASK CADDIE
-          </button>
-        </div>
+        <button
+          id="askButton"
+          class="ask-button"
+          onclick="askCaddie()"
+        >
+          🎤 ASK STEVE
+        </button>
 
         <div class="voice-status" id="voiceStatus">
-          <strong>Ready.</strong> Tap Ask Caddie and speak naturally.
+          <strong>Ready.</strong> Tap Ask Steve and speak naturally.
         </div>
       </div>
 
@@ -528,7 +497,6 @@
     const MPH_TO_KMH = 1.60934;
 
     let unitMode = "metric";
-    let voiceEnabled = true;
     let recognition = null;
     let listening = false;
 
@@ -571,6 +539,20 @@
       );
     }
 
+    function updateAskButton() {
+      const caddie = getCaddie();
+      const button = document.getElementById("askButton");
+
+      if (!listening) {
+        button.textContent = "🎤 ASK " + caddie.toUpperCase();
+      }
+
+      document.getElementById("voiceStatus").innerHTML =
+        "<strong>Ready.</strong> Tap Ask " +
+        caddie +
+        " and speak naturally.";
+    }
+
     function saveNames() {
       const player = getPlayer();
       const caddie = getCaddie();
@@ -593,6 +575,8 @@
       document.getElementById("caddieName").value = caddie;
       document.getElementById("playerHeading").textContent = player;
       document.getElementById("caddieHeading").textContent = caddie;
+
+      updateAskButton();
     }
 
     function setUnits(mode) {
@@ -676,35 +660,11 @@
       }
     }
 
-    function toggleVoice() {
-      voiceEnabled = !voiceEnabled;
-
-      localStorage.setItem(
-        "drcVoiceEnabled",
-        voiceEnabled ? "true" : "false"
-      );
-
-      const button = document.getElementById("voiceToggle");
-
-      if (voiceEnabled) {
-        button.textContent = "VOICE ON";
-        button.classList.add("on");
-        setVoiceStatus("Voice responses are on.");
-      } else {
-        button.textContent = "VOICE OFF";
-        button.classList.remove("on");
-        window.speechSynthesis.cancel();
-        setVoiceStatus("Voice responses are off.");
-      }
-    }
-
     function setVoiceStatus(message) {
       document.getElementById("voiceStatus").innerHTML = message;
     }
 
     function speak(text) {
-      if (!voiceEnabled) return;
-
       if (!("speechSynthesis" in window)) {
         setVoiceStatus(
           "<strong>Text answer ready.</strong> Voice output is not available in this browser."
@@ -745,7 +705,9 @@
         button.textContent = "🎤 LISTENING...";
 
         setVoiceStatus(
-          "<strong>Listening...</strong> Tell your caddie the shot."
+          "<strong>Listening...</strong> Tell " +
+          getCaddie() +
+          " the shot."
         );
       };
 
@@ -768,7 +730,9 @@
             "Microphone permission is blocked. Allow microphone access in Chrome.";
         } else if (event.error === "no-speech") {
           message =
-            "I didn't hear anything. Tap Ask Caddie and try again.";
+            "I didn't hear anything. Tap Ask " +
+            getCaddie() +
+            " and try again.";
         }
 
         setVoiceStatus(message);
@@ -779,7 +743,7 @@
 
         const button = document.getElementById("askButton");
         button.classList.remove("listening");
-        button.textContent = "🎤 ASK CADDIE";
+        updateAskButton();
       };
 
       return true;
@@ -852,7 +816,7 @@
         renderUnits();
       }
 
-      let advice = buildAdvice(text, player);
+      const advice = buildAdvice(text, player);
 
       document.getElementById("caddieAdvice").textContent =
         advice;
@@ -1004,21 +968,12 @@
       const savedUnits =
         localStorage.getItem("drcUnitMode");
 
-      const savedVoice =
-        localStorage.getItem("drcVoiceEnabled");
-
       updateNames(player, caddie);
 
       if (savedUnits === "imperial") {
         unitMode = "imperial";
       } else {
         unitMode = "metric";
-      }
-
-      if (savedVoice === "false") {
-        voiceEnabled = false;
-      } else {
-        voiceEnabled = true;
       }
 
       document
@@ -1035,19 +990,9 @@
           unitMode === "imperial"
         );
 
-      const voiceButton =
-        document.getElementById("voiceToggle");
-
-      if (voiceEnabled) {
-        voiceButton.textContent = "VOICE ON";
-        voiceButton.classList.add("on");
-      } else {
-        voiceButton.textContent = "VOICE OFF";
-        voiceButton.classList.remove("on");
-      }
-
       renderUnits();
       refreshAdvice(false);
+      updateAskButton();
     }
 
     loadSavedSettings();
