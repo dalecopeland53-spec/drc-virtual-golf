@@ -102,4 +102,956 @@
     }
 
     .card-header {
-      color: #
+      color: #7790b5;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .name-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .field-label {
+      display: block;
+      color: #8fa0c0;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      background: #071126;
+      color: #ffffff;
+      border: 1px solid #294372;
+      border-radius: 8px;
+      padding: 11px 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #d4af37;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .save-button {
+      width: 100%;
+      margin-top: 11px;
+      background: #d4af37;
+      color: #071126;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 11px;
+      border-radius: 8px;
+    }
+
+    .unit-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .unit-button {
+      background: #13224f;
+      color: #9fb1d3;
+      border: 1px solid #294372;
+      border-radius: 8px;
+      padding: 11px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .unit-button.active {
+      background: #d4af37;
+      color: #071126;
+      border-color: #d4af37;
+    }
+
+    .voice-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .voice-toggle,
+    .ask-button {
+      padding: 12px 8px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .voice-toggle {
+      background: #13224f;
+      color: #ffffff;
+      border: 1px solid #294372;
+    }
+
+    .voice-toggle.on {
+      background: #d4af37;
+      color: #071126;
+      border-color: #d4af37;
+    }
+
+    .ask-button {
+      background: #1769e0;
+      color: #ffffff;
+      border: 1px solid #3e8aff;
+    }
+
+    .ask-button.listening {
+      background: #b62020;
+      border-color: #ef4444;
+    }
+
+    .voice-status {
+      background: #071126;
+      border: 1px solid #1e2d5a;
+      border-radius: 8px;
+      padding: 10px;
+      color: #9fb1d3;
+      font-size: 12px;
+      line-height: 1.5;
+      min-height: 42px;
+    }
+
+    .voice-status strong {
+      color: #ffffff;
+    }
+
+    .metrics-display {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .metric-box {
+      flex: 1;
+      padding: 3px;
+    }
+
+    .metric-box + .metric-box {
+      border-left: 1px solid #1e2d5a;
+    }
+
+    .metric-label {
+      color: #8fa0c0;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .metric-val {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .metric-unit {
+      font-size: 11px;
+      color: #8fa0c0;
+    }
+
+    .highlight {
+      color: #ffcc00;
+    }
+
+    .caddie-bubble {
+      color: #d5deec;
+      font-size: 14px;
+      line-height: 1.55;
+      border-left: 3px solid #d4af37;
+      padding-left: 11px;
+    }
+
+    .club-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .club-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 8px;
+      padding: 11px 10px;
+      border-radius: 7px;
+      background: #13224f;
+      align-items: center;
+    }
+
+    .club-row.selected {
+      background: #1c3575;
+      border: 1px solid #ffcc00;
+    }
+
+    .club-name {
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .club-dist {
+      color: #ffcc00;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .club-status {
+      font-size: 11px;
+      color: #8fa0c0;
+      text-align: right;
+    }
+
+    .club-row.selected .club-status {
+      color: #ffcc00;
+      font-weight: 800;
+    }
+
+    .footer {
+      text-align: center;
+      color: #536789;
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 18px 0 5px;
+    }
+
+    @media (max-width: 390px) {
+      .brand-title {
+        font-size: 19px;
+      }
+
+      .metric-val {
+        font-size: 21px;
+      }
+
+      .club-row {
+        grid-template-columns: 1fr auto;
+      }
+
+      .club-status {
+        grid-column: 1 / -1;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="top-bar">
+      <div class="logo">⛳</div>
+
+      <div>
+        <div class="brand-title">DRC VIRTUAL GOLF</div>
+        <div class="brand-sub">Professional Caddie</div>
+      </div>
+
+      <div class="score">-3<br />UNDER</div>
+    </div>
+
+    <div class="environment-bar" id="environmentBar">
+      💨 <strong>Wind:</strong> 19 km/h NW
+      &nbsp; | &nbsp;
+      📈 <strong>Slope:</strong> +7 m
+      &nbsp; | &nbsp;
+      🌡️ <strong>Temp:</strong> 23°C
+    </div>
+
+    <div class="main-grid">
+
+      <div class="card">
+        <div class="card-header">Player & Caddie</div>
+
+        <div class="name-grid">
+          <div>
+            <label class="field-label" for="playerName">Player</label>
+            <input id="playerName" type="text" value="Tiger" maxlength="25" />
+          </div>
+
+          <div>
+            <label class="field-label" for="caddieName">Caddie</label>
+            <input id="caddieName" type="text" value="Steve" maxlength="25" />
+          </div>
+        </div>
+
+        <button class="save-button" onclick="saveNames()">
+          SAVE NAMES
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Units</div>
+
+        <div class="unit-row">
+          <button
+            id="metricButton"
+            class="unit-button active"
+            onclick="setUnits('metric')"
+          >
+            METRIC
+          </button>
+
+          <button
+            id="imperialButton"
+            class="unit-button"
+            onclick="setUnits('imperial')"
+          >
+            IMPERIAL
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Voice Caddie</div>
+
+        <div class="voice-row">
+          <button
+            id="voiceToggle"
+            class="voice-toggle on"
+            onclick="toggleVoice()"
+          >
+            VOICE ON
+          </button>
+
+          <button
+            id="askButton"
+            class="ask-button"
+            onclick="askCaddie()"
+          >
+            🎤 ASK CADDIE
+          </button>
+        </div>
+
+        <div class="voice-status" id="voiceStatus">
+          <strong>Ready.</strong> Tap Ask Caddie and speak naturally.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span id="playerHeading">Tiger</span>'s Shot
+        </div>
+
+        <div class="metrics-display">
+          <div class="metric-box">
+            <div class="metric-label">Hole / Par</div>
+            <div class="metric-val">4 / 4</div>
+          </div>
+
+          <div class="metric-box">
+            <div class="metric-label">Raw Distance</div>
+            <div class="metric-val">
+              <span id="rawDistance">151</span>
+              <span class="metric-unit" id="rawUnit">m</span>
+            </div>
+          </div>
+
+          <div class="metric-box">
+            <div class="metric-label">Plays Like</div>
+            <div class="metric-val highlight">
+              <span id="playsLike">155</span>
+              <span class="metric-unit highlight" id="playsUnit">m</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span id="caddieHeading">Steve</span>'s Live Strategy Advice
+        </div>
+
+        <div class="caddie-bubble" id="caddieAdvice">
+          Tiger, the pin is tucked back-right. The hill takes away the wind help.
+          Play a smooth 7-iron, starting about four metres left of the flag.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          Live Bag Matrix — Target
+          <span id="matrixTarget">155 m</span>
+        </div>
+
+        <div class="club-list">
+
+          <div class="club-row">
+            <span class="club-name">5 Iron</span>
+            <span class="club-dist" id="club5Distance">174 m</span>
+            <span class="club-status">Too Long</span>
+          </div>
+
+          <div class="club-row">
+            <span class="club-name">6 Iron</span>
+            <span class="club-dist" id="club6Distance">163 m</span>
+            <span class="club-status">Deep Fringe</span>
+          </div>
+
+          <div class="club-row selected">
+            <span class="club-name">7 Iron</span>
+            <span class="club-dist" id="club7Distance">151 m</span>
+            <span class="club-status">🎯 TARGET SELECT</span>
+          </div>
+
+          <div class="club-row">
+            <span class="club-name">8 Iron</span>
+            <span class="club-dist" id="club8Distance">137 m</span>
+            <span class="club-status">Short</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      DRC VIRTUAL GOLF
+    </div>
+  </div>
+
+  <script>
+    const DEFAULT_PLAYER = "Tiger";
+    const DEFAULT_CADDIE = "Steve";
+
+    const YARDS_TO_METRES = 0.9144;
+    const MPH_TO_KMH = 1.60934;
+
+    let unitMode = "metric";
+    let voiceEnabled = true;
+    let recognition = null;
+    let listening = false;
+
+    let shotData = {
+      rawYards: 165,
+      playsYards: 170,
+      windMph: 12,
+      windDirection: "NW",
+      slopeYards: 8,
+      temperatureF: 74
+    };
+
+    const bagYards = {
+      "5 Iron": 190,
+      "6 Iron": 178,
+      "7 Iron": 165,
+      "8 Iron": 150
+    };
+
+    function round(value) {
+      return Math.round(value);
+    }
+
+    function cleanName(value, fallback) {
+      const cleaned = String(value || "").trim();
+      return cleaned || fallback;
+    }
+
+    function getPlayer() {
+      return cleanName(
+        document.getElementById("playerName").value,
+        DEFAULT_PLAYER
+      );
+    }
+
+    function getCaddie() {
+      return cleanName(
+        document.getElementById("caddieName").value,
+        DEFAULT_CADDIE
+      );
+    }
+
+    function saveNames() {
+      const player = getPlayer();
+      const caddie = getCaddie();
+
+      localStorage.setItem("drcPlayerName", player);
+      localStorage.setItem("drcCaddieName", caddie);
+
+      updateNames(player, caddie);
+
+      const button = document.querySelector(".save-button");
+      button.textContent = "SAVED ✓";
+
+      setTimeout(() => {
+        button.textContent = "SAVE NAMES";
+      }, 1200);
+    }
+
+    function updateNames(player, caddie) {
+      document.getElementById("playerName").value = player;
+      document.getElementById("caddieName").value = caddie;
+      document.getElementById("playerHeading").textContent = player;
+      document.getElementById("caddieHeading").textContent = caddie;
+    }
+
+    function setUnits(mode) {
+      unitMode = mode;
+      localStorage.setItem("drcUnitMode", unitMode);
+
+      document
+        .getElementById("metricButton")
+        .classList.toggle("active", mode === "metric");
+
+      document
+        .getElementById("imperialButton")
+        .classList.toggle("active", mode === "imperial");
+
+      renderUnits();
+      refreshAdvice(false);
+    }
+
+    function renderUnits() {
+      const metric = unitMode === "metric";
+
+      const raw = metric
+        ? round(shotData.rawYards * YARDS_TO_METRES)
+        : round(shotData.rawYards);
+
+      const plays = metric
+        ? round(shotData.playsYards * YARDS_TO_METRES)
+        : round(shotData.playsYards);
+
+      const unit = metric ? "m" : "yds";
+
+      document.getElementById("rawDistance").textContent = raw;
+      document.getElementById("playsLike").textContent = plays;
+      document.getElementById("rawUnit").textContent = unit;
+      document.getElementById("playsUnit").textContent = unit;
+
+      document.getElementById("matrixTarget").textContent =
+        plays + " " + unit;
+
+      Object.entries(bagYards).forEach(([club, yards]) => {
+        const distance = metric
+          ? round(yards * YARDS_TO_METRES)
+          : round(yards);
+
+        const id =
+          club === "5 Iron" ? "club5Distance" :
+          club === "6 Iron" ? "club6Distance" :
+          club === "7 Iron" ? "club7Distance" :
+          "club8Distance";
+
+        document.getElementById(id).textContent =
+          distance + " " + unit;
+      });
+
+      if (metric) {
+        const wind = round(shotData.windMph * MPH_TO_KMH);
+        const slope = round(shotData.slopeYards * YARDS_TO_METRES);
+        const tempC = round((shotData.temperatureF - 32) * 5 / 9);
+
+        document.getElementById("environmentBar").innerHTML =
+          "💨 <strong>Wind:</strong> " +
+          wind +
+          " km/h " +
+          shotData.windDirection +
+          " &nbsp; | &nbsp; 📈 <strong>Slope:</strong> +" +
+          slope +
+          " m &nbsp; | &nbsp; 🌡️ <strong>Temp:</strong> " +
+          tempC +
+          "°C";
+      } else {
+        document.getElementById("environmentBar").innerHTML =
+          "💨 <strong>Wind:</strong> " +
+          round(shotData.windMph) +
+          " mph " +
+          shotData.windDirection +
+          " &nbsp; | &nbsp; 📈 <strong>Slope:</strong> +" +
+          round(shotData.slopeYards) +
+          " yds &nbsp; | &nbsp; 🌡️ <strong>Temp:</strong> " +
+          round(shotData.temperatureF) +
+          "°F";
+      }
+    }
+
+    function toggleVoice() {
+      voiceEnabled = !voiceEnabled;
+
+      localStorage.setItem(
+        "drcVoiceEnabled",
+        voiceEnabled ? "true" : "false"
+      );
+
+      const button = document.getElementById("voiceToggle");
+
+      if (voiceEnabled) {
+        button.textContent = "VOICE ON";
+        button.classList.add("on");
+        setVoiceStatus("Voice responses are on.");
+      } else {
+        button.textContent = "VOICE OFF";
+        button.classList.remove("on");
+        window.speechSynthesis.cancel();
+        setVoiceStatus("Voice responses are off.");
+      }
+    }
+
+    function setVoiceStatus(message) {
+      document.getElementById("voiceStatus").innerHTML = message;
+    }
+
+    function speak(text) {
+      if (!voiceEnabled) return;
+
+      if (!("speechSynthesis" in window)) {
+        setVoiceStatus(
+          "<strong>Text answer ready.</strong> Voice output is not available in this browser."
+        );
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.95;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function setupRecognition() {
+      const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        return false;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.lang = "en-AU";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = function () {
+        listening = true;
+
+        const button = document.getElementById("askButton");
+        button.classList.add("listening");
+        button.textContent = "🎤 LISTENING...";
+
+        setVoiceStatus(
+          "<strong>Listening...</strong> Tell your caddie the shot."
+        );
+      };
+
+      recognition.onresult = function (event) {
+        const transcript =
+          event.results[0][0].transcript.trim();
+
+        setVoiceStatus(
+          "<strong>Heard:</strong> " + transcript
+        );
+
+        handleGolfCommand(transcript);
+      };
+
+      recognition.onerror = function (event) {
+        let message = "Voice recognition error.";
+
+        if (event.error === "not-allowed") {
+          message =
+            "Microphone permission is blocked. Allow microphone access in Chrome.";
+        } else if (event.error === "no-speech") {
+          message =
+            "I didn't hear anything. Tap Ask Caddie and try again.";
+        }
+
+        setVoiceStatus(message);
+      };
+
+      recognition.onend = function () {
+        listening = false;
+
+        const button = document.getElementById("askButton");
+        button.classList.remove("listening");
+        button.textContent = "🎤 ASK CADDIE";
+      };
+
+      return true;
+    }
+
+    function askCaddie() {
+      if (!recognition) {
+        const available = setupRecognition();
+
+        if (!available) {
+          setVoiceStatus(
+            "<strong>Voice input unavailable.</strong> This browser does not support speech recognition."
+          );
+          return;
+        }
+      }
+
+      if (listening) {
+        recognition.stop();
+        return;
+      }
+
+      try {
+        recognition.start();
+      } catch (error) {
+        setVoiceStatus(
+          "Microphone is already starting. Try again in a moment."
+        );
+      }
+    }
+
+    function extractDistance(text) {
+      const matches = text.match(/\b(\d{2,3})\b/g);
+
+      if (!matches || matches.length === 0) {
+        return null;
+      }
+
+      return Number(matches[0]);
+    }
+
+    function handleGolfCommand(command) {
+      const text = command.toLowerCase();
+      const player = getPlayer();
+      const caddie = getCaddie();
+
+      let detectedDistance = extractDistance(text);
+
+      if (detectedDistance !== null) {
+        const mentionsMetres =
+          text.includes("metre") ||
+          text.includes("meter");
+
+        const mentionsYards =
+          text.includes("yard");
+
+        if (mentionsMetres) {
+          shotData.rawYards =
+            detectedDistance / YARDS_TO_METRES;
+        } else if (mentionsYards) {
+          shotData.rawYards = detectedDistance;
+        } else {
+          shotData.rawYards =
+            unitMode === "metric"
+              ? detectedDistance / YARDS_TO_METRES
+              : detectedDistance;
+        }
+
+        calculatePlaysLike();
+        renderUnits();
+      }
+
+      let advice = buildAdvice(text, player);
+
+      document.getElementById("caddieAdvice").textContent =
+        advice;
+
+      setVoiceStatus(
+        "<strong>" +
+        caddie +
+        ":</strong> " +
+        advice
+      );
+
+      speak(advice);
+    }
+
+    function calculatePlaysLike() {
+      let adjustment = 0;
+
+      adjustment += shotData.slopeYards * 0.5;
+
+      if (
+        shotData.windDirection === "N" ||
+        shotData.windDirection === "NW" ||
+        shotData.windDirection === "NE"
+      ) {
+        adjustment += shotData.windMph * 0.2;
+      }
+
+      shotData.playsYards =
+        shotData.rawYards + adjustment;
+    }
+
+    function chooseClub(targetYards) {
+      let selectedClub = "7 Iron";
+      let smallestDifference = Infinity;
+
+      Object.entries(bagYards).forEach(([club, yards]) => {
+        const difference =
+          Math.abs(yards - targetYards);
+
+        if (difference < smallestDifference) {
+          smallestDifference = difference;
+          selectedClub = club;
+        }
+      });
+
+      return selectedClub;
+    }
+
+    function buildAdvice(text, player) {
+      const club = chooseClub(shotData.playsYards);
+
+      const targetDistance =
+        unitMode === "metric"
+          ? round(shotData.playsYards * YARDS_TO_METRES)
+          : round(shotData.playsYards);
+
+      const unitWord =
+        unitMode === "metric"
+          ? "metres"
+          : "yards";
+
+      if (
+        text.includes("bunker") ||
+        text.includes("sand")
+      ) {
+        return (
+          player +
+          ", from the bunker, keep the strike committed. " +
+          "Use the bounce, accelerate through the sand and control the landing point."
+        );
+      }
+
+      if (
+        text.includes("rough") ||
+        text.includes("deep rough")
+      ) {
+        return (
+          player +
+          ", from the rough, check the lie first. " +
+          "Prioritise clean contact and take enough loft to control the strike."
+        );
+      }
+
+      if (
+        text.includes("wind") ||
+        text.includes("headwind")
+      ) {
+        return (
+          player +
+          ", into this wind, flight it down and avoid forcing the shot. " +
+          "The target is playing about " +
+          targetDistance +
+          " " +
+          unitWord +
+          ". I like the " +
+          club +
+          "."
+        );
+      }
+
+      if (
+        text.includes("left") ||
+        text.includes("right")
+      ) {
+        return (
+          player +
+          ", commit to the start line and let the shot shape work. " +
+          "For this number I like the " +
+          club +
+          "."
+        );
+      }
+
+      return (
+        player +
+        ", the target is playing about " +
+        targetDistance +
+        " " +
+        unitWord +
+        ". I like the " +
+        club +
+        ". Make a committed swing and favour the safe side of the target."
+      );
+    }
+
+    function refreshAdvice(speakIt) {
+      const player = getPlayer();
+
+      const advice =
+        buildAdvice("", player);
+
+      document.getElementById("caddieAdvice").textContent =
+        advice;
+
+      if (speakIt) {
+        speak(advice);
+      }
+    }
+
+    function loadSavedSettings() {
+      const player =
+        localStorage.getItem("drcPlayerName") ||
+        DEFAULT_PLAYER;
+
+      const caddie =
+        localStorage.getItem("drcCaddieName") ||
+        DEFAULT_CADDIE;
+
+      const savedUnits =
+        localStorage.getItem("drcUnitMode");
+
+      const savedVoice =
+        localStorage.getItem("drcVoiceEnabled");
+
+      updateNames(player, caddie);
+
+      if (savedUnits === "imperial") {
+        unitMode = "imperial";
+      } else {
+        unitMode = "metric";
+      }
+
+      if (savedVoice === "false") {
+        voiceEnabled = false;
+      } else {
+        voiceEnabled = true;
+      }
+
+      document
+        .getElementById("metricButton")
+        .classList.toggle(
+          "active",
+          unitMode === "metric"
+        );
+
+      document
+        .getElementById("imperialButton")
+        .classList.toggle(
+          "active",
+          unitMode === "imperial"
+        );
+
+      const voiceButton =
+        document.getElementById("voiceToggle");
+
+      if (voiceEnabled) {
+        voiceButton.textContent = "VOICE ON";
+        voiceButton.classList.add("on");
+      } else {
+        voiceButton.textContent = "VOICE OFF";
+        voiceButton.classList.remove("on");
+      }
+
+      renderUnits();
+      refreshAdvice(false);
+    }
+
+    loadSavedSettings();
+    setupRecognition();
+  </script>
+</body>
+</html>
