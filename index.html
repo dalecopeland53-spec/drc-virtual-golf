@@ -55,32 +55,41 @@ button{border:0;cursor:pointer}
 }
 
 .menu{font-size:22px;color:#d6e1eb}
+
 .brand{text-align:center}
+
 .brand-main{
   color:var(--gold);
   font-size:14px;
   font-weight:900;
   letter-spacing:1.2px;
 }
+
 .brand-sub{
   color:#428dea;
   font-size:7px;
   letter-spacing:3.2px;
   margin-top:1px;
 }
+
 .weather{
   text-align:right;
   color:#dce6ee;
   font-size:7px;
   line-height:1.2;
 }
-.weather strong{display:block;font-size:10px}
+
+.weather strong{
+  display:block;
+  font-size:10px;
+}
 
 .view{
   display:none;
   min-height:0;
   overflow:hidden;
 }
+
 .view.active{display:block}
 #roundView.active{display:grid}
 
@@ -106,46 +115,55 @@ button{border:0;cursor:pointer}
   overflow:hidden;
   border:1px solid #1b415d;
   border-radius:11px;
-  background:linear-gradient(90deg,#063625 0%,#0b4f33 18%,#146f42 34%,#289857 50%,#147746 66%,#0a5135 83%,#063625 100%);
+  background:linear-gradient(
+    90deg,
+    #063625 0%,
+    #0b4f33 18%,
+    #146f42 34%,
+    #289857 50%,
+    #147746 66%,
+    #0a5135 83%,
+    #063625 100%
+  );
 }
 
 .water{
   position:absolute;
   background:linear-gradient(#145069,#072e47);
-  transition:.2s ease;
 }
+
 .fairway{
   position:absolute;
   background:linear-gradient(90deg,#208b4f,#3faa61,#55bc70,#2d9a56);
-  transition:.2s ease;
 }
+
 .green{
   position:absolute;
   border-radius:50%;
   background:#69ca72;
-  transition:.2s ease;
 }
+
 .bunker{
   position:absolute;
   border-radius:50%;
   background:#ddcf98;
-  transition:.2s ease;
 }
+
 .flag{
   position:absolute;
   transform:translateX(-50%);
   font-size:17px;
   z-index:8;
-  transition:.2s ease;
 }
+
 .shot-line{
   position:absolute;
   width:2px;
   transform:translateX(-50%);
   background:rgba(255,255,255,.62);
   z-index:5;
-  transition:.2s ease;
 }
+
 .marker{
   position:absolute;
   left:50%;
@@ -156,9 +174,11 @@ button{border:0;cursor:pointer}
   background:#fff;
   z-index:7;
 }
+
 .marker.one{top:18%}
 .marker.two{top:47%}
 .marker.three{top:72%}
+
 .marker-label{
   position:absolute;
   left:55%;
@@ -168,6 +188,7 @@ button{border:0;cursor:pointer}
   text-shadow:0 2px 3px #000;
   z-index:8;
 }
+
 .marker-label.one{top:16%}
 .marker-label.two{top:45%}
 .marker-label.three{top:70%}
@@ -196,6 +217,7 @@ button{border:0;cursor:pointer}
   border-radius:16px;
   padding:3px;
 }
+
 .map-switch button{
   background:transparent;
   color:#c3d0dc;
@@ -203,7 +225,11 @@ button{border:0;cursor:pointer}
   padding:5px 7px;
   font-size:8px;
 }
-.map-switch .active{background:var(--blue);color:#fff}
+
+.map-switch .active{
+  background:var(--blue);
+  color:#fff;
+}
 
 .right{
   min-height:0;
@@ -211,6 +237,7 @@ button{border:0;cursor:pointer}
   grid-template-rows:.65fr .82fr 1.55fr 1.08fr .58fr;
   gap:3px;
 }
+
 .panel{
   min-height:0;
   overflow:hidden;
@@ -218,6 +245,7 @@ button{border:0;cursor:pointer}
   border:1px solid var(--line);
   border-radius:10px;
 }
+
 .hole-panel{
   padding:4px 6px;
   display:grid;
@@ -225,13 +253,32 @@ button{border:0;cursor:pointer}
   gap:4px;
   align-items:center;
 }
-.hole-title{font-size:18px;font-weight:900;line-height:1}
-.hole-meta{color:var(--muted);font-size:8px;margin-top:3px}
-.hole-nav{display:flex;gap:3px}
+
+.hole-title{
+  font-size:18px;
+  font-weight:900;
+  line-height:1;
+}
+
+.hole-meta{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:3px;
+}
+
+.hole-nav{
+  display:flex;
+  gap:3px;
+}
+
 .hole-nav button{
-  width:25px;height:28px;border-radius:8px;
-  background:#07131f;border:1px solid #85681f;
-  color:var(--gold);font-size:18px;
+  width:25px;
+  height:28px;
+  border-radius:8px;
+  background:#07131f;
+  border:1px solid #85681f;
+  color:var(--gold);
+  font-size:18px;
 }
 
 .distance-panel{
@@ -240,8 +287,17 @@ button{border:0;cursor:pointer}
   grid-template-columns:1fr 1fr;
   align-items:center;
 }
-.to-centre{border-right:1px solid #173248;padding-right:5px}
-.label{color:#dfe7ef;font-size:8px}
+
+.to-centre{
+  border-right:1px solid #173248;
+  padding-right:5px;
+}
+
+.label{
+  color:#dfe7ef;
+  font-size:8px;
+}
+
 .big-distance{
   color:var(--gold);
   font-weight:900;
@@ -249,39 +305,41 @@ button{border:0;cursor:pointer}
   line-height:1;
   margin-top:2px;
 }
+
 .big-distance small{font-size:10px}
+
 .distance-list{
   padding-left:5px;
   color:#8fa7bc;
   font-size:8px;
   line-height:1.65;
 }
-.distance-list strong{float:right;color:#fff}
+
+.distance-list strong{
+  float:right;
+  color:#fff;
+}
 
 .voice-panel{
   padding:4px 6px;
   display:grid;
   grid-template-rows:auto 1fr auto;
 }
+
 .voice-top{
   display:grid;
   grid-template-columns:1fr auto;
   gap:3px;
   align-items:center;
 }
-.voice-title{font-size:10px;font-weight:900}
-.voice-tools{display:flex;gap:3px}
-.voice-toggle{
-  background:var(--blue);
-  color:#fff;
-  border-radius:12px;
-  padding:4px 6px;
-  font-size:7px;
+
+.voice-title{
+  font-size:10px;
   font-weight:900;
 }
-.voice-toggle.off{background:#263a4c;color:#9badbd}
+
 .caddie-name{
-  width:50px;
+  width:58px;
   border:1px solid #294960;
   border-radius:12px;
   background:#06101a;
@@ -290,14 +348,37 @@ button{border:0;cursor:pointer}
   padding:4px 3px;
   font-size:8px;
 }
-.mic-area{text-align:center;align-self:center}
-.mic{
-  width:38px;height:38px;border-radius:50%;
-  background:var(--blue);color:#fff;font-size:18px;
+
+.mic-area{
+  text-align:center;
+  align-self:center;
 }
-.mic.listening{background:var(--red)}
-.ask-name{font-size:10px;font-weight:800;margin-top:1px}
-.tap-text{color:var(--muted);font-size:7px}
+
+.mic{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--blue);
+  color:#fff;
+  font-size:18px;
+}
+
+.mic.listening{
+  background:var(--red);
+  box-shadow:0 0 0 5px rgba(217,74,74,.18);
+}
+
+.ask-name{
+  font-size:10px;
+  font-weight:800;
+  margin-top:1px;
+}
+
+.tap-text{
+  color:var(--muted);
+  font-size:7px;
+}
+
 .answer{
   height:34px;
   border:1px solid #213f55;
@@ -315,17 +396,39 @@ button{border:0;cursor:pointer}
   display:grid;
   grid-template-rows:auto 1fr auto;
 }
-.section-title{font-size:10px;font-weight:900;margin-bottom:1px}
+
+.section-title{
+  font-size:10px;
+  font-weight:900;
+  margin-bottom:1px;
+}
+
 .club-row{
   display:grid;
   grid-template-columns:24px 1fr auto;
   gap:3px;
   align-items:center;
 }
+
 .club-icon{font-size:18px}
-.club-name{font-size:14px;font-weight:900}
-.carry{color:#90a7ba;text-align:right;font-size:7px}
-.carry strong{display:block;color:var(--gold);font-size:12px}
+
+.club-name{
+  font-size:14px;
+  font-weight:900;
+}
+
+.carry{
+  color:#90a7ba;
+  text-align:right;
+  font-size:7px;
+}
+
+.carry strong{
+  display:block;
+  color:var(--gold);
+  font-size:12px;
+}
+
 .club-select{
   width:100%;
   background:#09243a;
@@ -335,13 +438,18 @@ button{border:0;cursor:pointer}
   padding:3px 5px;
   font-size:8px;
 }
+
 .last-shot-panel{
   padding:4px 6px;
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
-.last-shot{color:#9eb0c2;font-size:8px}
+
+.last-shot{
+  color:#9eb0c2;
+  font-size:8px;
+}
 
 .score-panel{
   min-height:0;
@@ -352,6 +460,7 @@ button{border:0;cursor:pointer}
   border-radius:10px;
   overflow:hidden;
 }
+
 .score-cell{
   min-width:0;
   min-height:0;
@@ -360,36 +469,80 @@ button{border:0;cursor:pointer}
   padding:2px 1px;
   overflow:hidden;
 }
-.score-cell:last-child{border-right:0}
-.score-label{font-size:8px;font-weight:800;line-height:10px}
-.score-number{font-size:14px;line-height:16px;font-weight:900;margin-top:1px}
-.score-controls{
-  display:flex;justify-content:center;align-items:center;
-  gap:2px;margin-top:2px;
-}
-.score-btn{
-  width:20px;height:20px;line-height:18px;
-  border-radius:6px;background:#0a2941;
-  border:1px solid #28546f;color:#fff;
-  font-size:13px;font-weight:800;
-}
-.circle{
-  width:24px;height:24px;line-height:22px;
-  border-radius:50%;margin-top:6px;
-  background:#0d2639;border:1px solid #2c566f;
-  color:#a8bac9;font-size:12px;
-}
-.circle.active{background:var(--blue);color:#fff}
 
-.actions{display:grid;grid-template-columns:1.35fr 1fr;gap:4px}
-.next{
-  background:var(--gold);color:#06101a;
-  border-radius:9px;font-size:10px;font-weight:900;
+.score-cell:last-child{border-right:0}
+
+.score-label{
+  font-size:8px;
+  font-weight:800;
+  line-height:10px;
 }
+
+.score-number{
+  font-size:14px;
+  line-height:16px;
+  font-weight:900;
+  margin-top:1px;
+}
+
+.score-controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:2px;
+  margin-top:2px;
+}
+
+.score-btn{
+  width:20px;
+  height:20px;
+  line-height:18px;
+  border-radius:6px;
+  background:#0a2941;
+  border:1px solid #28546f;
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+}
+
+.circle{
+  width:24px;
+  height:24px;
+  line-height:22px;
+  border-radius:50%;
+  margin-top:6px;
+  background:#0d2639;
+  border:1px solid #2c566f;
+  color:#a8bac9;
+  font-size:12px;
+}
+
+.circle.active{
+  background:var(--blue);
+  color:#fff;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  gap:4px;
+}
+
+.next{
+  background:var(--gold);
+  color:#06101a;
+  border-radius:9px;
+  font-size:10px;
+  font-weight:900;
+}
+
 .scorecard{
-  background:#071e31;color:#fff;
-  border:1px solid #22547a;border-radius:9px;
-  font-size:8px;font-weight:800;
+  background:#071e31;
+  color:#fff;
+  border:1px solid #22547a;
+  border-radius:9px;
+  font-size:8px;
+  font-weight:800;
 }
 
 .bottom-nav{
@@ -399,11 +552,20 @@ button{border:0;cursor:pointer}
   border-top:1px solid #163149;
   padding-bottom:env(safe-area-inset-bottom);
 }
-.bottom-nav button{background:transparent;color:#8799aa;font-size:8px}
-.bottom-nav .active{color:var(--gold)}
-.nav-icon{display:block;font-size:17px;margin-bottom:1px}
 
-/* FULL PAGES */
+.bottom-nav button{
+  background:transparent;
+  color:#8799aa;
+  font-size:8px;
+}
+
+.bottom-nav .active{color:var(--gold)}
+
+.nav-icon{
+  display:block;
+  font-size:17px;
+  margin-bottom:1px;
+}
 
 .screen-page{
   height:100%;
@@ -411,14 +573,35 @@ button{border:0;cursor:pointer}
   overflow-y:auto;
   background:var(--bg);
 }
-.screen-title-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-.back-button{
-  width:34px;height:34px;border-radius:9px;
-  background:#0a2941;border:1px solid #28546f;
-  color:#fff;font-size:20px;
+
+.screen-title-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:4px;
 }
-.screen-title{font-size:21px;font-weight:900}
-.screen-subtitle{font-size:9px;color:var(--muted);margin-bottom:10px}
+
+.back-button{
+  width:34px;
+  height:34px;
+  border-radius:9px;
+  background:#0a2941;
+  border:1px solid #28546f;
+  color:#fff;
+  font-size:20px;
+}
+
+.screen-title{
+  font-size:21px;
+  font-weight:900;
+}
+
+.screen-subtitle{
+  font-size:9px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
 .large-card{
   background:var(--panel);
   border:1px solid var(--line);
@@ -426,139 +609,353 @@ button{border:0;cursor:pointer}
   padding:10px;
   margin-bottom:8px;
 }
-.card-title{font-size:11px;font-weight:900;color:var(--gold);margin-bottom:7px}
-.field-label{font-size:8px;color:var(--muted);margin:7px 0 3px}
+
+.card-title{
+  font-size:11px;
+  font-weight:900;
+  color:var(--gold);
+  margin-bottom:7px;
+}
+
+.field-label{
+  font-size:8px;
+  color:var(--muted);
+  margin:7px 0 3px;
+}
+
 .field{
-  width:100%;min-height:34px;
-  border:1px solid #244861;border-radius:8px;
-  background:#04101a;color:#fff;padding:7px;font-size:11px;
+  width:100%;
+  min-height:34px;
+  border:1px solid #244861;
+  border-radius:8px;
+  background:#04101a;
+  color:#fff;
+  padding:7px;
+  font-size:11px;
 }
+
 .page-button{
-  width:100%;min-height:38px;margin-top:8px;
-  border-radius:9px;background:var(--blue);
-  color:#fff;font-size:10px;font-weight:900;
+  width:100%;
+  min-height:38px;
+  margin-top:8px;
+  border-radius:9px;
+  background:var(--blue);
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
 }
-.page-button.gold{background:var(--gold);color:#06101a}
+
+.page-button.gold{
+  background:var(--gold);
+  color:#06101a;
+}
+
 .caddie-centre{text-align:center}
+
 .large-mic{
-  width:68px;height:68px;border-radius:50%;
-  background:var(--blue);color:#fff;font-size:30px;
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  background:var(--blue);
+  color:#fff;
+  font-size:30px;
   margin:10px auto 6px;
 }
-.large-mic.listening{background:var(--red)}
+
+.large-mic.listening{
+  background:var(--red);
+  box-shadow:0 0 0 8px rgba(217,74,74,.18);
+}
+
 .caddie-response-large{
-  min-height:100px;margin-top:10px;
-  border:1px solid #244861;background:#04101a;
-  border-radius:10px;padding:10px;
-  font-size:11px;line-height:1.45;text-align:left;
+  min-height:100px;
+  margin-top:10px;
+  border:1px solid #244861;
+  background:#04101a;
+  border-radius:10px;
+  padding:10px;
+  font-size:11px;
+  line-height:1.45;
+  text-align:left;
 }
+
 .bag-row{
-  display:grid;grid-template-columns:1fr 82px 24px;
-  gap:6px;align-items:center;padding:6px 0;
+  display:grid;
+  grid-template-columns:1fr 82px 24px;
+  gap:6px;
+  align-items:center;
+  padding:6px 0;
   border-bottom:1px solid #18334a;
 }
-.bag-club{font-size:11px;font-weight:800}
+
+.bag-club{
+  font-size:11px;
+  font-weight:800;
+}
+
 .bag-input{
-  width:100%;background:#04101a;color:#fff;
-  border:1px solid #244861;border-radius:7px;
-  padding:6px;text-align:center;
+  width:100%;
+  background:#04101a;
+  color:#fff;
+  border:1px solid #244861;
+  border-radius:7px;
+  padding:6px;
+  text-align:center;
 }
-.bag-unit{color:var(--muted);font-size:8px}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+
+.bag-unit{
+  color:var(--muted);
+  font-size:8px;
+}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
 .setting-row{
-  display:grid;grid-template-columns:1fr auto;
-  gap:10px;align-items:center;padding:9px 0;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:9px 0;
   border-bottom:1px solid #18334a;
 }
-.setting-main{font-size:10px;font-weight:800}
-.setting-small{color:var(--muted);font-size:8px;margin-top:2px}
+
+.setting-main{
+  font-size:10px;
+  font-weight:800;
+}
+
+.setting-small{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:2px;
+}
+
 .small-toggle{
-  padding:6px 10px;border-radius:15px;
-  background:#0a2941;color:#fff;
-  border:1px solid #28546f;font-size:8px;font-weight:800;
+  padding:6px 10px;
+  border-radius:15px;
+  background:#0a2941;
+  color:#fff;
+  border:1px solid #28546f;
+  font-size:8px;
+  font-weight:800;
 }
-.small-toggle.on{background:var(--blue)}
-.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+
+.more-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
 .more-card{
-  min-height:88px;border-radius:11px;
-  background:var(--panel);border:1px solid var(--line);
-  padding:10px;text-align:left;color:#fff;
+  min-height:88px;
+  border-radius:11px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  padding:10px;
+  text-align:left;
+  color:#fff;
 }
-.more-icon{font-size:22px;margin-bottom:7px}
-.more-title{font-size:11px;font-weight:900}
-.more-small{color:var(--muted);font-size:8px;margin-top:3px}
 
-/* SCORECARD */
+.more-icon{
+  font-size:22px;
+  margin-bottom:7px;
+}
 
-.score-table{width:100%;border-collapse:collapse;font-size:8px}
+.more-title{
+  font-size:11px;
+  font-weight:900;
+}
+
+.more-small{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:3px;
+}
+
+.score-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:8px;
+}
+
 .score-table th{
-  background:#0a2941;color:var(--gold);
-  padding:6px 2px;border:1px solid #244861;
+  background:#0a2941;
+  color:var(--gold);
+  padding:6px 2px;
+  border:1px solid #244861;
 }
-.score-table td{text-align:center;padding:6px 2px;border:1px solid #18334a}
-.score-table tr:nth-child(even){background:#06111c}
-.score-total{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+
+.score-table td{
+  text-align:center;
+  padding:6px 2px;
+  border:1px solid #18334a;
+}
+
+.score-table tr:nth-child(even){
+  background:#06111c;
+}
+
+.score-total{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  margin-top:8px;
+}
+
 .total-box{
-  background:#04101a;border:1px solid #244861;
-  border-radius:8px;padding:7px;text-align:center;
+  background:#04101a;
+  border:1px solid #244861;
+  border-radius:8px;
+  padding:7px;
+  text-align:center;
 }
-.total-label{color:var(--muted);font-size:7px}
-.total-value{color:var(--gold);font-size:17px;font-weight:900;margin-top:2px}
 
-/* PRACTICE */
+.total-label{
+  color:var(--muted);
+  font-size:7px;
+}
 
-.practice-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.total-value{
+  color:var(--gold);
+  font-size:17px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+.practice-type-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:6px;
+}
+
 .practice-type{
-  padding:11px 5px;border-radius:9px;
-  background:#061827;color:#fff;
-  border:1px solid #244861;font-size:9px;font-weight:800;
-}
-.practice-type.active{border-color:var(--gold);color:var(--gold)}
-.shape-row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.shape-btn{
-  padding:8px 3px;border-radius:8px;
-  background:#061827;color:#fff;
-  border:1px solid #244861;font-size:8px;
-}
-.shape-btn.active{background:var(--blue)}
-.practice-count-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);
-  gap:4px;margin-top:7px;
-}
-.practice-counter{
-  text-align:center;background:#04101a;
-  border:1px solid #18334a;border-radius:8px;padding:5px 2px;
-}
-.practice-counter-name{font-size:7px;color:var(--muted)}
-.practice-counter-value{font-size:16px;font-weight:900;margin:2px 0}
-.practice-plus{
-  width:25px;height:25px;border-radius:7px;
-  background:#0a2941;color:#fff;
+  padding:11px 5px;
+  border-radius:9px;
+  background:#061827;
+  color:#fff;
+  border:1px solid #244861;
+  font-size:9px;
+  font-weight:800;
 }
 
-/* WARMUP / ROUTINES */
+.practice-type.active{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.shape-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+}
+
+.shape-btn{
+  padding:8px 3px;
+  border-radius:8px;
+  background:#061827;
+  color:#fff;
+  border:1px solid #244861;
+  font-size:8px;
+}
+
+.shape-btn.active{background:var(--blue)}
+
+.practice-count-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:4px;
+  margin-top:7px;
+}
+
+.practice-counter{
+  text-align:center;
+  background:#04101a;
+  border:1px solid #18334a;
+  border-radius:8px;
+  padding:5px 2px;
+}
+
+.practice-counter-name{
+  font-size:7px;
+  color:var(--muted);
+}
+
+.practice-counter-value{
+  font-size:16px;
+  font-weight:900;
+  margin:2px 0;
+}
+
+.practice-plus{
+  width:25px;
+  height:25px;
+  border-radius:7px;
+  background:#0a2941;
+  color:#fff;
+}
 
 .check-row{
-  display:grid;grid-template-columns:34px 1fr;
-  gap:8px;align-items:center;
-  background:var(--panel);border:1px solid var(--line);
-  border-radius:10px;padding:9px;margin-bottom:6px;
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:8px;
+  align-items:center;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:9px;
+  margin-bottom:6px;
 }
+
 .check-button{
-  width:30px;height:30px;border-radius:50%;
-  background:#061827;border:1px solid #31546c;color:#fff;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:#061827;
+  border:1px solid #31546c;
+  color:#fff;
 }
-.check-button.done{background:var(--green);border-color:var(--green)}
-.check-title{font-size:11px;font-weight:900}
-.check-small{color:var(--muted);font-size:8px;margin-top:2px}
+
+.check-button.done{
+  background:var(--green);
+  border-color:var(--green);
+}
+
+.check-title{
+  font-size:11px;
+  font-weight:900;
+}
+
+.check-small{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:2px;
+}
+
 .progress-bar{
-  width:100%;height:9px;border-radius:10px;
-  background:#061827;overflow:hidden;margin-top:5px;
+  width:100%;
+  height:9px;
+  border-radius:10px;
+  background:#061827;
+  overflow:hidden;
+  margin-top:5px;
 }
+
 .progress-fill{
-  height:100%;width:0;background:var(--gold);transition:.2s;
+  height:100%;
+  width:0;
+  background:var(--gold);
+  transition:.2s;
 }
-.progress-text{font-size:9px;color:var(--muted);margin-top:5px}
+
+.progress-text{
+  font-size:9px;
+  color:var(--muted);
+  margin-top:5px;
+}
 
 @media(max-width:380px){
   .header{grid-template-columns:31px 1fr 75px}
@@ -577,15 +974,19 @@ button{border:0;cursor:pointer}
 <div class="app">
 
 <header class="header">
-  <div class="menu">☰</div>
-  <div class="brand">
-    <div class="brand-main">DRC VIRTUAL GOLF</div>
-    <div class="brand-sub">ELITE</div>
-  </div>
-  <div class="weather">
-    <strong>☀️ 24°C</strong>
-    Wind 8 km/h
-  </div>
+
+<div class="menu">☰</div>
+
+<div class="brand">
+  <div class="brand-main">DRC VIRTUAL GOLF</div>
+  <div class="brand-sub">ELITE</div>
+</div>
+
+<div class="weather">
+  <strong>☀️ 24°C</strong>
+  Wind 8 km/h
+</div>
+
 </header>
 
 <main id="roundView" class="page view active">
@@ -593,6 +994,7 @@ button{border:0;cursor:pointer}
 <section class="play-grid">
 
 <div class="map-card">
+
   <div id="water" class="water"></div>
   <div id="fairway" class="fairway"></div>
   <div id="green" class="green"></div>
@@ -605,13 +1007,18 @@ button{border:0;cursor:pointer}
   <div class="marker three"></div>
 
   <div class="marker-label one">
-    <span id="mapFullDistance">498</span> <span class="unit">m</span>
+    <span id="mapFullDistance">498</span>
+    <span class="unit">m</span>
   </div>
+
   <div class="marker-label two">
-    <span id="mapMidDistance">279</span> <span class="unit">m</span>
+    <span id="mapMidDistance">279</span>
+    <span class="unit">m</span>
   </div>
+
   <div class="marker-label three">
-    <span id="mapNearDistance">229</span> <span class="unit">m</span>
+    <span id="mapNearDistance">229</span>
+    <span class="unit">m</span>
   </div>
 
   <div class="player-dot"></div>
@@ -620,69 +1027,143 @@ button{border:0;cursor:pointer}
     <button class="active">GPS</button>
     <button>Aerial</button>
   </div>
+
 </div>
 
 <div class="right">
 
 <div class="panel hole-panel">
+
   <div>
-    <div class="hole-title">Hole <span id="holeNumber">1</span></div>
+    <div class="hole-title">
+      Hole <span id="holeNumber">1</span>
+    </div>
+
     <div class="hole-meta">
       Par <span id="holePar">5</span> |
       S.I. <span id="holeSI">5</span>
     </div>
   </div>
+
   <div class="hole-nav">
     <button onclick="previousHole()">‹</button>
     <button onclick="nextHole()">›</button>
   </div>
+
 </div>
 
 <div class="panel distance-panel">
+
   <div class="to-centre">
+
     <div class="label">To Centre</div>
+
     <div class="big-distance">
       <span id="centreBig">498</span>
       <small class="unit">m</small>
     </div>
+
   </div>
+
   <div class="distance-list">
-    Front <strong><span id="frontDistance">480</span> <span class="unit">m</span></strong><br>
-    Centre <strong><span id="centreDistance">498</span> <span class="unit">m</span></strong><br>
-    Back <strong><span id="backDistance">512</span> <span class="unit">m</span></strong>
+
+    Front
+    <strong>
+      <span id="frontDistance">480</span>
+      <span class="unit">m</span>
+    </strong>
+    <br>
+
+    Centre
+    <strong>
+      <span id="centreDistance">498</span>
+      <span class="unit">m</span>
+    </strong>
+    <br>
+
+    Back
+    <strong>
+      <span id="backDistance">512</span>
+      <span class="unit">m</span>
+    </strong>
+
   </div>
+
 </div>
 
 <div class="panel voice-panel">
+
   <div class="voice-top">
+
     <div class="voice-title">Voice Caddie</div>
-    <div class="voice-tools">
-      <button id="voiceToggle" class="voice-toggle" onclick="toggleVoice()">ON</button>
-      <input id="caddieName" class="caddie-name" maxlength="18" value="Pete" onchange="saveCaddieName()">
-    </div>
+
+    <input
+      id="caddieName"
+      class="caddie-name"
+      maxlength="18"
+      value="Pete"
+      onchange="saveCaddieName()"
+    >
+
   </div>
 
   <div class="mic-area">
-    <button id="micButton" class="mic" onclick="askCaddie()">🎤</button>
-    <div class="ask-name">Ask <span id="askName">Pete</span></div>
-    <div class="tap-text">Tap and speak</div>
+
+    <button
+      id="micButton"
+      class="mic"
+      onclick="askCaddie()"
+    >🎤</button>
+
+    <div class="ask-name">
+      Ask <span id="askName">Pete</span>
+    </div>
+
+    <div class="tap-text">
+      Tap and speak
+    </div>
+
   </div>
 
-  <div id="caddieAnswer" class="answer">Ready. Ask Pete for the shot.</div>
+  <div id="caddieAnswer" class="answer">
+    Ready. Ask Pete for the shot.
+  </div>
+
 </div>
 
 <div class="panel club-panel">
-  <div class="section-title">Recommended Club</div>
-  <div class="club-row">
-    <div class="club-icon">🏌️</div>
-    <div id="recommendedClub" class="club-name">Driver</div>
-    <div class="carry">
-      Est. Carry
-      <strong id="recommendedCarry">230 m</strong>
-    </div>
+
+  <div class="section-title">
+    Recommended Club
   </div>
 
-  <select id="clubSelect" class="club-select" onchange="manualClubChange()">
+  <div class="club-row">
+
+    <div class="club-icon">🏌️</div>
+
+    <div
+      id="recommendedClub"
+      class="club-name"
+    >Driver</div>
+
+    <div class="carry">
+
+      Est. Carry
+
+      <strong id="recommendedCarry">
+        230 m
+      </strong>
+
+    </div>
+
+  </div>
+
+  <select
+    id="clubSelect"
+    class="club-select"
+    onchange="manualClubChange()"
+  >
+
     <option>Driver</option>
     <option>3 Wood</option>
     <option>5 Wood</option>
@@ -696,361 +1177,1030 @@ button{border:0;cursor:pointer}
     <option>GW</option>
     <option>SW</option>
     <option>LW</option>
+
   </select>
+
 </div>
 
 <div class="panel last-shot-panel">
-  <div class="section-title">Last Shot</div>
-  <div id="lastShot" class="last-shot">No shot recorded</div>
+
+  <div class="section-title">
+    Last Shot
+  </div>
+
+  <div
+    id="lastShot"
+    class="last-shot"
+  >
+    No shot recorded
+  </div>
+
 </div>
 
 </div>
+
 </section>
 
 <section class="score-panel">
 
 <div class="score-cell">
-  <div class="score-label">Score</div>
-  <div id="scoreValue" class="score-number">0</div>
-  <div class="score-controls">
-    <button class="score-btn" onclick="changeScore(-1)">−</button>
-    <button class="score-btn" onclick="changeScore(1)">+</button>
+
+  <div class="score-label">
+    Score
   </div>
-</div>
 
-<div class="score-cell">
-  <div class="score-label">Putts</div>
-  <div id="puttsValue" class="score-number">0</div>
+  <div
+    id="scoreValue"
+    class="score-number"
+  >0</div>
+
   <div class="score-controls">
-    <button class="score-btn" onclick="changePutts(-1)">−</button>
-    <button class="score-btn" onclick="changePutts(1)">+</button>
+
+    <button
+      class="score-btn"
+      onclick="changeScore(-1)"
+    >−</button>
+
+    <button
+      class="score-btn"
+      onclick="changeScore(1)"
+    >+</button>
+
   </div>
+
 </div>
 
 <div class="score-cell">
-  <div class="score-label">GIR</div>
-  <button id="girButton" class="circle" onclick="toggleGir()">◎</button>
-</div>
 
-<div class="score-cell">
-  <div class="score-label">Fairway</div>
-  <button id="fairwayButton" class="circle" onclick="toggleFairway()">↗</button>
-</div>
+  <div class="score-label">
+    Putts
+  </div>
 
-<div class="score-cell">
-  <div class="score-label">Penalty</div>
-  <div id="penaltyValue" class="score-number">0</div>
+  <div
+    id="puttsValue"
+    class="score-number"
+  >0</div>
+
   <div class="score-controls">
-    <button class="score-btn" onclick="changePenalty(-1)">−</button>
-    <button class="score-btn" onclick="changePenalty(1)">+</button>
+
+    <button
+      class="score-btn"
+      onclick="changePutts(-1)"
+    >−</button>
+
+    <button
+      class="score-btn"
+      onclick="changePutts(1)"
+    >+</button>
+
   </div>
+
+</div>
+
+<div class="score-cell">
+
+  <div class="score-label">
+    GIR
+  </div>
+
+  <button
+    id="girButton"
+    class="circle"
+    onclick="toggleGir()"
+  >◎</button>
+
+</div>
+
+<div class="score-cell">
+
+  <div class="score-label">
+    Fairway
+  </div>
+
+  <button
+    id="fairwayButton"
+    class="circle"
+    onclick="toggleFairway()"
+  >↗</button>
+
+</div>
+
+<div class="score-cell">
+
+  <div class="score-label">
+    Penalty
+  </div>
+
+  <div
+    id="penaltyValue"
+    class="score-number"
+  >0</div>
+
+  <div class="score-controls">
+
+    <button
+      class="score-btn"
+      onclick="changePenalty(-1)"
+    >−</button>
+
+    <button
+      class="score-btn"
+      onclick="changePenalty(1)"
+    >+</button>
+
+  </div>
+
 </div>
 
 </section>
 
 <section class="actions">
-  <button class="next" onclick="nextHole()">🏁 NEXT HOLE</button>
-  <button class="scorecard" onclick="openTool('scorecard')">☷ VIEW SCORECARD</button>
+
+<button
+  class="next"
+  onclick="nextHole()"
+>
+  🏁 NEXT HOLE
+</button>
+
+<button
+  class="scorecard"
+  onclick="openTool('scorecard')"
+>
+  ☷ VIEW SCORECARD
+</button>
+
 </section>
 
 </main>
 
-<main id="caddieView" class="view screen-page">
-<div class="screen-title">Voice Caddie</div>
-<div class="screen-subtitle">Your caddie for the current hole</div>
+<main
+  id="caddieView"
+  class="view screen-page"
+>
+
+<div class="screen-title">
+  Voice Caddie
+</div>
+
+<div class="screen-subtitle">
+  Your caddie for the current hole
+</div>
 
 <div class="large-card caddie-centre">
-  <div class="card-title">Ask <span id="largeCaddieName">Pete</span></div>
-  <button id="largeMic" class="large-mic" onclick="askCaddie()">🎤</button>
-  <div class="tap-text">Tap and speak</div>
-  <div id="largeCaddieAnswer" class="caddie-response-large">Ready for your question.</div>
-</div>
 
-<div class="large-card">
-  <div class="card-title">Current Shot</div>
-  <div class="two-col">
-    <div>
-      <div class="field-label">Hole</div>
-      <div id="caddieHole" class="field">1</div>
-    </div>
-    <div>
-      <div class="field-label">To Centre</div>
-      <div id="caddieDistance" class="field">498 m</div>
-    </div>
+  <div class="card-title">
+    Ask <span id="largeCaddieName">Pete</span>
   </div>
-  <div class="field-label">Recommended Club</div>
-  <div id="caddieClub" class="field">Driver</div>
+
+  <button
+    id="largeMic"
+    class="large-mic"
+    onclick="askCaddie()"
+  >🎤</button>
+
+  <div class="tap-text">
+    Tap and speak
+  </div>
+
+  <div
+    id="largeCaddieAnswer"
+    class="caddie-response-large"
+  >
+    Ready for your question.
+  </div>
+
 </div>
-</main>
-
-<main id="bagView" class="view screen-page">
-<div class="screen-title">My Bag</div>
-<div class="screen-subtitle">Set your normal carry distance for each club</div>
-<div class="large-card">
-  <div class="card-title">Club Distances</div>
-  <div id="bagRows"></div>
-  <button class="page-button gold" onclick="saveBag()">SAVE MY BAG</button>
-</div>
-</main>
-
-<main id="courseView" class="view screen-page">
-<div class="screen-title">Course</div>
-<div class="screen-subtitle">Round setup and course details</div>
 
 <div class="large-card">
-  <div class="card-title">Course Setup</div>
-  <div class="field-label">Course Name</div>
-  <input id="courseName" class="field" placeholder="Enter course name">
+
+  <div class="card-title">
+    Current Shot
+  </div>
 
   <div class="two-col">
+
     <div>
-      <div class="field-label">Tee Type</div>
-      <select id="teeType" class="field">
+
+      <div class="field-label">
+        Hole
+      </div>
+
+      <div
+        id="caddieHole"
+        class="field"
+      >1</div>
+
+    </div>
+
+    <div>
+
+      <div class="field-label">
+        To Centre
+      </div>
+
+      <div
+        id="caddieDistance"
+        class="field"
+      >498 m</div>
+
+    </div>
+
+  </div>
+
+  <div class="field-label">
+    Recommended Club
+  </div>
+
+  <div
+    id="caddieClub"
+    class="field"
+  >
+    Driver
+  </div>
+
+</div>
+
+</main>
+
+<main
+  id="bagView"
+  class="view screen-page"
+>
+
+<div class="screen-title">
+  My Bag
+</div>
+
+<div class="screen-subtitle">
+  Set your normal carry distance for each club
+</div>
+
+<div class="large-card">
+
+  <div class="card-title">
+    Club Distances
+  </div>
+
+  <div id="bagRows"></div>
+
+  <button
+    class="page-button gold"
+    onclick="saveBag()"
+  >
+    SAVE MY BAG
+  </button>
+
+</div>
+
+</main>
+
+<main
+  id="courseView"
+  class="view screen-page"
+>
+
+<div class="screen-title">
+  Course
+</div>
+
+<div class="screen-subtitle">
+  Round setup and course details
+</div>
+
+<div class="large-card">
+
+  <div class="card-title">
+    Course Setup
+  </div>
+
+  <div class="field-label">
+    Course Name
+  </div>
+
+  <input
+    id="courseName"
+    class="field"
+    placeholder="Enter course name"
+  >
+
+  <div class="two-col">
+
+    <div>
+
+      <div class="field-label">
+        Tee Type
+      </div>
+
+      <select
+        id="teeType"
+        class="field"
+      >
         <option>MEN</option>
         <option>LADIES</option>
       </select>
+
     </div>
+
     <div>
-      <div class="field-label">Tee Colour</div>
-      <select id="teeColour" class="field">
+
+      <div class="field-label">
+        Tee Colour
+      </div>
+
+      <select
+        id="teeColour"
+        class="field"
+      >
         <option>WHITE</option>
         <option>YELLOW</option>
         <option>RED</option>
         <option>BLUE</option>
         <option>BLACK</option>
       </select>
+
     </div>
+
   </div>
 
-  <button class="page-button gold" onclick="saveCourse()">SAVE COURSE</button>
+  <button
+    class="page-button gold"
+    onclick="saveCourse()"
+  >
+    SAVE COURSE
+  </button>
+
 </div>
 
 <div class="large-card">
-  <div class="card-title">Current Hole</div>
-  <div class="two-col">
-    <div>
-      <div class="field-label">Hole</div>
-      <div id="courseHoleNumber" class="field">1</div>
-    </div>
-    <div>
-      <div class="field-label">Par</div>
-      <div id="coursePar" class="field">5</div>
-    </div>
+
+  <div class="card-title">
+    Current Hole
   </div>
-  <div class="field-label">Centre Distance</div>
-  <div id="courseDistance" class="field">498 m</div>
+
+  <div class="two-col">
+
+    <div>
+
+      <div class="field-label">
+        Hole
+      </div>
+
+      <div
+        id="courseHoleNumber"
+        class="field"
+      >1</div>
+
+    </div>
+
+    <div>
+
+      <div class="field-label">
+        Par
+      </div>
+
+      <div
+        id="coursePar"
+        class="field"
+      >5</div>
+
+    </div>
+
+  </div>
+
+  <div class="field-label">
+    Centre Distance
+  </div>
+
+  <div
+    id="courseDistance"
+    class="field"
+  >498 m</div>
+
 </div>
+
 </main>
 
-<main id="moreView" class="view screen-page">
-<div class="screen-title">More</div>
-<div class="screen-subtitle">Round tools and app settings</div>
+<main
+  id="moreView"
+  class="view screen-page"
+>
+
+<div class="screen-title">
+  More
+</div>
+
+<div class="screen-subtitle">
+  Round tools and app settings
+</div>
 
 <div class="more-grid">
-  <button class="more-card" onclick="openTool('scorecard')">
-    <div class="more-icon">📋</div>
-    <div class="more-title">Scorecard</div>
-    <div class="more-small">View all 18 holes</div>
-  </button>
 
-  <button class="more-card" onclick="openTool('practice')">
-    <div class="more-icon">🏌️</div>
-    <div class="more-title">Practice</div>
-    <div class="more-small">Practice sessions</div>
-  </button>
+<button
+  class="more-card"
+  onclick="openTool('scorecard')"
+>
 
-  <button class="more-card" onclick="openTool('warmup')">
-    <div class="more-icon">🔥</div>
-    <div class="more-title">Warm-Up</div>
-    <div class="more-small">Pre-round routine</div>
-  </button>
+  <div class="more-icon">📋</div>
 
-  <button class="more-card" onclick="openTool('routines')">
-    <div class="more-icon">✅</div>
-    <div class="more-title">Routines</div>
-    <div class="more-small">Shot checklist</div>
-  </button>
+  <div class="more-title">
+    Scorecard
+  </div>
+
+  <div class="more-small">
+    View all 18 holes
+  </div>
+
+</button>
+
+<button
+  class="more-card"
+  onclick="openTool('practice')"
+>
+
+  <div class="more-icon">🏌️</div>
+
+  <div class="more-title">
+    Practice
+  </div>
+
+  <div class="more-small">
+    Practice sessions
+  </div>
+
+</button>
+
+<button
+  class="more-card"
+  onclick="openTool('warmup')"
+>
+
+  <div class="more-icon">🔥</div>
+
+  <div class="more-title">
+    Warm-Up
+  </div>
+
+  <div class="more-small">
+    Pre-round routine
+  </div>
+
+</button>
+
+<button
+  class="more-card"
+  onclick="openTool('routines')"
+>
+
+  <div class="more-icon">✅</div>
+
+  <div class="more-title">
+    Routines
+  </div>
+
+  <div class="more-small">
+    Shot checklist
+  </div>
+
+</button>
+
 </div>
 
-<div class="large-card" style="margin-top:8px">
-  <div class="card-title">Settings</div>
+<div
+  class="large-card"
+  style="margin-top:8px"
+>
 
-  <div class="setting-row">
-    <div>
-      <div class="setting-main">Voice Caddie</div>
-      <div class="setting-small">Turn spoken caddie advice on or off</div>
-    </div>
-    <button id="moreVoiceToggle" class="small-toggle on" onclick="toggleVoiceFromMore()">ON</button>
+  <div class="card-title">
+    Settings
   </div>
 
   <div class="setting-row">
+
     <div>
-      <div class="setting-main">Distance Units</div>
-      <div class="setting-small">Metres or yards</div>
+
+      <div class="setting-main">
+        Voice Caddie
+      </div>
+
+      <div class="setting-small">
+        Microphone is always ready
+      </div>
+
     </div>
-    <button id="unitToggle" class="small-toggle" onclick="toggleUnits()">METRES</button>
+
+    <div style="color:#35b96f;font-size:9px;font-weight:900">
+      READY
+    </div>
+
   </div>
 
-  <div class="field-label">Caddie Name</div>
-  <input id="moreCaddieName" class="field" value="Pete" onchange="saveCaddieNameFromMore()">
+  <div class="setting-row">
+
+    <div>
+
+      <div class="setting-main">
+        Distance Units
+      </div>
+
+      <div class="setting-small">
+        Metres or yards
+      </div>
+
+    </div>
+
+    <button
+      id="unitToggle"
+      class="small-toggle"
+      onclick="toggleUnits()"
+    >
+      METRES
+    </button>
+
+  </div>
+
+  <div class="field-label">
+    Caddie Name
+  </div>
+
+  <input
+    id="moreCaddieName"
+    class="field"
+    value="Pete"
+    onchange="saveCaddieNameFromMore()"
+  >
+
 </div>
+
 </main>
 
-<main id="scorecardView" class="view screen-page">
+<main
+  id="scorecardView"
+  class="view screen-page"
+>
+
 <div class="screen-title-row">
-  <button class="back-button" onclick="showView('more')">‹</button>
-  <div class="screen-title">Scorecard</div>
+
+  <button
+    class="back-button"
+    onclick="showView('more')"
+  >‹</button>
+
+  <div class="screen-title">
+    Scorecard
+  </div>
+
 </div>
-<div class="screen-subtitle">Full 18-hole round</div>
+
+<div class="screen-subtitle">
+  Full 18-hole round
+</div>
 
 <div class="large-card">
+
 <table class="score-table">
+
 <thead>
+
 <tr>
-<th>Hole</th><th>Par</th><th>Score</th><th>Putts</th><th>GIR</th><th>FW</th><th>Pen</th>
+<th>Hole</th>
+<th>Par</th>
+<th>Score</th>
+<th>Putts</th>
+<th>GIR</th>
+<th>FW</th>
+<th>Pen</th>
 </tr>
+
 </thead>
+
 <tbody id="scorecardBody"></tbody>
+
 </table>
 
 <div class="score-total">
+
   <div class="total-box">
-    <div class="total-label">PAR</div>
-    <div id="totalPar" class="total-value">72</div>
+
+    <div class="total-label">
+      PAR
+    </div>
+
+    <div
+      id="totalPar"
+      class="total-value"
+    >72</div>
+
   </div>
+
   <div class="total-box">
-    <div class="total-label">SCORE</div>
-    <div id="totalScore" class="total-value">0</div>
+
+    <div class="total-label">
+      SCORE
+    </div>
+
+    <div
+      id="totalScore"
+      class="total-value"
+    >0</div>
+
   </div>
+
   <div class="total-box">
-    <div class="total-label">TO PAR</div>
-    <div id="toPar" class="total-value">—</div>
+
+    <div class="total-label">
+      TO PAR
+    </div>
+
+    <div
+      id="toPar"
+      class="total-value"
+    >—</div>
+
   </div>
-</div>
+
 </div>
 
-<button class="page-button gold" onclick="showView('round')">RETURN TO ROUND</button>
+</div>
+
+<button
+  class="page-button gold"
+  onclick="showView('round')"
+>
+  RETURN TO ROUND
+</button>
+
 </main>
 
-<main id="practiceView" class="view screen-page">
+<main
+  id="practiceView"
+  class="view screen-page"
+>
+
 <div class="screen-title-row">
-  <button class="back-button" onclick="showView('more')">‹</button>
-  <div class="screen-title">Practice</div>
+
+  <button
+    class="back-button"
+    onclick="showView('more')"
+  >‹</button>
+
+  <div class="screen-title">
+    Practice
+  </div>
+
 </div>
-<div class="screen-subtitle">Record a focused practice session</div>
+
+<div class="screen-subtitle">
+  Record a focused practice session
+</div>
 
 <div class="large-card">
-<div class="card-title">Practice Type</div>
+
+<div class="card-title">
+  Practice Type
+</div>
 
 <div class="practice-type-grid">
-  <button class="practice-type active" onclick="selectPracticeType(this,'Wedges')">Wedges</button>
-  <button class="practice-type" onclick="selectPracticeType(this,'Irons')">Irons</button>
-  <button class="practice-type" onclick="selectPracticeType(this,'Driver')">Driver</button>
-  <button class="practice-type" onclick="selectPracticeType(this,'Chipping')">Chipping</button>
-  <button class="practice-type" onclick="selectPracticeType(this,'Bunker')">Bunker</button>
-  <button class="practice-type" onclick="selectPracticeType(this,'Putting')">Putting</button>
+
+  <button
+    class="practice-type active"
+    onclick="selectPracticeType(this,'Wedges')"
+  >Wedges</button>
+
+  <button
+    class="practice-type"
+    onclick="selectPracticeType(this,'Irons')"
+  >Irons</button>
+
+  <button
+    class="practice-type"
+    onclick="selectPracticeType(this,'Driver')"
+  >Driver</button>
+
+  <button
+    class="practice-type"
+    onclick="selectPracticeType(this,'Chipping')"
+  >Chipping</button>
+
+  <button
+    class="practice-type"
+    onclick="selectPracticeType(this,'Bunker')"
+  >Bunker</button>
+
+  <button
+    class="practice-type"
+    onclick="selectPracticeType(this,'Putting')"
+  >Putting</button>
+
 </div>
 
-<div class="field-label">Shot Shape</div>
+<div class="field-label">
+  Shot Shape
+</div>
+
 <div class="shape-row">
-  <button class="shape-btn active" onclick="selectShape(this,'STRAIGHT')">STRAIGHT</button>
-  <button class="shape-btn" onclick="selectShape(this,'DRAW')">DRAW</button>
-  <button class="shape-btn" onclick="selectShape(this,'FADE')">FADE</button>
+
+  <button
+    class="shape-btn active"
+    onclick="selectShape(this,'STRAIGHT')"
+  >STRAIGHT</button>
+
+  <button
+    class="shape-btn"
+    onclick="selectShape(this,'DRAW')"
+  >DRAW</button>
+
+  <button
+    class="shape-btn"
+    onclick="selectShape(this,'FADE')"
+  >FADE</button>
+
 </div>
 
-<div class="field-label">Shot Results</div>
+<div class="field-label">
+  Shot Results
+</div>
+
 <div class="practice-count-grid">
 
 <div class="practice-counter">
-<div class="practice-counter-name">GOOD</div>
-<div id="practiceGood" class="practice-counter-value">0</div>
-<button class="practice-plus" onclick="practiceAdd('good')">+</button>
+
+<div class="practice-counter-name">
+  GOOD
+</div>
+
+<div
+  id="practiceGood"
+  class="practice-counter-value"
+>0</div>
+
+<button
+  class="practice-plus"
+  onclick="practiceAdd('good')"
+>+</button>
+
 </div>
 
 <div class="practice-counter">
-<div class="practice-counter-name">LEFT</div>
-<div id="practiceLeft" class="practice-counter-value">0</div>
-<button class="practice-plus" onclick="practiceAdd('left')">+</button>
+
+<div class="practice-counter-name">
+  LEFT
+</div>
+
+<div
+  id="practiceLeft"
+  class="practice-counter-value"
+>0</div>
+
+<button
+  class="practice-plus"
+  onclick="practiceAdd('left')"
+>+</button>
+
 </div>
 
 <div class="practice-counter">
-<div class="practice-counter-name">RIGHT</div>
-<div id="practiceRight" class="practice-counter-value">0</div>
-<button class="practice-plus" onclick="practiceAdd('right')">+</button>
+
+<div class="practice-counter-name">
+  RIGHT
+</div>
+
+<div
+  id="practiceRight"
+  class="practice-counter-value"
+>0</div>
+
+<button
+  class="practice-plus"
+  onclick="practiceAdd('right')"
+>+</button>
+
 </div>
 
 <div class="practice-counter">
-<div class="practice-counter-name">SHORT</div>
-<div id="practiceShort" class="practice-counter-value">0</div>
-<button class="practice-plus" onclick="practiceAdd('short')">+</button>
+
+<div class="practice-counter-name">
+  SHORT
+</div>
+
+<div
+  id="practiceShort"
+  class="practice-counter-value"
+>0</div>
+
+<button
+  class="practice-plus"
+  onclick="practiceAdd('short')"
+>+</button>
+
 </div>
 
 <div class="practice-counter">
-<div class="practice-counter-name">LONG</div>
-<div id="practiceLong" class="practice-counter-value">0</div>
-<button class="practice-plus" onclick="practiceAdd('long')">+</button>
+
+<div class="practice-counter-name">
+  LONG
 </div>
+
+<div
+  id="practiceLong"
+  class="practice-counter-value"
+>0</div>
+
+<button
+  class="practice-plus"
+  onclick="practiceAdd('long')"
+>+</button>
 
 </div>
 
-<div class="field-label">Session Note</div>
-<textarea id="practiceNote" class="field" rows="3" placeholder="What did you notice?"></textarea>
-
-<button class="page-button gold" onclick="savePractice()">SAVE PRACTICE SESSION</button>
-<button class="page-button" onclick="resetPractice()">RESET COUNTS</button>
 </div>
+
+<div class="field-label">
+  Session Note
+</div>
+
+<textarea
+  id="practiceNote"
+  class="field"
+  rows="3"
+  placeholder="What did you notice?"
+></textarea>
+
+<button
+  class="page-button gold"
+  onclick="savePractice()"
+>
+  SAVE PRACTICE SESSION
+</button>
+
+<button
+  class="page-button"
+  onclick="resetPractice()"
+>
+  RESET COUNTS
+</button>
+
+</div>
+
 </main>
 
-<main id="warmupView" class="view screen-page">
+<main
+  id="warmupView"
+  class="view screen-page"
+>
+
 <div class="screen-title-row">
-  <button class="back-button" onclick="showView('more')">‹</button>
-  <div class="screen-title">Warm-Up</div>
+
+  <button
+    class="back-button"
+    onclick="showView('more')"
+  >‹</button>
+
+  <div class="screen-title">
+    Warm-Up
+  </div>
+
 </div>
-<div class="screen-subtitle">Eight steps before you tee off</div>
+
+<div class="screen-subtitle">
+  Eight steps before you tee off
+</div>
 
 <div class="large-card">
-  <div class="card-title">Progress</div>
-  <div class="progress-bar"><div id="warmupProgress" class="progress-fill"></div></div>
-  <div id="warmupProgressText" class="progress-text">0 of 8 complete</div>
+
+  <div class="card-title">
+    Progress
+  </div>
+
+  <div class="progress-bar">
+
+    <div
+      id="warmupProgress"
+      class="progress-fill"
+    ></div>
+
+  </div>
+
+  <div
+    id="warmupProgressText"
+    class="progress-text"
+  >
+    0 of 8 complete
+  </div>
+
 </div>
 
 <div id="warmupRows"></div>
-<button class="page-button" onclick="resetWarmup()">RESET WARM-UP</button>
+
+<button
+  class="page-button"
+  onclick="resetWarmup()"
+>
+  RESET WARM-UP
+</button>
+
 </main>
 
-<main id="routinesView" class="view screen-page">
+<main
+  id="routinesView"
+  class="view screen-page"
+>
+
 <div class="screen-title-row">
-  <button class="back-button" onclick="showView('more')">‹</button>
-  <div class="screen-title">Routines</div>
+
+  <button
+    class="back-button"
+    onclick="showView('more')"
+  >‹</button>
+
+  <div class="screen-title">
+    Routines
+  </div>
+
 </div>
-<div class="screen-subtitle">Simple shot routine — one decision at a time</div>
+
+<div class="screen-subtitle">
+  Simple shot routine — one decision at a time
+</div>
 
 <div class="large-card">
-  <div class="card-title">Shot Routine</div>
-  <div class="progress-bar"><div id="routineProgress" class="progress-fill"></div></div>
-  <div id="routineProgressText" class="progress-text">0 of 8 complete</div>
+
+  <div class="card-title">
+    Shot Routine
+  </div>
+
+  <div class="progress-bar">
+
+    <div
+      id="routineProgress"
+      class="progress-fill"
+    ></div>
+
+  </div>
+
+  <div
+    id="routineProgressText"
+    class="progress-text"
+  >
+    0 of 8 complete
+  </div>
+
 </div>
 
 <div id="routineRows"></div>
-<button class="page-button gold" onclick="resetRoutine()">START NEXT SHOT</button>
+
+<button
+  class="page-button gold"
+  onclick="resetRoutine()"
+>
+  START NEXT SHOT
+</button>
+
 </main>
 
 <nav class="bottom-nav">
-<button id="navRound" class="active" onclick="showView('round')">
-<span class="nav-icon">🏌️</span>Round
+
+<button
+  id="navRound"
+  class="active"
+  onclick="showView('round')"
+>
+  <span class="nav-icon">🏌️</span>
+  Round
 </button>
-<button id="navCaddie" onclick="showView('caddie')">
-<span class="nav-icon">💬</span>Caddie
+
+<button
+  id="navCaddie"
+  onclick="showView('caddie')"
+>
+  <span class="nav-icon">💬</span>
+  Caddie
 </button>
-<button id="navBag" onclick="showView('bag')">
-<span class="nav-icon">🎒</span>My Bag
+
+<button
+  id="navBag"
+  onclick="showView('bag')"
+>
+  <span class="nav-icon">🎒</span>
+  My Bag
 </button>
-<button id="navCourse" onclick="showView('course')">
-<span class="nav-icon">⛳</span>Course
+
+<button
+  id="navCourse"
+  onclick="showView('course')"
+>
+  <span class="nav-icon">⛳</span>
+  Course
 </button>
-<button id="navMore" onclick="showView('more')">
-<span class="nav-icon">•••</span>More
+
+<button
+  id="navMore"
+  onclick="showView('more')"
+>
+  <span class="nav-icon">•••</span>
+  More
 </button>
+
 </nav>
 
 </div>
@@ -1060,11 +2210,11 @@ button{border:0;cursor:pointer}
 const YARDS_TO_METRES = 0.9144;
 
 let currentHole = 0;
-let voiceEnabled = true;
 let recognition = null;
 let listening = false;
 
-let unitMode = localStorage.getItem("drcUnitMode") || "metric";
+let unitMode =
+  localStorage.getItem("drcUnitMode") || "metric";
 
 const holes = [
 {hole:1,par:5,si:5,front:480,centre:498,back:512},
@@ -1088,27 +2238,192 @@ const holes = [
 ];
 
 const holeMaps = [
-{fairway:"polygon(40% 100%,67% 87%,55% 76%,75% 63%,60% 49%,72% 36%,58% 22%,63% 0,35% 0,40% 22%,25% 36%,39% 49%,24% 64%,38% 77%,27% 91%)",fairwayInset:"0 13% 0 19%",green:{top:"2%",left:"34%",width:"45%",height:"8%"},bunker:{top:"10%",left:"28%",width:"28%",height:"4%",rotate:"-20deg"},water:{top:"0",right:"0",bottom:"0",left:"auto",width:"20%",height:"auto"},flag:{top:"3%",left:"50%"},line:{top:"9%",bottom:"10%",left:"50%"}},
-{fairway:"polygon(58% 100%,74% 86%,58% 72%,68% 60%,48% 48%,57% 34%,38% 20%,43% 0,20% 0,25% 18%,19% 35%,34% 50%,25% 66%,40% 80%,35% 92%)",fairwayInset:"0 7% 0 21%",green:{top:"2%",left:"24%",width:"41%",height:"8%"},bunker:{top:"9%",left:"58%",width:"24%",height:"4%",rotate:"18deg"},water:{top:"0",left:"0",bottom:"0",right:"auto",width:"15%",height:"auto"},flag:{top:"3%",left:"43%"},line:{top:"9%",bottom:"10%",left:"47%"}},
-{fairway:"polygon(47% 100%,58% 80%,55% 58%,63% 40%,56% 0,38% 0,41% 40%,33% 58%,39% 80%)",fairwayInset:"0 20% 0 20%",green:{top:"2%",left:"36%",width:"35%",height:"7%"},bunker:{top:"9%",left:"26%",width:"22%",height:"3.5%",rotate:"-10deg"},water:{top:"34%",right:"0",width:"24%",height:"28%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"53%"},line:{top:"9%",bottom:"10%",left:"50%"}},
-{fairway:"polygon(30% 100%,48% 90%,39% 75%,56% 63%,45% 50%,63% 35%,58% 21%,72% 0,47% 0,38% 18%,26% 35%,35% 52%,22% 67%,31% 82%,20% 93%)",fairwayInset:"0 9% 0 18%",green:{top:"2%",left:"48%",width:"38%",height:"8%"},bunker:{top:"10%",left:"38%",width:"25%",height:"4%",rotate:"22deg"},water:{top:"0",right:"0",width:"17%",height:"45%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"67%"},line:{top:"9%",bottom:"10%",left:"49%"}},
-{fairway:"polygon(56% 100%,68% 86%,54% 72%,66% 55%,49% 40%,55% 22%,43% 0,24% 0,28% 20%,19% 39%,31% 58%,24% 74%,39% 88%,36% 100%)",fairwayInset:"0 8% 0 20%",green:{top:"2%",left:"25%",width:"42%",height:"8%"},bunker:{top:"10%",left:"58%",width:"25%",height:"4%",rotate:"-24deg"},water:{top:"55%",left:"0",width:"18%",height:"45%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"44%"},line:{top:"9%",bottom:"10%",left:"50%"}},
-{fairway:"polygon(48% 100%,58% 78%,52% 60%,59% 40%,55% 0,34% 0,38% 40%,31% 61%,39% 79%)",fairwayInset:"0 22% 0 18%",green:{top:"2%",left:"35%",width:"34%",height:"7%"},bunker:{top:"9%",left:"57%",width:"20%",height:"3.5%",rotate:"15deg"},water:{top:"0",right:"0",width:"18%",height:"100%",bottom:"0",left:"auto"},flag:{top:"3%",left:"51%"},line:{top:"9%",bottom:"10%",left:"49%"}},
-{fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 60%,48% 44%,60% 29%,52% 14%,60% 0,40% 0,33% 15%,23% 31%,34% 46%,24% 62%,35% 76%,25% 91%)",fairwayInset:"0 14% 0 18%",green:{top:"2%",left:"37%",width:"38%",height:"8%"},bunker:{top:"11%",left:"27%",width:"26%",height:"4%",rotate:"-15deg"},water:{top:"28%",right:"0",width:"20%",height:"35%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"55%"},line:{top:"9%",bottom:"10%",left:"48%"}},
-{fairway:"polygon(64% 100%,74% 86%,61% 72%,69% 57%,52% 42%,58% 28%,43% 14%,47% 0,26% 0,29% 18%,20% 33%,34% 48%,25% 63%,39% 78%,36% 92%)",fairwayInset:"0 8% 0 18%",green:{top:"2%",left:"27%",width:"40%",height:"8%"},bunker:{top:"9%",left:"55%",width:"24%",height:"4%",rotate:"25deg"},water:{top:"0",left:"0",width:"16%",height:"52%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"46%"},line:{top:"9%",bottom:"10%",left:"52%"}},
-{fairway:"polygon(34% 100%,50% 87%,43% 72%,56% 57%,45% 41%,58% 26%,53% 13%,68% 0,46% 0,35% 13%,22% 29%,33% 45%,21% 60%,32% 75%,22% 91%)",fairwayInset:"0 11% 0 18%",green:{top:"2%",left:"45%",width:"38%",height:"8%"},bunker:{top:"10%",left:"29%",width:"26%",height:"4%",rotate:"-18deg"},water:{top:"60%",right:"0",width:"19%",height:"40%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"63%"},line:{top:"9%",bottom:"10%",left:"48%"}},
-{fairway:"polygon(55% 100%,68% 88%,57% 73%,66% 58%,51% 45%,62% 30%,56% 16%,64% 0,43% 0,37% 15%,29% 31%,39% 46%,30% 62%,41% 78%,36% 92%)",fairwayInset:"0 10% 0 17%",green:{top:"2%",left:"41%",width:"40%",height:"8%"},bunker:{top:"11%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},water:{top:"0",right:"0",width:"14%",height:"100%",bottom:"0",left:"auto"},flag:{top:"3%",left:"60%"},line:{top:"9%",bottom:"10%",left:"51%"}},
-{fairway:"polygon(44% 100%,61% 88%,49% 74%,66% 59%,50% 44%,61% 29%,48% 14%,53% 0,30% 0,35% 17%,23% 34%,37% 49%,25% 65%,39% 80%,29% 93%)",fairwayInset:"0 10% 0 19%",green:{top:"2%",left:"31%",width:"42%",height:"8%"},bunker:{top:"10%",left:"59%",width:"24%",height:"4%",rotate:"-20deg"},water:{top:"0",left:"0",width:"16%",height:"100%",right:"auto",bottom:"0"},flag:{top:"3%",left:"50%"},line:{top:"9%",bottom:"10%",left:"50%"}},
-{fairway:"polygon(49% 100%,57% 80%,53% 62%,61% 42%,55% 0,35% 0,39% 42%,32% 61%,40% 80%)",fairwayInset:"0 21% 0 19%",green:{top:"2%",left:"36%",width:"35%",height:"7%"},bunker:{top:"9%",left:"27%",width:"21%",height:"3.5%",rotate:"17deg"},water:{top:"37%",left:"0",width:"22%",height:"27%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"53%"},line:{top:"9%",bottom:"10%",left:"50%"}},
-{fairway:"polygon(63% 100%,73% 85%,58% 72%,70% 56%,53% 41%,60% 26%,44% 12%,49% 0,28% 0,31% 16%,20% 31%,34% 47%,25% 64%,39% 80%,35% 93%)",fairwayInset:"0 8% 0 19%",green:{top:"2%",left:"29%",width:"40%",height:"8%"},bunker:{top:"10%",left:"58%",width:"24%",height:"4%",rotate:"-25deg"},water:{top:"0",right:"0",width:"17%",height:"48%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"47%"},line:{top:"9%",bottom:"10%",left:"51%"}},
-{fairway:"polygon(32% 100%,48% 88%,39% 73%,55% 59%,43% 44%,58% 29%,51% 14%,66% 0,45% 0,34% 14%,22% 30%,33% 46%,21% 62%,33% 78%,23% 92%)",fairwayInset:"0 12% 0 17%",green:{top:"2%",left:"43%",width:"39%",height:"8%"},bunker:{top:"10%",left:"28%",width:"25%",height:"4%",rotate:"-18deg"},water:{top:"54%",left:"0",width:"18%",height:"46%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"62%"},line:{top:"9%",bottom:"10%",left:"48%"}},
-{fairway:"polygon(55% 100%,70% 87%,57% 74%,69% 59%,51% 44%,62% 28%,55% 14%,63% 0,41% 0,35% 15%,27% 31%,38% 47%,29% 62%,42% 79%,36% 92%)",fairwayInset:"0 10% 0 17%",green:{top:"2%",left:"40%",width:"40%",height:"8%"},bunker:{top:"10%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},water:{top:"0",right:"0",width:"15%",height:"100%",bottom:"0",left:"auto"},flag:{top:"3%",left:"59%"},line:{top:"9%",bottom:"10%",left:"51%"}},
-{fairway:"polygon(48% 100%,58% 79%,52% 60%,60% 40%,55% 0,35% 0,39% 40%,31% 60%,39% 79%)",fairwayInset:"0 21% 0 19%",green:{top:"2%",left:"36%",width:"34%",height:"7%"},bunker:{top:"9%",left:"56%",width:"21%",height:"3.5%",rotate:"-12deg"},water:{top:"0",left:"0",width:"17%",height:"100%",right:"auto",bottom:"0"},flag:{top:"3%",left:"51%"},line:{top:"9%",bottom:"10%",left:"49%"}},
-{fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 59%,47% 44%,60% 29%,53% 14%,61% 0,39% 0,33% 15%,23% 31%,34% 47%,24% 63%,36% 79%,26% 92%)",fairwayInset:"0 13% 0 18%",green:{top:"2%",left:"38%",width:"39%",height:"8%"},bunker:{top:"10%",left:"28%",width:"26%",height:"4%",rotate:"-16deg"},water:{top:"30%",right:"0",width:"20%",height:"34%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"56%"},line:{top:"9%",bottom:"10%",left:"48%"}},
-{fairway:"polygon(61% 100%,72% 86%,59% 72%,68% 57%,52% 43%,59% 29%,44% 14%,49% 0,28% 0,31% 17%,21% 33%,35% 48%,25% 64%,39% 79%,35% 93%)",fairwayInset:"0 8% 0 19%",green:{top:"2%",left:"29%",width:"40%",height:"8%"},bunker:{top:"10%",left:"56%",width:"24%",height:"4%",rotate:"22deg"},water:{top:"55%",left:"0",width:"17%",height:"45%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"47%"},line:{top:"9%",bottom:"10%",left:"51%"}}
+
+{
+fairway:"polygon(40% 100%,67% 87%,55% 76%,75% 63%,60% 49%,72% 36%,58% 22%,63% 0,35% 0,40% 22%,25% 36%,39% 49%,24% 64%,38% 77%,27% 91%)",
+fairwayInset:"0 13% 0 19%",
+green:{top:"2%",left:"34%",width:"45%",height:"8%"},
+bunker:{top:"10%",left:"28%",width:"28%",height:"4%",rotate:"-20deg"},
+water:{top:"0",right:"0",bottom:"0",left:"auto",width:"20%",height:"auto"},
+flag:{top:"3%",left:"50%"},
+line:{top:"9%",bottom:"10%",left:"50%"}
+},
+
+{
+fairway:"polygon(58% 100%,74% 86%,58% 72%,68% 60%,48% 48%,57% 34%,38% 20%,43% 0,20% 0,25% 18%,19% 35%,34% 50%,25% 66%,40% 80%,35% 92%)",
+fairwayInset:"0 7% 0 21%",
+green:{top:"2%",left:"24%",width:"41%",height:"8%"},
+bunker:{top:"9%",left:"58%",width:"24%",height:"4%",rotate:"18deg"},
+water:{top:"0",left:"0",bottom:"0",right:"auto",width:"15%",height:"auto"},
+flag:{top:"3%",left:"43%"},
+line:{top:"9%",bottom:"10%",left:"47%"}
+},
+
+{
+fairway:"polygon(47% 100%,58% 80%,55% 58%,63% 40%,56% 0,38% 0,41% 40%,33% 58%,39% 80%)",
+fairwayInset:"0 20% 0 20%",
+green:{top:"2%",left:"36%",width:"35%",height:"7%"},
+bunker:{top:"9%",left:"26%",width:"22%",height:"3.5%",rotate:"-10deg"},
+water:{top:"34%",right:"0",width:"24%",height:"28%",bottom:"auto",left:"auto"},
+flag:{top:"3%",left:"53%"},
+line:{top:"9%",bottom:"10%",left:"50%"}
+},
+
+{
+fairway:"polygon(30% 100%,48% 90%,39% 75%,56% 63%,45% 50%,63% 35%,58% 21%,72% 0,47% 0,38% 18%,26% 35%,35% 52%,22% 67%,31% 82%,20% 93%)",
+fairwayInset:"0 9% 0 18%",
+green:{top:"2%",left:"48%",width:"38%",height:"8%"},
+bunker:{top:"10%",left:"38%",width:"25%",height:"4%",rotate:"22deg"},
+water:{top:"0",right:"0",width:"17%",height:"45%",bottom:"auto",left:"auto"},
+flag:{top:"3%",left:"67%"},
+line:{top:"9%",bottom:"10%",left:"49%"}
+},
+
+{
+fairway:"polygon(56% 100%,68% 86%,54% 72%,66% 55%,49% 40%,55% 22%,43% 0,24% 0,28% 20%,19% 39%,31% 58%,24% 74%,39% 88%,36% 100%)",
+fairwayInset:"0 8% 0 20%",
+green:{top:"2%",left:"25%",width:"42%",height:"8%"},
+bunker:{top:"10%",left:"58%",width:"25%",height:"4%",rotate:"-24deg"},
+water:{top:"55%",left:"0",width:"18%",height:"45%",right:"auto",bottom:"auto"},
+flag:{top:"3%",left:"44%"},
+line:{top:"9%",bottom:"10%",left:"50%"}
+},
+
+{
+fairway:"polygon(48% 100%,58% 78%,52% 60%,59% 40%,55% 0,34% 0,38% 40%,31% 61%,39% 79%)",
+fairwayInset:"0 22% 0 18%",
+green:{top:"2%",left:"35%",width:"34%",height:"7%"},
+bunker:{top:"9%",left:"57%",width:"20%",height:"3.5%",rotate:"15deg"},
+water:{top:"0",right:"0",width:"18%",height:"100%",bottom:"0",left:"auto"},
+flag:{top:"3%",left:"51%"},
+line:{top:"9%",bottom:"10%",left:"49%"}
+},
+
+{
+fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 60%,48% 44%,60% 29%,52% 14%,60% 0,40% 0,33% 15%,23% 31%,34% 46%,24% 62%,35% 76%,25% 91%)",
+fairwayInset:"0 14% 0 18%",
+green:{top:"2%",left:"37%",width:"38%",height:"8%"},
+bunker:{top:"11%",left:"27%",width:"26%",height:"4%",rotate:"-15deg"},
+water:{top:"28%",right:"0",width:"20%",height:"35%",bottom:"auto",left:"auto"},
+flag:{top:"3%",left:"55%"},
+line:{top:"9%",bottom:"10%",left:"48%"}
+},
+
+{
+fairway:"polygon(64% 100%,74% 86%,61% 72%,69% 57%,52% 42%,58% 28%,43% 14%,47% 0,26% 0,29% 18%,20% 33%,34% 48%,25% 63%,39% 78%,36% 92%)",
+fairwayInset:"0 8% 0 18%",
+green:{top:"2%",left:"27%",width:"40%",height:"8%"},
+bunker:{top:"9%",left:"55%",width:"24%",height:"4%",rotate:"25deg"},
+water:{top:"0",left:"0",width:"16%",height:"52%",right:"auto",bottom:"auto"},
+flag:{top:"3%",left:"46%"},
+line:{top:"9%",bottom:"10%",left:"52%"}
+},
+
+{
+fairway:"polygon(34% 100%,50% 87%,43% 72%,56% 57%,45% 41%,58% 26%,53% 13%,68% 0,46% 0,35% 13%,22% 29%,33% 45%,21% 60%,32% 75%,22% 91%)",
+fairwayInset:"0 11% 0 18%",
+green:{top:"2%",left:"45%",width:"38%",height:"8%"},
+bunker:{top:"10%",left:"29%",width:"26%",height:"4%",rotate:"-18deg"},
+water:{top:"60%",right:"0",width:"19%",height:"40%",bottom:"auto",left:"auto"},
+flag:{top:"3%",left:"63%"},
+line:{top:"9%",bottom:"10%",left:"48%"}
+},
+
+{
+fairway:"polygon(55% 100%,68% 88%,57% 73%,66% 58%,51% 45%,62% 30%,56% 16%,64% 0,43% 0,37% 15%,29% 31%,39% 46%,30% 62%,41% 78%,36% 92%)",
+fairwayInset:"0 10% 0 17%",
+green:{top:"2%",left:"41%",width:"40%",height:"8%"},
+bunker:{top:"11%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},
+water:{top:"0",right:"0",width:"14%",height:"100%",bottom:"0",left:"auto"},
+flag:{top:"3%",left:"60%"},
+line:{top:"9%",bottom:"10%",left:"51%"}
+},
+
+{
+fairway:"polygon(44% 100%,61% 88%,49% 74%,66% 59%,50% 44%,61% 29%,48% 14%,53% 0,30% 0,35% 17%,23% 34%,37% 49%,25% 65%,39% 80%,29% 93%)",
+fairwayInset:"0 10% 0 19%",
+green:{top:"2%",left:"31%",width:"42%",height:"8%"},
+bunker:{top:"10%",left:"59%",width:"24%",height:"4%",rotate:"-20deg"},
+water:{top:"0",left:"0",width:"16%",height:"100%",right:"auto",bottom:"0"},
+flag:{top:"3%",left:"50%"},
+line:{top:"9%",bottom:"10%",left:"50%"}
+},
+
+{
+fairway:"polygon(49% 100%,57% 80%,53% 62%,61% 42%,55% 0,35% 0,39% 42%,32% 61%,40% 80%)",
+fairwayInset:"0 21% 0 19%",
+green:{top:"2%",left:"36%",width:"35%",height:"7%"},
+bunker:{top:"9%",left:"27%",width:"21%",height:"3.5%",rotate:"17deg"},
+water:{top:"37%",left:"0",width:"22%",height:"27%",right:"auto",bottom:"auto"},
+flag:{top:"3%",left:"53%"},
+line:{top:"9%",bottom:"10%",left:"50%"}
+},
+
+{
+fairway:"polygon(63% 100%,73% 85%,58% 72%,70% 56%,53% 41%,60% 26%,44% 12%,49% 0,28% 0,31% 16%,20% 31%,34% 47%,25% 64%,39% 80%,35% 93%)",
+fairwayInset:"0 8% 0 19%",
+green:{top:"2%",left:"29%",width:"40%",height:"8%"},
+bunker:{top:"10%",left:"58%",width:"24%",height:"4%",rotate:"-25deg"},
+water:{top:"0",right:"0",width:"17%",height:"48%",bottom:"auto",left:"auto"},
+flag:{top:"3%",left:"47%"},
+line:{top:"9%",bottom:"10%",left:"51%"}
+},
+
+{
+fairway:"polygon(32% 100%,48% 88%,39% 73%,55% 59%,43% 44%,58% 29%,51% 14%,66% 0,45% 0,34% 14%,22% 30%,33% 46%,21% 62%,33% 78%,23% 92%)",
+fairwayInset:"0 12% 0 17%",
+green:{top:"2%",left:"43%",width:"39%",height:"8%"},
+bunker:{top:"10%",left:"28%",width:"25%",height:"4%",rotate:"-18deg"},
+water:{top:"54%",left:"0",width:"18%",height:"46%",right:"auto",bottom:"auto"},
+flag:{top:"3%",left:"62%"},
+line:{top:"9%",bottom:"10%",left:"48%"}
+},
+
+{
+fairway:"polygon(55% 100%,70% 87%,57% 74%,69% 59%,51% 44%,62% 28%,55% 14%,63% 0,41% 0,35% 15%,27% 31%,38% 47%,29% 62%,42% 79%,36% 92%)",
+fairwayInset:"0 10% 0 17%",
+green:{top:"2%",left:"40%",width:"40%",height:"8%"},
+bunker:{top:"10%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},
+water:{top:"0",right:"0",width:"15%",height:"100%",bottom:"0",left:"auto"},
+flag:{top:"3%",left:"59%"},
+line:{top:"9%",bottom:"10%",left:"51%"}
+},
+
+{
+fairway:"polygon(48% 100%,58% 79%,52% 60%,60% 40%,55% 0,35% 0,39% 40%,31% 60%,39% 79%)",
+fairwayInset:"0 21% 0 19%",
+green:{top:"2%",left:"36%",width:"34%",height:"7%"},
+bunker:{top:"9%",left:"56%",width:"21%",height:"3.5%",rotate:"-12deg"},
+water:{top:"0",left:"0",width:"17%",height:"100%",right:"auto",bottom:"0"},
+flag:{top:"3%",left:"51%"},
+line:{top:"9%",bottom:"10%",left:"49%"}
+},
+
+{
+fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 59%,47% 44%,60% 29%,53% 14%,61% 0,39% 0,33% 15%,23% 31%,34% 47%,24% 63%,36% 79%,26% 92%)",
+fairwayInset:"0 13% 0 18%",
+green:{top:"2%",left:"38%",width:"39%",height:"8%"},
+bunker:{top:"10%",left:"28%",width:"26%",height:"4%",rotate:"-16deg"},
+water:{top:"30%",right:"0",width:"20%",height:"34%",bottom:"auto",left:"auto"},
+flag:{top:"3%",left:"56%"},
+line:{top:"9%",bottom:"10%",left:"48%"}
+},
+
+{
+fairway:"polygon(61% 100%,72% 86%,59% 72%,68% 57%,52% 43%,59% 29%,44% 14%,49% 0,28% 0,31% 17%,21% 33%,35% 48%,25% 64%,39% 79%,35% 93%)",
+fairwayInset:"0 8% 0 19%",
+green:{top:"2%",left:"29%",width:"40%",height:"8%"},
+bunker:{top:"10%",left:"56%",width:"24%",height:"4%",rotate:"22deg"},
+water:{top:"55%",left:"0",width:"17%",height:"45%",right:"auto",bottom:"auto"},
+flag:{top:"3%",left:"47%"},
+line:{top:"9%",bottom:"10%",left:"51%"}
+}
+
 ];
 
-let bagMetres = JSON.parse(localStorage.getItem("drcBagMetres") || "null") || {
+let bagMetres =
+  JSON.parse(localStorage.getItem("drcBagMetres") || "null") ||
+{
 "Driver":230,
 "3 Wood":210,
 "5 Wood":195,
@@ -1124,11 +2439,19 @@ let bagMetres = JSON.parse(localStorage.getItem("drcBagMetres") || "null") || {
 "LW":70
 };
 
-let holeScores = JSON.parse(localStorage.getItem("drcHoleScores") || "{}");
+let holeScores =
+  JSON.parse(localStorage.getItem("drcHoleScores") || "{}");
 
 let practiceType = "Wedges";
 let practiceShape = "STRAIGHT";
-let practiceCounts = {good:0,left:0,right:0,short:0,long:0};
+
+let practiceCounts = {
+good:0,
+left:0,
+right:0,
+short:0,
+long:0
+};
 
 const warmupSteps = [
 ["Loosen Up","Easy movement and mobility"],
@@ -1152,29 +2475,56 @@ const routineSteps = [
 ["Next","Accept the result and move on"]
 ];
 
-let warmupState = JSON.parse(localStorage.getItem("drcWarmupState") || "null") || new Array(8).fill(false);
-let routineState = JSON.parse(localStorage.getItem("drcRoutineState") || "null") || new Array(8).fill(false);
+let warmupState =
+  JSON.parse(localStorage.getItem("drcWarmupState") || "null") ||
+  new Array(8).fill(false);
+
+let routineState =
+  JSON.parse(localStorage.getItem("drcRoutineState") || "null") ||
+  new Array(8).fill(false);
 
 function displayDistance(metres){
+
   if(unitMode==="imperial"){
-    return {value:Math.round(metres/YARDS_TO_METRES),unit:"yds"};
+
+    return{
+      value:Math.round(metres/YARDS_TO_METRES),
+      unit:"yds"
+    };
+
   }
-  return {value:Math.round(metres),unit:"m"};
+
+  return{
+    value:Math.round(metres),
+    unit:"m"
+  };
+
 }
 
 function hideAllViews(){
-  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+
+  document
+  .querySelectorAll(".view")
+  .forEach(v=>v.classList.remove("active"));
+
 }
 
 function clearBottomNav(){
-  document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));
+
+  document
+  .querySelectorAll(".bottom-nav button")
+  .forEach(b=>b.classList.remove("active"));
+
 }
 
 function showView(name){
+
   hideAllViews();
   clearBottomNav();
 
-  document.getElementById(name+"View").classList.add("active");
+  document
+  .getElementById(name+"View")
+  .classList.add("active");
 
   const navMap={
     round:"navRound",
@@ -1184,869 +2534,2957 @@ function showView(name){
     more:"navMore"
   };
 
-  if(navMap[name]) document.getElementById(navMap[name]).classList.add("active");
-  if(name==="caddie") updateCaddiePage();
-  if(name==="bag") renderBag();
-  if(name==="course") updateCoursePage();
-  if(name==="more") updateMorePage();
+  if(navMap[name]){
+
+    document
+    .getElementById(navMap[name])
+    .classList.add("active");
+
+  }
+
+  if(name==="caddie"){
+    updateCaddiePage();
+  }
+
+  if(name==="bag"){
+    renderBag();
+  }
+
+  if(name==="course"){
+    updateCoursePage();
+  }
+
+  if(name==="more"){
+    updateMorePage();
+  }
+
 }
 
 function openTool(name){
+
   hideAllViews();
   clearBottomNav();
-  document.getElementById(name+"View").classList.add("active");
-  document.getElementById("navMore").classList.add("active");
 
-  if(name==="scorecard") renderScorecard();
-  if(name==="practice") renderPractice();
-  if(name==="warmup") renderWarmup();
-  if(name==="routines") renderRoutine();
+  document
+  .getElementById(name+"View")
+  .classList.add("active");
+
+  document
+  .getElementById("navMore")
+  .classList.add("active");
+
+  if(name==="scorecard"){
+    renderScorecard();
+  }
+
+  if(name==="practice"){
+    renderPractice();
+  }
+
+  if(name==="warmup"){
+    renderWarmup();
+  }
+
+  if(name==="routines"){
+    renderRoutine();
+  }
+
 }
 
 function applyMapLayout(){
+
   const map=holeMaps[currentHole];
-  const fairway=document.getElementById("fairway");
-  const green=document.getElementById("green");
-  const bunker=document.getElementById("bunker");
-  const water=document.getElementById("water");
-  const flag=document.getElementById("flag");
-  const shotLine=document.getElementById("shotLine");
 
-  fairway.style.inset=map.fairwayInset;
-  fairway.style.clipPath=map.fairway;
+  const fairway=
+    document.getElementById("fairway");
 
-  green.style.top=map.green.top;
-  green.style.left=map.green.left;
-  green.style.width=map.green.width;
-  green.style.height=map.green.height;
+  const green=
+    document.getElementById("green");
 
-  bunker.style.top=map.bunker.top;
-  bunker.style.left=map.bunker.left;
-  bunker.style.width=map.bunker.width;
-  bunker.style.height=map.bunker.height;
-  bunker.style.transform="rotate("+map.bunker.rotate+")";
+  const bunker=
+    document.getElementById("bunker");
 
-  water.style.top=map.water.top;
-  water.style.right=map.water.right;
-  water.style.bottom=map.water.bottom;
-  water.style.left=map.water.left;
-  water.style.width=map.water.width;
-  water.style.height=map.water.height;
+  const water=
+    document.getElementById("water");
 
-  flag.style.top=map.flag.top;
-  flag.style.left=map.flag.left;
+  const flag=
+    document.getElementById("flag");
 
-  shotLine.style.top=map.line.top;
-  shotLine.style.bottom=map.line.bottom;
-  shotLine.style.left=map.line.left;
+  const shotLine=
+    document.getElementById("shotLine");
+
+  fairway.style.inset=
+    map.fairwayInset;
+
+  fairway.style.clipPath=
+    map.fairway;
+
+  green.style.top=
+    map.green.top;
+
+  green.style.left=
+    map.green.left;
+
+  green.style.width=
+    map.green.width;
+
+  green.style.height=
+    map.green.height;
+
+  bunker.style.top=
+    map.bunker.top;
+
+  bunker.style.left=
+    map.bunker.left;
+
+  bunker.style.width=
+    map.bunker.width;
+
+  bunker.style.height=
+    map.bunker.height;
+
+  bunker.style.transform=
+    "rotate("+map.bunker.rotate+")";
+
+  water.style.top=
+    map.water.top;
+
+  water.style.right=
+    map.water.right;
+
+  water.style.bottom=
+    map.water.bottom;
+
+  water.style.left=
+    map.water.left;
+
+  water.style.width=
+    map.water.width;
+
+  water.style.height=
+    map.water.height;
+
+  flag.style.top=
+    map.flag.top;
+
+  flag.style.left=
+    map.flag.left;
+
+  shotLine.style.top=
+    map.line.top;
+
+  shotLine.style.bottom=
+    map.line.bottom;
+
+  shotLine.style.left=
+    map.line.left;
+
 }
 
 function renderHole(){
-  const hole=holes[currentHole];
 
-  document.getElementById("holeNumber").textContent=hole.hole;
-  document.getElementById("holePar").textContent=hole.par;
-  document.getElementById("holeSI").textContent=hole.si;
+  const hole=
+    holes[currentHole];
 
-  const front=displayDistance(hole.front);
-  const centre=displayDistance(hole.centre);
-  const back=displayDistance(hole.back);
+  document
+  .getElementById("holeNumber")
+  .textContent=
+    hole.hole;
 
-  document.getElementById("frontDistance").textContent=front.value;
-  document.getElementById("centreDistance").textContent=centre.value;
-  document.getElementById("centreBig").textContent=centre.value;
-  document.getElementById("backDistance").textContent=back.value;
+  document
+  .getElementById("holePar")
+  .textContent=
+    hole.par;
 
-  document.getElementById("mapFullDistance").textContent=centre.value;
-  document.getElementById("mapMidDistance").textContent=Math.round(centre.value*.56);
-  document.getElementById("mapNearDistance").textContent=Math.round(centre.value*.46);
+  document
+  .getElementById("holeSI")
+  .textContent=
+    hole.si;
 
-  document.querySelectorAll(".unit").forEach(el=>el.textContent=centre.unit);
+  const front=
+    displayDistance(hole.front);
+
+  const centre=
+    displayDistance(hole.centre);
+
+  const back=
+    displayDistance(hole.back);
+
+  document
+  .getElementById("frontDistance")
+  .textContent=
+    front.value;
+
+  document
+  .getElementById("centreDistance")
+  .textContent=
+    centre.value;
+
+  document
+  .getElementById("centreBig")
+  .textContent=
+    centre.value;
+
+  document
+  .getElementById("backDistance")
+  .textContent=
+    back.value;
+
+  document
+  .getElementById("mapFullDistance")
+  .textContent=
+    centre.value;
+
+  document
+  .getElementById("mapMidDistance")
+  .textContent=
+    Math.round(centre.value*.56);
+
+  document
+  .getElementById("mapNearDistance")
+  .textContent=
+    Math.round(centre.value*.46);
+
+  document
+  .querySelectorAll(".unit")
+  .forEach(
+    el=>el.textContent=centre.unit
+  );
 
   applyMapLayout();
   loadHoleScore();
   recommendClub();
 
-  localStorage.setItem("drcCurrentHole",currentHole);
+  localStorage.setItem(
+    "drcCurrentHole",
+    currentHole
+  );
 
   updateCaddiePage();
   updateCoursePage();
+
 }
 
 function nextHole(){
-  if(currentHole<17) currentHole++;
+
+  if(currentHole<17){
+    currentHole++;
+  }
+
   renderHole();
+
 }
 
 function previousHole(){
-  if(currentHole>0) currentHole--;
+
+  if(currentHole>0){
+    currentHole--;
+  }
+
   renderHole();
+
 }
 
 function getScoreData(){
-  const number=holes[currentHole].hole;
+
+  const number=
+    holes[currentHole].hole;
 
   if(!holeScores[number]){
-    holeScores[number]={score:0,putts:0,gir:false,fairway:false,penalty:0};
+
+    holeScores[number]={
+      score:0,
+      putts:0,
+      gir:false,
+      fairway:false,
+      penalty:0
+    };
+
   }
 
   return holeScores[number];
+
 }
 
 function saveScores(){
-  localStorage.setItem("drcHoleScores",JSON.stringify(holeScores));
+
+  localStorage.setItem(
+    "drcHoleScores",
+    JSON.stringify(holeScores)
+  );
+
 }
 
 function loadHoleScore(){
-  const data=getScoreData();
 
-  document.getElementById("scoreValue").textContent=data.score;
-  document.getElementById("puttsValue").textContent=data.putts;
-  document.getElementById("penaltyValue").textContent=data.penalty;
+  const data=
+    getScoreData();
 
-  document.getElementById("girButton").classList.toggle("active",data.gir);
-  document.getElementById("fairwayButton").classList.toggle("active",data.fairway);
+  document
+  .getElementById("scoreValue")
+  .textContent=
+    data.score;
+
+  document
+  .getElementById("puttsValue")
+  .textContent=
+    data.putts;
+
+  document
+  .getElementById("penaltyValue")
+  .textContent=
+    data.penalty;
+
+  document
+  .getElementById("girButton")
+  .classList
+  .toggle("active",data.gir);
+
+  document
+  .getElementById("fairwayButton")
+  .classList
+  .toggle("active",data.fairway);
+
 }
 
 function changeScore(amount){
-  const data=getScoreData();
-  data.score=Math.max(0,data.score+amount);
+
+  const data=
+    getScoreData();
+
+  data.score=
+    Math.max(
+      0,
+      data.score+amount
+    );
+
   saveScores();
   loadHoleScore();
+
 }
 
 function changePutts(amount){
-  const data=getScoreData();
-  data.putts=Math.max(0,data.putts+amount);
+
+  const data=
+    getScoreData();
+
+  data.putts=
+    Math.max(
+      0,
+      data.putts+amount
+    );
+
   saveScores();
   loadHoleScore();
+
 }
 
 function changePenalty(amount){
-  const data=getScoreData();
-  data.penalty=Math.max(0,data.penalty+amount);
+
+  const data=
+    getScoreData();
+
+  data.penalty=
+    Math.max(
+      0,
+      data.penalty+amount
+    );
+
   saveScores();
   loadHoleScore();
+
 }
 
 function toggleGir(){
-  const data=getScoreData();
-  data.gir=!data.gir;
+
+  const data=
+    getScoreData();
+
+  data.gir=
+    !data.gir;
+
   saveScores();
   loadHoleScore();
+
 }
 
 function toggleFairway(){
-  const data=getScoreData();
-  data.fairway=!data.fairway;
+
+  const data=
+    getScoreData();
+
+  data.fairway=
+    !data.fairway;
+
   saveScores();
   loadHoleScore();
+
 }
 
-function chooseClub(target){
-  let selected="Driver";
-  let smallest=Infinity;
+/* ==============================
+   CLUB SELECTION
+============================== */
 
-  Object.entries(bagMetres).forEach(([club,carry])=>{
-    const difference=Math.abs(target-Number(carry));
+function chooseNearestClub(target){
+
+  let selected=
+    "Driver";
+
+  let smallest=
+    Infinity;
+
+  Object.entries(bagMetres)
+  .forEach(([club,carry])=>{
+
+    const difference=
+      Math.abs(
+        target-Number(carry)
+      );
+
     if(difference<smallest){
-      smallest=difference;
-      selected=club;
+
+      smallest=
+        difference;
+
+      selected=
+        club;
+
     }
+
   });
 
   return selected;
+
+}
+
+function getClubOrderedList(){
+
+  return Object
+  .entries(bagMetres)
+  .map(([club,carry])=>({
+    club,
+    carry:Number(carry)
+  }))
+  .sort(
+    (a,b)=>b.carry-a.carry
+  );
+
+}
+
+function getClubAboveDistance(target){
+
+  const clubs=
+    getClubOrderedList();
+
+  let best=
+    clubs[clubs.length-1];
+
+  for(const item of clubs){
+
+    if(item.carry>=target){
+      best=item;
+    }
+
+  }
+
+  return best.club;
+
+}
+
+function chooseClubForShot(
+  target,
+  lie,
+  hazard
+){
+
+  let club=
+    chooseNearestClub(target);
+
+  if(
+    target >
+    Math.max(
+      ...Object
+      .values(bagMetres)
+      .map(Number)
+    )
+  ){
+    return "Driver";
+  }
+
+  if(
+    lie==="greenside bunker" &&
+    target<=45
+  ){
+
+    if(bagMetres["SW"]){
+      return "SW";
+    }
+
+    if(bagMetres["LW"]){
+      return "LW";
+    }
+
+  }
+
+  if(
+    lie==="deep rough" &&
+    target>145
+  ){
+
+    const ordered=
+      getClubOrderedList();
+
+    const currentIndex=
+      ordered.findIndex(
+        item=>item.club===club
+      );
+
+    if(
+      currentIndex>=0 &&
+      currentIndex<ordered.length-1
+    ){
+
+      const safer=
+        ordered[currentIndex+1];
+
+      if(
+        safer &&
+        safer.club!=="Driver"
+      ){
+        club=safer.club;
+      }
+
+    }
+
+  }
+
+  if(
+    hazard.short &&
+    lie!=="deep rough" &&
+    lie!=="greenside bunker"
+  ){
+
+    club=
+      getClubAboveDistance(target);
+
+  }
+
+  return club;
+
 }
 
 function recommendClub(){
-  const target=holes[currentHole].centre;
-  let selected=chooseClub(target);
 
-  const longest=Math.max(...Object.values(bagMetres).map(Number));
-  if(target>longest) selected="Driver";
+  const target=
+    holes[currentHole].centre;
+
+  let selected=
+    chooseNearestClub(target);
+
+  const longest=
+    Math.max(
+      ...Object
+      .values(bagMetres)
+      .map(Number)
+    );
+
+  if(target>longest){
+    selected="Driver";
+  }
 
   setRecommendedClub(selected);
+
 }
 
 function setRecommendedClub(club){
-  if(!bagMetres[club]) return;
 
-  document.getElementById("recommendedClub").textContent=club;
+  if(
+    bagMetres[club]===undefined
+  ){
+    return;
+  }
 
-  const carry=displayDistance(bagMetres[club]);
-  document.getElementById("recommendedCarry").textContent=carry.value+" "+carry.unit;
-  document.getElementById("clubSelect").value=club;
+  document
+  .getElementById("recommendedClub")
+  .textContent=
+    club;
+
+  const carry=
+    displayDistance(
+      bagMetres[club]
+    );
+
+  document
+  .getElementById("recommendedCarry")
+  .textContent=
+    carry.value+" "+carry.unit;
+
+  document
+  .getElementById("clubSelect")
+  .value=
+    club;
 
   updateCaddiePage();
+
 }
 
 function manualClubChange(){
-  setRecommendedClub(document.getElementById("clubSelect").value);
+
+  setRecommendedClub(
+    document
+    .getElementById("clubSelect")
+    .value
+  );
+
 }
 
+/* ==============================
+   CADDIE NAME
+============================== */
+
 function getCaddieName(){
-  const value=document.getElementById("caddieName").value.trim();
+
+  const value=
+    document
+    .getElementById("caddieName")
+    .value
+    .trim();
+
   return value || "Pete";
+
 }
 
 function saveCaddieName(){
-  const name=getCaddieName();
 
-  document.getElementById("caddieName").value=name;
-  document.getElementById("askName").textContent=name;
-  document.getElementById("largeCaddieName").textContent=name;
-  document.getElementById("moreCaddieName").value=name;
+  const name=
+    getCaddieName();
 
-  localStorage.setItem("drcCaddieName",name);
+  document
+  .getElementById("caddieName")
+  .value=
+    name;
 
-  setCaddieAnswers("Ready. Ask "+name+" for the shot.");
+  document
+  .getElementById("askName")
+  .textContent=
+    name;
+
+  document
+  .getElementById("largeCaddieName")
+  .textContent=
+    name;
+
+  document
+  .getElementById("moreCaddieName")
+  .value=
+    name;
+
+  localStorage.setItem(
+    "drcCaddieName",
+    name
+  );
+
+  setCaddieAnswers(
+    "Ready. Ask "+name+" for the shot."
+  );
+
 }
 
 function saveCaddieNameFromMore(){
-  const name=document.getElementById("moreCaddieName").value.trim() || "Pete";
-  document.getElementById("caddieName").value=name;
+
+  const name=
+    document
+    .getElementById("moreCaddieName")
+    .value
+    .trim() || "Pete";
+
+  document
+  .getElementById("caddieName")
+  .value=
+    name;
+
   saveCaddieName();
+
 }
 
-function toggleVoice(){
-  voiceEnabled=!voiceEnabled;
+/* ==============================
+   MICROPHONE
+============================== */
 
-  const button=document.getElementById("voiceToggle");
-  button.textContent=voiceEnabled ? "ON" : "OFF";
-  button.classList.toggle("off",!voiceEnabled);
+function setListeningState(active){
 
-  localStorage.setItem("drcVoiceEnabled",voiceEnabled ? "true" : "false");
-  updateMorePage();
+  listening=
+    active;
+
+  const small=
+    document.getElementById("micButton");
+
+  const large=
+    document.getElementById("largeMic");
+
+  if(small){
+    small.classList.toggle(
+      "listening",
+      active
+    );
+  }
+
+  if(large){
+    large.classList.toggle(
+      "listening",
+      active
+    );
+  }
+
 }
-
-function toggleVoiceFromMore(){
-  toggleVoice();
-}
-
-/* MICROPHONE */
 
 function setupRecognition(){
-  const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const SpeechRecognition=
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
 
   if(!SpeechRecognition){
+
     recognition=null;
+
     return false;
+
   }
 
   try{
-    recognition=new SpeechRecognition();
 
-    recognition.lang="en-AU";
-    recognition.continuous=false;
-    recognition.interimResults=false;
-    recognition.maxAlternatives=1;
+    recognition=
+      new SpeechRecognition();
 
-    recognition.onstart=function(){
-      listening=true;
-      document.getElementById("micButton").classList.add("listening");
-      document.getElementById("largeMic").classList.add("listening");
-      setCaddieAnswers("Listening...");
-    };
+    recognition.lang=
+      "en-AU";
 
-    recognition.onresult=function(event){
-      if(!event.results || !event.results.length) return;
+    recognition.continuous=
+      false;
 
-      const transcript=event.results[0][0].transcript.trim();
+    recognition.interimResults=
+      false;
 
-      if(transcript){
-        handleGolfCommand(transcript);
-      }else{
-        setCaddieAnswers("I didn't catch that. Tap the mic and try again.");
-      }
-    };
+    recognition.maxAlternatives=
+      3;
 
-    recognition.onerror=function(event){
-      let message="I couldn't hear that clearly. Tap the mic and try again.";
+    recognition.onstart=
+      function(){
 
-      if(event.error==="not-allowed" || event.error==="service-not-allowed"){
-        message="Microphone permission is blocked. Allow microphone access for DRC Virtual Golf.";
-      }else if(event.error==="no-speech"){
-        message="I didn't hear anything. Tap the mic and speak again.";
-      }else if(event.error==="audio-capture"){
-        message="The microphone isn't available right now.";
-      }else if(event.error==="network"){
-        message="Voice recognition couldn't reach the speech service.";
-      }
+        setListeningState(true);
 
-      setCaddieAnswers(message);
-    };
+        setCaddieAnswers(
+          "Listening..."
+        );
 
-    recognition.onend=function(){
-      listening=false;
-      document.getElementById("micButton").classList.remove("listening");
-      document.getElementById("largeMic").classList.remove("listening");
-    };
+      };
+
+    recognition.onresult=
+      function(event){
+
+        if(
+          !event.results ||
+          !event.results.length
+        ){
+
+          return;
+
+        }
+
+        let transcript="";
+
+        const result=
+          event.results[0];
+
+        if(result.length){
+
+          transcript=
+            result[0]
+            .transcript
+            .trim();
+
+        }
+
+        if(transcript){
+
+          handleGolfCommand(
+            transcript
+          );
+
+        }else{
+
+          setCaddieAnswers(
+            "Didn't catch that. Tap the mic and say it again."
+          );
+
+        }
+
+      };
+
+    recognition.onerror=
+      function(event){
+
+        let message=
+          "Didn't catch that clearly. Tap the mic and try again.";
+
+        if(
+          event.error==="not-allowed" ||
+          event.error==="service-not-allowed"
+        ){
+
+          message=
+            "Microphone permission is blocked. Allow microphone access for DRC Virtual Golf.";
+
+        }
+
+        else if(
+          event.error==="no-speech"
+        ){
+
+          message=
+            "Didn't hear anything. Tap the mic and speak again.";
+
+        }
+
+        else if(
+          event.error==="audio-capture"
+        ){
+
+          message=
+            "The microphone isn't available right now.";
+
+        }
+
+        else if(
+          event.error==="network"
+        ){
+
+          message=
+            "Voice recognition couldn't reach the speech service.";
+
+        }
+
+        setCaddieAnswers(
+          message
+        );
+
+      };
+
+    recognition.onend=
+      function(){
+
+        setListeningState(false);
+
+      };
 
     return true;
+
   }catch(error){
+
     recognition=null;
+
     return false;
+
   }
+
 }
 
 function setCaddieAnswers(text){
-  document.getElementById("caddieAnswer").textContent=text;
-  document.getElementById("largeCaddieAnswer").textContent=text;
+
+  const small=
+    document.getElementById("caddieAnswer");
+
+  const large=
+    document.getElementById("largeCaddieAnswer");
+
+  if(small){
+    small.textContent=text;
+  }
+
+  if(large){
+    large.textContent=text;
+  }
+
 }
 
 function askCaddie(){
-  if(!voiceEnabled){
-    setCaddieAnswers("Voice Caddie is switched off.");
-    return;
-  }
 
-  if(listening && recognition){
-    try{recognition.stop();}catch(error){}
+  if(
+    listening &&
+    recognition
+  ){
+
+    try{
+      recognition.stop();
+    }catch(error){}
+
     return;
+
   }
 
   if(!recognition){
+
     if(!setupRecognition()){
-      setCaddieAnswers("Voice recognition is not available on this device.");
+
+      setCaddieAnswers(
+        "Voice recognition is not available on this device."
+      );
+
       return;
+
     }
+
   }
 
   try{
+
     recognition.start();
+
   }catch(error){
+
     recognition=null;
 
     if(setupRecognition()){
+
       try{
+
         recognition.start();
+
       }catch(secondError){
-        setCaddieAnswers("The microphone couldn't start. Tap again.");
+
+        setCaddieAnswers(
+          "The microphone couldn't start. Tap it again."
+        );
+
       }
+
     }else{
-      setCaddieAnswers("Voice recognition is not available on this device.");
+
+      setCaddieAnswers(
+        "Voice recognition is not available on this device."
+      );
+
     }
+
   }
+
 }
 
-/* SMART PETE */
+/* ==============================
+   SMART PETE LANGUAGE
+============================== */
+
+function normaliseSpeech(text){
+
+  let t=
+    String(text || "")
+    .toLowerCase()
+    .trim();
+
+  t=
+    t.replace(/[.,!?]/g," ");
+
+  /*
+    Common speech-recognition misses
+    in golf language.
+  */
+
+  t=
+    t.replace(/\bruff\b/g,"rough");
+
+  t=
+    t.replace(/\broughh\b/g,"rough");
+
+  t=
+    t.replace(/\bfare way\b/g,"fairway");
+
+  t=
+    t.replace(/\bfair way\b/g,"fairway");
+
+  t=
+    t.replace(/\bhead win\b/g,"headwind");
+
+  t=
+    t.replace(/\btail win\b/g,"tailwind");
+
+  t=
+    t.replace(/\bcross win\b/g,"crosswind");
+
+  /*
+    "when" is treated as wind only
+    when it follows a wind speed pattern.
+  */
+
+  t=
+    t.replace(
+      /(\d+(?:\.\d+)?)\s*(?:km|kph|kmh|kilometres?|kilometers?)\s+when\b/g,
+      "$1 km wind"
+    );
+
+  t=
+    t.replace(
+      /(\d+(?:\.\d+)?)\s+when\b/g,
+      "$1 wind"
+    );
+
+  t=
+    t.replace(
+      /\bwind into\b/g,
+      "headwind"
+    );
+
+  t=
+    t.replace(
+      /\binto wind\b/g,
+      "headwind"
+    );
+
+  t=
+    t.replace(
+      /\bwind behind\b/g,
+      "tailwind"
+    );
+
+  t=
+    t.replace(
+      /\bhelping wind\b/g,
+      "tailwind"
+    );
+
+  t=
+    t.replace(/\s+/g," ");
+
+  return t.trim();
+
+}
+
+function extractNumbers(text){
+
+  const matches=
+    text.match(/\d+(?:\.\d+)?/g);
+
+  if(!matches){
+    return [];
+  }
+
+  return matches.map(Number);
+
+}
 
 function parseDistance(text){
-  const match=text.match(/(\d+(?:\.\d+)?)\s*(metres?|meters?|m|yards?|yds?)/i);
 
-  if(!match) return null;
+  let match=
+    text.match(
+      /(\d+(?:\.\d+)?)\s*(?:metres?|meters?|meter|metre|m)\b/
+    );
 
-  const value=Number(match[1]);
-  const unit=match[2].toLowerCase();
+  if(match){
 
-  if(unit.startsWith("yard") || unit.startsWith("yd")){
-    return value*YARDS_TO_METRES;
+    return{
+      value:Number(match[1]),
+      explicit:true
+    };
+
   }
 
-  return value;
-}
+  match=
+    text.match(
+      /(\d+(?:\.\d+)?)\s*(?:yards?|yard|yds?|yd)\b/
+    );
 
-function parseWind(text){
-  const result={speed:0,direction:"none"};
+  if(match){
 
-  const km=text.match(/(\d+(?:\.\d+)?)\s*(?:km\/?h|kph|kilometres? per hour|kilometers? per hour)/i);
-  const mph=text.match(/(\d+(?:\.\d+)?)\s*mph/i);
+    return{
+      value:Number(match[1])*
+        YARDS_TO_METRES,
+      explicit:true
+    };
 
-  if(km) result.speed=Number(km[1]);
-  if(mph) result.speed=Number(mph[1])*1.60934;
+  }
 
-  if(/\bheadwind\b|\binto the wind\b/i.test(text)) result.direction="head";
-  else if(/\btailwind\b|\bdownwind\b/i.test(text)) result.direction="tail";
-  else if(/\bleft to right\b/i.test(text)) result.direction="ltr";
-  else if(/\bright to left\b/i.test(text)) result.direction="rtl";
-  else if(/\bcrosswind\b/i.test(text)) result.direction="cross";
+  /*
+    Natural golf shorthand:
+    "155 rough"
+    "155 water left"
+    "155 15 headwind"
+  */
 
-  return result;
+  const numbers=
+    extractNumbers(text);
+
+  if(numbers.length){
+
+    const first=
+      numbers[0];
+
+    if(
+      first>=20 &&
+      first<=700
+    ){
+
+      return{
+        value:
+          unitMode==="imperial"
+          ? first*YARDS_TO_METRES
+          : first,
+        explicit:false
+      };
+
+    }
+
+  }
+
+  return null;
+
 }
 
 function parseLie(text){
-  if(/\bdeep rough\b|\bheavy rough\b|\bthick rough\b/i.test(text)) return "deep rough";
-  if(/\brough\b/i.test(text)) return "rough";
-  if(/\bfairway bunker\b/i.test(text)) return "fairway bunker";
-  if(/\bgreenside bunker\b/i.test(text)) return "greenside bunker";
-  if(/\bbunker\b|\bsand\b/i.test(text)) return "bunker";
-  if(/\btee\b/i.test(text)) return "tee";
+
+  if(
+    /\bdeep rough\b|\bheavy rough\b|\bthick rough\b|\bbad rough\b|\blong rough\b/
+    .test(text)
+  ){
+    return "deep rough";
+  }
+
+  if(
+    /\blight rough\b|\bfirst cut\b|\bsemi rough\b/
+    .test(text)
+  ){
+    return "light rough";
+  }
+
+  if(
+    /\brough\b/
+    .test(text)
+  ){
+    return "rough";
+  }
+
+  if(
+    /\bfairway bunker\b|\bpot bunker\b/
+    .test(text)
+  ){
+    return "fairway bunker";
+  }
+
+  if(
+    /\bgreenside bunker\b|\bgreen side bunker\b/
+    .test(text)
+  ){
+    return "greenside bunker";
+  }
+
+  if(
+    /\bbunker\b|\bsand\b/
+    .test(text)
+  ){
+    return "bunker";
+  }
+
+  if(
+    /\btee\b|\btee box\b/
+    .test(text)
+  ){
+    return "tee";
+  }
+
+  if(
+    /\bfairway\b/
+    .test(text)
+  ){
+    return "fairway";
+  }
+
   return "fairway";
+
+}
+
+function parseLieQuality(text){
+
+  if(
+    /\bsitting up\b|\bgood lie\b|\bclean lie\b|\bfluffy\b/
+    .test(text)
+  ){
+    return "good";
+  }
+
+  if(
+    /\bsitting down\b|\bburied\b|\bplugged\b|\bbad lie\b|\bdeep lie\b/
+    .test(text)
+  ){
+    return "bad";
+  }
+
+  return "normal";
+
+}
+
+function parseWind(text){
+
+  const result={
+    speed:0,
+    direction:"none"
+  };
+
+  let match=
+    text.match(
+      /(\d+(?:\.\d+)?)\s*(?:km\/?h|kmh|kph|kilometres? per hour|kilometers? per hour|km)\b/
+    );
+
+  if(match){
+
+    result.speed=
+      Number(match[1]);
+
+  }else{
+
+    match=
+      text.match(
+        /(\d+(?:\.\d+)?)\s*(?:mph|miles? per hour)\b/
+      );
+
+    if(match){
+
+      result.speed=
+        Number(match[1])*
+        1.60934;
+
+    }
+
+  }
+
+  /*
+    If speech heard:
+    "15 wind"
+    we know 15 is likely wind speed
+    if another larger distance exists first.
+  */
+
+  if(!result.speed){
+
+    match=
+      text.match(
+        /(\d+(?:\.\d+)?)\s+wind\b/
+      );
+
+    if(match){
+
+      const candidate=
+        Number(match[1]);
+
+      if(candidate<=80){
+        result.speed=candidate;
+      }
+
+    }
+
+  }
+
+  if(
+    /\bheadwind\b|\bhead wind\b|\binto the wind\b|\bwind against\b/
+    .test(text)
+  ){
+
+    result.direction=
+      "head";
+
+  }
+
+  else if(
+    /\btailwind\b|\btail wind\b|\bdownwind\b|\bwind behind\b/
+    .test(text)
+  ){
+
+    result.direction=
+      "tail";
+
+  }
+
+  else if(
+    /\bleft to right\b|\bleft-to-right\b/
+    .test(text)
+  ){
+
+    result.direction=
+      "ltr";
+
+  }
+
+  else if(
+    /\bright to left\b|\bright-to-left\b/
+    .test(text)
+  ){
+
+    result.direction=
+      "rtl";
+
+  }
+
+  else if(
+    /\bcrosswind\b|\bcross wind\b/
+    .test(text)
+  ){
+
+    result.direction=
+      "cross";
+
+  }
+
+  /*
+    If speed was heard but the direction
+    was imperfectly recognised as just "wind",
+    we keep the speed but do not invent direction.
+  */
+
+  return result;
+
 }
 
 function parseElevation(text){
-  const uphill=text.match(/(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)\s*(?:uphill|up hill|up)/i);
-  const downhill=text.match(/(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)\s*(?:downhill|down hill|down)/i);
 
-  if(uphill) return Number(uphill[1]);
-  if(downhill) return -Number(downhill[1]);
-  if(/\buphill\b|\bup hill\b/i.test(text)) return 5;
-  if(/\bdownhill\b|\bdown hill\b/i.test(text)) return -5;
+  let match=
+    text.match(
+      /(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)?\s*(?:uphill|up hill)\b/
+    );
+
+  if(match){
+
+    return Number(match[1]);
+
+  }
+
+  match=
+    text.match(
+      /(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)?\s*(?:downhill|down hill)\b/
+    );
+
+  if(match){
+
+    return -Number(match[1]);
+
+  }
+
+  if(
+    /\buphill\b|\bup hill\b/
+    .test(text)
+  ){
+    return 5;
+  }
+
+  if(
+    /\bdownhill\b|\bdown hill\b/
+    .test(text)
+  ){
+    return -5;
+  }
 
   return 0;
+
 }
 
-function calculatePlayingDistance(base,lie,wind,elevation){
-  let playing=base;
+function parseHazards(text){
 
-  if(lie==="rough") playing*=1.05;
-  if(lie==="deep rough") playing*=1.10;
-  if(lie==="fairway bunker") playing*=1.06;
+  const hazard={
+    water:false,
+    bunker:false,
+    trees:false,
+    trouble:false,
+    left:false,
+    right:false,
+    short:false,
+    long:false
+  };
 
-  const windMph=wind.speed/1.60934;
-  const windAdjustment=windMph*0.75*YARDS_TO_METRES;
+  if(
+    /\bwater\b|\bpond\b|\blake\b|\bcreek\b|\bhazard\b/
+    .test(text)
+  ){
+    hazard.water=true;
+  }
 
-  if(wind.direction==="head") playing+=windAdjustment;
-  if(wind.direction==="tail") playing-=windAdjustment;
+  if(
+    /\bbunker\b|\bsand\b/
+    .test(text)
+  ){
+    hazard.bunker=true;
+  }
 
-  if(elevation>0) playing*=1.05;
-  if(elevation<0) playing*=0.95;
+  if(
+    /\btrees?\b/
+    .test(text)
+  ){
+    hazard.trees=true;
+  }
 
-  return Math.max(1,playing);
+  if(
+    /\btrouble\b|\bob\b|\bout of bounds\b/
+    .test(text)
+  ){
+    hazard.trouble=true;
+  }
+
+  if(
+    /\bleft\b/
+    .test(text)
+  ){
+    hazard.left=true;
+  }
+
+  if(
+    /\bright\b/
+    .test(text)
+  ){
+    hazard.right=true;
+  }
+
+  if(
+    /\bshort\b|\bfront\b/
+    .test(text)
+  ){
+    hazard.short=true;
+  }
+
+  if(
+    /\blong\b|\bback\b/
+    .test(text)
+  ){
+    hazard.long=true;
+  }
+
+  return hazard;
+
+}
+
+/* ==============================
+   PLAYS-LIKE CALCULATION
+============================== */
+
+function calculatePlayingDistance(
+  base,
+  lie,
+  lieQuality,
+  wind,
+  elevation
+){
+
+  let playing=
+    base;
+
+  /*
+    Lie effects are deliberately
+    conservative rather than extreme.
+  */
+
+  if(lie==="light rough"){
+
+    playing*=1.015;
+
+  }
+
+  else if(lie==="rough"){
+
+    playing*=1.04;
+
+  }
+
+  else if(lie==="deep rough"){
+
+    playing*=1.07;
+
+  }
+
+  else if(lie==="fairway bunker"){
+
+    playing*=1.045;
+
+  }
+
+  if(
+    lieQuality==="bad" &&
+    (
+      lie==="rough" ||
+      lie==="deep rough"
+    )
+  ){
+
+    playing*=1.025;
+
+  }
+
+  /*
+    A sitting-up lie can sometimes
+    produce a flyer. We do not blindly
+    add club for that situation.
+  */
+
+  if(
+    lieQuality==="good" &&
+    (
+      lie==="rough" ||
+      lie==="light rough"
+    )
+  ){
+
+    playing-=base*.01;
+
+  }
+
+  /*
+    Wind rule:
+    0.75 yards per mph converted to metres.
+  */
+
+  const windMph=
+    wind.speed/1.60934;
+
+  const windAdjustmentMetres=
+    windMph*
+    .75*
+    YARDS_TO_METRES;
+
+  if(
+    wind.direction==="head"
+  ){
+
+    playing+=
+      windAdjustmentMetres;
+
+  }
+
+  if(
+    wind.direction==="tail"
+  ){
+
+    playing-=
+      windAdjustmentMetres;
+
+  }
+
+  /*
+    Elevation:
+    approx 5% if the user only says
+    uphill/downhill.
+  */
+
+  if(elevation>0){
+
+    playing+=
+      base*.05;
+
+  }
+
+  if(elevation<0){
+
+    playing-=
+      base*.05;
+
+  }
+
+  return Math.max(
+    1,
+    playing
+  );
+
 }
 
 function formatDistance(metres){
-  const d=displayDistance(metres);
+
+  const d=
+    displayDistance(metres);
+
   return d.value+" "+d.unit;
+
+}
+
+/* ==============================
+   SMART CADDIE RESPONSE
+============================== */
+
+function describeLie(lie,quality){
+
+  if(
+    lie==="deep rough"
+  ){
+
+    if(quality==="bad"){
+      return "deep rough, sitting down";
+    }
+
+    return "deep rough";
+  }
+
+  if(
+    lie==="rough"
+  ){
+
+    if(quality==="good"){
+      return "rough, sitting up";
+    }
+
+    if(quality==="bad"){
+      return "rough, sitting down";
+    }
+
+    return "rough";
+  }
+
+  if(
+    lie==="light rough"
+  ){
+    return "light rough";
+  }
+
+  if(
+    lie==="fairway bunker"
+  ){
+    return "fairway bunker";
+  }
+
+  if(
+    lie==="greenside bunker"
+  ){
+    return "greenside bunker";
+  }
+
+  if(
+    lie==="bunker"
+  ){
+    return "bunker";
+  }
+
+  if(
+    lie==="tee"
+  ){
+    return "tee";
+  }
+
+  return "fairway";
+
+}
+
+function buildHazardAdvice(hazard){
+
+  if(hazard.water){
+
+    if(hazard.left){
+      return "Water left — favour right-centre.";
+    }
+
+    if(hazard.right){
+      return "Water right — favour left-centre.";
+    }
+
+    if(hazard.short){
+      return "Water short — carry it comfortably.";
+    }
+
+    if(hazard.long){
+      return "Water long — don't chase the back number.";
+    }
+
+    return "Water in play — choose the safe side.";
+  }
+
+  if(hazard.bunker){
+
+    if(hazard.left){
+      return "Bunker left — favour right-centre.";
+    }
+
+    if(hazard.right){
+      return "Bunker right — favour left-centre.";
+    }
+
+    if(hazard.short){
+      return "Bunker short — make sure you cover it.";
+    }
+
+    if(hazard.long){
+      return "Bunker long — centre number is enough.";
+    }
+
+    return "Bunker in play — don't short-side it.";
+  }
+
+  if(hazard.trees){
+
+    if(hazard.left){
+      return "Trees left — favour the right side.";
+    }
+
+    if(hazard.right){
+      return "Trees right — favour the left side.";
+    }
+
+    return "Take the clearest window.";
+  }
+
+  if(hazard.trouble){
+
+    if(hazard.left){
+      return "Trouble left — favour right-centre.";
+    }
+
+    if(hazard.right){
+      return "Trouble right — favour left-centre.";
+    }
+
+    return "Keep the big miss out of play.";
+  }
+
+  return "";
+
+}
+
+function buildWindAdvice(wind){
+
+  if(
+    !wind.speed &&
+    wind.direction==="none"
+  ){
+    return "";
+  }
+
+  const speed=
+    wind.speed
+    ? Math.round(wind.speed)+" km/h "
+    : "";
+
+  if(
+    wind.direction==="head"
+  ){
+
+    return speed+
+      "headwind — flight it down.";
+
+  }
+
+  if(
+    wind.direction==="tail"
+  ){
+
+    return speed+
+      "tailwind — allow the extra carry.";
+
+  }
+
+  if(
+    wind.direction==="ltr"
+  ){
+
+    return speed+
+      "left-to-right — start it a little left.";
+
+  }
+
+  if(
+    wind.direction==="rtl"
+  ){
+
+    return speed+
+      "right-to-left — start it a little right.";
+
+  }
+
+  if(
+    wind.direction==="cross"
+  ){
+
+    return speed+
+      "crosswind — allow for it, don't fight it.";
+
+  }
+
+  if(wind.speed){
+
+    return speed+
+      "wind heard. Tell me head, tail, left-to-right or right-to-left.";
+
+  }
+
+  return "";
+
+}
+
+function buildLieAdvice(
+  lie,
+  quality,
+  club
+){
+
+  if(
+    lie==="light rough"
+  ){
+
+    return "Light rough — normal swing, expect a little less spin.";
+
+  }
+
+  if(
+    lie==="rough"
+  ){
+
+    if(quality==="good"){
+
+      return "Ball sitting up — watch the flyer and control the strike.";
+
+    }
+
+    if(quality==="bad"){
+
+      return "Ball sitting down — clean contact first. Don't force it.";
+
+    }
+
+    return "Rough — check how much grass is between club and ball.";
+
+  }
+
+  if(
+    lie==="deep rough"
+  ){
+
+    return "Deep rough — get it out cleanly. Don't force a long club.";
+
+  }
+
+  if(
+    lie==="fairway bunker"
+  ){
+
+    return "Fairway bunker — clean strike, stable base, enough loft to clear the lip.";
+
+  }
+
+  if(
+    lie==="greenside bunker"
+  ){
+
+    return "Greenside bunker — use the bounce and commit through the sand.";
+
+  }
+
+  if(
+    lie==="bunker"
+  ){
+
+    return "Bunker — check the lip and choose the safest flight.";
+
+  }
+
+  return "";
+
 }
 
 function handleGolfCommand(command){
-  const text=command.toLowerCase();
-  const hole=holes[currentHole];
 
-  const spokenDistance=parseDistance(text);
-  const baseDistance=spokenDistance!==null ? spokenDistance : hole.centre;
+  const original=
+    command.trim();
 
-  const lie=parseLie(text);
-  const wind=parseWind(text);
-  const elevation=parseElevation(text);
+  const text=
+    normaliseSpeech(original);
 
-  const playing=calculatePlayingDistance(baseDistance,lie,wind,elevation);
+  const hole=
+    holes[currentHole];
 
-  let club=chooseClub(playing);
+  const distanceInfo=
+    parseDistance(text);
 
-  if(lie==="greenside bunker" && playing<50 && bagMetres["SW"]){
-    club="SW";
+  const baseDistance=
+    distanceInfo
+    ? distanceInfo.value
+    : hole.centre;
+
+  const lie=
+    parseLie(text);
+
+  const lieQuality=
+    parseLieQuality(text);
+
+  const wind=
+    parseWind(text);
+
+  const elevation=
+    parseElevation(text);
+
+  const hazard=
+    parseHazards(text);
+
+  const usefulInfo=
+    Boolean(
+      distanceInfo ||
+      lie!=="fairway" ||
+      wind.speed ||
+      wind.direction!=="none" ||
+      elevation!==0 ||
+      hazard.water ||
+      hazard.bunker ||
+      hazard.trees ||
+      hazard.trouble
+    );
+
+  if(!usefulInfo){
+
+    const message=
+      "Give me the distance, lie, wind or trouble. Example: 155 rough, 15 headwind, water left.";
+
+    setCaddieAnswers(
+      message
+    );
+
+    document
+    .getElementById("lastShot")
+    .textContent=
+      "Heard: "+original;
+
+    speak(message);
+
+    return;
+
   }
 
-  setRecommendedClub(club);
+  const playing=
+    calculatePlayingDistance(
+      baseDistance,
+      lie,
+      lieQuality,
+      wind,
+      elevation
+    );
 
-  let advice=formatDistance(baseDistance)+" actual";
+  const club=
+    chooseClubForShot(
+      playing,
+      lie,
+      hazard
+    );
 
-  if(Math.abs(playing-baseDistance)>=3){
-    advice+=", playing about "+formatDistance(playing);
+  setRecommendedClub(
+    club
+  );
+
+  const parts=[];
+
+  if(distanceInfo){
+
+    parts.push(
+      formatDistance(baseDistance)+
+      ", "+
+      describeLie(
+        lie,
+        lieQuality
+      )
+    );
+
+  }else{
+
+    parts.push(
+      describeLie(
+        lie,
+        lieQuality
+      )
+    );
+
   }
 
-  advice+=". I like the "+club+".";
+  if(
+    Math.abs(
+      playing-baseDistance
+    )>=2
+  ){
 
-  if(lie==="rough"){
-    advice+=" Check the lie and prioritise clean contact.";
+    parts.push(
+      "playing "+
+      formatDistance(playing)
+    );
+
   }
 
-  if(lie==="deep rough"){
-    advice+=" Clean contact first. Don't force maximum carry.";
+  parts.push(
+    club
+  );
+
+  const windAdvice=
+    buildWindAdvice(wind);
+
+  if(windAdvice){
+    parts.push(windAdvice);
   }
 
-  if(lie==="fairway bunker"){
-    advice+=" Pick it clean and favour control.";
+  const hazardAdvice=
+    buildHazardAdvice(hazard);
+
+  if(hazardAdvice){
+    parts.push(hazardAdvice);
   }
 
-  if(lie==="bunker" || lie==="greenside bunker"){
-    advice+=" Use the bounce and commit through the sand.";
+  const lieAdvice=
+    buildLieAdvice(
+      lie,
+      lieQuality,
+      club
+    );
+
+  if(lieAdvice){
+    parts.push(lieAdvice);
   }
 
-  if(wind.direction==="head"){
-    advice+=" Flight it down and don't chase extra speed.";
+  if(
+    elevation>0
+  ){
+
+    parts.push(
+      "Uphill — commit to the extra number."
+    );
+
   }
 
-  if(wind.direction==="tail"){
-    advice+=" Allow for the extra carry and release.";
+  if(
+    elevation<0
+  ){
+
+    parts.push(
+      "Downhill — don't force the carry."
+    );
+
   }
 
-  if(wind.direction==="ltr"){
-    advice+=" Wind left to right. Start it slightly left.";
+  if(
+    /\bdraw\b/
+    .test(text)
+  ){
+
+    parts.push(
+      "Set the start line for the draw."
+    );
+
   }
 
-  if(wind.direction==="rtl"){
-    advice+=" Wind right to left. Start it slightly right.";
+  if(
+    /\bfade\b/
+    .test(text)
+  ){
+
+    parts.push(
+      "Set the start line for the fade."
+    );
+
   }
 
-  if(wind.direction==="cross"){
-    advice+=" Allow for the crosswind rather than fighting it.";
+  if(
+    /\bknockdown\b|\bpunch\b|\blow\b|\blow shot\b/
+    .test(text)
+  ){
+
+    parts.push(
+      "Three-quarter finish. Keep the flight down."
+    );
+
   }
 
-  if(/\bwater\b/i.test(text)){
-    if(/\bright\b/i.test(text)){
-      advice+=" Water right. Favour the left-centre.";
-    }else if(/\bleft\b/i.test(text)){
-      advice+=" Water left. Favour the right-centre.";
-    }else{
-      advice+=" Keep the water out of the big miss.";
-    }
-  }
+  parts.push(
+    "Commit."
+  );
 
-  if(/\btrees?\b/i.test(text)){
-    if(/\bright\b/i.test(text)){
-      advice+=" Trees right. Favour the left side.";
-    }else if(/\bleft\b/i.test(text)){
-      advice+=" Trees left. Favour the right side.";
-    }else{
-      advice+=" Take the clearest window.";
-    }
-  }
+  const advice=
+    parts
+    .join(". ")
+    .replace(/\.\./g,".")
+    .replace(/\.\s+\./g,".")
+    .trim();
 
-  if(/\bdraw\b/i.test(text)){
-    advice+=" Set the start line for the draw and commit.";
-  }
+  document
+  .getElementById("lastShot")
+  .textContent=
+    "Heard: "+original;
 
-  if(/\bfade\b/i.test(text)){
-    advice+=" Set the start line for the fade and commit.";
-  }
+  setCaddieAnswers(
+    advice
+  );
 
-  advice+=" Commit to the target and swing freely.";
+  speak(
+    advice
+  );
 
-  document.getElementById("lastShot").textContent="Heard: "+command;
-
-  setCaddieAnswers(advice);
-  speak(advice);
 }
+
+/* ==============================
+   SPEECH OUTPUT
+============================== */
 
 function speak(text){
-  if(!voiceEnabled || !("speechSynthesis" in window)) return;
 
-  window.speechSynthesis.cancel();
+  if(
+    !("speechSynthesis" in window)
+  ){
+    return;
+  }
 
-  const utterance=new SpeechSynthesisUtterance(text);
-  utterance.rate=.95;
-  utterance.pitch=1;
-  utterance.volume=1;
+  window
+  .speechSynthesis
+  .cancel();
 
-  window.speechSynthesis.speak(utterance);
+  const utterance=
+    new SpeechSynthesisUtterance(
+      text
+    );
+
+  utterance.rate=
+    .95;
+
+  utterance.pitch=
+    1;
+
+  utterance.volume=
+    1;
+
+  window
+  .speechSynthesis
+  .speak(
+    utterance
+  );
+
 }
+
+/* ==============================
+   CADDIE PAGE
+============================== */
 
 function updateCaddiePage(){
-  if(!document.getElementById("caddieHole")) return;
 
-  const hole=holes[currentHole];
-  const distance=displayDistance(hole.centre);
-  const name=getCaddieName();
+  if(
+    !document
+    .getElementById("caddieHole")
+  ){
+    return;
+  }
 
-  document.getElementById("largeCaddieName").textContent=name;
-  document.getElementById("caddieHole").textContent=hole.hole;
-  document.getElementById("caddieDistance").textContent=distance.value+" "+distance.unit;
-  document.getElementById("caddieClub").textContent=document.getElementById("recommendedClub").textContent;
+  const hole=
+    holes[currentHole];
+
+  const distance=
+    displayDistance(
+      hole.centre
+    );
+
+  const name=
+    getCaddieName();
+
+  document
+  .getElementById("largeCaddieName")
+  .textContent=
+    name;
+
+  document
+  .getElementById("caddieHole")
+  .textContent=
+    hole.hole;
+
+  document
+  .getElementById("caddieDistance")
+  .textContent=
+    distance.value+
+    " "+
+    distance.unit;
+
+  document
+  .getElementById("caddieClub")
+  .textContent=
+    document
+    .getElementById("recommendedClub")
+    .textContent;
+
 }
 
+/* ==============================
+   MY BAG
+============================== */
+
 function renderBag(){
-  const container=document.getElementById("bagRows");
+
+  const container=
+    document.getElementById("bagRows");
+
   container.innerHTML="";
 
-  Object.entries(bagMetres).forEach(([club,carry])=>{
-    const row=document.createElement("div");
-    row.className="bag-row";
+  Object
+  .entries(bagMetres)
+  .forEach(
+    ([club,carry])=>{
 
-    row.innerHTML=
-      '<div class="bag-club">'+club+'</div>'+
-      '<input class="bag-input" type="number" data-club="'+club+'" value="'+carry+'">'+
-      '<div class="bag-unit">m</div>';
+      const row=
+        document.createElement("div");
 
-    container.appendChild(row);
-  });
+      row.className=
+        "bag-row";
+
+      row.innerHTML=
+        '<div class="bag-club">'+
+        club+
+        '</div>'+
+        '<input class="bag-input" type="number" data-club="'+
+        club+
+        '" value="'+
+        carry+
+        '">'+
+        '<div class="bag-unit">m</div>';
+
+      container.appendChild(
+        row
+      );
+
+    }
+  );
+
 }
 
 function saveBag(){
-  document.querySelectorAll(".bag-input").forEach(input=>{
-    const club=input.dataset.club;
-    const value=Number(input.value);
 
-    if(value>=0) bagMetres[club]=value;
-  });
+  document
+  .querySelectorAll(".bag-input")
+  .forEach(
+    input=>{
 
-  localStorage.setItem("drcBagMetres",JSON.stringify(bagMetres));
+      const club=
+        input.dataset.club;
+
+      const value=
+        Number(input.value);
+
+      if(
+        value>=0 &&
+        Number.isFinite(value)
+      ){
+
+        bagMetres[club]=
+          value;
+
+      }
+
+    }
+  );
+
+  localStorage.setItem(
+    "drcBagMetres",
+    JSON.stringify(
+      bagMetres
+    )
+  );
+
   recommendClub();
-  alert("My Bag saved.");
+
+  alert(
+    "My Bag saved."
+  );
+
 }
 
+/* ==============================
+   COURSE
+============================== */
+
 function saveCourse(){
+
   const course={
-    name:document.getElementById("courseName").value.trim(),
-    teeType:document.getElementById("teeType").value,
-    teeColour:document.getElementById("teeColour").value
+
+    name:
+      document
+      .getElementById("courseName")
+      .value
+      .trim(),
+
+    teeType:
+      document
+      .getElementById("teeType")
+      .value,
+
+    teeColour:
+      document
+      .getElementById("teeColour")
+      .value
+
   };
 
-  localStorage.setItem("drcCourseSetup",JSON.stringify(course));
-  alert("Course saved.");
+  localStorage.setItem(
+    "drcCourseSetup",
+    JSON.stringify(
+      course
+    )
+  );
+
+  alert(
+    "Course saved."
+  );
+
 }
 
 function loadCourse(){
-  const course=JSON.parse(localStorage.getItem("drcCourseSetup") || "null");
-  if(!course) return;
 
-  document.getElementById("courseName").value=course.name || "";
-  document.getElementById("teeType").value=course.teeType || "MEN";
-  document.getElementById("teeColour").value=course.teeColour || "WHITE";
+  const course=
+    JSON.parse(
+      localStorage
+      .getItem("drcCourseSetup") ||
+      "null"
+    );
+
+  if(!course){
+    return;
+  }
+
+  document
+  .getElementById("courseName")
+  .value=
+    course.name || "";
+
+  document
+  .getElementById("teeType")
+  .value=
+    course.teeType || "MEN";
+
+  document
+  .getElementById("teeColour")
+  .value=
+    course.teeColour || "WHITE";
+
 }
 
 function updateCoursePage(){
-  if(!document.getElementById("courseHoleNumber")) return;
 
-  const hole=holes[currentHole];
-  const distance=displayDistance(hole.centre);
+  if(
+    !document
+    .getElementById("courseHoleNumber")
+  ){
+    return;
+  }
 
-  document.getElementById("courseHoleNumber").textContent=hole.hole;
-  document.getElementById("coursePar").textContent=hole.par;
-  document.getElementById("courseDistance").textContent=distance.value+" "+distance.unit;
+  const hole=
+    holes[currentHole];
+
+  const distance=
+    displayDistance(
+      hole.centre
+    );
+
+  document
+  .getElementById("courseHoleNumber")
+  .textContent=
+    hole.hole;
+
+  document
+  .getElementById("coursePar")
+  .textContent=
+    hole.par;
+
+  document
+  .getElementById("courseDistance")
+  .textContent=
+    distance.value+
+    " "+
+    distance.unit;
+
 }
 
-function toggleUnits(){
-  unitMode=unitMode==="metric" ? "imperial" : "metric";
+/* ==============================
+   SETTINGS
+============================== */
 
-  localStorage.setItem("drcUnitMode",unitMode);
+function toggleUnits(){
+
+  unitMode=
+    unitMode==="metric"
+    ? "imperial"
+    : "metric";
+
+  localStorage.setItem(
+    "drcUnitMode",
+    unitMode
+  );
 
   renderHole();
   updateMorePage();
+
 }
 
 function updateMorePage(){
-  if(!document.getElementById("moreVoiceToggle")) return;
 
-  const voice=document.getElementById("moreVoiceToggle");
+  if(
+    !document
+    .getElementById("unitToggle")
+  ){
+    return;
+  }
 
-  voice.textContent=voiceEnabled ? "ON" : "OFF";
-  voice.classList.toggle("on",voiceEnabled);
+  document
+  .getElementById("unitToggle")
+  .textContent=
+    unitMode==="metric"
+    ? "METRES"
+    : "YARDS";
 
-  document.getElementById("unitToggle").textContent=
-    unitMode==="metric" ? "METRES" : "YARDS";
+  document
+  .getElementById("moreCaddieName")
+  .value=
+    getCaddieName();
 
-  document.getElementById("moreCaddieName").value=getCaddieName();
 }
 
-/* SCORECARD */
+/* ==============================
+   SCORECARD
+============================== */
 
 function renderScorecard(){
-  const body=document.getElementById("scorecardBody");
+
+  const body=
+    document.getElementById(
+      "scorecardBody"
+    );
+
   body.innerHTML="";
 
   let totalPar=0;
   let totalScore=0;
   let holesPlayed=0;
 
-  holes.forEach(hole=>{
-    totalPar+=hole.par;
+  holes.forEach(
+    hole=>{
 
-    const data=holeScores[hole.hole];
-    const score=data && data.score>0 ? data.score : 0;
+      totalPar+=hole.par;
 
-    if(score>0){
-      totalScore+=score;
-      holesPlayed++;
+      const data=
+        holeScores[hole.hole];
+
+      const score=
+        data &&
+        data.score>0
+        ? data.score
+        : 0;
+
+      if(score>0){
+
+        totalScore+=score;
+        holesPlayed++;
+
+      }
+
+      const row=
+        document
+        .createElement("tr");
+
+      row.innerHTML=
+
+        "<td>"+
+        hole.hole+
+        "</td>"+
+
+        "<td>"+
+        hole.par+
+        "</td>"+
+
+        "<td>"+
+        (score || "–")+
+        "</td>"+
+
+        "<td>"+
+        (data ? data.putts : "–")+
+        "</td>"+
+
+        "<td>"+
+        (data && data.gir ? "✓" : "–")+
+        "</td>"+
+
+        "<td>"+
+        (data && data.fairway ? "✓" : "–")+
+        "</td>"+
+
+        "<td>"+
+        (data ? data.penalty : "–")+
+        "</td>";
+
+      body.appendChild(
+        row
+      );
+
     }
+  );
 
-    const row=document.createElement("tr");
+  document
+  .getElementById("totalPar")
+  .textContent=
+    totalPar;
 
-    row.innerHTML=
-      "<td>"+hole.hole+"</td>"+
-      "<td>"+hole.par+"</td>"+
-      "<td>"+(score || "–")+"</td>"+
-      "<td>"+(data ? data.putts : "–")+"</td>"+
-      "<td>"+(data && data.gir ? "✓" : "–")+"</td>"+
-      "<td>"+(data && data.fairway ? "✓" : "–")+"</td>"+
-      "<td>"+(data ? data.penalty : "–")+"</td>";
-
-    body.appendChild(row);
-  });
-
-  document.getElementById("totalPar").textContent=totalPar;
-  document.getElementById("totalScore").textContent=totalScore || "–";
+  document
+  .getElementById("totalScore")
+  .textContent=
+    totalScore || "–";
 
   if(holesPlayed===18){
-    const difference=totalScore-totalPar;
 
-    document.getElementById("toPar").textContent=
-      difference===0 ? "E" : difference>0 ? "+"+difference : difference;
+    const difference=
+      totalScore-totalPar;
+
+    document
+    .getElementById("toPar")
+    .textContent=
+      difference===0
+      ? "E"
+      : difference>0
+      ? "+"+difference
+      : difference;
+
   }else{
-    document.getElementById("toPar").textContent="–";
+
+    document
+    .getElementById("toPar")
+    .textContent=
+      "–";
+
   }
+
 }
 
-/* PRACTICE */
+/* ==============================
+   PRACTICE
+============================== */
 
-function selectPracticeType(button,type){
-  practiceType=type;
+function selectPracticeType(
+  button,
+  type
+){
 
-  document.querySelectorAll(".practice-type").forEach(b=>b.classList.remove("active"));
-  button.classList.add("active");
+  practiceType=
+    type;
+
+  document
+  .querySelectorAll(".practice-type")
+  .forEach(
+    b=>b.classList.remove("active")
+  );
+
+  button
+  .classList
+  .add("active");
+
 }
 
-function selectShape(button,shape){
-  practiceShape=shape;
+function selectShape(
+  button,
+  shape
+){
 
-  document.querySelectorAll(".shape-btn").forEach(b=>b.classList.remove("active"));
-  button.classList.add("active");
+  practiceShape=
+    shape;
+
+  document
+  .querySelectorAll(".shape-btn")
+  .forEach(
+    b=>b.classList.remove("active")
+  );
+
+  button
+  .classList
+  .add("active");
+
 }
 
 function practiceAdd(type){
+
   practiceCounts[type]++;
+
   renderPracticeCounts();
+
 }
 
 function renderPracticeCounts(){
-  document.getElementById("practiceGood").textContent=practiceCounts.good;
-  document.getElementById("practiceLeft").textContent=practiceCounts.left;
-  document.getElementById("practiceRight").textContent=practiceCounts.right;
-  document.getElementById("practiceShort").textContent=practiceCounts.short;
-  document.getElementById("practiceLong").textContent=practiceCounts.long;
+
+  document
+  .getElementById("practiceGood")
+  .textContent=
+    practiceCounts.good;
+
+  document
+  .getElementById("practiceLeft")
+  .textContent=
+    practiceCounts.left;
+
+  document
+  .getElementById("practiceRight")
+  .textContent=
+    practiceCounts.right;
+
+  document
+  .getElementById("practiceShort")
+  .textContent=
+    practiceCounts.short;
+
+  document
+  .getElementById("practiceLong")
+  .textContent=
+    practiceCounts.long;
+
 }
 
 function renderPractice(){
+
   renderPracticeCounts();
+
 }
 
 function resetPractice(){
-  practiceCounts={good:0,left:0,right:0,short:0,long:0};
-  document.getElementById("practiceNote").value="";
+
+  practiceCounts={
+    good:0,
+    left:0,
+    right:0,
+    short:0,
+    long:0
+  };
+
+  document
+  .getElementById("practiceNote")
+  .value="";
+
   renderPracticeCounts();
+
 }
 
 function savePractice(){
-  const saved=JSON.parse(localStorage.getItem("drcPracticeHistory") || "[]");
+
+  const saved=
+    JSON.parse(
+      localStorage
+      .getItem("drcPracticeHistory") ||
+      "[]"
+    );
 
   saved.unshift({
-    date:new Date().toISOString(),
-    type:practiceType,
-    shape:practiceShape,
-    counts:{...practiceCounts},
-    note:document.getElementById("practiceNote").value.trim()
+
+    date:
+      new Date()
+      .toISOString(),
+
+    type:
+      practiceType,
+
+    shape:
+      practiceShape,
+
+    counts:{
+      ...practiceCounts
+    },
+
+    note:
+      document
+      .getElementById("practiceNote")
+      .value
+      .trim()
+
   });
 
-  localStorage.setItem("drcPracticeHistory",JSON.stringify(saved));
-  alert("Practice session saved.");
+  localStorage.setItem(
+    "drcPracticeHistory",
+    JSON.stringify(saved)
+  );
+
+  alert(
+    "Practice session saved."
+  );
+
 }
 
-/* WARM-UP */
+/* ==============================
+   WARM-UP
+============================== */
 
 function renderWarmup(){
-  const container=document.getElementById("warmupRows");
+
+  const container=
+    document.getElementById(
+      "warmupRows"
+    );
+
   container.innerHTML="";
 
-  warmupSteps.forEach((step,index)=>{
-    const row=document.createElement("div");
-    row.className="check-row";
+  warmupSteps.forEach(
+    (step,index)=>{
 
-    row.innerHTML=
-      '<button class="check-button '+(warmupState[index] ? "done" : "")+
-      '" onclick="toggleWarmup('+index+')">'+
-      (warmupState[index] ? "✓" : "")+
-      '</button>'+
-      '<div>'+
-      '<div class="check-title">'+step[0]+'</div>'+
-      '<div class="check-small">'+step[1]+'</div>'+
-      '</div>';
+      const row=
+        document
+        .createElement("div");
 
-    container.appendChild(row);
-  });
+      row.className=
+        "check-row";
 
-  const complete=warmupState.filter(Boolean).length;
-  const percent=complete/warmupSteps.length*100;
+      row.innerHTML=
 
-  document.getElementById("warmupProgress").style.width=percent+"%";
-  document.getElementById("warmupProgressText").textContent=complete+" of 8 complete";
+        '<button class="check-button '+
+        (
+          warmupState[index]
+          ? "done"
+          : ""
+        )+
+        '" onclick="toggleWarmup('+
+        index+
+        ')">'+
+        (
+          warmupState[index]
+          ? "✓"
+          : ""
+        )+
+        '</button>'+
+
+        '<div>'+
+        '<div class="check-title">'+
+        step[0]+
+        '</div>'+
+        '<div class="check-small">'+
+        step[1]+
+        '</div>'+
+        '</div>';
+
+      container.appendChild(
+        row
+      );
+
+    }
+  );
+
+  const complete=
+    warmupState
+    .filter(Boolean)
+    .length;
+
+  const percent=
+    complete/
+    warmupSteps.length*
+    100;
+
+  document
+  .getElementById("warmupProgress")
+  .style.width=
+    percent+"%";
+
+  document
+  .getElementById("warmupProgressText")
+  .textContent=
+    complete+
+    " of 8 complete";
+
 }
 
 function toggleWarmup(index){
-  warmupState[index]=!warmupState[index];
 
-  localStorage.setItem("drcWarmupState",JSON.stringify(warmupState));
+  warmupState[index]=
+    !warmupState[index];
+
+  localStorage.setItem(
+    "drcWarmupState",
+    JSON.stringify(warmupState)
+  );
+
   renderWarmup();
+
 }
 
 function resetWarmup(){
-  warmupState=new Array(8).fill(false);
 
-  localStorage.setItem("drcWarmupState",JSON.stringify(warmupState));
+  warmupState=
+    new Array(8).fill(false);
+
+  localStorage.setItem(
+    "drcWarmupState",
+    JSON.stringify(warmupState)
+  );
+
   renderWarmup();
+
 }
 
-/* ROUTINES */
+/* ==============================
+   ROUTINES
+============================== */
 
 function renderRoutine(){
-  const container=document.getElementById("routineRows");
+
+  const container=
+    document.getElementById(
+      "routineRows"
+    );
+
   container.innerHTML="";
 
-  routineSteps.forEach((step,index)=>{
-    const row=document.createElement("div");
-    row.className="check-row";
+  routineSteps.forEach(
+    (step,index)=>{
 
-    row.innerHTML=
-      '<button class="check-button '+(routineState[index] ? "done" : "")+
-      '" onclick="toggleRoutine('+index+')">'+
-      (routineState[index] ? "✓" : "")+
-      '</button>'+
-      '<div>'+
-      '<div class="check-title">'+step[0]+'</div>'+
-      '<div class="check-small">'+step[1]+'</div>'+
-      '</div>';
+      const row=
+        document
+        .createElement("div");
 
-    container.appendChild(row);
-  });
+      row.className=
+        "check-row";
 
-  const complete=routineState.filter(Boolean).length;
-  const percent=complete/routineSteps.length*100;
+      row.innerHTML=
 
-  document.getElementById("routineProgress").style.width=percent+"%";
-  document.getElementById("routineProgressText").textContent=complete+" of 8 complete";
+        '<button class="check-button '+
+        (
+          routineState[index]
+          ? "done"
+          : ""
+        )+
+        '" onclick="toggleRoutine('+
+        index+
+        ')">'+
+        (
+          routineState[index]
+          ? "✓"
+          : ""
+        )+
+        '</button>'+
+
+        '<div>'+
+        '<div class="check-title">'+
+        step[0]+
+        '</div>'+
+        '<div class="check-small">'+
+        step[1]+
+        '</div>'+
+        '</div>';
+
+      container.appendChild(
+        row
+      );
+
+    }
+  );
+
+  const complete=
+    routineState
+    .filter(Boolean)
+    .length;
+
+  const percent=
+    complete/
+    routineSteps.length*
+    100;
+
+  document
+  .getElementById("routineProgress")
+  .style.width=
+    percent+"%";
+
+  document
+  .getElementById("routineProgressText")
+  .textContent=
+    complete+
+    " of 8 complete";
+
 }
 
 function toggleRoutine(index){
-  routineState[index]=!routineState[index];
 
-  localStorage.setItem("drcRoutineState",JSON.stringify(routineState));
+  routineState[index]=
+    !routineState[index];
+
+  localStorage.setItem(
+    "drcRoutineState",
+    JSON.stringify(routineState)
+  );
+
   renderRoutine();
+
 }
 
 function resetRoutine(){
-  routineState=new Array(8).fill(false);
 
-  localStorage.setItem("drcRoutineState",JSON.stringify(routineState));
+  routineState=
+    new Array(8).fill(false);
+
+  localStorage.setItem(
+    "drcRoutineState",
+    JSON.stringify(routineState)
+  );
+
   renderRoutine();
+
 }
 
+/* ==============================
+   LOAD
+============================== */
+
 function loadSettings(){
-  const savedCaddie=localStorage.getItem("drcCaddieName");
+
+  const savedCaddie=
+    localStorage.getItem(
+      "drcCaddieName"
+    );
 
   if(savedCaddie){
-    document.getElementById("caddieName").value=savedCaddie;
+
+    document
+    .getElementById("caddieName")
+    .value=
+      savedCaddie;
+
   }
 
-  const savedVoice=localStorage.getItem("drcVoiceEnabled");
+  const savedHole=
+    Number(
+      localStorage
+      .getItem("drcCurrentHole")
+    );
 
-  if(savedVoice==="false"){
-    voiceEnabled=false;
-    document.getElementById("voiceToggle").textContent="OFF";
-    document.getElementById("voiceToggle").classList.add("off");
+  if(
+    Number.isInteger(savedHole) &&
+    savedHole>=0 &&
+    savedHole<=17
+  ){
+
+    currentHole=
+      savedHole;
+
   }
 
-  const savedHole=Number(localStorage.getItem("drcCurrentHole"));
+  const name=
+    getCaddieName();
 
-  if(Number.isInteger(savedHole) && savedHole>=0 && savedHole<=17){
-    currentHole=savedHole;
-  }
+  document
+  .getElementById("askName")
+  .textContent=
+    name;
 
-  const name=getCaddieName();
+  document
+  .getElementById("largeCaddieName")
+  .textContent=
+    name;
 
-  document.getElementById("askName").textContent=name;
-  setCaddieAnswers("Ready. Ask "+name+" for the shot.");
+  document
+  .getElementById("moreCaddieName")
+  .value=
+    name;
+
+  setCaddieAnswers(
+    "Ready. Ask "+
+    name+
+    " for the shot."
+  );
 
   loadCourse();
   updateMorePage();
+
 }
 
 loadSettings();
+
 renderBag();
 renderWarmup();
 renderRoutine();
 renderHole();
 
+setupRecognition();
+
 </script>
+
 </body>
-</html>
+  </html>
