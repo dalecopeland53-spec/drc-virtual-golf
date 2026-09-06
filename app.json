@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Tour Pro Elite",
+    "name": "DRC Virtual Golf",
     "slug": "drc-virtual-golf",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,6 +14,9 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./drc-virtual-golf-icon.png",
         "backgroundColor": "#03081e"
