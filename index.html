@@ -18,6 +18,7 @@
   --text:#fff;
   --muted:#8fa7bd;
   --red:#d94a4a;
+  --green:#35b96f;
 }
 
 html,body{
@@ -577,7 +578,6 @@ button{
   display:grid;
   grid-template-columns:1.35fr 1fr;
   gap:4px;
-  min-height:0;
 }
 
 .next{
@@ -598,7 +598,6 @@ button{
 }
 
 .bottom-nav{
-  min-height:0;
   display:grid;
   grid-template-columns:repeat(5,1fr);
   background:#020b13;
@@ -622,7 +621,7 @@ button{
   margin-bottom:1px;
 }
 
-/* OTHER PAGES */
+/* FULL PAGES */
 
 .screen-page{
   height:100%;
@@ -631,11 +630,26 @@ button{
   background:var(--bg);
 }
 
+.screen-title-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:4px;
+}
+
+.back-button{
+  width:34px;
+  height:34px;
+  border-radius:9px;
+  background:#0a2941;
+  border:1px solid #28546f;
+  color:#fff;
+  font-size:20px;
+}
+
 .screen-title{
   font-size:21px;
   font-weight:900;
-  color:#fff;
-  margin-bottom:3px;
 }
 
 .screen-subtitle{
@@ -678,7 +692,7 @@ button{
 
 .page-button{
   width:100%;
-  min-height:36px;
+  min-height:38px;
   margin-top:8px;
   border-radius:9px;
   background:var(--blue);
@@ -690,11 +704,6 @@ button{
 .page-button.gold{
   background:var(--gold);
   color:#06101a;
-}
-
-.page-button.secondary{
-  background:#0a2941;
-  border:1px solid #28546f;
 }
 
 .caddie-centre{
@@ -736,10 +745,6 @@ button{
   border-bottom:1px solid #18334a;
 }
 
-.bag-row:last-child{
-  border-bottom:0;
-}
-
 .bag-club{
   font-size:11px;
   font-weight:800;
@@ -753,7 +758,6 @@ button{
   border-radius:7px;
   padding:6px;
   text-align:center;
-  font-size:10px;
 }
 
 .bag-unit{
@@ -774,10 +778,6 @@ button{
   align-items:center;
   padding:9px 0;
   border-bottom:1px solid #18334a;
-}
-
-.setting-row:last-child{
-  border-bottom:0;
 }
 
 .setting-main{
@@ -837,34 +837,203 @@ button{
   margin-top:3px;
 }
 
+/* SCORECARD */
+
+.score-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:8px;
+}
+
+.score-table th{
+  background:#0a2941;
+  color:var(--gold);
+  padding:6px 2px;
+  border:1px solid #244861;
+}
+
+.score-table td{
+  text-align:center;
+  padding:6px 2px;
+  border:1px solid #18334a;
+}
+
+.score-table tr:nth-child(even){
+  background:#06111c;
+}
+
+.score-total{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  margin-top:8px;
+}
+
+.total-box{
+  background:#04101a;
+  border:1px solid #244861;
+  border-radius:8px;
+  padding:7px;
+  text-align:center;
+}
+
+.total-label{
+  color:var(--muted);
+  font-size:7px;
+}
+
+.total-value{
+  color:var(--gold);
+  font-size:17px;
+  font-weight:900;
+  margin-top:2px;
+}
+
+/* PRACTICE */
+
+.practice-type-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:6px;
+}
+
+.practice-type{
+  padding:11px 5px;
+  border-radius:9px;
+  background:#061827;
+  color:#fff;
+  border:1px solid #244861;
+  font-size:9px;
+  font-weight:800;
+}
+
+.practice-type.active{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.shape-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px;
+}
+
+.shape-btn{
+  padding:8px 3px;
+  border-radius:8px;
+  background:#061827;
+  color:#fff;
+  border:1px solid #244861;
+  font-size:8px;
+}
+
+.shape-btn.active{
+  background:var(--blue);
+}
+
+.practice-count-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:4px;
+  margin-top:7px;
+}
+
+.practice-counter{
+  text-align:center;
+  background:#04101a;
+  border:1px solid #18334a;
+  border-radius:8px;
+  padding:5px 2px;
+}
+
+.practice-counter-name{
+  font-size:7px;
+  color:var(--muted);
+}
+
+.practice-counter-value{
+  font-size:16px;
+  font-weight:900;
+  margin:2px 0;
+}
+
+.practice-plus{
+  width:25px;
+  height:25px;
+  border-radius:7px;
+  background:#0a2941;
+  color:#fff;
+}
+
+/* WARMUP / ROUTINES */
+
+.check-row{
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:8px;
+  align-items:center;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:9px;
+  margin-bottom:6px;
+}
+
+.check-button{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:#061827;
+  border:1px solid #31546c;
+  color:#fff;
+}
+
+.check-button.done{
+  background:var(--green);
+  border-color:var(--green);
+}
+
+.check-title{
+  font-size:11px;
+  font-weight:900;
+}
+
+.check-small{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:2px;
+}
+
+.progress-bar{
+  width:100%;
+  height:9px;
+  border-radius:10px;
+  background:#061827;
+  overflow:hidden;
+  margin-top:5px;
+}
+
+.progress-fill{
+  height:100%;
+  width:0;
+  background:var(--gold);
+  transition:.2s;
+}
+
+.progress-text{
+  font-size:9px;
+  color:var(--muted);
+  margin-top:5px;
+}
+
 @media(max-width:380px){
-  .header{
-    grid-template-columns:31px 1fr 75px;
-  }
-
-  .brand-main{
-    font-size:12px;
-  }
-
-  .play-grid{
-    grid-template-columns:46% 54%;
-  }
-
-  .hole-title{
-    font-size:16px;
-  }
-
-  .big-distance{
-    font-size:21px;
-  }
-
-  .club-name{
-    font-size:12px;
-  }
-
-  .marker-label{
-    font-size:11px;
-  }
+  .header{grid-template-columns:31px 1fr 75px}
+  .brand-main{font-size:12px}
+  .play-grid{grid-template-columns:46% 54%}
+  .hole-title{font-size:16px}
+  .big-distance{font-size:21px}
+  .club-name{font-size:12px}
+  .marker-label{font-size:11px}
 }
 </style>
 </head>
@@ -874,7 +1043,6 @@ button{
 <div class="app">
 
 <header class="header">
-
   <div class="menu">☰</div>
 
   <div class="brand">
@@ -886,7 +1054,6 @@ button{
     <strong>☀️ 24°C</strong>
     Wind 8 km/h
   </div>
-
 </header>
 
 <!-- ROUND -->
@@ -934,234 +1101,151 @@ button{
 
 <div class="right">
 
-  <div class="panel hole-panel">
-
-    <div>
-      <div class="hole-title">
-        Hole <span id="holeNumber">1</span>
-      </div>
-
-      <div class="hole-meta">
-        Par <span id="holePar">5</span>
-        &nbsp;|&nbsp;
-        S.I. <span id="holeSI">5</span>
-      </div>
+<div class="panel hole-panel">
+  <div>
+    <div class="hole-title">Hole <span id="holeNumber">1</span></div>
+    <div class="hole-meta">
+      Par <span id="holePar">5</span> |
+      S.I. <span id="holeSI">5</span>
     </div>
-
-    <div class="hole-nav">
-      <button onclick="previousHole()">‹</button>
-      <button onclick="nextHole()">›</button>
-    </div>
-
   </div>
 
-  <div class="panel distance-panel">
-
-    <div class="to-centre">
-
-      <div class="label">To Centre</div>
-
-      <div class="big-distance">
-        <span id="centreBig">498</span>
-        <small class="unit">m</small>
-      </div>
-
-    </div>
-
-    <div class="distance-list">
-
-      Front
-      <strong>
-        <span id="frontDistance">480</span>
-        <span class="unit">m</span>
-      </strong>
-
-      <br>
-
-      Centre
-      <strong>
-        <span id="centreDistance">498</span>
-        <span class="unit">m</span>
-      </strong>
-
-      <br>
-
-      Back
-      <strong>
-        <span id="backDistance">512</span>
-        <span class="unit">m</span>
-      </strong>
-
-    </div>
-
+  <div class="hole-nav">
+    <button onclick="previousHole()">‹</button>
+    <button onclick="nextHole()">›</button>
   </div>
-
-  <div class="panel voice-panel">
-
-    <div class="voice-top">
-
-      <div class="voice-title">Voice Caddie</div>
-
-      <div class="voice-tools">
-
-        <button
-          id="voiceToggle"
-          class="voice-toggle"
-          onclick="toggleVoice()"
-        >
-          ON
-        </button>
-
-        <input
-          id="caddieName"
-          class="caddie-name"
-          maxlength="18"
-          value="Pete"
-          onchange="saveCaddieName()"
-        >
-
-      </div>
-
-    </div>
-
-    <div class="mic-area">
-
-      <button
-        id="micButton"
-        class="mic"
-        onclick="askCaddie()"
-      >
-        🎤
-      </button>
-
-      <div class="ask-name">
-        Ask <span id="askName">Pete</span>
-      </div>
-
-      <div class="tap-text">
-        Tap and speak
-      </div>
-
-    </div>
-
-    <div
-      id="caddieAnswer"
-      class="answer"
-    >
-      Ready. Ask Pete for the shot.
-    </div>
-
-  </div>
-
-  <div class="panel club-panel">
-
-    <div class="section-title">
-      Recommended Club
-    </div>
-
-    <div class="club-row">
-
-      <div class="club-icon">🏌️</div>
-
-      <div
-        id="recommendedClub"
-        class="club-name"
-      >
-        Driver
-      </div>
-
-      <div class="carry">
-        Est. Carry
-        <strong id="recommendedCarry">230 m</strong>
-      </div>
-
-    </div>
-
-    <select
-      id="clubSelect"
-      class="club-select"
-      onchange="manualClubChange()"
-    >
-      <option>Driver</option>
-      <option>3 Wood</option>
-      <option>5 Wood</option>
-      <option>4 Iron</option>
-      <option>5 Iron</option>
-      <option>6 Iron</option>
-      <option>7 Iron</option>
-      <option>8 Iron</option>
-      <option>9 Iron</option>
-      <option>PW</option>
-      <option>GW</option>
-      <option>SW</option>
-      <option>LW</option>
-    </select>
-
-  </div>
-
-  <div class="panel last-shot-panel">
-
-    <div class="section-title">
-      Last Shot
-    </div>
-
-    <div
-      id="lastShot"
-      class="last-shot"
-    >
-      No shot recorded
-    </div>
-
-  </div>
-
 </div>
 
+<div class="panel distance-panel">
+  <div class="to-centre">
+    <div class="label">To Centre</div>
+    <div class="big-distance">
+      <span id="centreBig">498</span>
+      <small class="unit">m</small>
+    </div>
+  </div>
+
+  <div class="distance-list">
+    Front
+    <strong><span id="frontDistance">480</span> <span class="unit">m</span></strong>
+    <br>
+    Centre
+    <strong><span id="centreDistance">498</span> <span class="unit">m</span></strong>
+    <br>
+    Back
+    <strong><span id="backDistance">512</span> <span class="unit">m</span></strong>
+  </div>
+</div>
+
+<div class="panel voice-panel">
+  <div class="voice-top">
+    <div class="voice-title">Voice Caddie</div>
+
+    <div class="voice-tools">
+      <button id="voiceToggle" class="voice-toggle" onclick="toggleVoice()">ON</button>
+
+      <input
+        id="caddieName"
+        class="caddie-name"
+        maxlength="18"
+        value="Pete"
+        onchange="saveCaddieName()"
+      >
+    </div>
+  </div>
+
+  <div class="mic-area">
+    <button id="micButton" class="mic" onclick="askCaddie()">🎤</button>
+    <div class="ask-name">Ask <span id="askName">Pete</span></div>
+    <div class="tap-text">Tap and speak</div>
+  </div>
+
+  <div id="caddieAnswer" class="answer">
+    Ready. Ask Pete for the shot.
+  </div>
+</div>
+
+<div class="panel club-panel">
+  <div class="section-title">Recommended Club</div>
+
+  <div class="club-row">
+    <div class="club-icon">🏌️</div>
+    <div id="recommendedClub" class="club-name">Driver</div>
+    <div class="carry">
+      Est. Carry
+      <strong id="recommendedCarry">230 m</strong>
+    </div>
+  </div>
+
+  <select id="clubSelect" class="club-select" onchange="manualClubChange()">
+    <option>Driver</option>
+    <option>3 Wood</option>
+    <option>5 Wood</option>
+    <option>4 Iron</option>
+    <option>5 Iron</option>
+    <option>6 Iron</option>
+    <option>7 Iron</option>
+    <option>8 Iron</option>
+    <option>9 Iron</option>
+    <option>PW</option>
+    <option>GW</option>
+    <option>SW</option>
+    <option>LW</option>
+  </select>
+</div>
+
+<div class="panel last-shot-panel">
+  <div class="section-title">Last Shot</div>
+  <div id="lastShot" class="last-shot">No shot recorded</div>
+</div>
+
+</div>
 </section>
 
 <section class="score-panel">
 
-  <div class="score-cell">
-    <div class="score-label">Score</div>
-    <div id="scoreValue" class="score-number">0</div>
-    <div class="score-controls">
-      <button class="score-btn" onclick="changeScore(-1)">−</button>
-      <button class="score-btn" onclick="changeScore(1)">+</button>
-    </div>
+<div class="score-cell">
+  <div class="score-label">Score</div>
+  <div id="scoreValue" class="score-number">0</div>
+  <div class="score-controls">
+    <button class="score-btn" onclick="changeScore(-1)">−</button>
+    <button class="score-btn" onclick="changeScore(1)">+</button>
   </div>
+</div>
 
-  <div class="score-cell">
-    <div class="score-label">Putts</div>
-    <div id="puttsValue" class="score-number">0</div>
-    <div class="score-controls">
-      <button class="score-btn" onclick="changePutts(-1)">−</button>
-      <button class="score-btn" onclick="changePutts(1)">+</button>
-    </div>
+<div class="score-cell">
+  <div class="score-label">Putts</div>
+  <div id="puttsValue" class="score-number">0</div>
+  <div class="score-controls">
+    <button class="score-btn" onclick="changePutts(-1)">−</button>
+    <button class="score-btn" onclick="changePutts(1)">+</button>
   </div>
+</div>
 
-  <div class="score-cell">
-    <div class="score-label">GIR</div>
-    <button id="girButton" class="circle" onclick="toggleGir()">◎</button>
-  </div>
+<div class="score-cell">
+  <div class="score-label">GIR</div>
+  <button id="girButton" class="circle" onclick="toggleGir()">◎</button>
+</div>
 
-  <div class="score-cell">
-    <div class="score-label">Fairway</div>
-    <button id="fairwayButton" class="circle" onclick="toggleFairway()">↗</button>
-  </div>
+<div class="score-cell">
+  <div class="score-label">Fairway</div>
+  <button id="fairwayButton" class="circle" onclick="toggleFairway()">↗</button>
+</div>
 
-  <div class="score-cell">
-    <div class="score-label">Penalty</div>
-    <div id="penaltyValue" class="score-number">0</div>
-    <div class="score-controls">
-      <button class="score-btn" onclick="changePenalty(-1)">−</button>
-      <button class="score-btn" onclick="changePenalty(1)">+</button>
-    </div>
+<div class="score-cell">
+  <div class="score-label">Penalty</div>
+  <div id="penaltyValue" class="score-number">0</div>
+  <div class="score-controls">
+    <button class="score-btn" onclick="changePenalty(-1)">−</button>
+    <button class="score-btn" onclick="changePenalty(1)">+</button>
   </div>
+</div>
 
 </section>
 
 <section class="actions">
   <button class="next" onclick="nextHole()">🏁 NEXT HOLE</button>
-  <button class="scorecard" onclick="showScorecard()">☷ VIEW SCORECARD</button>
+  <button class="scorecard" onclick="openTool('scorecard')">☷ VIEW SCORECARD</button>
 </section>
 
 </main>
@@ -1170,75 +1254,56 @@ button{
 
 <main id="caddieView" class="view screen-page">
 
-  <div class="screen-title">Voice Caddie</div>
-  <div class="screen-subtitle">Your caddie for the current hole</div>
+<div class="screen-title">Voice Caddie</div>
+<div class="screen-subtitle">Your caddie for the current hole</div>
 
-  <div class="large-card caddie-centre">
+<div class="large-card caddie-centre">
+  <div class="card-title">Ask <span id="largeCaddieName">Pete</span></div>
 
-    <div class="card-title">
-      Ask <span id="largeCaddieName">Pete</span>
+  <button id="largeMic" class="large-mic" onclick="askCaddie()">🎤</button>
+
+  <div class="tap-text">Tap and speak</div>
+
+  <div id="largeCaddieAnswer" class="caddie-response-large">
+    Ready for your question.
+  </div>
+</div>
+
+<div class="large-card">
+  <div class="card-title">Current Shot</div>
+
+  <div class="two-col">
+    <div>
+      <div class="field-label">Hole</div>
+      <div id="caddieHole" class="field">1</div>
     </div>
 
-    <button
-      id="largeMic"
-      class="large-mic"
-      onclick="askCaddie()"
-    >
-      🎤
-    </button>
-
-    <div class="tap-text">Tap and speak</div>
-
-    <div
-      id="largeCaddieAnswer"
-      class="caddie-response-large"
-    >
-      Ready for your question.
+    <div>
+      <div class="field-label">To Centre</div>
+      <div id="caddieDistance" class="field">498 m</div>
     </div>
-
   </div>
 
-  <div class="large-card">
-
-    <div class="card-title">Current Shot</div>
-
-    <div class="two-col">
-      <div>
-        <div class="field-label">Hole</div>
-        <div id="caddieHole" class="field">1</div>
-      </div>
-
-      <div>
-        <div class="field-label">To Centre</div>
-        <div id="caddieDistance" class="field">498 m</div>
-      </div>
-    </div>
-
-    <div class="field-label">Recommended Club</div>
-    <div id="caddieClub" class="field">Driver</div>
-
-  </div>
+  <div class="field-label">Recommended Club</div>
+  <div id="caddieClub" class="field">Driver</div>
+</div>
 
 </main>
 
-<!-- MY BAG -->
+<!-- BAG -->
 
 <main id="bagView" class="view screen-page">
 
-  <div class="screen-title">My Bag</div>
-  <div class="screen-subtitle">Set your normal carry distance for each club</div>
+<div class="screen-title">My Bag</div>
+<div class="screen-subtitle">Set your normal carry distance for each club</div>
 
-  <div class="large-card">
+<div class="large-card">
+  <div class="card-title">Club Distances</div>
 
-    <div class="card-title">Club Distances</div>
+  <div id="bagRows"></div>
 
-    <div id="bagRows"></div>
-
-    <button class="page-button gold" onclick="saveBag()">
-      SAVE MY BAG
-    </button>
-
-  </div>
+  <button class="page-button gold" onclick="saveBag()">SAVE MY BAG</button>
+</div>
 
 </main>
 
@@ -1246,71 +1311,59 @@ button{
 
 <main id="courseView" class="view screen-page">
 
-  <div class="screen-title">Course</div>
-  <div class="screen-subtitle">Round setup and course details</div>
+<div class="screen-title">Course</div>
+<div class="screen-subtitle">Round setup and course details</div>
 
-  <div class="large-card">
+<div class="large-card">
+  <div class="card-title">Course Setup</div>
 
-    <div class="card-title">Course Setup</div>
+  <div class="field-label">Course Name</div>
+  <input id="courseName" class="field" placeholder="Enter course name">
 
-    <div class="field-label">Course Name</div>
-    <input
-      id="courseName"
-      class="field"
-      placeholder="Enter course name"
-    >
+  <div class="two-col">
 
-    <div class="two-col">
-
-      <div>
-        <div class="field-label">Tee Type</div>
-        <select id="teeType" class="field">
-          <option>MEN</option>
-          <option>LADIES</option>
-        </select>
-      </div>
-
-      <div>
-        <div class="field-label">Tee Colour</div>
-        <select id="teeColour" class="field">
-          <option>WHITE</option>
-          <option>YELLOW</option>
-          <option>RED</option>
-          <option>BLUE</option>
-          <option>BLACK</option>
-        </select>
-      </div>
-
+    <div>
+      <div class="field-label">Tee Type</div>
+      <select id="teeType" class="field">
+        <option>MEN</option>
+        <option>LADIES</option>
+      </select>
     </div>
 
-    <button class="page-button gold" onclick="saveCourse()">
-      SAVE COURSE
-    </button>
+    <div>
+      <div class="field-label">Tee Colour</div>
+      <select id="teeColour" class="field">
+        <option>WHITE</option>
+        <option>YELLOW</option>
+        <option>RED</option>
+        <option>BLUE</option>
+        <option>BLACK</option>
+      </select>
+    </div>
 
   </div>
 
-  <div class="large-card">
+  <button class="page-button gold" onclick="saveCourse()">SAVE COURSE</button>
+</div>
 
-    <div class="card-title">Current Hole</div>
+<div class="large-card">
+  <div class="card-title">Current Hole</div>
 
-    <div class="two-col">
-
-      <div>
-        <div class="field-label">Hole</div>
-        <div id="courseHoleNumber" class="field">1</div>
-      </div>
-
-      <div>
-        <div class="field-label">Par</div>
-        <div id="coursePar" class="field">5</div>
-      </div>
-
+  <div class="two-col">
+    <div>
+      <div class="field-label">Hole</div>
+      <div id="courseHoleNumber" class="field">1</div>
     </div>
 
-    <div class="field-label">Centre Distance</div>
-    <div id="courseDistance" class="field">498 m</div>
-
+    <div>
+      <div class="field-label">Par</div>
+      <div id="coursePar" class="field">5</div>
+    </div>
   </div>
+
+  <div class="field-label">Centre Distance</div>
+  <div id="courseDistance" class="field">498 m</div>
+</div>
 
 </main>
 
@@ -1318,110 +1371,309 @@ button{
 
 <main id="moreView" class="view screen-page">
 
-  <div class="screen-title">More</div>
-  <div class="screen-subtitle">Round tools and app settings</div>
+<div class="screen-title">More</div>
+<div class="screen-subtitle">Round tools and app settings</div>
 
-  <div class="more-grid">
+<div class="more-grid">
 
-    <button class="more-card" onclick="showScorecard()">
-      <div class="more-icon">📋</div>
-      <div class="more-title">Scorecard</div>
-      <div class="more-small">View all 18 holes</div>
-    </button>
+  <button class="more-card" onclick="openTool('scorecard')">
+    <div class="more-icon">📋</div>
+    <div class="more-title">Scorecard</div>
+    <div class="more-small">View all 18 holes</div>
+  </button>
 
-    <button class="more-card">
-      <div class="more-icon">🏌️</div>
-      <div class="more-title">Practice</div>
-      <div class="more-small">Practice sessions</div>
-    </button>
+  <button class="more-card" onclick="openTool('practice')">
+    <div class="more-icon">🏌️</div>
+    <div class="more-title">Practice</div>
+    <div class="more-small">Practice sessions</div>
+  </button>
 
-    <button class="more-card">
-      <div class="more-icon">🔥</div>
-      <div class="more-title">Warm-Up</div>
-      <div class="more-small">Pre-round routine</div>
-    </button>
+  <button class="more-card" onclick="openTool('warmup')">
+    <div class="more-icon">🔥</div>
+    <div class="more-title">Warm-Up</div>
+    <div class="more-small">Pre-round routine</div>
+  </button>
 
-    <button class="more-card">
-      <div class="more-icon">✅</div>
-      <div class="more-title">Routines</div>
-      <div class="more-small">Shot checklist</div>
-    </button>
+  <button class="more-card" onclick="openTool('routines')">
+    <div class="more-icon">✅</div>
+    <div class="more-title">Routines</div>
+    <div class="more-small">Shot checklist</div>
+  </button>
 
-  </div>
+</div>
 
-  <div class="large-card" style="margin-top:8px">
+<div class="large-card" style="margin-top:8px">
 
-    <div class="card-title">Settings</div>
+  <div class="card-title">Settings</div>
 
-    <div class="setting-row">
-      <div>
-        <div class="setting-main">Voice Caddie</div>
-        <div class="setting-small">Turn spoken caddie advice on or off</div>
-      </div>
-
-      <button
-        id="moreVoiceToggle"
-        class="small-toggle on"
-        onclick="toggleVoiceFromMore()"
-      >
-        ON
-      </button>
+  <div class="setting-row">
+    <div>
+      <div class="setting-main">Voice Caddie</div>
+      <div class="setting-small">Turn spoken caddie advice on or off</div>
     </div>
 
-    <div class="setting-row">
-      <div>
-        <div class="setting-main">Distance Units</div>
-        <div class="setting-small">Metres or yards</div>
-      </div>
+    <button id="moreVoiceToggle" class="small-toggle on" onclick="toggleVoiceFromMore()">
+      ON
+    </button>
+  </div>
 
-      <button
-        id="unitToggle"
-        class="small-toggle"
-        onclick="toggleUnits()"
-      >
-        METRES
-      </button>
+  <div class="setting-row">
+    <div>
+      <div class="setting-main">Distance Units</div>
+      <div class="setting-small">Metres or yards</div>
     </div>
 
-    <div class="field-label">Caddie Name</div>
-
-    <input
-      id="moreCaddieName"
-      class="field"
-      value="Pete"
-      onchange="saveCaddieNameFromMore()"
-    >
-
+    <button id="unitToggle" class="small-toggle" onclick="toggleUnits()">
+      METRES
+    </button>
   </div>
+
+  <div class="field-label">Caddie Name</div>
+
+  <input
+    id="moreCaddieName"
+    class="field"
+    value="Pete"
+    onchange="saveCaddieNameFromMore()"
+  >
+
+</div>
+
+</main>
+
+<!-- SCORECARD -->
+
+<main id="scorecardView" class="view screen-page">
+
+<div class="screen-title-row">
+  <button class="back-button" onclick="showView('more')">‹</button>
+  <div class="screen-title">Scorecard</div>
+</div>
+
+<div class="screen-subtitle">Full 18-hole round</div>
+
+<div class="large-card">
+
+<table class="score-table">
+<thead>
+<tr>
+  <th>Hole</th>
+  <th>Par</th>
+  <th>Score</th>
+  <th>Putts</th>
+  <th>GIR</th>
+  <th>FW</th>
+  <th>Pen</th>
+</tr>
+</thead>
+
+<tbody id="scorecardBody"></tbody>
+</table>
+
+<div class="score-total">
+
+  <div class="total-box">
+    <div class="total-label">PAR</div>
+    <div id="totalPar" class="total-value">72</div>
+  </div>
+
+  <div class="total-box">
+    <div class="total-label">SCORE</div>
+    <div id="totalScore" class="total-value">0</div>
+  </div>
+
+  <div class="total-box">
+    <div class="total-label">TO PAR</div>
+    <div id="toPar" class="total-value">—</div>
+  </div>
+
+</div>
+
+</div>
+
+<button class="page-button gold" onclick="showView('round')">
+  RETURN TO ROUND
+</button>
+
+</main>
+
+<!-- PRACTICE -->
+
+<main id="practiceView" class="view screen-page">
+
+<div class="screen-title-row">
+  <button class="back-button" onclick="showView('more')">‹</button>
+  <div class="screen-title">Practice</div>
+</div>
+
+<div class="screen-subtitle">Record a focused practice session</div>
+
+<div class="large-card">
+
+<div class="card-title">Practice Type</div>
+
+<div class="practice-type-grid">
+  <button class="practice-type active" onclick="selectPracticeType(this,'Wedges')">Wedges</button>
+  <button class="practice-type" onclick="selectPracticeType(this,'Irons')">Irons</button>
+  <button class="practice-type" onclick="selectPracticeType(this,'Driver')">Driver</button>
+  <button class="practice-type" onclick="selectPracticeType(this,'Chipping')">Chipping</button>
+  <button class="practice-type" onclick="selectPracticeType(this,'Bunker')">Bunker</button>
+  <button class="practice-type" onclick="selectPracticeType(this,'Putting')">Putting</button>
+</div>
+
+<div class="field-label">Shot Shape</div>
+
+<div class="shape-row">
+  <button class="shape-btn active" onclick="selectShape(this,'STRAIGHT')">STRAIGHT</button>
+  <button class="shape-btn" onclick="selectShape(this,'DRAW')">DRAW</button>
+  <button class="shape-btn" onclick="selectShape(this,'FADE')">FADE</button>
+</div>
+
+<div class="field-label">Shot Results</div>
+
+<div class="practice-count-grid">
+
+<div class="practice-counter">
+  <div class="practice-counter-name">GOOD</div>
+  <div id="practiceGood" class="practice-counter-value">0</div>
+  <button class="practice-plus" onclick="practiceAdd('good')">+</button>
+</div>
+
+<div class="practice-counter">
+  <div class="practice-counter-name">LEFT</div>
+  <div id="practiceLeft" class="practice-counter-value">0</div>
+  <button class="practice-plus" onclick="practiceAdd('left')">+</button>
+</div>
+
+<div class="practice-counter">
+  <div class="practice-counter-name">RIGHT</div>
+  <div id="practiceRight" class="practice-counter-value">0</div>
+  <button class="practice-plus" onclick="practiceAdd('right')">+</button>
+</div>
+
+<div class="practice-counter">
+  <div class="practice-counter-name">SHORT</div>
+  <div id="practiceShort" class="practice-counter-value">0</div>
+  <button class="practice-plus" onclick="practiceAdd('short')">+</button>
+</div>
+
+<div class="practice-counter">
+  <div class="practice-counter-name">LONG</div>
+  <div id="practiceLong" class="practice-counter-value">0</div>
+  <button class="practice-plus" onclick="practiceAdd('long')">+</button>
+</div>
+
+</div>
+
+<div class="field-label">Session Note</div>
+
+<textarea
+  id="practiceNote"
+  class="field"
+  rows="3"
+  placeholder="What did you notice?"
+></textarea>
+
+<button class="page-button gold" onclick="savePractice()">
+  SAVE PRACTICE SESSION
+</button>
+
+<button class="page-button" onclick="resetPractice()">
+  RESET COUNTS
+</button>
+
+</div>
+
+</main>
+
+<!-- WARM UP -->
+
+<main id="warmupView" class="view screen-page">
+
+<div class="screen-title-row">
+  <button class="back-button" onclick="showView('more')">‹</button>
+  <div class="screen-title">Warm-Up</div>
+</div>
+
+<div class="screen-subtitle">Eight steps before you tee off</div>
+
+<div class="large-card">
+  <div class="card-title">Progress</div>
+
+  <div class="progress-bar">
+    <div id="warmupProgress" class="progress-fill"></div>
+  </div>
+
+  <div id="warmupProgressText" class="progress-text">
+    0 of 8 complete
+  </div>
+</div>
+
+<div id="warmupRows"></div>
+
+<button class="page-button" onclick="resetWarmup()">
+  RESET WARM-UP
+</button>
+
+</main>
+
+<!-- ROUTINES -->
+
+<main id="routinesView" class="view screen-page">
+
+<div class="screen-title-row">
+  <button class="back-button" onclick="showView('more')">‹</button>
+  <div class="screen-title">Routines</div>
+</div>
+
+<div class="screen-subtitle">Simple shot routine — one decision at a time</div>
+
+<div class="large-card">
+  <div class="card-title">Shot Routine</div>
+
+  <div class="progress-bar">
+    <div id="routineProgress" class="progress-fill"></div>
+  </div>
+
+  <div id="routineProgressText" class="progress-text">
+    0 of 8 complete
+  </div>
+</div>
+
+<div id="routineRows"></div>
+
+<button class="page-button gold" onclick="resetRoutine()">
+  START NEXT SHOT
+</button>
 
 </main>
 
 <nav class="bottom-nav">
 
-  <button id="navRound" class="active" onclick="showView('round')">
-    <span class="nav-icon">🏌️</span>
-    Round
-  </button>
+<button id="navRound" class="active" onclick="showView('round')">
+  <span class="nav-icon">🏌️</span>
+  Round
+</button>
 
-  <button id="navCaddie" onclick="showView('caddie')">
-    <span class="nav-icon">💬</span>
-    Caddie
-  </button>
+<button id="navCaddie" onclick="showView('caddie')">
+  <span class="nav-icon">💬</span>
+  Caddie
+</button>
 
-  <button id="navBag" onclick="showView('bag')">
-    <span class="nav-icon">🎒</span>
-    My Bag
-  </button>
+<button id="navBag" onclick="showView('bag')">
+  <span class="nav-icon">🎒</span>
+  My Bag
+</button>
 
-  <button id="navCourse" onclick="showView('course')">
-    <span class="nav-icon">⛳</span>
-    Course
-  </button>
+<button id="navCourse" onclick="showView('course')">
+  <span class="nav-icon">⛳</span>
+  Course
+</button>
 
-  <button id="navMore" onclick="showView('more')">
-    <span class="nav-icon">•••</span>
-    More
-  </button>
+<button id="navMore" onclick="showView('more')">
+  <span class="nav-icon">•••</span>
+  More
+</button>
 
 </nav>
 
@@ -1483,7 +1735,10 @@ const holeMaps = [
 {fairway:"polygon(61% 100%,72% 86%,59% 72%,68% 57%,52% 43%,59% 29%,44% 14%,49% 0,28% 0,31% 17%,21% 33%,35% 48%,25% 64%,39% 79%,35% 93%)",fairwayInset:"0 8% 0 19%",green:{top:"2%",left:"29%",width:"40%",height:"8%"},bunker:{top:"10%",left:"56%",width:"24%",height:"4%",rotate:"22deg"},water:{top:"55%",left:"0",width:"17%",height:"45%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"47%"},line:{top:"9%",bottom:"10%",left:"51%"}}
 ];
 
-let bagMetres = JSON.parse(localStorage.getItem("drcBagMetres") || "null") || {
+let bagMetres =
+JSON.parse(localStorage.getItem("drcBagMetres") || "null")
+||
+{
 "Driver":230,
 "3 Wood":210,
 "5 Wood":195,
@@ -1502,6 +1757,49 @@ let bagMetres = JSON.parse(localStorage.getItem("drcBagMetres") || "null") || {
 let holeScores =
 JSON.parse(localStorage.getItem("drcHoleScores") || "{}");
 
+let practiceType = "Wedges";
+let practiceShape = "STRAIGHT";
+
+let practiceCounts = {
+  good:0,
+  left:0,
+  right:0,
+  short:0,
+  long:0
+};
+
+const warmupSteps = [
+  ["Loosen Up","Easy movement and mobility"],
+  ["Short Wedges","Build rhythm with short wedges"],
+  ["Mid Irons","Controlled mid-iron strikes"],
+  ["Long Club","A few longer clubs"],
+  ["Driver","Finish full swings with driver"],
+  ["Chipping","Check strike and landing spot"],
+  ["Putting","Speed first, then start line"],
+  ["Ready","One committed final shot"]
+];
+
+const routineSteps = [
+  ["Target","Choose the exact target"],
+  ["Lie","Read the lie before choosing the shot"],
+  ["Club","Choose the club for the shot required"],
+  ["Picture","See the ball flight and landing point"],
+  ["Commit","Commit fully to the decision"],
+  ["Breathe","One calm breath"],
+  ["Reset","Step in and execute"],
+  ["Next","Accept the result and move on"]
+];
+
+let warmupState =
+JSON.parse(localStorage.getItem("drcWarmupState") || "null")
+||
+new Array(8).fill(false);
+
+let routineState =
+JSON.parse(localStorage.getItem("drcRoutineState") || "null")
+||
+new Array(8).fill(false);
+
 function displayDistance(metres){
 
   if(unitMode === "imperial"){
@@ -1517,15 +1815,24 @@ function displayDistance(metres){
   };
 }
 
-function showView(name){
+function hideAllViews(){
 
   document.querySelectorAll(".view").forEach(v=>{
     v.classList.remove("active");
   });
+}
+
+function clearBottomNav(){
 
   document.querySelectorAll(".bottom-nav button").forEach(b=>{
     b.classList.remove("active");
   });
+}
+
+function showView(name){
+
+  hideAllViews();
+  clearBottomNav();
 
   document.getElementById(name+"View").classList.add("active");
 
@@ -1537,23 +1844,29 @@ function showView(name){
     more:"navMore"
   };
 
-  document.getElementById(navMap[name]).classList.add("active");
-
-  if(name === "caddie"){
-    updateCaddiePage();
+  if(navMap[name]){
+    document.getElementById(navMap[name]).classList.add("active");
   }
 
-  if(name === "bag"){
-    renderBag();
-  }
+  if(name==="caddie") updateCaddiePage();
+  if(name==="bag") renderBag();
+  if(name==="course") updateCoursePage();
+  if(name==="more") updateMorePage();
+}
 
-  if(name === "course"){
-    updateCoursePage();
-  }
+function openTool(name){
 
-  if(name === "more"){
-    updateMorePage();
-  }
+  hideAllViews();
+  clearBottomNav();
+
+  document.getElementById(name+"View").classList.add("active");
+
+  document.getElementById("navMore").classList.add("active");
+
+  if(name==="scorecard") renderScorecard();
+  if(name==="practice") renderPractice();
+  if(name==="warmup") renderWarmup();
+  if(name==="routines") renderRoutine();
 }
 
 function applyMapLayout(){
@@ -1615,12 +1928,13 @@ function renderHole(){
 
   document.getElementById("mapFullDistance").textContent = centre.value;
   document.getElementById("mapMidDistance").textContent =
-    Math.round(centre.value * .56);
-  document.getElementById("mapNearDistance").textContent =
-    Math.round(centre.value * .46);
+    Math.round(centre.value*.56);
 
-  document.querySelectorAll(".unit").forEach(element=>{
-    element.textContent = centre.unit;
+  document.getElementById("mapNearDistance").textContent =
+    Math.round(centre.value*.46);
+
+  document.querySelectorAll(".unit").forEach(el=>{
+    el.textContent = centre.unit;
   });
 
   applyMapLayout();
@@ -1634,12 +1948,12 @@ function renderHole(){
 }
 
 function nextHole(){
-  if(currentHole < 17) currentHole++;
+  if(currentHole<17) currentHole++;
   renderHole();
 }
 
 function previousHole(){
-  if(currentHole > 0) currentHole--;
+  if(currentHole>0) currentHole--;
   renderHole();
 }
 
@@ -1681,21 +1995,21 @@ function loadHoleScore(){
 
 function changeScore(amount){
   const data = getScoreData();
-  data.score = Math.max(0,data.score + amount);
+  data.score = Math.max(0,data.score+amount);
   saveScores();
   loadHoleScore();
 }
 
 function changePutts(amount){
   const data = getScoreData();
-  data.putts = Math.max(0,data.putts + amount);
+  data.putts = Math.max(0,data.putts+amount);
   saveScores();
   loadHoleScore();
 }
 
 function changePenalty(amount){
   const data = getScoreData();
-  data.penalty = Math.max(0,data.penalty + amount);
+  data.penalty = Math.max(0,data.penalty+amount);
   saveScores();
   loadHoleScore();
 }
@@ -1725,15 +2039,13 @@ function recommendClub(){
 
     const difference = Math.abs(target-carry);
 
-    if(difference < smallest){
+    if(difference<smallest){
       smallest = difference;
       selected = club;
     }
   });
 
-  if(target > 210){
-    selected = "Driver";
-  }
+  if(target>210) selected = "Driver";
 
   setRecommendedClub(selected);
 }
@@ -1856,7 +2168,7 @@ function setupRecognition(){
 
     let message = "I couldn't hear that clearly.";
 
-    if(event.error === "not-allowed"){
+    if(event.error==="not-allowed"){
       message = "Microphone permission is blocked.";
     }
 
@@ -1912,9 +2224,7 @@ function handleGolfCommand(command){
 
   const text = command.toLowerCase();
   const hole = holes[currentHole];
-
-  const distance =
-    displayDistance(hole.centre);
+  const distance = displayDistance(hole.centre);
 
   const club =
     document.getElementById("recommendedClub").textContent;
@@ -1925,11 +2235,7 @@ function handleGolfCommand(command){
     distance.unit+
     " to the centre. ";
 
-  if(
-    text.includes("wind")
-    ||
-    text.includes("headwind")
-  ){
+  if(text.includes("wind") || text.includes("headwind")){
     advice +=
       "Keep the flight controlled and don't force it. ";
   }
@@ -1939,11 +2245,7 @@ function handleGolfCommand(command){
       "Check the lie first and prioritise clean contact. ";
   }
 
-  if(
-    text.includes("bunker")
-    ||
-    text.includes("sand")
-  ){
+  if(text.includes("bunker") || text.includes("sand")){
     advice +=
       "Commit to the strike and use the bounce. ";
   }
@@ -1965,11 +2267,7 @@ function handleGolfCommand(command){
 
 function speak(text){
 
-  if(
-    !voiceEnabled
-    ||
-    !("speechSynthesis" in window)
-  ){
+  if(!voiceEnabled || !("speechSynthesis" in window)){
     return;
   }
 
@@ -1995,6 +2293,7 @@ function updateCaddiePage(){
 
   document.getElementById("largeCaddieName").textContent = name;
   document.getElementById("caddieHole").textContent = hole.hole;
+
   document.getElementById("caddieDistance").textContent =
     distance.value+" "+distance.unit;
 
@@ -2015,8 +2314,11 @@ function renderBag(){
 
     row.innerHTML =
       '<div class="bag-club">'+club+'</div>'+
-      '<input class="bag-input" type="number" '+
-      'data-club="'+club+'" value="'+carry+'">'+
+      '<input class="bag-input" type="number" data-club="'+
+      club+
+      '" value="'+
+      carry+
+      '">'+
       '<div class="bag-unit">m</div>';
 
     container.appendChild(row);
@@ -2030,7 +2332,7 @@ function saveBag(){
     const club = input.dataset.club;
     const value = Number(input.value);
 
-    if(value >= 0){
+    if(value>=0){
       bagMetres[club] = value;
     }
   });
@@ -2064,11 +2366,7 @@ function saveCourse(){
 function loadCourse(){
 
   const course =
-    JSON.parse(
-      localStorage.getItem("drcCourseSetup")
-      ||
-      "null"
-    );
+    JSON.parse(localStorage.getItem("drcCourseSetup") || "null");
 
   if(!course) return;
 
@@ -2102,7 +2400,7 @@ function updateCoursePage(){
 function toggleUnits(){
 
   unitMode =
-    unitMode === "metric"
+    unitMode==="metric"
     ?
     "imperial"
     :
@@ -2127,7 +2425,7 @@ function updateMorePage(){
   voice.classList.toggle("on",voiceEnabled);
 
   document.getElementById("unitToggle").textContent =
-    unitMode === "metric"
+    unitMode==="metric"
     ?
     "METRES"
     :
@@ -2137,42 +2435,293 @@ function updateMorePage(){
     getCaddieName();
 }
 
-function showScorecard(){
+/* SCORECARD */
 
-  let totalScore = 0;
+function renderScorecard(){
+
+  const body = document.getElementById("scorecardBody");
+
+  body.innerHTML = "";
+
   let totalPar = 0;
-
-  let text = "DRC VIRTUAL GOLF\n\n";
+  let totalScore = 0;
+  let holesPlayed = 0;
 
   holes.forEach(hole=>{
 
-    const data = holeScores[hole.hole];
-
     totalPar += hole.par;
 
-    const score = data ? data.score : 0;
+    const data = holeScores[hole.hole];
 
-    if(score > 0){
+    const score =
+      data && data.score>0
+      ?
+      data.score
+      :
+      0;
+
+    if(score>0){
       totalScore += score;
+      holesPlayed++;
     }
 
-    text +=
-      "Hole "+
-      hole.hole+
-      " | Par "+
-      hole.par+
-      " | Score "+
-      (score > 0 ? score : "-")+
-      "\n";
+    const row = document.createElement("tr");
+
+    row.innerHTML =
+      "<td>"+hole.hole+"</td>"+
+      "<td>"+hole.par+"</td>"+
+      "<td>"+(score || "–")+"</td>"+
+      "<td>"+(data ? data.putts : "–")+"</td>"+
+      "<td>"+(data && data.gir ? "✓" : "–")+"</td>"+
+      "<td>"+(data && data.fairway ? "✓" : "–")+"</td>"+
+      "<td>"+(data ? data.penalty : "–")+"</td>";
+
+    body.appendChild(row);
   });
 
-  text += "\nPar: "+totalPar;
+  document.getElementById("totalPar").textContent = totalPar;
 
-  if(totalScore > 0){
-    text += "\nRecorded Score: "+totalScore;
+  document.getElementById("totalScore").textContent =
+    totalScore || "–";
+
+  if(holesPlayed===18){
+
+    const difference = totalScore-totalPar;
+
+    document.getElementById("toPar").textContent =
+      difference===0
+      ?
+      "E"
+      :
+      difference>0
+      ?
+      "+"+difference
+      :
+      difference;
+
   }
+  else{
+    document.getElementById("toPar").textContent = "–";
+  }
+}
 
-  alert(text);
+/* PRACTICE */
+
+function selectPracticeType(button,type){
+
+  practiceType = type;
+
+  document.querySelectorAll(".practice-type").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  button.classList.add("active");
+}
+
+function selectShape(button,shape){
+
+  practiceShape = shape;
+
+  document.querySelectorAll(".shape-btn").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  button.classList.add("active");
+}
+
+function practiceAdd(type){
+
+  practiceCounts[type]++;
+
+  renderPracticeCounts();
+}
+
+function renderPracticeCounts(){
+
+  document.getElementById("practiceGood").textContent =
+    practiceCounts.good;
+
+  document.getElementById("practiceLeft").textContent =
+    practiceCounts.left;
+
+  document.getElementById("practiceRight").textContent =
+    practiceCounts.right;
+
+  document.getElementById("practiceShort").textContent =
+    practiceCounts.short;
+
+  document.getElementById("practiceLong").textContent =
+    practiceCounts.long;
+}
+
+function renderPractice(){
+  renderPracticeCounts();
+}
+
+function resetPractice(){
+
+  practiceCounts = {
+    good:0,
+    left:0,
+    right:0,
+    short:0,
+    long:0
+  };
+
+  document.getElementById("practiceNote").value = "";
+
+  renderPracticeCounts();
+}
+
+function savePractice(){
+
+  const saved =
+    JSON.parse(localStorage.getItem("drcPracticeHistory") || "[]");
+
+  saved.unshift({
+    date:new Date().toISOString(),
+    type:practiceType,
+    shape:practiceShape,
+    counts:{...practiceCounts},
+    note:document.getElementById("practiceNote").value.trim()
+  });
+
+  localStorage.setItem(
+    "drcPracticeHistory",
+    JSON.stringify(saved)
+  );
+
+  alert("Practice session saved.");
+}
+
+/* WARMUP */
+
+function renderWarmup(){
+
+  const container = document.getElementById("warmupRows");
+
+  container.innerHTML = "";
+
+  warmupSteps.forEach((step,index)=>{
+
+    const row = document.createElement("div");
+
+    row.className = "check-row";
+
+    row.innerHTML =
+      '<button class="check-button '+
+      (warmupState[index] ? "done" : "")+
+      '" onclick="toggleWarmup('+index+')">'+
+      (warmupState[index] ? "✓" : "")+
+      '</button>'+
+      '<div>'+
+      '<div class="check-title">'+step[0]+'</div>'+
+      '<div class="check-small">'+step[1]+'</div>'+
+      '</div>';
+
+    container.appendChild(row);
+  });
+
+  const complete =
+    warmupState.filter(Boolean).length;
+
+  const percent =
+    complete / warmupSteps.length * 100;
+
+  document.getElementById("warmupProgress").style.width =
+    percent+"%";
+
+  document.getElementById("warmupProgressText").textContent =
+    complete+" of 8 complete";
+}
+
+function toggleWarmup(index){
+
+  warmupState[index] = !warmupState[index];
+
+  localStorage.setItem(
+    "drcWarmupState",
+    JSON.stringify(warmupState)
+  );
+
+  renderWarmup();
+}
+
+function resetWarmup(){
+
+  warmupState = new Array(8).fill(false);
+
+  localStorage.setItem(
+    "drcWarmupState",
+    JSON.stringify(warmupState)
+  );
+
+  renderWarmup();
+}
+
+/* ROUTINE */
+
+function renderRoutine(){
+
+  const container = document.getElementById("routineRows");
+
+  container.innerHTML = "";
+
+  routineSteps.forEach((step,index)=>{
+
+    const row = document.createElement("div");
+
+    row.className = "check-row";
+
+    row.innerHTML =
+      '<button class="check-button '+
+      (routineState[index] ? "done" : "")+
+      '" onclick="toggleRoutine('+index+')">'+
+      (routineState[index] ? "✓" : "")+
+      '</button>'+
+      '<div>'+
+      '<div class="check-title">'+step[0]+'</div>'+
+      '<div class="check-small">'+step[1]+'</div>'+
+      '</div>';
+
+    container.appendChild(row);
+  });
+
+  const complete =
+    routineState.filter(Boolean).length;
+
+  const percent =
+    complete / routineSteps.length * 100;
+
+  document.getElementById("routineProgress").style.width =
+    percent+"%";
+
+  document.getElementById("routineProgressText").textContent =
+    complete+" of 8 complete";
+}
+
+function toggleRoutine(index){
+
+  routineState[index] = !routineState[index];
+
+  localStorage.setItem(
+    "drcRoutineState",
+    JSON.stringify(routineState)
+  );
+
+  renderRoutine();
+}
+
+function resetRoutine(){
+
+  routineState = new Array(8).fill(false);
+
+  localStorage.setItem(
+    "drcRoutineState",
+    JSON.stringify(routineState)
+  );
+
+  renderRoutine();
 }
 
 function loadSettings(){
@@ -2188,7 +2737,7 @@ function loadSettings(){
   const savedVoice =
     localStorage.getItem("drcVoiceEnabled");
 
-  if(savedVoice === "false"){
+  if(savedVoice==="false"){
 
     voiceEnabled = false;
 
@@ -2205,9 +2754,9 @@ function loadSettings(){
   if(
     Number.isInteger(savedHole)
     &&
-    savedHole >= 0
+    savedHole>=0
     &&
-    savedHole <= 17
+    savedHole<=17
   ){
     currentHole = savedHole;
   }
@@ -2227,6 +2776,8 @@ function loadSettings(){
 loadSettings();
 setupRecognition();
 renderBag();
+renderWarmup();
+renderRoutine();
 renderHole();
 
 </script>
