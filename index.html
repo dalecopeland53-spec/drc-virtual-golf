@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>DRC Virtual Golf</title>
 <meta name="theme-color" content="#020812">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -31,7 +29,7 @@ html,body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
-button,input,select{
+button,input,select,textarea{
   font-family:inherit;
 }
 
@@ -59,7 +57,6 @@ button{
   padding:2px 7px;
   border-bottom:1px solid #12304a;
   background:#020a13;
-  min-height:0;
 }
 
 .menu{
@@ -69,7 +66,6 @@ button{
 
 .brand{
   text-align:center;
-  min-width:0;
 }
 
 .brand-main{
@@ -77,7 +73,6 @@ button{
   font-size:14px;
   font-weight:900;
   letter-spacing:1.2px;
-  white-space:nowrap;
 }
 
 .brand-sub{
@@ -99,11 +94,24 @@ button{
   font-size:10px;
 }
 
+.view{
+  display:none;
+  min-height:0;
+  overflow:hidden;
+}
+
+.view.active{
+  display:block;
+}
+
+#roundView.active{
+  display:grid;
+}
+
 .page{
   min-height:0;
   overflow:hidden;
   padding:4px;
-  display:grid;
   grid-template-rows:minmax(0,1fr) 64px 34px;
   gap:4px;
 }
@@ -122,17 +130,16 @@ button{
   overflow:hidden;
   border:1px solid #1b415d;
   border-radius:11px;
-  background:
-    linear-gradient(
-      90deg,
-      #063625 0%,
-      #0b4f33 18%,
-      #146f42 34%,
-      #289857 50%,
-      #147746 66%,
-      #0a5135 83%,
-      #063625 100%
-    );
+  background:linear-gradient(
+    90deg,
+    #063625 0%,
+    #0b4f33 18%,
+    #146f42 34%,
+    #289857 50%,
+    #147746 66%,
+    #0a5135 83%,
+    #063625 100%
+  );
 }
 
 .water{
@@ -143,14 +150,13 @@ button{
 
 .fairway{
   position:absolute;
-  background:
-    linear-gradient(
-      90deg,
-      #208b4f,
-      #3faa61,
-      #55bc70,
-      #2d9a56
-    );
+  background:linear-gradient(
+    90deg,
+    #208b4f,
+    #3faa61,
+    #55bc70,
+    #2d9a56
+  );
   transition:.2s ease;
 }
 
@@ -208,7 +214,6 @@ button{
   font-weight:900;
   text-shadow:0 2px 3px #000;
   z-index:8;
-  white-space:nowrap;
 }
 
 .marker-label.one{top:16%}
@@ -280,14 +285,12 @@ button{
   font-size:18px;
   font-weight:900;
   line-height:1;
-  white-space:nowrap;
 }
 
 .hole-meta{
   color:var(--muted);
   font-size:8px;
   margin-top:3px;
-  white-space:nowrap;
 }
 
 .hole-nav{
@@ -328,7 +331,6 @@ button{
   font-size:24px;
   line-height:1;
   margin-top:2px;
-  white-space:nowrap;
 }
 
 .big-distance small{
@@ -620,6 +622,221 @@ button{
   margin-bottom:1px;
 }
 
+/* OTHER PAGES */
+
+.screen-page{
+  height:100%;
+  padding:8px;
+  overflow-y:auto;
+  background:var(--bg);
+}
+
+.screen-title{
+  font-size:21px;
+  font-weight:900;
+  color:#fff;
+  margin-bottom:3px;
+}
+
+.screen-subtitle{
+  font-size:9px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+.large-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px;
+  margin-bottom:8px;
+}
+
+.card-title{
+  font-size:11px;
+  font-weight:900;
+  color:var(--gold);
+  margin-bottom:7px;
+}
+
+.field-label{
+  font-size:8px;
+  color:var(--muted);
+  margin:7px 0 3px;
+}
+
+.field{
+  width:100%;
+  min-height:34px;
+  border:1px solid #244861;
+  border-radius:8px;
+  background:#04101a;
+  color:#fff;
+  padding:7px;
+  font-size:11px;
+}
+
+.page-button{
+  width:100%;
+  min-height:36px;
+  margin-top:8px;
+  border-radius:9px;
+  background:var(--blue);
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+}
+
+.page-button.gold{
+  background:var(--gold);
+  color:#06101a;
+}
+
+.page-button.secondary{
+  background:#0a2941;
+  border:1px solid #28546f;
+}
+
+.caddie-centre{
+  text-align:center;
+}
+
+.large-mic{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  background:var(--blue);
+  color:#fff;
+  font-size:30px;
+  margin:10px auto 6px;
+}
+
+.large-mic.listening{
+  background:var(--red);
+}
+
+.caddie-response-large{
+  min-height:100px;
+  margin-top:10px;
+  border:1px solid #244861;
+  background:#04101a;
+  border-radius:10px;
+  padding:10px;
+  font-size:11px;
+  line-height:1.45;
+  text-align:left;
+}
+
+.bag-row{
+  display:grid;
+  grid-template-columns:1fr 82px 24px;
+  gap:6px;
+  align-items:center;
+  padding:6px 0;
+  border-bottom:1px solid #18334a;
+}
+
+.bag-row:last-child{
+  border-bottom:0;
+}
+
+.bag-club{
+  font-size:11px;
+  font-weight:800;
+}
+
+.bag-input{
+  width:100%;
+  background:#04101a;
+  color:#fff;
+  border:1px solid #244861;
+  border-radius:7px;
+  padding:6px;
+  text-align:center;
+  font-size:10px;
+}
+
+.bag-unit{
+  color:var(--muted);
+  font-size:8px;
+}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.setting-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:9px 0;
+  border-bottom:1px solid #18334a;
+}
+
+.setting-row:last-child{
+  border-bottom:0;
+}
+
+.setting-main{
+  font-size:10px;
+  font-weight:800;
+}
+
+.setting-small{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:2px;
+}
+
+.small-toggle{
+  padding:6px 10px;
+  border-radius:15px;
+  background:#0a2941;
+  color:#fff;
+  border:1px solid #28546f;
+  font-size:8px;
+  font-weight:800;
+}
+
+.small-toggle.on{
+  background:var(--blue);
+}
+
+.more-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.more-card{
+  min-height:88px;
+  border-radius:11px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  padding:10px;
+  text-align:left;
+  color:#fff;
+}
+
+.more-icon{
+  font-size:22px;
+  margin-bottom:7px;
+}
+
+.more-title{
+  font-size:11px;
+  font-weight:900;
+}
+
+.more-small{
+  color:var(--muted);
+  font-size:8px;
+  margin-top:3px;
+}
+
 @media(max-width:380px){
   .header{
     grid-template-columns:31px 1fr 75px;
@@ -672,7 +889,9 @@ button{
 
 </header>
 
-<main class="page">
+<!-- ROUND -->
+
+<main id="roundView" class="page view active">
 
 <section class="play-grid">
 
@@ -853,9 +1072,7 @@ button{
 
       <div class="carry">
         Est. Carry
-        <strong id="recommendedCarry">
-          230 m
-        </strong>
+        <strong id="recommendedCarry">230 m</strong>
       </div>
 
     </div>
@@ -904,156 +1121,304 @@ button{
 <section class="score-panel">
 
   <div class="score-cell">
-
     <div class="score-label">Score</div>
-
     <div id="scoreValue" class="score-number">0</div>
-
     <div class="score-controls">
-
-      <button
-        class="score-btn"
-        onclick="changeScore(-1)"
-      >
-        −
-      </button>
-
-      <button
-        class="score-btn"
-        onclick="changeScore(1)"
-      >
-        +
-      </button>
-
+      <button class="score-btn" onclick="changeScore(-1)">−</button>
+      <button class="score-btn" onclick="changeScore(1)">+</button>
     </div>
-
   </div>
 
   <div class="score-cell">
-
     <div class="score-label">Putts</div>
-
     <div id="puttsValue" class="score-number">0</div>
-
     <div class="score-controls">
-
-      <button
-        class="score-btn"
-        onclick="changePutts(-1)"
-      >
-        −
-      </button>
-
-      <button
-        class="score-btn"
-        onclick="changePutts(1)"
-      >
-        +
-      </button>
-
+      <button class="score-btn" onclick="changePutts(-1)">−</button>
+      <button class="score-btn" onclick="changePutts(1)">+</button>
     </div>
-
   </div>
 
   <div class="score-cell">
-
     <div class="score-label">GIR</div>
-
-    <button
-      id="girButton"
-      class="circle"
-      onclick="toggleGir()"
-    >
-      ◎
-    </button>
-
+    <button id="girButton" class="circle" onclick="toggleGir()">◎</button>
   </div>
 
   <div class="score-cell">
-
     <div class="score-label">Fairway</div>
-
-    <button
-      id="fairwayButton"
-      class="circle"
-      onclick="toggleFairway()"
-    >
-      ↗
-    </button>
-
+    <button id="fairwayButton" class="circle" onclick="toggleFairway()">↗</button>
   </div>
 
   <div class="score-cell">
-
     <div class="score-label">Penalty</div>
-
     <div id="penaltyValue" class="score-number">0</div>
-
     <div class="score-controls">
-
-      <button
-        class="score-btn"
-        onclick="changePenalty(-1)"
-      >
-        −
-      </button>
-
-      <button
-        class="score-btn"
-        onclick="changePenalty(1)"
-      >
-        +
-      </button>
-
+      <button class="score-btn" onclick="changePenalty(-1)">−</button>
+      <button class="score-btn" onclick="changePenalty(1)">+</button>
     </div>
-
   </div>
 
 </section>
 
 <section class="actions">
-
-  <button
-    class="next"
-    onclick="nextHole()"
-  >
-    🏁 NEXT HOLE
-  </button>
-
-  <button
-    class="scorecard"
-    onclick="showScorecard()"
-  >
-    ☷ VIEW SCORECARD
-  </button>
-
+  <button class="next" onclick="nextHole()">🏁 NEXT HOLE</button>
+  <button class="scorecard" onclick="showScorecard()">☷ VIEW SCORECARD</button>
 </section>
+
+</main>
+
+<!-- CADDIE -->
+
+<main id="caddieView" class="view screen-page">
+
+  <div class="screen-title">Voice Caddie</div>
+  <div class="screen-subtitle">Your caddie for the current hole</div>
+
+  <div class="large-card caddie-centre">
+
+    <div class="card-title">
+      Ask <span id="largeCaddieName">Pete</span>
+    </div>
+
+    <button
+      id="largeMic"
+      class="large-mic"
+      onclick="askCaddie()"
+    >
+      🎤
+    </button>
+
+    <div class="tap-text">Tap and speak</div>
+
+    <div
+      id="largeCaddieAnswer"
+      class="caddie-response-large"
+    >
+      Ready for your question.
+    </div>
+
+  </div>
+
+  <div class="large-card">
+
+    <div class="card-title">Current Shot</div>
+
+    <div class="two-col">
+      <div>
+        <div class="field-label">Hole</div>
+        <div id="caddieHole" class="field">1</div>
+      </div>
+
+      <div>
+        <div class="field-label">To Centre</div>
+        <div id="caddieDistance" class="field">498 m</div>
+      </div>
+    </div>
+
+    <div class="field-label">Recommended Club</div>
+    <div id="caddieClub" class="field">Driver</div>
+
+  </div>
+
+</main>
+
+<!-- MY BAG -->
+
+<main id="bagView" class="view screen-page">
+
+  <div class="screen-title">My Bag</div>
+  <div class="screen-subtitle">Set your normal carry distance for each club</div>
+
+  <div class="large-card">
+
+    <div class="card-title">Club Distances</div>
+
+    <div id="bagRows"></div>
+
+    <button class="page-button gold" onclick="saveBag()">
+      SAVE MY BAG
+    </button>
+
+  </div>
+
+</main>
+
+<!-- COURSE -->
+
+<main id="courseView" class="view screen-page">
+
+  <div class="screen-title">Course</div>
+  <div class="screen-subtitle">Round setup and course details</div>
+
+  <div class="large-card">
+
+    <div class="card-title">Course Setup</div>
+
+    <div class="field-label">Course Name</div>
+    <input
+      id="courseName"
+      class="field"
+      placeholder="Enter course name"
+    >
+
+    <div class="two-col">
+
+      <div>
+        <div class="field-label">Tee Type</div>
+        <select id="teeType" class="field">
+          <option>MEN</option>
+          <option>LADIES</option>
+        </select>
+      </div>
+
+      <div>
+        <div class="field-label">Tee Colour</div>
+        <select id="teeColour" class="field">
+          <option>WHITE</option>
+          <option>YELLOW</option>
+          <option>RED</option>
+          <option>BLUE</option>
+          <option>BLACK</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button class="page-button gold" onclick="saveCourse()">
+      SAVE COURSE
+    </button>
+
+  </div>
+
+  <div class="large-card">
+
+    <div class="card-title">Current Hole</div>
+
+    <div class="two-col">
+
+      <div>
+        <div class="field-label">Hole</div>
+        <div id="courseHoleNumber" class="field">1</div>
+      </div>
+
+      <div>
+        <div class="field-label">Par</div>
+        <div id="coursePar" class="field">5</div>
+      </div>
+
+    </div>
+
+    <div class="field-label">Centre Distance</div>
+    <div id="courseDistance" class="field">498 m</div>
+
+  </div>
+
+</main>
+
+<!-- MORE -->
+
+<main id="moreView" class="view screen-page">
+
+  <div class="screen-title">More</div>
+  <div class="screen-subtitle">Round tools and app settings</div>
+
+  <div class="more-grid">
+
+    <button class="more-card" onclick="showScorecard()">
+      <div class="more-icon">📋</div>
+      <div class="more-title">Scorecard</div>
+      <div class="more-small">View all 18 holes</div>
+    </button>
+
+    <button class="more-card">
+      <div class="more-icon">🏌️</div>
+      <div class="more-title">Practice</div>
+      <div class="more-small">Practice sessions</div>
+    </button>
+
+    <button class="more-card">
+      <div class="more-icon">🔥</div>
+      <div class="more-title">Warm-Up</div>
+      <div class="more-small">Pre-round routine</div>
+    </button>
+
+    <button class="more-card">
+      <div class="more-icon">✅</div>
+      <div class="more-title">Routines</div>
+      <div class="more-small">Shot checklist</div>
+    </button>
+
+  </div>
+
+  <div class="large-card" style="margin-top:8px">
+
+    <div class="card-title">Settings</div>
+
+    <div class="setting-row">
+      <div>
+        <div class="setting-main">Voice Caddie</div>
+        <div class="setting-small">Turn spoken caddie advice on or off</div>
+      </div>
+
+      <button
+        id="moreVoiceToggle"
+        class="small-toggle on"
+        onclick="toggleVoiceFromMore()"
+      >
+        ON
+      </button>
+    </div>
+
+    <div class="setting-row">
+      <div>
+        <div class="setting-main">Distance Units</div>
+        <div class="setting-small">Metres or yards</div>
+      </div>
+
+      <button
+        id="unitToggle"
+        class="small-toggle"
+        onclick="toggleUnits()"
+      >
+        METRES
+      </button>
+    </div>
+
+    <div class="field-label">Caddie Name</div>
+
+    <input
+      id="moreCaddieName"
+      class="field"
+      value="Pete"
+      onchange="saveCaddieNameFromMore()"
+    >
+
+  </div>
 
 </main>
 
 <nav class="bottom-nav">
 
-  <button class="active">
+  <button id="navRound" class="active" onclick="showView('round')">
     <span class="nav-icon">🏌️</span>
     Round
   </button>
 
-  <button>
+  <button id="navCaddie" onclick="showView('caddie')">
     <span class="nav-icon">💬</span>
     Caddie
   </button>
 
-  <button>
+  <button id="navBag" onclick="showView('bag')">
     <span class="nav-icon">🎒</span>
     My Bag
   </button>
 
-  <button>
+  <button id="navCourse" onclick="showView('course')">
     <span class="nav-icon">⛳</span>
     Course
   </button>
 
-  <button>
+  <button id="navMore" onclick="showView('more')">
     <span class="nav-icon">•••</span>
     More
   </button>
@@ -1077,443 +1442,212 @@ let unitMode =
   "metric";
 
 const holes = [
-  {hole:1,par:5,si:5,front:480,centre:498,back:512},
-  {hole:2,par:4,si:11,front:356,centre:369,back:382},
-  {hole:3,par:3,si:15,front:142,centre:151,back:160},
-  {hole:4,par:4,si:1,front:396,centre:410,back:423},
-  {hole:5,par:5,si:7,front:475,centre:491,back:506},
-  {hole:6,par:3,si:17,front:128,centre:139,back:150},
-  {hole:7,par:4,si:9,front:348,centre:361,back:374},
-  {hole:8,par:4,si:3,front:382,centre:397,back:410},
-  {hole:9,par:4,si:13,front:335,centre:349,back:362},
-  {hole:10,par:4,si:6,front:368,centre:381,back:394},
-  {hole:11,par:5,si:4,front:492,centre:508,back:523},
-  {hole:12,par:3,si:16,front:151,centre:162,back:173},
-  {hole:13,par:4,si:10,front:346,centre:360,back:373},
-  {hole:14,par:4,si:2,front:401,centre:416,back:429},
-  {hole:15,par:5,si:8,front:485,centre:501,back:517},
-  {hole:16,par:3,si:18,front:121,centre:132,back:143},
-  {hole:17,par:4,si:12,front:355,centre:369,back:382},
-  {hole:18,par:4,si:14,front:361,centre:375,back:389}
+{hole:1,par:5,si:5,front:480,centre:498,back:512},
+{hole:2,par:4,si:11,front:356,centre:369,back:382},
+{hole:3,par:3,si:15,front:142,centre:151,back:160},
+{hole:4,par:4,si:1,front:396,centre:410,back:423},
+{hole:5,par:5,si:7,front:475,centre:491,back:506},
+{hole:6,par:3,si:17,front:128,centre:139,back:150},
+{hole:7,par:4,si:9,front:348,centre:361,back:374},
+{hole:8,par:4,si:3,front:382,centre:397,back:410},
+{hole:9,par:4,si:13,front:335,centre:349,back:362},
+{hole:10,par:4,si:6,front:368,centre:381,back:394},
+{hole:11,par:5,si:4,front:492,centre:508,back:523},
+{hole:12,par:3,si:16,front:151,centre:162,back:173},
+{hole:13,par:4,si:10,front:346,centre:360,back:373},
+{hole:14,par:4,si:2,front:401,centre:416,back:429},
+{hole:15,par:5,si:8,front:485,centre:501,back:517},
+{hole:16,par:3,si:18,front:121,centre:132,back:143},
+{hole:17,par:4,si:12,front:355,centre:369,back:382},
+{hole:18,par:4,si:14,front:361,centre:375,back:389}
 ];
 
 const holeMaps = [
-  {
-    fairway:"polygon(40% 100%,67% 87%,55% 76%,75% 63%,60% 49%,72% 36%,58% 22%,63% 0,35% 0,40% 22%,25% 36%,39% 49%,24% 64%,38% 77%,27% 91%)",
-    fairwayInset:"0 13% 0 19%",
-    green:{top:"2%",left:"34%",width:"45%",height:"8%"},
-    bunker:{top:"10%",left:"28%",width:"28%",height:"4%",rotate:"-20deg"},
-    water:{top:"0",right:"0",bottom:"0",left:"auto",width:"20%",height:"auto"},
-    flag:{top:"3%",left:"50%"},
-    line:{top:"9%",bottom:"10%",left:"50%"}
-  },
-  {
-    fairway:"polygon(58% 100%,74% 86%,58% 72%,68% 60%,48% 48%,57% 34%,38% 20%,43% 0,20% 0,25% 18%,19% 35%,34% 50%,25% 66%,40% 80%,35% 92%)",
-    fairwayInset:"0 7% 0 21%",
-    green:{top:"2%",left:"24%",width:"41%",height:"8%"},
-    bunker:{top:"9%",left:"58%",width:"24%",height:"4%",rotate:"18deg"},
-    water:{top:"0",left:"0",bottom:"0",right:"auto",width:"15%",height:"auto"},
-    flag:{top:"3%",left:"43%"},
-    line:{top:"9%",bottom:"10%",left:"47%"}
-  },
-  {
-    fairway:"polygon(47% 100%,58% 80%,55% 58%,63% 40%,56% 0,38% 0,41% 40%,33% 58%,39% 80%)",
-    fairwayInset:"0 20% 0 20%",
-    green:{top:"2%",left:"36%",width:"35%",height:"7%"},
-    bunker:{top:"9%",left:"26%",width:"22%",height:"3.5%",rotate:"-10deg"},
-    water:{top:"34%",right:"0",width:"24%",height:"28%",bottom:"auto",left:"auto"},
-    flag:{top:"3%",left:"53%"},
-    line:{top:"9%",bottom:"10%",left:"50%"}
-  },
-  {
-    fairway:"polygon(30% 100%,48% 90%,39% 75%,56% 63%,45% 50%,63% 35%,58% 21%,72% 0,47% 0,38% 18%,26% 35%,35% 52%,22% 67%,31% 82%,20% 93%)",
-    fairwayInset:"0 9% 0 18%",
-    green:{top:"2%",left:"48%",width:"38%",height:"8%"},
-    bunker:{top:"10%",left:"38%",width:"25%",height:"4%",rotate:"22deg"},
-    water:{top:"0",right:"0",width:"17%",height:"45%",bottom:"auto",left:"auto"},
-    flag:{top:"3%",left:"67%"},
-    line:{top:"9%",bottom:"10%",left:"49%"}
-  },
-  {
-    fairway:"polygon(56% 100%,68% 86%,54% 72%,66% 55%,49% 40%,55% 22%,43% 0,24% 0,28% 20%,19% 39%,31% 58%,24% 74%,39% 88%,36% 100%)",
-    fairwayInset:"0 8% 0 20%",
-    green:{top:"2%",left:"25%",width:"42%",height:"8%"},
-    bunker:{top:"10%",left:"58%",width:"25%",height:"4%",rotate:"-24deg"},
-    water:{top:"55%",left:"0",width:"18%",height:"45%",right:"auto",bottom:"auto"},
-    flag:{top:"3%",left:"44%"},
-    line:{top:"9%",bottom:"10%",left:"50%"}
-  },
-  {
-    fairway:"polygon(48% 100%,58% 78%,52% 60%,59% 40%,55% 0,34% 0,38% 40%,31% 61%,39% 79%)",
-    fairwayInset:"0 22% 0 18%",
-    green:{top:"2%",left:"35%",width:"34%",height:"7%"},
-    bunker:{top:"9%",left:"57%",width:"20%",height:"3.5%",rotate:"15deg"},
-    water:{top:"0",right:"0",width:"18%",height:"100%",bottom:"0",left:"auto"},
-    flag:{top:"3%",left:"51%"},
-    line:{top:"9%",bottom:"10%",left:"49%"}
-  },
-  {
-    fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 60%,48% 44%,60% 29%,52% 14%,60% 0,40% 0,33% 15%,23% 31%,34% 46%,24% 62%,35% 76%,25% 91%)",
-    fairwayInset:"0 14% 0 18%",
-    green:{top:"2%",left:"37%",width:"38%",height:"8%"},
-    bunker:{top:"11%",left:"27%",width:"26%",height:"4%",rotate:"-15deg"},
-    water:{top:"28%",right:"0",width:"20%",height:"35%",bottom:"auto",left:"auto"},
-    flag:{top:"3%",left:"55%"},
-    line:{top:"9%",bottom:"10%",left:"48%"}
-  },
-  {
-    fairway:"polygon(64% 100%,74% 86%,61% 72%,69% 57%,52% 42%,58% 28%,43% 14%,47% 0,26% 0,29% 18%,20% 33%,34% 48%,25% 63%,39% 78%,36% 92%)",
-    fairwayInset:"0 8% 0 18%",
-    green:{top:"2%",left:"27%",width:"40%",height:"8%"},
-    bunker:{top:"9%",left:"55%",width:"24%",height:"4%",rotate:"25deg"},
-    water:{top:"0",left:"0",width:"16%",height:"52%",right:"auto",bottom:"auto"},
-    flag:{top:"3%",left:"46%"},
-    line:{top:"9%",bottom:"10%",left:"52%"}
-  },
-  {
-    fairway:"polygon(34% 100%,50% 87%,43% 72%,56% 57%,45% 41%,58% 26%,53% 13%,68% 0,46% 0,35% 13%,22% 29%,33% 45%,21% 60%,32% 75%,22% 91%)",
-    fairwayInset:"0 11% 0 18%",
-    green:{top:"2%",left:"45%",width:"38%",height:"8%"},
-    bunker:{top:"10%",left:"29%",width:"26%",height:"4%",rotate:"-18deg"},
-    water:{top:"60%",right:"0",width:"19%",height:"40%",bottom:"auto",left:"auto"},
-    flag:{top:"3%",left:"63%"},
-    line:{top:"9%",bottom:"10%",left:"48%"}
-  },
-  {
-    fairway:"polygon(55% 100%,68% 88%,57% 73%,66% 58%,51% 45%,62% 30%,56% 16%,64% 0,43% 0,37% 15%,29% 31%,39% 46%,30% 62%,41% 78%,36% 92%)",
-    fairwayInset:"0 10% 0 17%",
-    green:{top:"2%",left:"41%",width:"40%",height:"8%"},
-    bunker:{top:"11%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},
-    water:{top:"0",right:"0",width:"14%",height:"100%",bottom:"0",left:"auto"},
-    flag:{top:"3%",left:"60%"},
-    line:{top:"9%",bottom:"10%",left:"51%"}
-  },
-  {
-    fairway:"polygon(44% 100%,61% 88%,49% 74%,66% 59%,50% 44%,61% 29%,48% 14%,53% 0,30% 0,35% 17%,23% 34%,37% 49%,25% 65%,39% 80%,29% 93%)",
-    fairwayInset:"0 10% 0 19%",
-    green:{top:"2%",left:"31%",width:"42%",height:"8%"},
-    bunker:{top:"10%",left:"59%",width:"24%",height:"4%",rotate:"-20deg"},
-    water:{top:"0",left:"0",width:"16%",height:"100%",right:"auto",bottom:"0"},
-    flag:{top:"3%",left:"50%"},
-    line:{top:"9%",bottom:"10%",left:"50%"}
-  },
-  {
-    fairway:"polygon(49% 100%,57% 80%,53% 62%,61% 42%,55% 0,35% 0,39% 42%,32% 61%,40% 80%)",
-    fairwayInset:"0 21% 0 19%",
-    green:{top:"2%",left:"36%",width:"35%",height:"7%"},
-    bunker:{top:"9%",left:"27%",width:"21%",height:"3.5%",rotate:"17deg"},
-    water:{top:"37%",left:"0",width:"22%",height:"27%",right:"auto",bottom:"auto"},
-    flag:{top:"3%",left:"53%"},
-    line:{top:"9%",bottom:"10%",left:"50%"}
-  },
-  {
-    fairway:"polygon(63% 100%,73% 85%,58% 72%,70% 56%,53% 41%,60% 26%,44% 12%,49% 0,28% 0,31% 16%,20% 31%,34% 47%,25% 64%,39% 80%,35% 93%)",
-    fairwayInset:"0 8% 0 19%",
-    green:{top:"2%",left:"29%",width:"40%",height:"8%"},
-    bunker:{top:"10%",left:"58%",width:"24%",height:"4%",rotate:"-25deg"},
-    water:{top:"0",right:"0",width:"17%",height:"48%",bottom:"auto",left:"auto"},
-    flag:{top:"3%",left:"47%"},
-    line:{top:"9%",bottom:"10%",left:"51%"}
-  },
-  {
-    fairway:"polygon(32% 100%,48% 88%,39% 73%,55% 59%,43% 44%,58% 29%,51% 14%,66% 0,45% 0,34% 14%,22% 30%,33% 46%,21% 62%,33% 78%,23% 92%)",
-    fairwayInset:"0 12% 0 17%",
-    green:{top:"2%",left:"43%",width:"39%",height:"8%"},
-    bunker:{top:"10%",left:"28%",width:"25%",height:"4%",rotate:"-18deg"},
-    water:{top:"54%",left:"0",width:"18%",height:"46%",right:"auto",bottom:"auto"},
-    flag:{top:"3%",left:"62%"},
-    line:{top:"9%",bottom:"10%",left:"48%"}
-  },
-  {
-    fairway:"polygon(55% 100%,70% 87%,57% 74%,69% 59%,51% 44%,62% 28%,55% 14%,63% 0,41% 0,35% 15%,27% 31%,38% 47%,29% 62%,42% 79%,36% 92%)",
-    fairwayInset:"0 10% 0 17%",
-    green:{top:"2%",left:"40%",width:"40%",height:"8%"},
-    bunker:{top:"10%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},
-    water:{top:"0",right:"0",width:"15%",height:"100%",bottom:"0",left:"auto"},
-    flag:{top:"3%",left:"59%"},
-    line:{top:"9%",bottom:"10%",left:"51%"}
-  },
-  {
-    fairway:"polygon(48% 100%,58% 79%,52% 60%,60% 40%,55% 0,35% 0,39% 40%,31% 60%,39% 79%)",
-    fairwayInset:"0 21% 0 19%",
-    green:{top:"2%",left:"36%",width:"34%",height:"7%"},
-    bunker:{top:"9%",left:"56%",width:"21%",height:"3.5%",rotate:"-12deg"},
-    water:{top:"0",left:"0",width:"17%",height:"100%",right:"auto",bottom:"0"},
-    flag:{top:"3%",left:"51%"},
-    line:{top:"9%",bottom:"10%",left:"49%"}
-  },
-  {
-    fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 59%,47% 44%,60% 29%,53% 14%,61% 0,39% 0,33% 15%,23% 31%,34% 47%,24% 63%,36% 79%,26% 92%)",
-    fairwayInset:"0 13% 0 18%",
-    green:{top:"2%",left:"38%",width:"39%",height:"8%"},
-    bunker:{top:"10%",left:"28%",width:"26%",height:"4%",rotate:"-16deg"},
-    water:{top:"30%",right:"0",width:"20%",height:"34%",bottom:"auto",left:"auto"},
-    flag:{top:"3%",left:"56%"},
-    line:{top:"9%",bottom:"10%",left:"48%"}
-  },
-  {
-    fairway:"polygon(61% 100%,72% 86%,59% 72%,68% 57%,52% 43%,59% 29%,44% 14%,49% 0,28% 0,31% 17%,21% 33%,35% 48%,25% 64%,39% 79%,35% 93%)",
-    fairwayInset:"0 8% 0 19%",
-    green:{top:"2%",left:"29%",width:"40%",height:"8%"},
-    bunker:{top:"10%",left:"56%",width:"24%",height:"4%",rotate:"22deg"},
-    water:{top:"55%",left:"0",width:"17%",height:"45%",right:"auto",bottom:"auto"},
-    flag:{top:"3%",left:"47%"},
-    line:{top:"9%",bottom:"10%",left:"51%"}
-  }
+{fairway:"polygon(40% 100%,67% 87%,55% 76%,75% 63%,60% 49%,72% 36%,58% 22%,63% 0,35% 0,40% 22%,25% 36%,39% 49%,24% 64%,38% 77%,27% 91%)",fairwayInset:"0 13% 0 19%",green:{top:"2%",left:"34%",width:"45%",height:"8%"},bunker:{top:"10%",left:"28%",width:"28%",height:"4%",rotate:"-20deg"},water:{top:"0",right:"0",bottom:"0",left:"auto",width:"20%",height:"auto"},flag:{top:"3%",left:"50%"},line:{top:"9%",bottom:"10%",left:"50%"}},
+{fairway:"polygon(58% 100%,74% 86%,58% 72%,68% 60%,48% 48%,57% 34%,38% 20%,43% 0,20% 0,25% 18%,19% 35%,34% 50%,25% 66%,40% 80%,35% 92%)",fairwayInset:"0 7% 0 21%",green:{top:"2%",left:"24%",width:"41%",height:"8%"},bunker:{top:"9%",left:"58%",width:"24%",height:"4%",rotate:"18deg"},water:{top:"0",left:"0",bottom:"0",right:"auto",width:"15%",height:"auto"},flag:{top:"3%",left:"43%"},line:{top:"9%",bottom:"10%",left:"47%"}},
+{fairway:"polygon(47% 100%,58% 80%,55% 58%,63% 40%,56% 0,38% 0,41% 40%,33% 58%,39% 80%)",fairwayInset:"0 20% 0 20%",green:{top:"2%",left:"36%",width:"35%",height:"7%"},bunker:{top:"9%",left:"26%",width:"22%",height:"3.5%",rotate:"-10deg"},water:{top:"34%",right:"0",width:"24%",height:"28%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"53%"},line:{top:"9%",bottom:"10%",left:"50%"}},
+{fairway:"polygon(30% 100%,48% 90%,39% 75%,56% 63%,45% 50%,63% 35%,58% 21%,72% 0,47% 0,38% 18%,26% 35%,35% 52%,22% 67%,31% 82%,20% 93%)",fairwayInset:"0 9% 0 18%",green:{top:"2%",left:"48%",width:"38%",height:"8%"},bunker:{top:"10%",left:"38%",width:"25%",height:"4%",rotate:"22deg"},water:{top:"0",right:"0",width:"17%",height:"45%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"67%"},line:{top:"9%",bottom:"10%",left:"49%"}},
+{fairway:"polygon(56% 100%,68% 86%,54% 72%,66% 55%,49% 40%,55% 22%,43% 0,24% 0,28% 20%,19% 39%,31% 58%,24% 74%,39% 88%,36% 100%)",fairwayInset:"0 8% 0 20%",green:{top:"2%",left:"25%",width:"42%",height:"8%"},bunker:{top:"10%",left:"58%",width:"25%",height:"4%",rotate:"-24deg"},water:{top:"55%",left:"0",width:"18%",height:"45%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"44%"},line:{top:"9%",bottom:"10%",left:"50%"}},
+{fairway:"polygon(48% 100%,58% 78%,52% 60%,59% 40%,55% 0,34% 0,38% 40%,31% 61%,39% 79%)",fairwayInset:"0 22% 0 18%",green:{top:"2%",left:"35%",width:"34%",height:"7%"},bunker:{top:"9%",left:"57%",width:"20%",height:"3.5%",rotate:"15deg"},water:{top:"0",right:"0",width:"18%",height:"100%",bottom:"0",left:"auto"},flag:{top:"3%",left:"51%"},line:{top:"9%",bottom:"10%",left:"49%"}},
+{fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 60%,48% 44%,60% 29%,52% 14%,60% 0,40% 0,33% 15%,23% 31%,34% 46%,24% 62%,35% 76%,25% 91%)",fairwayInset:"0 14% 0 18%",green:{top:"2%",left:"37%",width:"38%",height:"8%"},bunker:{top:"11%",left:"27%",width:"26%",height:"4%",rotate:"-15deg"},water:{top:"28%",right:"0",width:"20%",height:"35%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"55%"},line:{top:"9%",bottom:"10%",left:"48%"}},
+{fairway:"polygon(64% 100%,74% 86%,61% 72%,69% 57%,52% 42%,58% 28%,43% 14%,47% 0,26% 0,29% 18%,20% 33%,34% 48%,25% 63%,39% 78%,36% 92%)",fairwayInset:"0 8% 0 18%",green:{top:"2%",left:"27%",width:"40%",height:"8%"},bunker:{top:"9%",left:"55%",width:"24%",height:"4%",rotate:"25deg"},water:{top:"0",left:"0",width:"16%",height:"52%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"46%"},line:{top:"9%",bottom:"10%",left:"52%"}},
+{fairway:"polygon(34% 100%,50% 87%,43% 72%,56% 57%,45% 41%,58% 26%,53% 13%,68% 0,46% 0,35% 13%,22% 29%,33% 45%,21% 60%,32% 75%,22% 91%)",fairwayInset:"0 11% 0 18%",green:{top:"2%",left:"45%",width:"38%",height:"8%"},bunker:{top:"10%",left:"29%",width:"26%",height:"4%",rotate:"-18deg"},water:{top:"60%",right:"0",width:"19%",height:"40%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"63%"},line:{top:"9%",bottom:"10%",left:"48%"}},
+{fairway:"polygon(55% 100%,68% 88%,57% 73%,66% 58%,51% 45%,62% 30%,56% 16%,64% 0,43% 0,37% 15%,29% 31%,39% 46%,30% 62%,41% 78%,36% 92%)",fairwayInset:"0 10% 0 17%",green:{top:"2%",left:"41%",width:"40%",height:"8%"},bunker:{top:"11%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},water:{top:"0",right:"0",width:"14%",height:"100%",bottom:"0",left:"auto"},flag:{top:"3%",left:"60%"},line:{top:"9%",bottom:"10%",left:"51%"}},
+{fairway:"polygon(44% 100%,61% 88%,49% 74%,66% 59%,50% 44%,61% 29%,48% 14%,53% 0,30% 0,35% 17%,23% 34%,37% 49%,25% 65%,39% 80%,29% 93%)",fairwayInset:"0 10% 0 19%",green:{top:"2%",left:"31%",width:"42%",height:"8%"},bunker:{top:"10%",left:"59%",width:"24%",height:"4%",rotate:"-20deg"},water:{top:"0",left:"0",width:"16%",height:"100%",right:"auto",bottom:"0"},flag:{top:"3%",left:"50%"},line:{top:"9%",bottom:"10%",left:"50%"}},
+{fairway:"polygon(49% 100%,57% 80%,53% 62%,61% 42%,55% 0,35% 0,39% 42%,32% 61%,40% 80%)",fairwayInset:"0 21% 0 19%",green:{top:"2%",left:"36%",width:"35%",height:"7%"},bunker:{top:"9%",left:"27%",width:"21%",height:"3.5%",rotate:"17deg"},water:{top:"37%",left:"0",width:"22%",height:"27%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"53%"},line:{top:"9%",bottom:"10%",left:"50%"}},
+{fairway:"polygon(63% 100%,73% 85%,58% 72%,70% 56%,53% 41%,60% 26%,44% 12%,49% 0,28% 0,31% 16%,20% 31%,34% 47%,25% 64%,39% 80%,35% 93%)",fairwayInset:"0 8% 0 19%",green:{top:"2%",left:"29%",width:"40%",height:"8%"},bunker:{top:"10%",left:"58%",width:"24%",height:"4%",rotate:"-25deg"},water:{top:"0",right:"0",width:"17%",height:"48%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"47%"},line:{top:"9%",bottom:"10%",left:"51%"}},
+{fairway:"polygon(32% 100%,48% 88%,39% 73%,55% 59%,43% 44%,58% 29%,51% 14%,66% 0,45% 0,34% 14%,22% 30%,33% 46%,21% 62%,33% 78%,23% 92%)",fairwayInset:"0 12% 0 17%",green:{top:"2%",left:"43%",width:"39%",height:"8%"},bunker:{top:"10%",left:"28%",width:"25%",height:"4%",rotate:"-18deg"},water:{top:"54%",left:"0",width:"18%",height:"46%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"62%"},line:{top:"9%",bottom:"10%",left:"48%"}},
+{fairway:"polygon(55% 100%,70% 87%,57% 74%,69% 59%,51% 44%,62% 28%,55% 14%,63% 0,41% 0,35% 15%,27% 31%,38% 47%,29% 62%,42% 79%,36% 92%)",fairwayInset:"0 10% 0 17%",green:{top:"2%",left:"40%",width:"40%",height:"8%"},bunker:{top:"10%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},water:{top:"0",right:"0",width:"15%",height:"100%",bottom:"0",left:"auto"},flag:{top:"3%",left:"59%"},line:{top:"9%",bottom:"10%",left:"51%"}},
+{fairway:"polygon(48% 100%,58% 79%,52% 60%,60% 40%,55% 0,35% 0,39% 40%,31% 60%,39% 79%)",fairwayInset:"0 21% 0 19%",green:{top:"2%",left:"36%",width:"34%",height:"7%"},bunker:{top:"9%",left:"56%",width:"21%",height:"3.5%",rotate:"-12deg"},water:{top:"0",left:"0",width:"17%",height:"100%",right:"auto",bottom:"0"},flag:{top:"3%",left:"51%"},line:{top:"9%",bottom:"10%",left:"49%"}},
+{fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 59%,47% 44%,60% 29%,53% 14%,61% 0,39% 0,33% 15%,23% 31%,34% 47%,24% 63%,36% 79%,26% 92%)",fairwayInset:"0 13% 0 18%",green:{top:"2%",left:"38%",width:"39%",height:"8%"},bunker:{top:"10%",left:"28%",width:"26%",height:"4%",rotate:"-16deg"},water:{top:"30%",right:"0",width:"20%",height:"34%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"56%"},line:{top:"9%",bottom:"10%",left:"48%"}},
+{fairway:"polygon(61% 100%,72% 86%,59% 72%,68% 57%,52% 43%,59% 29%,44% 14%,49% 0,28% 0,31% 17%,21% 33%,35% 48%,25% 64%,39% 79%,35% 93%)",fairwayInset:"0 8% 0 19%",green:{top:"2%",left:"29%",width:"40%",height:"8%"},bunker:{top:"10%",left:"56%",width:"24%",height:"4%",rotate:"22deg"},water:{top:"55%",left:"0",width:"17%",height:"45%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"47%"},line:{top:"9%",bottom:"10%",left:"51%"}}
 ];
 
-const bagMetres = {
-  "Driver":230,
-  "3 Wood":210,
-  "5 Wood":195,
-  "4 Iron":180,
-  "5 Iron":170,
-  "6 Iron":160,
-  "7 Iron":150,
-  "8 Iron":140,
-  "9 Iron":130,
-  "PW":115,
-  "GW":100,
-  "SW":85,
-  "LW":70
+let bagMetres = JSON.parse(localStorage.getItem("drcBagMetres") || "null") || {
+"Driver":230,
+"3 Wood":210,
+"5 Wood":195,
+"4 Iron":180,
+"5 Iron":170,
+"6 Iron":160,
+"7 Iron":150,
+"8 Iron":140,
+"9 Iron":130,
+"PW":115,
+"GW":100,
+"SW":85,
+"LW":70
 };
 
 let holeScores =
-  JSON.parse(
-    localStorage.getItem("drcHoleScores")
-    ||
-    "{}"
-  );
+JSON.parse(localStorage.getItem("drcHoleScores") || "{}");
 
 function displayDistance(metres){
 
   if(unitMode === "imperial"){
-
     return{
-      value:
-        Math.round(
-          metres / YARDS_TO_METRES
-        ),
+      value:Math.round(metres / YARDS_TO_METRES),
       unit:"yds"
     };
-
   }
 
   return{
     value:Math.round(metres),
     unit:"m"
   };
+}
 
+function showView(name){
+
+  document.querySelectorAll(".view").forEach(v=>{
+    v.classList.remove("active");
+  });
+
+  document.querySelectorAll(".bottom-nav button").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  document.getElementById(name+"View").classList.add("active");
+
+  const navMap = {
+    round:"navRound",
+    caddie:"navCaddie",
+    bag:"navBag",
+    course:"navCourse",
+    more:"navMore"
+  };
+
+  document.getElementById(navMap[name]).classList.add("active");
+
+  if(name === "caddie"){
+    updateCaddiePage();
+  }
+
+  if(name === "bag"){
+    renderBag();
+  }
+
+  if(name === "course"){
+    updateCoursePage();
+  }
+
+  if(name === "more"){
+    updateMorePage();
+  }
 }
 
 function applyMapLayout(){
 
-  const map =
-    holeMaps[currentHole];
+  const map = holeMaps[currentHole];
 
-  const fairway =
-    document.getElementById("fairway");
+  const fairway = document.getElementById("fairway");
+  const green = document.getElementById("green");
+  const bunker = document.getElementById("bunker");
+  const water = document.getElementById("water");
+  const flag = document.getElementById("flag");
+  const shotLine = document.getElementById("shotLine");
 
-  const green =
-    document.getElementById("green");
+  fairway.style.inset = map.fairwayInset;
+  fairway.style.clipPath = map.fairway;
 
-  const bunker =
-    document.getElementById("bunker");
+  green.style.top = map.green.top;
+  green.style.left = map.green.left;
+  green.style.width = map.green.width;
+  green.style.height = map.green.height;
 
-  const water =
-    document.getElementById("water");
+  bunker.style.top = map.bunker.top;
+  bunker.style.left = map.bunker.left;
+  bunker.style.width = map.bunker.width;
+  bunker.style.height = map.bunker.height;
+  bunker.style.transform = "rotate("+map.bunker.rotate+")";
 
-  const flag =
-    document.getElementById("flag");
+  water.style.top = map.water.top;
+  water.style.right = map.water.right;
+  water.style.bottom = map.water.bottom;
+  water.style.left = map.water.left;
+  water.style.width = map.water.width;
+  water.style.height = map.water.height;
 
-  const shotLine =
-    document.getElementById("shotLine");
+  flag.style.top = map.flag.top;
+  flag.style.left = map.flag.left;
 
-  fairway.style.inset =
-    map.fairwayInset;
-
-  fairway.style.clipPath =
-    map.fairway;
-
-  green.style.top =
-    map.green.top;
-
-  green.style.left =
-    map.green.left;
-
-  green.style.width =
-    map.green.width;
-
-  green.style.height =
-    map.green.height;
-
-  bunker.style.top =
-    map.bunker.top;
-
-  bunker.style.left =
-    map.bunker.left;
-
-  bunker.style.width =
-    map.bunker.width;
-
-  bunker.style.height =
-    map.bunker.height;
-
-  bunker.style.transform =
-    "rotate(" + map.bunker.rotate + ")";
-
-  water.style.top =
-    map.water.top;
-
-  water.style.right =
-    map.water.right;
-
-  water.style.bottom =
-    map.water.bottom;
-
-  water.style.left =
-    map.water.left;
-
-  water.style.width =
-    map.water.width;
-
-  water.style.height =
-    map.water.height;
-
-  flag.style.top =
-    map.flag.top;
-
-  flag.style.left =
-    map.flag.left;
-
-  shotLine.style.top =
-    map.line.top;
-
-  shotLine.style.bottom =
-    map.line.bottom;
-
-  shotLine.style.left =
-    map.line.left;
-
+  shotLine.style.top = map.line.top;
+  shotLine.style.bottom = map.line.bottom;
+  shotLine.style.left = map.line.left;
 }
 
 function renderHole(){
 
-  const hole =
-    holes[currentHole];
+  const hole = holes[currentHole];
 
-  document
-    .getElementById("holeNumber")
-    .textContent =
-      hole.hole;
+  document.getElementById("holeNumber").textContent = hole.hole;
+  document.getElementById("holePar").textContent = hole.par;
+  document.getElementById("holeSI").textContent = hole.si;
 
-  document
-    .getElementById("holePar")
-    .textContent =
-      hole.par;
+  const front = displayDistance(hole.front);
+  const centre = displayDistance(hole.centre);
+  const back = displayDistance(hole.back);
 
-  document
-    .getElementById("holeSI")
-    .textContent =
-      hole.si;
+  document.getElementById("frontDistance").textContent = front.value;
+  document.getElementById("centreDistance").textContent = centre.value;
+  document.getElementById("centreBig").textContent = centre.value;
+  document.getElementById("backDistance").textContent = back.value;
 
-  const front =
-    displayDistance(hole.front);
+  document.getElementById("mapFullDistance").textContent = centre.value;
+  document.getElementById("mapMidDistance").textContent =
+    Math.round(centre.value * .56);
+  document.getElementById("mapNearDistance").textContent =
+    Math.round(centre.value * .46);
 
-  const centre =
-    displayDistance(hole.centre);
-
-  const back =
-    displayDistance(hole.back);
-
-  document
-    .getElementById("frontDistance")
-    .textContent =
-      front.value;
-
-  document
-    .getElementById("centreDistance")
-    .textContent =
-      centre.value;
-
-  document
-    .getElementById("centreBig")
-    .textContent =
-      centre.value;
-
-  document
-    .getElementById("backDistance")
-    .textContent =
-      back.value;
-
-  document
-    .getElementById("mapFullDistance")
-    .textContent =
-      centre.value;
-
-  document
-    .getElementById("mapMidDistance")
-    .textContent =
-      Math.round(
-        centre.value * 0.56
-      );
-
-  document
-    .getElementById("mapNearDistance")
-    .textContent =
-      Math.round(
-        centre.value * 0.46
-      );
-
-  document
-    .querySelectorAll(".unit")
-    .forEach(
-      element => {
-        element.textContent =
-          centre.unit;
-      }
-    );
+  document.querySelectorAll(".unit").forEach(element=>{
+    element.textContent = centre.unit;
+  });
 
   applyMapLayout();
-
   loadHoleScore();
-
   recommendClub();
 
-  localStorage.setItem(
-    "drcCurrentHole",
-    currentHole
-  );
+  localStorage.setItem("drcCurrentHole",currentHole);
 
+  updateCaddiePage();
+  updateCoursePage();
 }
 
 function nextHole(){
-
-  if(currentHole < 17){
-    currentHole++;
-  }
-
+  if(currentHole < 17) currentHole++;
   renderHole();
-
 }
 
 function previousHole(){
-
-  if(currentHole > 0){
-    currentHole--;
-  }
-
+  if(currentHole > 0) currentHole--;
   renderHole();
-
 }
 
 function getScoreData(){
 
-  const number =
-    holes[currentHole].hole;
+  const number = holes[currentHole].hole;
 
   if(!holeScores[number]){
-
     holeScores[number] = {
       score:0,
       putts:0,
@@ -1521,284 +1655,162 @@ function getScoreData(){
       fairway:false,
       penalty:0
     };
-
   }
 
   return holeScores[number];
-
 }
 
 function saveScores(){
-
-  localStorage.setItem(
-    "drcHoleScores",
-    JSON.stringify(holeScores)
-  );
-
+  localStorage.setItem("drcHoleScores",JSON.stringify(holeScores));
 }
 
 function loadHoleScore(){
 
-  const data =
-    getScoreData();
+  const data = getScoreData();
 
-  document
-    .getElementById("scoreValue")
-    .textContent =
-      data.score;
+  document.getElementById("scoreValue").textContent = data.score;
+  document.getElementById("puttsValue").textContent = data.putts;
+  document.getElementById("penaltyValue").textContent = data.penalty;
 
-  document
-    .getElementById("puttsValue")
-    .textContent =
-      data.putts;
+  document.getElementById("girButton")
+    .classList.toggle("active",data.gir);
 
-  document
-    .getElementById("penaltyValue")
-    .textContent =
-      data.penalty;
-
-  document
-    .getElementById("girButton")
-    .classList.toggle(
-      "active",
-      data.gir
-    );
-
-  document
-    .getElementById("fairwayButton")
-    .classList.toggle(
-      "active",
-      data.fairway
-    );
-
+  document.getElementById("fairwayButton")
+    .classList.toggle("active",data.fairway);
 }
 
 function changeScore(amount){
-
-  const data =
-    getScoreData();
-
-  data.score =
-    Math.max(
-      0,
-      data.score + amount
-    );
-
+  const data = getScoreData();
+  data.score = Math.max(0,data.score + amount);
   saveScores();
   loadHoleScore();
-
 }
 
 function changePutts(amount){
-
-  const data =
-    getScoreData();
-
-  data.putts =
-    Math.max(
-      0,
-      data.putts + amount
-    );
-
+  const data = getScoreData();
+  data.putts = Math.max(0,data.putts + amount);
   saveScores();
   loadHoleScore();
-
 }
 
 function changePenalty(amount){
-
-  const data =
-    getScoreData();
-
-  data.penalty =
-    Math.max(
-      0,
-      data.penalty + amount
-    );
-
+  const data = getScoreData();
+  data.penalty = Math.max(0,data.penalty + amount);
   saveScores();
   loadHoleScore();
-
 }
 
 function toggleGir(){
-
-  const data =
-    getScoreData();
-
-  data.gir =
-    !data.gir;
-
+  const data = getScoreData();
+  data.gir = !data.gir;
   saveScores();
   loadHoleScore();
-
 }
 
 function toggleFairway(){
-
-  const data =
-    getScoreData();
-
-  data.fairway =
-    !data.fairway;
-
+  const data = getScoreData();
+  data.fairway = !data.fairway;
   saveScores();
   loadHoleScore();
-
 }
 
 function recommendClub(){
 
-  const target =
-    holes[currentHole].centre;
+  const target = holes[currentHole].centre;
 
-  let selected =
-    "Driver";
+  let selected = "Driver";
+  let smallest = Infinity;
 
-  let smallest =
-    Infinity;
+  Object.entries(bagMetres).forEach(([club,carry])=>{
 
-  Object.entries(bagMetres)
-    .forEach(
-      ([club,carry]) => {
+    const difference = Math.abs(target-carry);
 
-        const difference =
-          Math.abs(
-            target - carry
-          );
-
-        if(difference < smallest){
-
-          smallest =
-            difference;
-
-          selected =
-            club;
-
-        }
-
-      }
-    );
+    if(difference < smallest){
+      smallest = difference;
+      selected = club;
+    }
+  });
 
   if(target > 210){
     selected = "Driver";
   }
 
   setRecommendedClub(selected);
-
 }
 
 function setRecommendedClub(club){
 
-  document
-    .getElementById("recommendedClub")
-    .textContent =
-      club;
+  document.getElementById("recommendedClub").textContent = club;
 
-  const carry =
-    displayDistance(
-      bagMetres[club]
-    );
+  const carry = displayDistance(bagMetres[club]);
 
-  document
-    .getElementById("recommendedCarry")
-    .textContent =
-      carry.value
-      +
-      " "
-      +
-      carry.unit;
+  document.getElementById("recommendedCarry").textContent =
+    carry.value+" "+carry.unit;
 
-  document
-    .getElementById("clubSelect")
-    .value =
-      club;
+  document.getElementById("clubSelect").value = club;
 
+  updateCaddiePage();
 }
 
 function manualClubChange(){
-
-  setRecommendedClub(
-    document
-      .getElementById("clubSelect")
-      .value
-  );
-
+  setRecommendedClub(document.getElementById("clubSelect").value);
 }
 
 function getCaddieName(){
 
   const value =
-    document
-      .getElementById("caddieName")
-      .value
-      .trim();
+    document.getElementById("caddieName").value.trim();
 
   return value || "Pete";
-
 }
 
 function saveCaddieName(){
 
+  const name = getCaddieName();
+
+  document.getElementById("caddieName").value = name;
+  document.getElementById("askName").textContent = name;
+
+  localStorage.setItem("drcCaddieName",name);
+
+  document.getElementById("caddieAnswer").textContent =
+    "Ready. Ask "+name+" for the shot.";
+
+  document.getElementById("largeCaddieName").textContent = name;
+  document.getElementById("moreCaddieName").value = name;
+}
+
+function saveCaddieNameFromMore(){
+
   const name =
-    getCaddieName();
+    document.getElementById("moreCaddieName").value.trim()
+    ||
+    "Pete";
 
-  document
-    .getElementById("caddieName")
-    .value =
-      name;
+  document.getElementById("caddieName").value = name;
 
-  document
-    .getElementById("askName")
-    .textContent =
-      name;
-
-  localStorage.setItem(
-    "drcCaddieName",
-    name
-  );
-
-  document
-    .getElementById("caddieAnswer")
-    .textContent =
-      "Ready. Ask "
-      +
-      name
-      +
-      " for the shot.";
-
+  saveCaddieName();
 }
 
 function toggleVoice(){
 
-  voiceEnabled =
-    !voiceEnabled;
+  voiceEnabled = !voiceEnabled;
 
-  const button =
-    document
-      .getElementById("voiceToggle");
+  const button = document.getElementById("voiceToggle");
 
-  button.textContent =
-    voiceEnabled
-    ?
-    "ON"
-    :
-    "OFF";
-
-  button.classList.toggle(
-    "off",
-    !voiceEnabled
-  );
+  button.textContent = voiceEnabled ? "ON" : "OFF";
+  button.classList.toggle("off",!voiceEnabled);
 
   localStorage.setItem(
     "drcVoiceEnabled",
-    voiceEnabled
-    ?
-    "true"
-    :
-    "false"
+    voiceEnabled ? "true" : "false"
   );
 
+  updateMorePage();
+}
+
+function toggleVoiceFromMore(){
+  toggleVoice();
 }
 
 function setupRecognition(){
@@ -1812,152 +1824,105 @@ function setupRecognition(){
     return false;
   }
 
-  recognition =
-    new SpeechRecognition();
+  recognition = new SpeechRecognition();
 
-  recognition.lang =
-    "en-AU";
+  recognition.lang = "en-AU";
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
 
-  recognition.continuous =
-    false;
+  recognition.onstart = function(){
 
-  recognition.interimResults =
-    false;
+    listening = true;
 
-  recognition.maxAlternatives =
-    1;
+    document.getElementById("micButton")
+      .classList.add("listening");
 
-  recognition.onstart =
-    function(){
+    document.getElementById("largeMic")
+      .classList.add("listening");
 
-      listening = true;
+    setCaddieAnswers("Listening...");
+  };
 
-      document
-        .getElementById("micButton")
-        .classList.add("listening");
+  recognition.onresult = function(event){
 
-      document
-        .getElementById("caddieAnswer")
-        .textContent =
-          "Listening...";
+    const transcript =
+      event.results[0][0].transcript.trim();
 
-    };
+    handleGolfCommand(transcript);
+  };
 
-  recognition.onresult =
-    function(event){
+  recognition.onerror = function(event){
 
-      const transcript =
-        event.results[0][0]
-          .transcript
-          .trim();
+    let message = "I couldn't hear that clearly.";
 
-      handleGolfCommand(transcript);
+    if(event.error === "not-allowed"){
+      message = "Microphone permission is blocked.";
+    }
 
-    };
+    setCaddieAnswers(message);
+  };
 
-  recognition.onerror =
-    function(event){
+  recognition.onend = function(){
 
-      let message =
-        "I couldn't hear that clearly.";
+    listening = false;
 
-      if(
-        event.error === "not-allowed"
-      ){
-        message =
-          "Microphone permission is blocked.";
-      }
+    document.getElementById("micButton")
+      .classList.remove("listening");
 
-      document
-        .getElementById("caddieAnswer")
-        .textContent =
-          message;
-
-    };
-
-  recognition.onend =
-    function(){
-
-      listening = false;
-
-      document
-        .getElementById("micButton")
-        .classList.remove("listening");
-
-    };
+    document.getElementById("largeMic")
+      .classList.remove("listening");
+  };
 
   return true;
+}
 
+function setCaddieAnswers(text){
+
+  document.getElementById("caddieAnswer").textContent = text;
+  document.getElementById("largeCaddieAnswer").textContent = text;
 }
 
 function askCaddie(){
 
   if(!voiceEnabled){
-
-    document
-      .getElementById("caddieAnswer")
-      .textContent =
-        "Voice Caddie is switched off.";
-
+    setCaddieAnswers("Voice Caddie is switched off.");
     return;
-
   }
 
-  if(
-    !recognition
-    &&
-    !setupRecognition()
-  ){
-
-    document
-      .getElementById("caddieAnswer")
-      .textContent =
-        "Voice recognition is not available on this device.";
-
+  if(!recognition && !setupRecognition()){
+    setCaddieAnswers(
+      "Voice recognition is not available on this device."
+    );
     return;
-
   }
 
   if(listening){
-
     recognition.stop();
     return;
-
   }
 
   try{
     recognition.start();
   }
-  catch(error){
-  }
-
+  catch(error){}
 }
 
 function handleGolfCommand(command){
 
-  const text =
-    command.toLowerCase();
-
-  const hole =
-    holes[currentHole];
+  const text = command.toLowerCase();
+  const hole = holes[currentHole];
 
   const distance =
-    displayDistance(
-      hole.centre
-    );
+    displayDistance(hole.centre);
 
   const club =
-    document
-      .getElementById("recommendedClub")
-      .textContent;
+    document.getElementById("recommendedClub").textContent;
 
   let advice =
-    distance.value
-    +
-    " "
-    +
-    distance.unit
-    +
+    distance.value+
+    " "+
+    distance.unit+
     " to the centre. ";
 
   if(
@@ -1969,9 +1934,7 @@ function handleGolfCommand(command){
       "Keep the flight controlled and don't force it. ";
   }
 
-  if(
-    text.includes("rough")
-  ){
+  if(text.includes("rough")){
     advice +=
       "Check the lie first and prioritise clean contact. ";
   }
@@ -1985,27 +1948,19 @@ function handleGolfCommand(command){
       "Commit to the strike and use the bounce. ";
   }
 
-  if(
-    text.includes("water")
-  ){
+  if(text.includes("water")){
     advice +=
       "Take the penalty area out of play where possible. ";
   }
 
   advice +=
-    "I like the "
-    +
-    club
-    +
+    "I like the "+
+    club+
     ". Commit to the target and swing freely.";
 
-  document
-    .getElementById("caddieAnswer")
-    .textContent =
-      advice;
+  setCaddieAnswers(advice);
 
   speak(advice);
-
 }
 
 function speak(text){
@@ -2018,21 +1973,168 @@ function speak(text){
     return;
   }
 
-  window
-    .speechSynthesis
-    .cancel();
+  window.speechSynthesis.cancel();
 
   const utterance =
     new SpeechSynthesisUtterance(text);
 
-  utterance.rate = 0.95;
+  utterance.rate = .95;
   utterance.pitch = 1;
   utterance.volume = 1;
 
-  window
-    .speechSynthesis
-    .speak(utterance);
+  window.speechSynthesis.speak(utterance);
+}
 
+function updateCaddiePage(){
+
+  if(!document.getElementById("caddieHole")) return;
+
+  const hole = holes[currentHole];
+  const distance = displayDistance(hole.centre);
+  const name = getCaddieName();
+
+  document.getElementById("largeCaddieName").textContent = name;
+  document.getElementById("caddieHole").textContent = hole.hole;
+  document.getElementById("caddieDistance").textContent =
+    distance.value+" "+distance.unit;
+
+  document.getElementById("caddieClub").textContent =
+    document.getElementById("recommendedClub").textContent;
+}
+
+function renderBag(){
+
+  const container = document.getElementById("bagRows");
+
+  container.innerHTML = "";
+
+  Object.entries(bagMetres).forEach(([club,carry])=>{
+
+    const row = document.createElement("div");
+    row.className = "bag-row";
+
+    row.innerHTML =
+      '<div class="bag-club">'+club+'</div>'+
+      '<input class="bag-input" type="number" '+
+      'data-club="'+club+'" value="'+carry+'">'+
+      '<div class="bag-unit">m</div>';
+
+    container.appendChild(row);
+  });
+}
+
+function saveBag(){
+
+  document.querySelectorAll(".bag-input").forEach(input=>{
+
+    const club = input.dataset.club;
+    const value = Number(input.value);
+
+    if(value >= 0){
+      bagMetres[club] = value;
+    }
+  });
+
+  localStorage.setItem(
+    "drcBagMetres",
+    JSON.stringify(bagMetres)
+  );
+
+  recommendClub();
+
+  alert("My Bag saved.");
+}
+
+function saveCourse(){
+
+  const course = {
+    name:document.getElementById("courseName").value.trim(),
+    teeType:document.getElementById("teeType").value,
+    teeColour:document.getElementById("teeColour").value
+  };
+
+  localStorage.setItem(
+    "drcCourseSetup",
+    JSON.stringify(course)
+  );
+
+  alert("Course saved.");
+}
+
+function loadCourse(){
+
+  const course =
+    JSON.parse(
+      localStorage.getItem("drcCourseSetup")
+      ||
+      "null"
+    );
+
+  if(!course) return;
+
+  document.getElementById("courseName").value =
+    course.name || "";
+
+  document.getElementById("teeType").value =
+    course.teeType || "MEN";
+
+  document.getElementById("teeColour").value =
+    course.teeColour || "WHITE";
+}
+
+function updateCoursePage(){
+
+  if(!document.getElementById("courseHoleNumber")) return;
+
+  const hole = holes[currentHole];
+  const distance = displayDistance(hole.centre);
+
+  document.getElementById("courseHoleNumber").textContent =
+    hole.hole;
+
+  document.getElementById("coursePar").textContent =
+    hole.par;
+
+  document.getElementById("courseDistance").textContent =
+    distance.value+" "+distance.unit;
+}
+
+function toggleUnits(){
+
+  unitMode =
+    unitMode === "metric"
+    ?
+    "imperial"
+    :
+    "metric";
+
+  localStorage.setItem("drcUnitMode",unitMode);
+
+  renderHole();
+  updateMorePage();
+}
+
+function updateMorePage(){
+
+  if(!document.getElementById("moreVoiceToggle")) return;
+
+  const voice =
+    document.getElementById("moreVoiceToggle");
+
+  voice.textContent =
+    voiceEnabled ? "ON" : "OFF";
+
+  voice.classList.toggle("on",voiceEnabled);
+
+  document.getElementById("unitToggle").textContent =
+    unitMode === "metric"
+    ?
+    "METRES"
+    :
+    "YARDS";
+
+  document.getElementById("moreCaddieName").value =
+    getCaddieName();
 }
 
 function showScorecard(){
@@ -2040,113 +2142,65 @@ function showScorecard(){
   let totalScore = 0;
   let totalPar = 0;
 
-  let text =
-    "DRC VIRTUAL GOLF\n\n";
+  let text = "DRC VIRTUAL GOLF\n\n";
 
-  holes.forEach(
-    hole => {
+  holes.forEach(hole=>{
 
-      const data =
-        holeScores[hole.hole];
+    const data = holeScores[hole.hole];
 
-      totalPar +=
-        hole.par;
+    totalPar += hole.par;
 
-      const score =
-        data
-        ?
-        data.score
-        :
-        0;
+    const score = data ? data.score : 0;
 
-      if(score > 0){
-        totalScore += score;
-      }
-
-      text +=
-        "Hole "
-        +
-        hole.hole
-        +
-        " | Par "
-        +
-        hole.par
-        +
-        " | Score "
-        +
-        (
-          score > 0
-          ?
-          score
-          :
-          "-"
-        )
-        +
-        "\n";
-
+    if(score > 0){
+      totalScore += score;
     }
-  );
-
-  text +=
-    "\nPar: "
-    +
-    totalPar;
-
-  if(totalScore > 0){
 
     text +=
-      "\nRecorded Score: "
-      +
-      totalScore;
+      "Hole "+
+      hole.hole+
+      " | Par "+
+      hole.par+
+      " | Score "+
+      (score > 0 ? score : "-")+
+      "\n";
+  });
 
+  text += "\nPar: "+totalPar;
+
+  if(totalScore > 0){
+    text += "\nRecorded Score: "+totalScore;
   }
 
   alert(text);
-
 }
 
 function loadSettings(){
 
   const savedCaddie =
-    localStorage.getItem(
-      "drcCaddieName"
-    );
+    localStorage.getItem("drcCaddieName");
 
   if(savedCaddie){
-
-    document
-      .getElementById("caddieName")
-      .value =
-        savedCaddie;
-
+    document.getElementById("caddieName").value =
+      savedCaddie;
   }
 
   const savedVoice =
-    localStorage.getItem(
-      "drcVoiceEnabled"
-    );
+    localStorage.getItem("drcVoiceEnabled");
 
   if(savedVoice === "false"){
 
     voiceEnabled = false;
 
-    document
-      .getElementById("voiceToggle")
-      .textContent =
-        "OFF";
+    document.getElementById("voiceToggle").textContent =
+      "OFF";
 
-    document
-      .getElementById("voiceToggle")
+    document.getElementById("voiceToggle")
       .classList.add("off");
-
   }
 
   const savedHole =
-    Number(
-      localStorage.getItem(
-        "drcCurrentHole"
-      )
-    );
+    Number(localStorage.getItem("drcCurrentHole"));
 
   if(
     Number.isInteger(savedHole)
@@ -2158,27 +2212,21 @@ function loadSettings(){
     currentHole = savedHole;
   }
 
-  const name =
-    getCaddieName();
+  const name = getCaddieName();
 
-  document
-    .getElementById("askName")
-    .textContent =
-      name;
+  document.getElementById("askName").textContent = name;
 
-  document
-    .getElementById("caddieAnswer")
-    .textContent =
-      "Ready. Ask "
-      +
-      name
-      +
-      " for the shot.";
+  setCaddieAnswers(
+    "Ready. Ask "+name+" for the shot."
+  );
 
+  loadCourse();
+  updateMorePage();
 }
 
 loadSettings();
 setupRecognition();
+renderBag();
 renderHole();
 
 </script>
