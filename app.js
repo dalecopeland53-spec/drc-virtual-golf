@@ -1,16 +1,13 @@
-import React,{useEffect,useRef,useState}from'react';
+import React,{useEffect,useRef}from'react';
 import{SafeAreaView,StyleSheet,StatusBar,Platform,PermissionsAndroid}from'react-native';
 import{WebView}from'react-native-webview';
 import{ExpoSpeechRecognitionModule,useSpeechRecognitionEvent}from'expo-speech-recognition';
 
 export default function App(){
 const webRef=useRef(null);
-const[recognizing,setRecognizing]=useState(false);
 const recognizingRef=useRef(false);
-const lastTranscriptRef=useRef('');
-const commandSentRef=useRef(false);
 
-const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/?voicefix=20260907b';
+const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/?voicefix=20260907c';
 
 const sendToWeb=code=>{
 try{
@@ -49,12 +46,7 @@ if(b)b.classList.toggle("listening",${on});
 
 const deliverCommand=text=>{
 const clean=String(text||'').trim();
-
-if(!clean||commandSentRef.current)return;
-
-commandSentRef.current=true;
-
-showAnswer('Heard: '+clean);
+if(!clean)return;
 
 sendToWeb(`
 (function(){
@@ -104,110 +96,59 @@ ExpoSpeechRecognitionModule.abort();
 
 useSpeechRecognitionEvent('start',()=>{
 recognizingRef.current=true;
-setRecognizing(true);
-lastTranscriptRef.current='';
-commandSentRef.current=false;
-
 setListening(true);
 showAnswer('Listening...');
 });
 
 useSpeechRecognitionEvent('result',event=>{
-try{
-const results=event?.results;
+const transcript=event?.results?.[0]?.transcript?.trim()||'';
 
-if(!results||!results.length)return;
+if(!transcript)return;
 
-let text='';
+showAnswer('Heard: '+transcript);
 
-for(let i=0;i<results.length;i++){
-const t=results[i]?.transcript?.trim();
-if(t)text=t;
+if(event.isFinal){
+deliverCommand(transcript);
 }
-
-if(!text)return;
-
-lastTranscriptRef.current=text;
-
-/*
-IMPORTANT:
-Do NOT wait for event.isFinal.
-Android can correctly return the words as an interim result,
-then return an empty final result.
-*/
-showAnswer('Hearing: '+text);
-
-}catch(e){}
 });
 
 useSpeechRecognitionEvent('end',()=>{
 recognizingRef.current=false;
-setRecognizing(false);
 setListening(false);
-
-const text=lastTranscriptRef.current.trim();
-
-if(text){
-deliverCommand(text);
-}else{
-showAnswer("Didn't hear anything. Tap the mic and speak again.");
-}
 });
 
 useSpeechRecognitionEvent('error',event=>{
 recognizingRef.current=false;
-setRecognizing(false);
 setListening(false);
-
-const saved=lastTranscriptRef.current.trim();
-
-/*
-If Android throws a client/no-speech error AFTER already
-giving us useful speech, use that speech anyway.
-*/
-if(saved){
-deliverCommand(saved);
-return;
-}
 
 const error=event?.error||'';
 
-let message="Didn't catch that. Tap the mic and try again.";
-
-if(
-error==='not-allowed'||
-error==='permission-denied'
-){
-message='Microphone permission is blocked.';
-}else if(error==='audio-capture'){
-message="The microphone isn't available right now.";
-}else if(
-error==='no-speech'||
-error==='speech-timeout'
-){
-message="Didn't hear anything. Tap the mic and speak again.";
-}else if(error==='network'){
-message="Voice recognition couldn't reach the speech service.";
-}else if(error==='service-not-allowed'){
-message='Speech recognition is not available on this phone.';
-}else if(error==='busy'){
-message='The microphone is busy. Tap it again.';
-}else if(error==='client'){
-message='Speech ended before a final result was returned.';
+if(error==='aborted'||error==='no-speech'){
+showAnswer("Didn't hear anything. Tap the mic and speak again.");
+return;
 }
 
-showAnswer(message);
+if(error==='not-allowed'||error==='permission-denied'){
+showAnswer('Microphone permission is blocked.');
+return;
+}
+
+if(error==='audio-capture'){
+showAnswer("The microphone isn't available right now.");
+return;
+}
+
+if(error==='network'){
+showAnswer("Voice recognition couldn't reach the speech service.");
+return;
+}
+
+showAnswer('Voice error: '+error);
 });
 
 const startNativeSpeech=async()=>{
 try{
-
-if(recognizingRef.current){
-return;
-}
-
-lastTranscriptRef.current='';
-commandSentRef.current=false;
+if(recognizingRef.current)return;
 
 const permission=
 await ExpoSpeechRecognitionModule.requestPermissionsAsync();
@@ -222,25 +163,18 @@ showAnswer('Starting microphone...');
 ExpoSpeechRecognitionModule.start({
 lang:'en-AU',
 interimResults:true,
-maxAlternatives:1,
-continuous:false,
-requiresOnDeviceRecognition:false
+continuous:false
 });
 
 }catch(e){
 recognizingRef.current=false;
-setRecognizing(false);
-
-showAnswer(
-"The microphone couldn't start."
-);
+showAnswer("The microphone couldn't start.");
 }
 };
 
 const onMessage=event=>{
 try{
 const raw=event?.nativeEvent?.data;
-
 if(!raw)return;
 
 let data;
@@ -266,9 +200,7 @@ const bridge=`
 (function(){
 
 function sendMic(){
-
 try{
-
 var a=document.getElementById("caddieAnswer");
 var b=document.getElementById("largeCaddieAnswer");
 
@@ -276,35 +208,18 @@ if(a)a.textContent="Starting microphone...";
 if(b)b.textContent="Starting microphone...";
 
 window.ReactNativeWebView.postMessage(
-JSON.stringify({
-type:"DRC_START_SPEECH"
-})
+JSON.stringify({type:"DRC_START_SPEECH"})
 );
 
-}catch(e){
-
-var a=document.getElementById("caddieAnswer");
-var b=document.getElementById("largeCaddieAnswer");
-
-if(a)a.textContent="Native bridge unavailable.";
-if(b)b.textContent="Native bridge unavailable.";
-}
-
+}catch(e){}
 }
 
 window.DRCNativeSpeech=sendMic;
 
-document.addEventListener(
-"click",
-function(e){
+document.addEventListener("click",function(e){
 
-var target=e.target;
-
-if(!target)return;
-
-var button=
-target.closest?
-target.closest("button"):
+var button=e.target&&e.target.closest?
+e.target.closest("button"):
 null;
 
 if(!button)return;
@@ -313,7 +228,6 @@ if(
 button.id==="micButton"||
 button.id==="largeMic"
 ){
-
 e.preventDefault();
 e.stopPropagation();
 
@@ -324,9 +238,7 @@ e.stopImmediatePropagation();
 sendMic();
 }
 
-},
-true
-);
+},true);
 
 })();
 true;
@@ -334,19 +246,13 @@ true;
 
 return(
 <SafeAreaView style={styles.container}>
-
-<StatusBar
-barStyle="light-content"
-backgroundColor="#03081e"
-/>
+<StatusBar barStyle="light-content" backgroundColor="#03081e"/>
 
 <WebView
 ref={webRef}
 source={{
 uri:liveProjectUrl,
-headers:{
-'Cache-Control':'no-cache'
-}
+headers:{'Cache-Control':'no-cache'}
 }}
 style={styles.webview}
 javaScriptEnabled={true}
@@ -362,18 +268,11 @@ injectedJavaScriptBeforeContentLoaded={bridge}
 injectedJavaScript={bridge}
 onMessage={onMessage}
 />
-
 </SafeAreaView>
 );
 }
 
 const styles=StyleSheet.create({
-container:{
-flex:1,
-backgroundColor:'#03081e'
-},
-webview:{
-flex:1,
-backgroundColor:'#03081e'
-}
+container:{flex:1,backgroundColor:'#03081e'},
+webview:{flex:1,backgroundColor:'#03081e'}
 });
