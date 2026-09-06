@@ -25,6 +25,7 @@ button{border:0;cursor:pointer}
 #roundView.active{display:grid}
 .page{min-height:0;overflow:hidden;padding:4px;grid-template-rows:minmax(0,1fr) 64px 34px;gap:4px}
 .play-grid{min-height:0;display:grid;grid-template-columns:47% 53%;gap:4px}
+
 .map-card{min-height:0;height:100%;position:relative;overflow:hidden;border:1px solid #1b415d;border-radius:11px;background:linear-gradient(90deg,#063625 0%,#0b4f33 18%,#146f42 34%,#289857 50%,#147746 66%,#0a5135 83%,#063625 100%)}
 .water{position:absolute;background:linear-gradient(#145069,#072e47)}
 .fairway{position:absolute;background:linear-gradient(90deg,#208b4f,#3faa61,#55bc70,#2d9a56)}
@@ -41,6 +42,34 @@ button{border:0;cursor:pointer}
 .marker-label.two{top:45%}
 .marker-label.three{top:70%}
 .player-dot{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);width:23px;height:23px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 0 0 3px rgba(22,120,255,.28);z-index:9}
+
+.gps-badge{
+  position:absolute;
+  top:5px;
+  left:5px;
+  z-index:20;
+  max-width:94%;
+  border:1px solid #31546c;
+  background:rgba(2,8,18,.9);
+  color:#b8c9d6;
+  border-radius:11px;
+  padding:4px 7px;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.3px;
+  box-shadow:0 2px 7px rgba(0,0,0,.28)
+}
+.gps-badge.lock{
+  color:#fff;
+  border-color:#35b96f;
+  background:rgba(7,55,35,.94)
+}
+.gps-badge.error{
+  color:#fff;
+  border-color:#d94a4a;
+  background:rgba(77,18,18,.94)
+}
+
 .map-switch{position:absolute;left:5px;bottom:5px;display:flex;z-index:10;background:#03101a;border-radius:16px;padding:3px}
 .map-switch button{background:transparent;color:#c3d0dc;border-radius:13px;padding:5px 7px;font-size:8px}
 .map-switch .active{background:var(--blue);color:#fff}
@@ -52,6 +81,7 @@ button{border:0;cursor:pointer}
 .hole-meta{color:var(--muted);font-size:8px;margin-top:3px}
 .hole-nav{display:flex;gap:3px}
 .hole-nav button{width:25px;height:28px;border-radius:8px;background:#07131f;border:1px solid #85681f;color:var(--gold);font-size:18px}
+
 .distance-panel{padding:4px 5px;display:grid;grid-template-columns:1fr 1fr;align-items:center}
 .to-centre{border-right:1px solid #173248;padding-right:5px}
 .label{color:#dfe7ef;font-size:8px}
@@ -70,7 +100,6 @@ button{border:0;cursor:pointer}
 .ask-name{font-size:9px;font-weight:800;margin-top:0}
 .tap-text{color:#b4c3d1;font-size:7px}
 
-/* PETE — LARGE, BRIGHT, EASY TO READ */
 .answer{
   min-height:70px;
   height:100%;
@@ -111,9 +140,11 @@ button{border:0;cursor:pointer}
 .score-btn{width:20px;height:20px;line-height:18px;border-radius:6px;background:#0a2941;border:1px solid #28546f;color:#fff;font-size:13px;font-weight:800}
 .circle{width:24px;height:24px;line-height:22px;border-radius:50%;margin-top:6px;background:#0d2639;border:1px solid #2c566f;color:#a8bac9;font-size:12px}
 .circle.active{background:var(--blue);color:#fff}
+
 .actions{display:grid;grid-template-columns:1.35fr 1fr;gap:4px}
 .next{background:var(--gold);color:#06101a;border-radius:9px;font-size:10px;font-weight:900}
 .scorecard{background:#071e31;color:#fff;border:1px solid #22547a;border-radius:9px;font-size:8px;font-weight:800}
+
 .bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);background:#020b13;border-top:1px solid #163149;padding-bottom:env(safe-area-inset-bottom)}
 .bottom-nav button{background:transparent;color:#8799aa;font-size:8px}
 .bottom-nav .active{color:var(--gold)}
@@ -130,9 +161,11 @@ button{border:0;cursor:pointer}
 .field{width:100%;min-height:34px;border:1px solid #244861;border-radius:8px;background:#04101a;color:#fff;padding:7px;font-size:11px}
 .page-button{width:100%;min-height:38px;margin-top:8px;border-radius:9px;background:var(--blue);color:#fff;font-size:10px;font-weight:900}
 .page-button.gold{background:var(--gold);color:#06101a}
+
 .caddie-centre{text-align:center}
 .large-mic{width:68px;height:68px;border-radius:50%;background:var(--blue);color:#fff;font-size:30px;margin:10px auto 6px}
 .large-mic.listening{background:var(--red);box-shadow:0 0 0 8px rgba(217,74,74,.18)}
+
 .caddie-response-large{
   min-height:115px;
   margin-top:10px;
@@ -149,44 +182,68 @@ button{border:0;cursor:pointer}
   -webkit-user-select:none;
   -webkit-touch-callout:none
 }
+
 .bag-row{display:grid;grid-template-columns:1fr 82px 24px;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid #18334a}
 .bag-club{font-size:11px;font-weight:800}
 .bag-input{width:100%;background:#04101a;color:#fff;border:1px solid #244861;border-radius:7px;padding:6px;text-align:center}
 .bag-unit{color:var(--muted);font-size:8px}
+
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+
 .setting-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #18334a}
 .setting-main{font-size:10px;font-weight:800}
 .setting-small{color:var(--muted);font-size:8px;margin-top:2px}
 .small-toggle{padding:6px 10px;border-radius:15px;background:#0a2941;color:#fff;border:1px solid #28546f;font-size:8px;font-weight:800}
+
+.gps-status-value{font-size:10px;font-weight:900;color:var(--gold)}
+.gps-coordinates{
+  margin-top:6px;
+  background:#04101a;
+  border:1px solid #244861;
+  border-radius:8px;
+  padding:8px;
+  color:#d9e4ed;
+  font-size:9px;
+  line-height:1.7;
+  word-break:break-all
+}
+
 .more-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .more-card{min-height:88px;border-radius:11px;background:var(--panel);border:1px solid var(--line);padding:10px;text-align:left;color:#fff}
 .more-icon{font-size:22px;margin-bottom:7px}
 .more-title{font-size:11px;font-weight:900}
 .more-small{color:var(--muted);font-size:8px;margin-top:3px}
+
 .score-table{width:100%;border-collapse:collapse;font-size:8px}
 .score-table th{background:#0a2941;color:var(--gold);padding:6px 2px;border:1px solid #244861}
 .score-table td{text-align:center;padding:6px 2px;border:1px solid #18334a}
 .score-table tr:nth-child(even){background:#06111c}
+
 .score-total{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
 .total-box{background:#04101a;border:1px solid #244861;border-radius:8px;padding:7px;text-align:center}
 .total-label{color:var(--muted);font-size:7px}
 .total-value{color:var(--gold);font-size:17px;font-weight:900;margin-top:2px}
+
 .practice-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 .practice-type{padding:11px 5px;border-radius:9px;background:#061827;color:#fff;border:1px solid #244861;font-size:9px;font-weight:800}
 .practice-type.active{border-color:var(--gold);color:var(--gold)}
+
 .shape-row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .shape-btn{padding:8px 3px;border-radius:8px;background:#061827;color:#fff;border:1px solid #244861;font-size:8px}
 .shape-btn.active{background:var(--blue)}
+
 .practice-count-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:7px}
 .practice-counter{text-align:center;background:#04101a;border:1px solid #18334a;border-radius:8px;padding:5px 2px}
 .practice-counter-name{font-size:7px;color:var(--muted)}
 .practice-counter-value{font-size:16px;font-weight:900;margin:2px 0}
 .practice-plus{width:25px;height:25px;border-radius:7px;background:#0a2941;color:#fff}
+
 .check-row{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px;margin-bottom:6px}
 .check-button{width:30px;height:30px;border-radius:50%;background:#061827;border:1px solid #31546c;color:#fff}
 .check-button.done{background:var(--green);border-color:var(--green)}
 .check-title{font-size:11px;font-weight:900}
 .check-small{color:var(--muted);font-size:8px;margin-top:2px}
+
 .progress-bar{width:100%;height:9px;border-radius:10px;background:#061827;overflow:hidden;margin-top:5px}
 .progress-fill{height:100%;width:0;background:var(--gold);transition:.2s}
 .progress-text{font-size:9px;color:var(--muted);margin-top:5px}
@@ -209,70 +266,192 @@ button{border:0;cursor:pointer}
 
 <header class="header">
 <div class="menu">☰</div>
-<div class="brand"><div class="brand-main">DRC VIRTUAL GOLF</div><div class="brand-sub">ELITE</div></div>
-<div class="weather"><strong>☀️ <span id="weatherTemp">24°C</span></strong><span id="weatherWind">Wind 8 km/h</span></div>
+
+<div class="brand">
+<div class="brand-main">DRC VIRTUAL GOLF</div>
+<div class="brand-sub">ELITE</div>
+</div>
+
+<div class="weather">
+<strong>☀️ <span id="weatherTemp">24°C</span></strong>
+<span id="weatherWind">Wind 8 km/h</span>
+</div>
 </header>
 
 <main id="roundView" class="page view active">
 <section class="play-grid">
 
 <div class="map-card">
+
+<div id="gpsBadge" class="gps-badge">
+GPS SEARCHING
+</div>
+
 <div id="water" class="water"></div>
 <div id="fairway" class="fairway"></div>
 <div id="green" class="green"></div>
 <div id="bunker" class="bunker"></div>
 <div id="shotLine" class="shot-line"></div>
 <div id="flag" class="flag">🚩</div>
+
 <div class="marker one"></div>
 <div class="marker two"></div>
 <div class="marker three"></div>
-<div class="marker-label one"><span id="mapFullDistance">498</span> <span class="unit">m</span></div>
-<div class="marker-label two"><span id="mapMidDistance">279</span> <span class="unit">m</span></div>
-<div class="marker-label three"><span id="mapNearDistance">229</span> <span class="unit">m</span></div>
+
+<div class="marker-label one">
+<span id="mapFullDistance">498</span>
+<span class="unit">m</span>
+</div>
+
+<div class="marker-label two">
+<span id="mapMidDistance">279</span>
+<span class="unit">m</span>
+</div>
+
+<div class="marker-label three">
+<span id="mapNearDistance">229</span>
+<span class="unit">m</span>
+</div>
+
 <div class="player-dot"></div>
-<div class="map-switch"><button class="active">GPS</button><button>Aerial</button></div>
+
+<div class="map-switch">
+<button class="active">GPS</button>
+<button>Aerial</button>
+</div>
+
 </div>
 
 <div class="right">
 
 <div class="panel hole-panel">
-<div><div class="hole-title">Hole <span id="holeNumber">1</span></div><div class="hole-meta">Par <span id="holePar">5</span> | S.I. <span id="holeSI">5</span></div></div>
-<div class="hole-nav"><button onclick="previousHole()">‹</button><button onclick="nextHole()">›</button></div>
+<div>
+<div class="hole-title">
+Hole <span id="holeNumber">1</span>
+</div>
+
+<div class="hole-meta">
+Par <span id="holePar">5</span> |
+S.I. <span id="holeSI">5</span>
+</div>
+</div>
+
+<div class="hole-nav">
+<button onclick="previousHole()">‹</button>
+<button onclick="nextHole()">›</button>
+</div>
 </div>
 
 <div class="panel distance-panel">
-<div class="to-centre"><div class="label">To Centre</div><div class="big-distance"><span id="centreBig">498</span> <small class="unit">m</small></div></div>
-<div class="distance-list">
-Front <strong><span id="frontDistance">480</span> <span class="unit">m</span></strong><br>
-Centre <strong><span id="centreDistance">498</span> <span class="unit">m</span></strong><br>
-Back <strong><span id="backDistance">512</span> <span class="unit">m</span></strong>
+
+<div class="to-centre">
+<div class="label">To Centre</div>
+
+<div class="big-distance">
+<span id="centreBig">498</span>
+<small class="unit">m</small>
 </div>
+</div>
+
+<div class="distance-list">
+Front
+<strong>
+<span id="frontDistance">480</span>
+<span class="unit">m</span>
+</strong>
+<br>
+
+Centre
+<strong>
+<span id="centreDistance">498</span>
+<span class="unit">m</span>
+</strong>
+<br>
+
+Back
+<strong>
+<span id="backDistance">512</span>
+<span class="unit">m</span>
+</strong>
+</div>
+
 </div>
 
 <div class="panel voice-panel">
+
 <div class="voice-top">
-<div class="voice-title">Voice Caddie</div>
-<input id="caddieName" class="caddie-name" maxlength="18" value="Pete" onchange="saveCaddieName()">
+
+<div class="voice-title">
+Voice Caddie
+</div>
+
+<input
+id="caddieName"
+class="caddie-name"
+maxlength="18"
+value="Pete"
+onchange="saveCaddieName()"
+>
+
 </div>
 
 <div class="mic-area">
-<button id="micButton" class="mic" onclick="askCaddie()">🎤</button>
-<div class="ask-name">Ask <span id="askName">Pete</span></div>
-<div class="tap-text">Tap and speak</div>
+
+<button
+id="micButton"
+class="mic"
+onclick="askCaddie()"
+>
+🎤
+</button>
+
+<div class="ask-name">
+Ask <span id="askName">Pete</span>
 </div>
 
-<div id="caddieAnswer" class="answer">Ready. Ask Pete for the shot.</div>
+<div class="tap-text">
+Tap and speak
+</div>
+
+</div>
+
+<div id="caddieAnswer" class="answer">
+Ready. Ask Pete for the shot.
+</div>
+
 </div>
 
 <div class="panel club-panel">
-<div class="section-title">Recommended Club</div>
-<div class="club-row">
-<div class="club-icon">🏌️</div>
-<div id="recommendedClub" class="club-name">Driver</div>
-<div class="carry">Est. Carry<strong id="recommendedCarry">230 m</strong></div>
+
+<div class="section-title">
+Recommended Club
 </div>
 
-<select id="clubSelect" class="club-select" onchange="manualClubChange()">
+<div class="club-row">
+
+<div class="club-icon">
+🏌️
+</div>
+
+<div id="recommendedClub" class="club-name">
+Driver
+</div>
+
+<div class="carry">
+Est. Carry
+<strong id="recommendedCarry">
+230 m
+</strong>
+</div>
+
+</div>
+
+<select
+id="clubSelect"
+class="club-select"
+onchange="manualClubChange()"
+>
+
 <option>Driver</option>
 <option>3 Wood</option>
 <option>5 Wood</option>
@@ -286,77 +465,213 @@ Back <strong><span id="backDistance">512</span> <span class="unit">m</span></str
 <option>GW</option>
 <option>SW</option>
 <option>LW</option>
+
 </select>
+
 </div>
 
 <div class="panel last-shot-panel">
 <div class="section-title">Last Shot</div>
-<div id="lastShot" class="last-shot">No shot recorded</div>
+<div id="lastShot" class="last-shot">
+No shot recorded
+</div>
 </div>
 
 </div>
+
 </section>
 
 <section class="score-panel">
+
 <div class="score-cell">
-<div class="score-label">Score</div>
-<div id="scoreValue" class="score-number">0</div>
+
+<div class="score-label">
+Score
+</div>
+
+<div id="scoreValue" class="score-number">
+0
+</div>
+
 <div class="score-controls">
-<button class="score-btn" onclick="changeScore(-1)">−</button>
-<button class="score-btn" onclick="changeScore(1)">+</button>
+
+<button
+class="score-btn"
+onclick="changeScore(-1)"
+>
+−
+</button>
+
+<button
+class="score-btn"
+onclick="changeScore(1)"
+>
++
+</button>
+
 </div>
+
 </div>
 
 <div class="score-cell">
-<div class="score-label">Putts</div>
-<div id="puttsValue" class="score-number">0</div>
+
+<div class="score-label">
+Putts
+</div>
+
+<div id="puttsValue" class="score-number">
+0
+</div>
+
 <div class="score-controls">
-<button class="score-btn" onclick="changePutts(-1)">−</button>
-<button class="score-btn" onclick="changePutts(1)">+</button>
+
+<button
+class="score-btn"
+onclick="changePutts(-1)"
+>
+−
+</button>
+
+<button
+class="score-btn"
+onclick="changePutts(1)"
+>
++
+</button>
+
 </div>
+
 </div>
 
 <div class="score-cell">
-<div class="score-label">GIR</div>
-<button id="girButton" class="circle" onclick="toggleGir()">◎</button>
+
+<div class="score-label">
+GIR
+</div>
+
+<button
+id="girButton"
+class="circle"
+onclick="toggleGir()"
+>
+◎
+</button>
+
 </div>
 
 <div class="score-cell">
-<div class="score-label">Fairway</div>
-<button id="fairwayButton" class="circle" onclick="toggleFairway()">↗</button>
+
+<div class="score-label">
+Fairway
+</div>
+
+<button
+id="fairwayButton"
+class="circle"
+onclick="toggleFairway()"
+>
+↗
+</button>
+
 </div>
 
 <div class="score-cell">
-<div class="score-label">Penalty</div>
-<div id="penaltyValue" class="score-number">0</div>
+
+<div class="score-label">
+Penalty
+</div>
+
+<div id="penaltyValue" class="score-number">
+0
+</div>
+
 <div class="score-controls">
-<button class="score-btn" onclick="changePenalty(-1)">−</button>
-<button class="score-btn" onclick="changePenalty(1)">+</button>
+
+<button
+class="score-btn"
+onclick="changePenalty(-1)"
+>
+−
+</button>
+
+<button
+class="score-btn"
+onclick="changePenalty(1)"
+>
++
+</button>
+
 </div>
+
 </div>
+
 </section>
 
 <section class="actions">
-<button class="next" onclick="nextHole()">🏁 NEXT HOLE</button>
-<button class="scorecard" onclick="openTool('scorecard')">☷ VIEW SCORECARD</button>
+
+<button
+class="next"
+onclick="nextHole()"
+>
+🏁 NEXT HOLE
+</button>
+
+<button
+class="scorecard"
+onclick="openTool('scorecard')"
+>
+☷ VIEW SCORECARD
+</button>
+
 </section>
+
 </main>
 
 <main id="caddieView" class="view screen-page">
-<div class="screen-title">Voice Caddie</div>
-<div class="screen-subtitle">Your caddie for the current hole</div>
+
+<div class="screen-title">
+Voice Caddie
+</div>
+
+<div class="screen-subtitle">
+Your caddie for the current hole
+</div>
 
 <div class="large-card caddie-centre">
-<div class="card-title">Ask <span id="largeCaddieName">Pete</span></div>
-<button id="largeMic" class="large-mic" onclick="askCaddie()">🎤</button>
-<div class="tap-text">Tap and speak</div>
-<div id="largeCaddieAnswer" class="caddie-response-large">Ready for your question.</div>
+
+<div class="card-title">
+Ask <span id="largeCaddieName">Pete</span>
+</div>
+
+<button
+id="largeMic"
+class="large-mic"
+onclick="askCaddie()"
+>
+🎤
+</button>
+
+<div class="tap-text">
+Tap and speak
+</div>
+
+<div
+id="largeCaddieAnswer"
+class="caddie-response-large"
+>
+Ready for your question.
+</div>
+
 </div>
 
 <div class="large-card">
-<div class="card-title">Current Shot</div>
+
+<div class="card-title">
+Current Shot
+</div>
 
 <div class="two-col">
+
 <div>
 <div class="field-label">Hole</div>
 <div id="caddieHole" class="field">1</div>
@@ -366,61 +681,136 @@ Back <strong><span id="backDistance">512</span> <span class="unit">m</span></str
 <div class="field-label">To Centre</div>
 <div id="caddieDistance" class="field">498 m</div>
 </div>
+
 </div>
 
-<div class="field-label">Recommended Club</div>
-<div id="caddieClub" class="field">Driver</div>
+<div class="field-label">
+Recommended Club
 </div>
+
+<div id="caddieClub" class="field">
+Driver
+</div>
+
+</div>
+
 </main>
 
 <main id="bagView" class="view screen-page">
-<div class="screen-title">My Bag</div>
-<div class="screen-subtitle">Set your normal carry distance for each club</div>
+
+<div class="screen-title">
+My Bag
+</div>
+
+<div class="screen-subtitle">
+Set your normal carry distance for each club
+</div>
 
 <div class="large-card">
-<div class="card-title">Club Distances</div>
-<div id="bagRows"></div>
-<button class="page-button gold" onclick="saveBag()">SAVE MY BAG</button>
+
+<div class="card-title">
+Club Distances
 </div>
+
+<div id="bagRows"></div>
+
+<button
+class="page-button gold"
+onclick="saveBag()"
+>
+SAVE MY BAG
+</button>
+
+</div>
+
 </main>
 
 <main id="courseView" class="view screen-page">
-<div class="screen-title">Course</div>
-<div class="screen-subtitle">Round setup and course details</div>
+
+<div class="screen-title">
+Course
+</div>
+
+<div class="screen-subtitle">
+Round setup and course details
+</div>
 
 <div class="large-card">
-<div class="card-title">Course Setup</div>
-<div class="field-label">Course Name</div>
-<input id="courseName" class="field" placeholder="Enter course name">
+
+<div class="card-title">
+Course Setup
+</div>
+
+<div class="field-label">
+Course Name
+</div>
+
+<input
+id="courseName"
+class="field"
+placeholder="Enter course name"
+>
 
 <div class="two-col">
+
 <div>
-<div class="field-label">Tee Type</div>
-<select id="teeType" class="field">
+
+<div class="field-label">
+Tee Type
+</div>
+
+<select
+id="teeType"
+class="field"
+>
+
 <option>MEN</option>
 <option>LADIES</option>
+
 </select>
+
 </div>
 
 <div>
-<div class="field-label">Tee Colour</div>
-<select id="teeColour" class="field">
+
+<div class="field-label">
+Tee Colour
+</div>
+
+<select
+id="teeColour"
+class="field"
+>
+
 <option>WHITE</option>
 <option>YELLOW</option>
 <option>RED</option>
 <option>BLUE</option>
 <option>BLACK</option>
+
 </select>
-</div>
+
 </div>
 
-<button class="page-button gold" onclick="saveCourse()">SAVE COURSE</button>
+</div>
+
+<button
+class="page-button gold"
+onclick="saveCourse()"
+>
+SAVE COURSE
+</button>
+
 </div>
 
 <div class="large-card">
-<div class="card-title">Current Hole</div>
+
+<div class="card-title">
+Current Hole
+</div>
 
 <div class="two-col">
+
 <div>
 <div class="field-label">Hole</div>
 <div id="courseHoleNumber" class="field">1</div>
@@ -430,78 +820,210 @@ Back <strong><span id="backDistance">512</span> <span class="unit">m</span></str
 <div class="field-label">Par</div>
 <div id="coursePar" class="field">5</div>
 </div>
+
 </div>
 
-<div class="field-label">Centre Distance</div>
-<div id="courseDistance" class="field">498 m</div>
+<div class="field-label">
+Centre Distance
 </div>
+
+<div id="courseDistance" class="field">
+498 m
+</div>
+
+</div>
+
 </main>
 
 <main id="moreView" class="view screen-page">
-<div class="screen-title">More</div>
-<div class="screen-subtitle">Round tools and app settings</div>
+
+<div class="screen-title">
+More
+</div>
+
+<div class="screen-subtitle">
+Round tools and app settings
+</div>
 
 <div class="more-grid">
-<button class="more-card" onclick="openTool('scorecard')">
+
+<button
+class="more-card"
+onclick="openTool('scorecard')"
+>
 <div class="more-icon">📋</div>
 <div class="more-title">Scorecard</div>
 <div class="more-small">View all 18 holes</div>
 </button>
 
-<button class="more-card" onclick="openTool('practice')">
+<button
+class="more-card"
+onclick="openTool('practice')"
+>
 <div class="more-icon">🏌️</div>
 <div class="more-title">Practice</div>
 <div class="more-small">Practice sessions</div>
 </button>
 
-<button class="more-card" onclick="openTool('warmup')">
+<button
+class="more-card"
+onclick="openTool('warmup')"
+>
 <div class="more-icon">🔥</div>
 <div class="more-title">Warm-Up</div>
 <div class="more-small">Pre-round routine</div>
 </button>
 
-<button class="more-card" onclick="openTool('routines')">
+<button
+class="more-card"
+onclick="openTool('routines')"
+>
 <div class="more-icon">✅</div>
 <div class="more-title">Routines</div>
 <div class="more-small">Shot checklist</div>
 </button>
+
 </div>
 
 <div class="large-card" style="margin-top:8px">
-<div class="card-title">Settings</div>
 
-<div class="setting-row">
-<div>
-<div class="setting-main">Voice Caddie</div>
-<div class="setting-small">Microphone is always ready</div>
-</div>
-<div style="color:#35b96f;font-size:9px;font-weight:900">READY</div>
+<div class="card-title">
+Settings
 </div>
 
 <div class="setting-row">
+
 <div>
-<div class="setting-main">Distance Units</div>
-<div class="setting-small">Metres or yards</div>
-</div>
-<button id="unitToggle" class="small-toggle" onclick="toggleUnits()">METRES</button>
+
+<div class="setting-main">
+Voice Caddie
 </div>
 
-<div class="field-label">Caddie Name</div>
-<input id="moreCaddieName" class="field" value="Pete" onchange="saveCaddieNameFromMore()">
+<div class="setting-small">
+Microphone is always ready
 </div>
+
+</div>
+
+<div style="color:#35b96f;font-size:9px;font-weight:900">
+READY
+</div>
+
+</div>
+
+<div class="setting-row">
+
+<div>
+
+<div class="setting-main">
+Distance Units
+</div>
+
+<div class="setting-small">
+Metres or yards
+</div>
+
+</div>
+
+<button
+id="unitToggle"
+class="small-toggle"
+onclick="toggleUnits()"
+>
+METRES
+</button>
+
+</div>
+
+<div class="field-label">
+Caddie Name
+</div>
+
+<input
+id="moreCaddieName"
+class="field"
+value="Pete"
+onchange="saveCaddieNameFromMore()"
+>
+
+</div>
+
+<div class="large-card">
+
+<div class="card-title">
+GPS Position
+</div>
+
+<div class="setting-row">
+
+<div>
+
+<div class="setting-main">
+Phone GPS
+</div>
+
+<div class="setting-small">
+Real position from this device
+</div>
+
+</div>
+
+<div
+id="gpsStatusText"
+class="gps-status-value"
+>
+SEARCHING
+</div>
+
+</div>
+
+<div
+id="gpsCoordinates"
+class="gps-coordinates"
+>
+Latitude: —<br>
+Longitude: —<br>
+Accuracy: —
+</div>
+
+<button
+class="page-button"
+onclick="refreshGps()"
+>
+REFRESH GPS
+</button>
+
+</div>
+
 </main>
 
 <main id="scorecardView" class="view screen-page">
+
 <div class="screen-title-row">
-<button class="back-button" onclick="showView('more')">‹</button>
-<div class="screen-title">Scorecard</div>
+
+<button
+class="back-button"
+onclick="showView('more')"
+>
+‹
+</button>
+
+<div class="screen-title">
+Scorecard
 </div>
 
-<div class="screen-subtitle">Full 18-hole round</div>
+</div>
+
+<div class="screen-subtitle">
+Full 18-hole round
+</div>
 
 <div class="large-card">
+
 <table class="score-table">
+
 <thead>
+
 <tr>
 <th>Hole</th>
 <th>Par</th>
@@ -511,11 +1033,15 @@ Back <strong><span id="backDistance">512</span> <span class="unit">m</span></str
 <th>FW</th>
 <th>Pen</th>
 </tr>
+
 </thead>
+
 <tbody id="scorecardBody"></tbody>
+
 </table>
 
 <div class="score-total">
+
 <div class="total-box">
 <div class="total-label">PAR</div>
 <div id="totalPar" class="total-value">72</div>
@@ -530,43 +1056,128 @@ Back <strong><span id="backDistance">512</span> <span class="unit">m</span></str
 <div class="total-label">TO PAR</div>
 <div id="toPar" class="total-value">—</div>
 </div>
-</div>
+
 </div>
 
-<button class="page-button gold" onclick="showView('round')">RETURN TO ROUND</button>
+</div>
+
+<button
+class="page-button gold"
+onclick="showView('round')"
+>
+RETURN TO ROUND
+</button>
+
 </main>
 
 <main id="practiceView" class="view screen-page">
+
 <div class="screen-title-row">
-<button class="back-button" onclick="showView('more')">‹</button>
-<div class="screen-title">Practice</div>
+
+<button
+class="back-button"
+onclick="showView('more')"
+>
+‹
+</button>
+
+<div class="screen-title">
+Practice
 </div>
 
-<div class="screen-subtitle">Record a focused practice session</div>
+</div>
+
+<div class="screen-subtitle">
+Record a focused practice session
+</div>
 
 <div class="large-card">
-<div class="card-title">Practice Type</div>
+
+<div class="card-title">
+Practice Type
+</div>
 
 <div class="practice-type-grid">
-<button class="practice-type active" onclick="selectPracticeType(this,'Wedges')">Wedges</button>
-<button class="practice-type" onclick="selectPracticeType(this,'Irons')">Irons</button>
-<button class="practice-type" onclick="selectPracticeType(this,'Driver')">Driver</button>
-<button class="practice-type" onclick="selectPracticeType(this,'Chipping')">Chipping</button>
-<button class="practice-type" onclick="selectPracticeType(this,'Bunker')">Bunker</button>
-<button class="practice-type" onclick="selectPracticeType(this,'Putting')">Putting</button>
+
+<button
+class="practice-type active"
+onclick="selectPracticeType(this,'Wedges')"
+>
+Wedges
+</button>
+
+<button
+class="practice-type"
+onclick="selectPracticeType(this,'Irons')"
+>
+Irons
+</button>
+
+<button
+class="practice-type"
+onclick="selectPracticeType(this,'Driver')"
+>
+Driver
+</button>
+
+<button
+class="practice-type"
+onclick="selectPracticeType(this,'Chipping')"
+>
+Chipping
+</button>
+
+<button
+class="practice-type"
+onclick="selectPracticeType(this,'Bunker')"
+>
+Bunker
+</button>
+
+<button
+class="practice-type"
+onclick="selectPracticeType(this,'Putting')"
+>
+Putting
+</button>
+
 </div>
 
-<div class="field-label">Shot Shape</div>
+<div class="field-label">
+Shot Shape
+</div>
 
 <div class="shape-row">
-<button class="shape-btn active" onclick="selectShape(this,'STRAIGHT')">STRAIGHT</button>
-<button class="shape-btn" onclick="selectShape(this,'DRAW')">DRAW</button>
-<button class="shape-btn" onclick="selectShape(this,'FADE')">FADE</button>
+
+<button
+class="shape-btn active"
+onclick="selectShape(this,'STRAIGHT')"
+>
+STRAIGHT
+</button>
+
+<button
+class="shape-btn"
+onclick="selectShape(this,'DRAW')"
+>
+DRAW
+</button>
+
+<button
+class="shape-btn"
+onclick="selectShape(this,'FADE')"
+>
+FADE
+</button>
+
 </div>
 
-<div class="field-label">Shot Results</div>
+<div class="field-label">
+Shot Results
+</div>
 
 <div class="practice-count-grid">
+
 <div class="practice-counter">
 <div class="practice-counter-name">GOOD</div>
 <div id="practiceGood" class="practice-counter-value">0</div>
@@ -596,91 +1207,466 @@ Back <strong><span id="backDistance">512</span> <span class="unit">m</span></str
 <div id="practiceLong" class="practice-counter-value">0</div>
 <button class="practice-plus" onclick="practiceAdd('long')">+</button>
 </div>
+
 </div>
 
-<div class="field-label">Session Note</div>
-<textarea id="practiceNote" class="field" rows="3" placeholder="What did you notice?"></textarea>
-
-<button class="page-button gold" onclick="savePractice()">SAVE PRACTICE SESSION</button>
-<button class="page-button" onclick="resetPractice()">RESET COUNTS</button>
+<div class="field-label">
+Session Note
 </div>
+
+<textarea
+id="practiceNote"
+class="field"
+rows="3"
+placeholder="What did you notice?"
+></textarea>
+
+<button
+class="page-button gold"
+onclick="savePractice()"
+>
+SAVE PRACTICE SESSION
+</button>
+
+<button
+class="page-button"
+onclick="resetPractice()"
+>
+RESET COUNTS
+</button>
+
+</div>
+
 </main>
 
 <main id="warmupView" class="view screen-page">
+
 <div class="screen-title-row">
-<button class="back-button" onclick="showView('more')">‹</button>
-<div class="screen-title">Warm-Up</div>
+
+<button
+class="back-button"
+onclick="showView('more')"
+>
+‹
+</button>
+
+<div class="screen-title">
+Warm-Up
 </div>
 
-<div class="screen-subtitle">Eight steps before you tee off</div>
+</div>
+
+<div class="screen-subtitle">
+Eight steps before you tee off
+</div>
 
 <div class="large-card">
-<div class="card-title">Progress</div>
-<div class="progress-bar">
-<div id="warmupProgress" class="progress-fill"></div>
+
+<div class="card-title">
+Progress
 </div>
-<div id="warmupProgressText" class="progress-text">0 of 8 complete</div>
+
+<div class="progress-bar">
+<div
+id="warmupProgress"
+class="progress-fill"
+></div>
+</div>
+
+<div
+id="warmupProgressText"
+class="progress-text"
+>
+0 of 8 complete
+</div>
+
 </div>
 
 <div id="warmupRows"></div>
 
-<button class="page-button" onclick="resetWarmup()">RESET WARM-UP</button>
+<button
+class="page-button"
+onclick="resetWarmup()"
+>
+RESET WARM-UP
+</button>
+
 </main>
 
 <main id="routinesView" class="view screen-page">
+
 <div class="screen-title-row">
-<button class="back-button" onclick="showView('more')">‹</button>
-<div class="screen-title">Routines</div>
+
+<button
+class="back-button"
+onclick="showView('more')"
+>
+‹
+</button>
+
+<div class="screen-title">
+Routines
 </div>
 
-<div class="screen-subtitle">Simple shot routine — one decision at a time</div>
+</div>
+
+<div class="screen-subtitle">
+Simple shot routine — one decision at a time
+</div>
 
 <div class="large-card">
-<div class="card-title">Shot Routine</div>
-<div class="progress-bar">
-<div id="routineProgress" class="progress-fill"></div>
+
+<div class="card-title">
+Shot Routine
 </div>
-<div id="routineProgressText" class="progress-text">0 of 8 complete</div>
+
+<div class="progress-bar">
+<div
+id="routineProgress"
+class="progress-fill"
+></div>
+</div>
+
+<div
+id="routineProgressText"
+class="progress-text"
+>
+0 of 8 complete
+</div>
+
 </div>
 
 <div id="routineRows"></div>
 
-<button class="page-button gold" onclick="resetRoutine()">START NEXT SHOT</button>
+<button
+class="page-button gold"
+onclick="resetRoutine()"
+>
+START NEXT SHOT
+</button>
+
 </main>
 
 <nav class="bottom-nav">
-<button id="navRound" class="active" onclick="showView('round')">
-<span class="nav-icon">🏌️</span>Round
+
+<button
+id="navRound"
+class="active"
+onclick="showView('round')"
+>
+<span class="nav-icon">🏌️</span>
+Round
 </button>
 
-<button id="navCaddie" onclick="showView('caddie')">
-<span class="nav-icon">💬</span>Caddie
+<button
+id="navCaddie"
+onclick="showView('caddie')"
+>
+<span class="nav-icon">💬</span>
+Caddie
 </button>
 
-<button id="navBag" onclick="showView('bag')">
-<span class="nav-icon">🎒</span>My Bag
+<button
+id="navBag"
+onclick="showView('bag')"
+>
+<span class="nav-icon">🎒</span>
+My Bag
 </button>
 
-<button id="navCourse" onclick="showView('course')">
-<span class="nav-icon">⛳</span>Course
+<button
+id="navCourse"
+onclick="showView('course')"
+>
+<span class="nav-icon">⛳</span>
+Course
 </button>
 
-<button id="navMore" onclick="showView('more')">
-<span class="nav-icon">•••</span>More
+<button
+id="navMore"
+onclick="showView('more')"
+>
+<span class="nav-icon">•••</span>
+More
 </button>
+
 </nav>
 
 </div>
 
 <script>
-const $=id=>document.getElementById(id),$$=s=>document.querySelectorAll(s),YARDS_TO_METRES=.9144;
-let currentHole=0,recognition=null,listening=false,unitMode=localStorage.getItem("drcUnitMode")||"metric";
+
+const $=id=>document.getElementById(id);
+const $$=s=>document.querySelectorAll(s);
+const YARDS_TO_METRES=.9144;
+
+let currentHole=0;
+let recognition=null;
+let listening=false;
+
+let unitMode=
+  localStorage.getItem("drcUnitMode")||
+  "metric";
 
 const currentConditions={
   temperatureC:24,
   windSpeedKmh:8,
   windDirection:"none"
 };
+
+/* =========================================================
+   REAL PHONE GPS — FOUNDATION
+   ========================================================= */
+
+let gpsWatchId=null;
+
+const gpsState={
+  status:"SEARCHING",
+  latitude:null,
+  longitude:null,
+  accuracy:null,
+  altitude:null,
+  heading:null,
+  speed:null,
+  timestamp:null
+};
+
+function updateGpsDisplay(){
+
+  const badge=$("gpsBadge");
+  const status=$("gpsStatusText");
+  const coordinates=$("gpsCoordinates");
+
+  if(status){
+    status.textContent=gpsState.status;
+  }
+
+  if(badge){
+
+    badge.classList.remove(
+      "lock",
+      "error"
+    );
+
+    if(gpsState.status==="LOCKED"){
+
+      const accuracy=
+        Number.isFinite(gpsState.accuracy)
+          ?Math.round(gpsState.accuracy)
+          :null;
+
+      badge.textContent=
+        accuracy!==null
+          ?"GPS ±"+accuracy+" m"
+          :"GPS LOCKED";
+
+      badge.classList.add("lock");
+
+    }else if(
+      gpsState.status==="BLOCKED"||
+      gpsState.status==="UNAVAILABLE"||
+      gpsState.status==="ERROR"
+    ){
+
+      badge.textContent=
+        "GPS "+gpsState.status;
+
+      badge.classList.add("error");
+
+    }else{
+
+      badge.textContent=
+        "GPS "+gpsState.status;
+
+    }
+  }
+
+  if(coordinates){
+
+    if(
+      Number.isFinite(gpsState.latitude)&&
+      Number.isFinite(gpsState.longitude)
+    ){
+
+      coordinates.innerHTML=
+        "Latitude: "+
+        gpsState.latitude.toFixed(6)+
+        "<br>"+
+        "Longitude: "+
+        gpsState.longitude.toFixed(6)+
+        "<br>"+
+        "Accuracy: "+
+        (
+          Number.isFinite(gpsState.accuracy)
+            ?"±"+Math.round(gpsState.accuracy)+" m"
+            :"—"
+        );
+
+    }else{
+
+      coordinates.innerHTML=
+        "Latitude: —<br>"+
+        "Longitude: —<br>"+
+        "Accuracy: —";
+
+    }
+  }
+}
+
+function gpsSuccess(position){
+
+  if(
+    !position||
+    !position.coords
+  ){
+    return;
+  }
+
+  gpsState.status="LOCKED";
+  gpsState.latitude=
+    Number(position.coords.latitude);
+
+  gpsState.longitude=
+    Number(position.coords.longitude);
+
+  gpsState.accuracy=
+    Number(position.coords.accuracy);
+
+  gpsState.altitude=
+    Number.isFinite(position.coords.altitude)
+      ?Number(position.coords.altitude)
+      :null;
+
+  gpsState.heading=
+    Number.isFinite(position.coords.heading)
+      ?Number(position.coords.heading)
+      :null;
+
+  gpsState.speed=
+    Number.isFinite(position.coords.speed)
+      ?Number(position.coords.speed)
+      :null;
+
+  gpsState.timestamp=
+    position.timestamp||
+    Date.now();
+
+  updateGpsDisplay();
+}
+
+function gpsError(error){
+
+  if(!error){
+
+    gpsState.status="ERROR";
+    updateGpsDisplay();
+    return;
+
+  }
+
+  if(error.code===1){
+
+    gpsState.status="BLOCKED";
+
+  }else if(error.code===2){
+
+    gpsState.status="UNAVAILABLE";
+
+  }else if(error.code===3){
+
+    gpsState.status="SEARCHING";
+
+  }else{
+
+    gpsState.status="ERROR";
+
+  }
+
+  updateGpsDisplay();
+}
+
+function startGps(){
+
+  if(!("geolocation" in navigator)){
+
+    gpsState.status="UNAVAILABLE";
+    updateGpsDisplay();
+    return;
+  }
+
+  gpsState.status="SEARCHING";
+  updateGpsDisplay();
+
+  try{
+
+    navigator.geolocation.getCurrentPosition(
+      gpsSuccess,
+      gpsError,
+      {
+        enableHighAccuracy:true,
+        timeout:15000,
+        maximumAge:0
+      }
+    );
+
+    if(gpsWatchId===null){
+
+      gpsWatchId=
+        navigator.geolocation.watchPosition(
+          gpsSuccess,
+          gpsError,
+          {
+            enableHighAccuracy:true,
+            timeout:20000,
+            maximumAge:3000
+          }
+        );
+
+    }
+
+  }catch(error){
+
+    gpsState.status="ERROR";
+    updateGpsDisplay();
+
+  }
+}
+
+function refreshGps(){
+
+  if(!("geolocation" in navigator)){
+
+    gpsState.status="UNAVAILABLE";
+    updateGpsDisplay();
+    return;
+  }
+
+  gpsState.status="SEARCHING";
+  updateGpsDisplay();
+
+  try{
+
+    navigator.geolocation.getCurrentPosition(
+      gpsSuccess,
+      gpsError,
+      {
+        enableHighAccuracy:true,
+        timeout:15000,
+        maximumAge:0
+      }
+    );
+
+  }catch(error){
+
+    gpsState.status="ERROR";
+    updateGpsDisplay();
+
+  }
+}
+
+/* =========================================================
+   HOLES
+   ========================================================= */
 
 const holes=[
 {hole:1,par:5,si:5,front:480,centre:498,back:512},
@@ -724,16 +1710,43 @@ const holeMaps=[
 ["polygon(61% 100%,72% 86%,59% 72%,68% 57%,52% 43%,59% 29%,44% 14%,49% 0,28% 0,31% 17%,21% 33%,35% 48%,25% 64%,39% 79%,35% 93%)","0 8% 0 19%",["2%","29%","40%","8%"],["10%","56%","24%","4%","22deg"],["55%","auto","auto","0","17%","45%"],["3%","47%"],["9%","10%","51%"]]
 ];
 
-let bagMetres=JSON.parse(localStorage.getItem("drcBagMetres")||"null")||{
-"Driver":230,"3 Wood":210,"5 Wood":195,"4 Iron":180,"5 Iron":170,"6 Iron":160,
-"7 Iron":150,"8 Iron":140,"9 Iron":130,"PW":115,"GW":100,"SW":85,"LW":70
-};
+let bagMetres=
+  JSON.parse(
+    localStorage.getItem("drcBagMetres")||
+    "null"
+  )||
+  {
+    "Driver":230,
+    "3 Wood":210,
+    "5 Wood":195,
+    "4 Iron":180,
+    "5 Iron":170,
+    "6 Iron":160,
+    "7 Iron":150,
+    "8 Iron":140,
+    "9 Iron":130,
+    "PW":115,
+    "GW":100,
+    "SW":85,
+    "LW":70
+  };
 
-let holeScores=JSON.parse(localStorage.getItem("drcHoleScores")||"{}");
+let holeScores=
+  JSON.parse(
+    localStorage.getItem("drcHoleScores")||
+    "{}"
+  );
 
 let practiceType="Wedges";
 let practiceShape="STRAIGHT";
-let practiceCounts={good:0,left:0,right:0,short:0,long:0};
+
+let practiceCounts={
+  good:0,
+  left:0,
+  right:0,
+  short:0,
+  long:0
+};
 
 const warmupSteps=[
 ["Loosen Up","Easy movement and mobility"],
@@ -757,33 +1770,71 @@ const routineSteps=[
 ["Next","Accept the result and move on"]
 ];
 
-let warmupState=JSON.parse(localStorage.getItem("drcWarmupState")||"null")||new Array(8).fill(false);
-let routineState=JSON.parse(localStorage.getItem("drcRoutineState")||"null")||new Array(8).fill(false);
+let warmupState=
+  JSON.parse(
+    localStorage.getItem("drcWarmupState")||
+    "null"
+  )||
+  new Array(8).fill(false);
+
+let routineState=
+  JSON.parse(
+    localStorage.getItem("drcRoutineState")||
+    "null"
+  )||
+  new Array(8).fill(false);
 
 function displayDistance(m){
+
   return unitMode==="imperial"
-    ?{value:Math.round(m/YARDS_TO_METRES),unit:"yds"}
-    :{value:Math.round(m),unit:"m"};
+
+    ?{
+      value:Math.round(
+        m/YARDS_TO_METRES
+      ),
+      unit:"yds"
+    }
+
+    :{
+      value:Math.round(m),
+      unit:"m"
+    };
 }
 
 function formatDistance(m){
-  const d=displayDistance(m);
-  return d.value+" "+d.unit;
+
+  const d=
+    displayDistance(m);
+
+  return d.value+
+    " "+
+    d.unit;
 }
 
 function hideAllViews(){
-  $$(".view").forEach(v=>v.classList.remove("active"));
+
+  $$(".view").forEach(
+    v=>v.classList.remove("active")
+  );
+
 }
 
 function clearBottomNav(){
-  $$(".bottom-nav button").forEach(b=>b.classList.remove("active"));
+
+  $$(".bottom-nav button")
+    .forEach(
+      b=>b.classList.remove("active")
+    );
+
 }
 
 function showView(name){
+
   hideAllViews();
   clearBottomNav();
 
-  $(name+"View").classList.add("active");
+  $(name+"View")
+    .classList.add("active");
 
   const nav={
     round:"navRound",
@@ -793,29 +1844,63 @@ function showView(name){
     more:"navMore"
   };
 
-  if(nav[name])$(nav[name]).classList.add("active");
+  if(nav[name]){
+    $(nav[name])
+      .classList.add("active");
+  }
 
-  if(name==="caddie")updateCaddiePage();
-  if(name==="bag")renderBag();
-  if(name==="course")updateCoursePage();
-  if(name==="more")updateMorePage();
+  if(name==="caddie"){
+    updateCaddiePage();
+  }
+
+  if(name==="bag"){
+    renderBag();
+  }
+
+  if(name==="course"){
+    updateCoursePage();
+  }
+
+  if(name==="more"){
+    updateMorePage();
+  }
+
 }
 
 function openTool(name){
+
   hideAllViews();
   clearBottomNav();
 
-  $(name+"View").classList.add("active");
-  $("navMore").classList.add("active");
+  $(name+"View")
+    .classList.add("active");
 
-  if(name==="scorecard")renderScorecard();
-  if(name==="practice")renderPractice();
-  if(name==="warmup")renderWarmup();
-  if(name==="routines")renderRoutine();
+  $("navMore")
+    .classList.add("active");
+
+  if(name==="scorecard"){
+    renderScorecard();
+  }
+
+  if(name==="practice"){
+    renderPractice();
+  }
+
+  if(name==="warmup"){
+    renderWarmup();
+  }
+
+  if(name==="routines"){
+    renderRoutine();
+  }
+
 }
 
 function applyMapLayout(){
-  const m=holeMaps[currentHole];
+
+  const m=
+    holeMaps[currentHole];
+
   const f=$("fairway");
   const g=$("green");
   const b=$("bunker");
@@ -826,67 +1911,176 @@ function applyMapLayout(){
   f.style.inset=m[1];
   f.style.clipPath=m[0];
 
-  [g.style.top,g.style.left,g.style.width,g.style.height]=m[2];
+  [
+    g.style.top,
+    g.style.left,
+    g.style.width,
+    g.style.height
+  ]=m[2];
 
-  [b.style.top,b.style.left,b.style.width,b.style.height]=m[3];
-  b.style.transform="rotate("+m[3][4]+")";
+  [
+    b.style.top,
+    b.style.left,
+    b.style.width,
+    b.style.height
+  ]=m[3];
 
-  [w.style.top,w.style.right,w.style.bottom,w.style.left,w.style.width,w.style.height]=m[4];
+  b.style.transform=
+    "rotate("+m[3][4]+")";
 
-  [fl.style.top,fl.style.left]=m[5];
-  [l.style.top,l.style.bottom,l.style.left]=m[6];
+  [
+    w.style.top,
+    w.style.right,
+    w.style.bottom,
+    w.style.left,
+    w.style.width,
+    w.style.height
+  ]=m[4];
+
+  [
+    fl.style.top,
+    fl.style.left
+  ]=m[5];
+
+  [
+    l.style.top,
+    l.style.bottom,
+    l.style.left
+  ]=m[6];
+
 }
 
 function renderConditions(){
-  $("weatherTemp").textContent=Math.round(currentConditions.temperatureC)+"°C";
-  $("weatherWind").textContent="Wind "+Math.round(currentConditions.windSpeedKmh)+" km/h";
+
+  $("weatherTemp")
+    .textContent=
+    Math.round(
+      currentConditions.temperatureC
+    )+
+    "°C";
+
+  $("weatherWind")
+    .textContent=
+    "Wind "+
+    Math.round(
+      currentConditions.windSpeedKmh
+    )+
+    " km/h";
+
 }
 
 function renderHole(){
-  const h=holes[currentHole];
-  const f=displayDistance(h.front);
-  const c=displayDistance(h.centre);
-  const b=displayDistance(h.back);
 
-  $("holeNumber").textContent=h.hole;
-  $("holePar").textContent=h.par;
-  $("holeSI").textContent=h.si;
+  const h=
+    holes[currentHole];
 
-  $("frontDistance").textContent=f.value;
-  $("centreDistance").textContent=c.value;
-  $("centreBig").textContent=c.value;
-  $("backDistance").textContent=b.value;
+  const f=
+    displayDistance(
+      h.front
+    );
 
-  $("mapFullDistance").textContent=c.value;
-  $("mapMidDistance").textContent=Math.round(c.value*.56);
-  $("mapNearDistance").textContent=Math.round(c.value*.46);
+  const c=
+    displayDistance(
+      h.centre
+    );
 
-  $$(".unit").forEach(el=>el.textContent=c.unit);
+  const b=
+    displayDistance(
+      h.back
+    );
+
+  $("holeNumber")
+    .textContent=
+    h.hole;
+
+  $("holePar")
+    .textContent=
+    h.par;
+
+  $("holeSI")
+    .textContent=
+    h.si;
+
+  $("frontDistance")
+    .textContent=
+    f.value;
+
+  $("centreDistance")
+    .textContent=
+    c.value;
+
+  $("centreBig")
+    .textContent=
+    c.value;
+
+  $("backDistance")
+    .textContent=
+    b.value;
+
+  $("mapFullDistance")
+    .textContent=
+    c.value;
+
+  $("mapMidDistance")
+    .textContent=
+    Math.round(
+      c.value*.56
+    );
+
+  $("mapNearDistance")
+    .textContent=
+    Math.round(
+      c.value*.46
+    );
+
+  $$(".unit").forEach(
+    el=>
+      el.textContent=
+      c.unit
+  );
 
   applyMapLayout();
   loadHoleScore();
   recommendClub();
 
-  localStorage.setItem("drcCurrentHole",currentHole);
+  localStorage.setItem(
+    "drcCurrentHole",
+    currentHole
+  );
 
   updateCaddiePage();
   updateCoursePage();
+
 }
 
 function nextHole(){
-  if(currentHole<17)currentHole++;
+
+  if(currentHole<17){
+    currentHole++;
+  }
+
   renderHole();
+
 }
 
 function previousHole(){
-  if(currentHole>0)currentHole--;
+
+  if(currentHole>0){
+    currentHole--;
+  }
+
   renderHole();
+
 }
 
 function getScoreData(){
-  const n=holes[currentHole].hole;
+
+  const n=
+    holes[currentHole]
+      .hole;
 
   if(!holeScores[n]){
+
     holeScores[n]={
       score:0,
       putts:0,
@@ -894,826 +2088,1932 @@ function getScoreData(){
       fairway:false,
       penalty:0
     };
+
   }
 
   return holeScores[n];
+
 }
 
 function saveScores(){
-  localStorage.setItem("drcHoleScores",JSON.stringify(holeScores));
+
+  localStorage.setItem(
+    "drcHoleScores",
+    JSON.stringify(
+      holeScores
+    )
+  );
+
 }
 
 function loadHoleScore(){
-  const d=getScoreData();
 
-  $("scoreValue").textContent=d.score;
-  $("puttsValue").textContent=d.putts;
-  $("penaltyValue").textContent=d.penalty;
+  const d=
+    getScoreData();
 
-  $("girButton").classList.toggle("active",d.gir);
-  $("fairwayButton").classList.toggle("active",d.fairway);
+  $("scoreValue")
+    .textContent=
+    d.score;
+
+  $("puttsValue")
+    .textContent=
+    d.putts;
+
+  $("penaltyValue")
+    .textContent=
+    d.penalty;
+
+  $("girButton")
+    .classList
+    .toggle(
+      "active",
+      d.gir
+    );
+
+  $("fairwayButton")
+    .classList
+    .toggle(
+      "active",
+      d.fairway
+    );
+
 }
 
 function changeScore(n){
-  const d=getScoreData();
-  d.score=Math.max(0,d.score+n);
+
+  const d=
+    getScoreData();
+
+  d.score=
+    Math.max(
+      0,
+      d.score+n
+    );
+
   saveScores();
   loadHoleScore();
+
 }
 
 function changePutts(n){
-  const d=getScoreData();
-  d.putts=Math.max(0,d.putts+n);
+
+  const d=
+    getScoreData();
+
+  d.putts=
+    Math.max(
+      0,
+      d.putts+n
+    );
+
   saveScores();
   loadHoleScore();
+
 }
 
 function changePenalty(n){
-  const d=getScoreData();
-  d.penalty=Math.max(0,d.penalty+n);
+
+  const d=
+    getScoreData();
+
+  d.penalty=
+    Math.max(
+      0,
+      d.penalty+n
+    );
+
   saveScores();
   loadHoleScore();
+
 }
 
 function toggleGir(){
-  const d=getScoreData();
-  d.gir=!d.gir;
+
+  const d=
+    getScoreData();
+
+  d.gir=
+    !d.gir;
+
   saveScores();
   loadHoleScore();
+
 }
 
 function toggleFairway(){
-  const d=getScoreData();
-  d.fairway=!d.fairway;
+
+  const d=
+    getScoreData();
+
+  d.fairway=
+    !d.fairway;
+
   saveScores();
   loadHoleScore();
+
 }
 
 function chooseNearestClub(target){
-  let selected="Driver";
-  let smallest=Infinity;
 
-  Object.entries(bagMetres).forEach(([club,carry])=>{
-    const d=Math.abs(target-Number(carry));
+  let selected=
+    "Driver";
 
-    if(d<smallest){
-      smallest=d;
-      selected=club;
-    }
-  });
+  let smallest=
+    Infinity;
+
+  Object
+    .entries(
+      bagMetres
+    )
+    .forEach(
+      ([club,carry])=>{
+
+        const d=
+          Math.abs(
+            target-
+            Number(carry)
+          );
+
+        if(d<smallest){
+
+          smallest=d;
+          selected=club;
+
+        }
+
+      }
+    );
 
   return selected;
+
 }
 
 function getClubOrderedList(){
-  return Object.entries(bagMetres)
-    .map(([club,carry])=>({club,carry:Number(carry)}))
-    .sort((a,b)=>b.carry-a.carry);
+
+  return Object
+    .entries(
+      bagMetres
+    )
+    .map(
+      ([club,carry])=>({
+        club,
+        carry:Number(carry)
+      })
+    )
+    .sort(
+      (a,b)=>
+        b.carry-
+        a.carry
+    );
+
 }
 
 function getClubAboveDistance(target){
-  const clubs=getClubOrderedList();
-  let best=clubs[clubs.length-1];
 
-  for(const item of clubs){
-    if(item.carry>=target)best=item;
+  const clubs=
+    getClubOrderedList();
+
+  let best=
+    clubs[
+      clubs.length-1
+    ];
+
+  for(
+    const item
+    of clubs
+  ){
+
+    if(
+      item.carry>=target
+    ){
+      best=item;
+    }
+
   }
 
   return best.club;
+
 }
 
-function chooseClubForShot(target,lie,hazard){
-  let club=chooseNearestClub(target);
+function chooseClubForShot(
+  target,
+  lie,
+  hazard
+){
 
-  if(target>Math.max(...Object.values(bagMetres).map(Number))){
-    return"Driver";
+  let club=
+    chooseNearestClub(
+      target
+    );
+
+  if(
+    target>
+    Math.max(
+      ...Object
+        .values(
+          bagMetres
+        )
+        .map(Number)
+    )
+  ){
+
+    return "Driver";
+
   }
 
-  if(lie==="greenside bunker"&&target<=45){
-    if(bagMetres.SW)return"SW";
-    if(bagMetres.LW)return"LW";
-  }
+  if(
+    lie==="greenside bunker"&&
+    target<=45
+  ){
 
-  if(lie==="deep rough"&&target>145){
-    const list=getClubOrderedList();
-    const i=list.findIndex(x=>x.club===club);
-    const safer=list[i+1];
-
-    if(i>=0&&safer&&safer.club!=="Driver"){
-      club=safer.club;
+    if(bagMetres.SW){
+      return "SW";
     }
+
+    if(bagMetres.LW){
+      return "LW";
+    }
+
   }
 
-  if(hazard.short&&lie!=="deep rough"&&lie!=="greenside bunker"){
-    club=getClubAboveDistance(target);
+  if(
+    lie==="deep rough"&&
+    target>145
+  ){
+
+    const list=
+      getClubOrderedList();
+
+    const i=
+      list.findIndex(
+        x=>
+          x.club===club
+      );
+
+    const safer=
+      list[i+1];
+
+    if(
+      i>=0&&
+      safer&&
+      safer.club!=="Driver"
+    ){
+
+      club=
+        safer.club;
+
+    }
+
+  }
+
+  if(
+    hazard.short&&
+    lie!=="deep rough"&&
+    lie!=="greenside bunker"
+  ){
+
+    club=
+      getClubAboveDistance(
+        target
+      );
+
   }
 
   return club;
+
 }
 
 function recommendClub(){
-  const target=holes[currentHole].centre;
-  const longest=Math.max(...Object.values(bagMetres).map(Number));
+
+  const target=
+    holes[currentHole]
+      .centre;
+
+  const longest=
+    Math.max(
+      ...Object
+        .values(
+          bagMetres
+        )
+        .map(Number)
+    );
 
   setRecommendedClub(
+
     target>longest
+
       ?"Driver"
-      :chooseNearestClub(target)
+
+      :chooseNearestClub(
+        target
+      )
+
   );
+
 }
 
 function setRecommendedClub(club){
-  if(bagMetres[club]===undefined)return;
 
-  $("recommendedClub").textContent=club;
+  if(
+    bagMetres[club]===
+    undefined
+  ){
+    return;
+  }
 
-  const c=displayDistance(bagMetres[club]);
+  $("recommendedClub")
+    .textContent=
+    club;
 
-  $("recommendedCarry").textContent=c.value+" "+c.unit;
-  $("clubSelect").value=club;
+  const c=
+    displayDistance(
+      bagMetres[club]
+    );
+
+  $("recommendedCarry")
+    .textContent=
+    c.value+
+    " "+
+    c.unit;
+
+  $("clubSelect")
+    .value=
+    club;
 
   updateCaddiePage();
+
 }
 
 function manualClubChange(){
-  setRecommendedClub($("clubSelect").value);
+
+  setRecommendedClub(
+    $("clubSelect")
+      .value
+  );
+
 }
 
 function getCaddieName(){
-  return $("caddieName").value.trim()||"Pete";
+
+  return $("caddieName")
+    .value
+    .trim()||
+    "Pete";
+
 }
 
 function saveCaddieName(){
-  const n=getCaddieName();
 
-  $("caddieName").value=n;
-  $("askName").textContent=n;
-  $("largeCaddieName").textContent=n;
-  $("moreCaddieName").value=n;
+  const n=
+    getCaddieName();
 
-  localStorage.setItem("drcCaddieName",n);
+  $("caddieName")
+    .value=
+    n;
 
-  setCaddieAnswers("Ready. Ask "+n+" for the shot.");
+  $("askName")
+    .textContent=
+    n;
+
+  $("largeCaddieName")
+    .textContent=
+    n;
+
+  $("moreCaddieName")
+    .value=
+    n;
+
+  localStorage.setItem(
+    "drcCaddieName",
+    n
+  );
+
+  setCaddieAnswers(
+    "Ready. Ask "+
+    n+
+    " for the shot."
+  );
+
 }
 
 function saveCaddieNameFromMore(){
-  $("caddieName").value=$("moreCaddieName").value.trim()||"Pete";
+
+  $("caddieName")
+    .value=
+    $("moreCaddieName")
+      .value
+      .trim()||
+    "Pete";
+
   saveCaddieName();
+
 }
 
 function setListeningState(on){
+
   listening=on;
 
-  ["micButton","largeMic"].forEach(id=>{
-    if($(id)){
-      $(id).classList.toggle("listening",on);
+  [
+    "micButton",
+    "largeMic"
+  ]
+  .forEach(
+    id=>{
+
+      if($(id)){
+
+        $(id)
+          .classList
+          .toggle(
+            "listening",
+            on
+          );
+
+      }
+
     }
-  });
+  );
+
 }
 
 function setCaddieAnswers(text){
-  if($("caddieAnswer"))$("caddieAnswer").textContent=text;
-  if($("largeCaddieAnswer"))$("largeCaddieAnswer").textContent=text;
+
+  if(
+    $("caddieAnswer")
+  ){
+
+    $("caddieAnswer")
+      .textContent=
+      text;
+
+  }
+
+  if(
+    $("largeCaddieAnswer")
+  ){
+
+    $("largeCaddieAnswer")
+      .textContent=
+      text;
+
+  }
+
 }
 
 function setupRecognition(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+
+  const SR=
+    window.SpeechRecognition||
+    window.webkitSpeechRecognition;
 
   if(!SR){
+
     recognition=null;
     return false;
+
   }
 
   try{
-    recognition=new SR();
-    recognition.lang="en-AU";
-    recognition.continuous=false;
-    recognition.interimResults=false;
-    recognition.maxAlternatives=3;
 
-    recognition.onstart=()=>{
-      setListeningState(true);
-      setCaddieAnswers("Listening...");
-    };
+    recognition=
+      new SR();
 
-    recognition.onresult=e=>{
-      if(!e.results||!e.results.length)return;
+    recognition.lang=
+      "en-AU";
 
-      const t=e.results[0][0]?.transcript?.trim()||"";
+    recognition.continuous=
+      false;
 
-      if(t){
-        handleGolfCommand(t);
-      }else{
-        setCaddieAnswers("Didn't catch that. Tap the mic and try again.");
-      }
-    };
+    recognition.interimResults=
+      false;
 
-    recognition.onerror=e=>{
-      let m="Didn't catch that clearly. Tap the mic and try again.";
+    recognition.maxAlternatives=
+      3;
 
-      if(e.error==="not-allowed"||e.error==="service-not-allowed"){
-        m="Microphone permission is blocked.";
-      }else if(e.error==="no-speech"){
-        m="Didn't hear anything. Tap the mic and speak again.";
-      }else if(e.error==="audio-capture"){
-        m="The microphone isn't available right now.";
-      }else if(e.error==="network"){
-        m="Voice recognition couldn't reach the speech service.";
-      }
+    recognition.onstart=
+      ()=>{
 
-      setCaddieAnswers(m);
-    };
+        setListeningState(
+          true
+        );
 
-    recognition.onend=()=>{
-      setListeningState(false);
-    };
+        setCaddieAnswers(
+          "Listening..."
+        );
+
+      };
+
+    recognition.onresult=
+      e=>{
+
+        if(
+          !e.results||
+          !e.results.length
+        ){
+          return;
+        }
+
+        const t=
+          e.results[0][0]
+            ?.transcript
+            ?.trim()||
+          "";
+
+        if(t){
+
+          handleGolfCommand(
+            t
+          );
+
+        }else{
+
+          setCaddieAnswers(
+            "Didn't catch that. Tap the mic and try again."
+          );
+
+        }
+
+      };
+
+    recognition.onerror=
+      e=>{
+
+        let m=
+          "Didn't catch that clearly. Tap the mic and try again.";
+
+        if(
+          e.error==="not-allowed"||
+          e.error==="service-not-allowed"
+        ){
+
+          m=
+            "Microphone permission is blocked.";
+
+        }else if(
+          e.error==="no-speech"
+        ){
+
+          m=
+            "Didn't hear anything. Tap the mic and speak again.";
+
+        }else if(
+          e.error==="audio-capture"
+        ){
+
+          m=
+            "The microphone isn't available right now.";
+
+        }else if(
+          e.error==="network"
+        ){
+
+          m=
+            "Voice recognition couldn't reach the speech service.";
+
+        }
+
+        setCaddieAnswers(
+          m
+        );
+
+      };
+
+    recognition.onend=
+      ()=>{
+
+        setListeningState(
+          false
+        );
+
+      };
 
     return true;
 
   }catch(e){
+
     recognition=null;
     return false;
+
   }
+
 }
 
 function askCaddie(){
-  if(listening&&recognition){
+
+  if(
+    listening&&
+    recognition
+  ){
+
     try{
       recognition.stop();
     }catch(e){}
 
     return;
+
   }
 
-  if(!recognition&&!setupRecognition()){
-    setCaddieAnswers("Voice recognition is not available on this device.");
+  if(
+    !recognition&&
+    !setupRecognition()
+  ){
+
+    setCaddieAnswers(
+      "Voice recognition is not available on this device."
+    );
+
     return;
+
   }
 
   try{
+
     recognition.start();
+
   }catch(e){
+
     recognition=null;
 
-    if(setupRecognition()){
+    if(
+      setupRecognition()
+    ){
+
       try{
+
         recognition.start();
+
       }catch(x){
-        setCaddieAnswers("The microphone couldn't start. Tap it again.");
+
+        setCaddieAnswers(
+          "The microphone couldn't start. Tap it again."
+        );
+
       }
+
     }
+
   }
+
 }
 
 function normaliseSpeech(text){
-  return String(text||"")
-    .toLowerCase()
-    .trim()
-    .replace(/[.,!?]/g," ")
-    .replace(/\bruff\b|\broughh\b/g,"rough")
-    .replace(/\bfare way\b|\bfair way\b/g,"fairway")
-    .replace(/\bhead win\b/g,"headwind")
-    .replace(/\btail win\b/g,"tailwind")
-    .replace(/\bcross win\b/g,"crosswind")
-    .replace(/(\d+(?:\.\d+)?)\s*(?:km|kph|kmh|kilometres?|kilometers?)\s+when\b/g,"$1 km wind")
-    .replace(/(\d+(?:\.\d+)?)\s+when\b/g,"$1 wind")
-    .replace(/\bwind into\b|\binto wind\b/g,"headwind")
-    .replace(/\bwind behind\b|\bhelping wind\b/g,"tailwind")
-    .replace(/\s+/g," ")
-    .trim();
+
+  return String(
+    text||
+    ""
+  )
+  .toLowerCase()
+  .trim()
+  .replace(
+    /[.,!?]/g,
+    " "
+  )
+  .replace(
+    /\bruff\b|\broughh\b/g,
+    "rough"
+  )
+  .replace(
+    /\bfare way\b|\bfair way\b/g,
+    "fairway"
+  )
+  .replace(
+    /\bhead win\b/g,
+    "headwind"
+  )
+  .replace(
+    /\btail win\b/g,
+    "tailwind"
+  )
+  .replace(
+    /\bcross win\b/g,
+    "crosswind"
+  )
+  .replace(
+    /(\d+(?:\.\d+)?)\s*(?:km|kph|kmh|kilometres?|kilometers?)\s+when\b/g,
+    "$1 km wind"
+  )
+  .replace(
+    /(\d+(?:\.\d+)?)\s+when\b/g,
+    "$1 wind"
+  )
+  .replace(
+    /\bwind into\b|\binto wind\b/g,
+    "headwind"
+  )
+  .replace(
+    /\bwind behind\b|\bhelping wind\b/g,
+    "tailwind"
+  )
+  .replace(
+    /\s+/g,
+    " "
+  )
+  .trim();
+
 }
 
 function extractNumbers(t){
-  const m=t.match(/\d+(?:\.\d+)?/g);
-  return m?m.map(Number):[];
+
+  const m=
+    t.match(
+      /\d+(?:\.\d+)?/g
+    );
+
+  return m
+    ?m.map(Number)
+    :[];
+
 }
 
 function parseDistance(t){
-  let m=t.match(/(\d+(?:\.\d+)?)\s*(?:metres?|meters?|meter|metre|m)\b/);
+
+  let m=
+    t.match(
+      /(\d+(?:\.\d+)?)\s*(?:metres?|meters?|meter|metre|m)\b/
+    );
 
   if(m){
-    return{value:Number(m[1]),explicit:true};
-  }
 
-  m=t.match(/(\d+(?:\.\d+)?)\s*(?:yards?|yard|yds?|yd)\b/);
-
-  if(m){
-    return{value:Number(m[1])*YARDS_TO_METRES,explicit:true};
-  }
-
-  const n=extractNumbers(t)[0];
-
-  if(n>=20&&n<=700){
     return{
-      value:unitMode==="imperial"
-        ?n*YARDS_TO_METRES
-        :n,
+      value:Number(m[1]),
+      explicit:true
+    };
+
+  }
+
+  m=
+    t.match(
+      /(\d+(?:\.\d+)?)\s*(?:yards?|yard|yds?|yd)\b/
+    );
+
+  if(m){
+
+    return{
+      value:
+        Number(m[1])*
+        YARDS_TO_METRES,
+      explicit:true
+    };
+
+  }
+
+  const n=
+    extractNumbers(t)[0];
+
+  if(
+    n>=20&&
+    n<=700
+  ){
+
+    return{
+      value:
+        unitMode==="imperial"
+          ?n*YARDS_TO_METRES
+          :n,
       explicit:false
     };
+
   }
 
   return null;
+
 }
 
 function parseLie(t){
-  if(/\bdeep rough\b|\bheavy rough\b|\bthick rough\b|\bbad rough\b|\blong rough\b/.test(t)){
-    return"deep rough";
+
+  if(
+    /\bdeep rough\b|\bheavy rough\b|\bthick rough\b|\bbad rough\b|\blong rough\b/
+      .test(t)
+  ){
+
+    return "deep rough";
+
   }
 
-  if(/\blight rough\b|\bfirst cut\b|\bsemi rough\b/.test(t)){
-    return"light rough";
+  if(
+    /\blight rough\b|\bfirst cut\b|\bsemi rough\b/
+      .test(t)
+  ){
+
+    return "light rough";
+
   }
 
-  if(/\brough\b/.test(t)){
-    return"rough";
+  if(
+    /\brough\b/
+      .test(t)
+  ){
+
+    return "rough";
+
   }
 
-  if(/\bfairway bunker\b|\bpot bunker\b/.test(t)){
-    return"fairway bunker";
+  if(
+    /\bfairway bunker\b|\bpot bunker\b/
+      .test(t)
+  ){
+
+    return "fairway bunker";
+
   }
 
-  if(/\bgreenside bunker\b|\bgreen side bunker\b/.test(t)){
-    return"greenside bunker";
+  if(
+    /\bgreenside bunker\b|\bgreen side bunker\b/
+      .test(t)
+  ){
+
+    return "greenside bunker";
+
   }
 
-  if(/\bbunker\b|\bsand\b/.test(t)){
-    return"bunker";
+  if(
+    /\bbunker\b|\bsand\b/
+      .test(t)
+  ){
+
+    return "bunker";
+
   }
 
-  if(/\btee\b|\btee box\b/.test(t)){
-    return"tee";
+  if(
+    /\btee\b|\btee box\b/
+      .test(t)
+  ){
+
+    return "tee";
+
   }
 
-  return"fairway";
+  return "fairway";
+
 }
 
 function parseLieQuality(t){
-  if(/\bsitting up\b|\bgood lie\b|\bclean lie\b|\bfluffy\b/.test(t)){
-    return"good";
+
+  if(
+    /\bsitting up\b|\bgood lie\b|\bclean lie\b|\bfluffy\b/
+      .test(t)
+  ){
+
+    return "good";
+
   }
 
-  if(/\bsitting down\b|\bburied\b|\bplugged\b|\bbad lie\b|\bdeep lie\b/.test(t)){
-    return"bad";
+  if(
+    /\bsitting down\b|\bburied\b|\bplugged\b|\bbad lie\b|\bdeep lie\b/
+      .test(t)
+  ){
+
+    return "bad";
+
   }
 
-  return"normal";
+  return "normal";
+
 }
 
 function parseWind(t){
+
   const r={
-    speed:Number(currentConditions.windSpeedKmh)||0,
-    direction:currentConditions.windDirection||"none"
+    speed:
+      Number(
+        currentConditions.windSpeedKmh
+      )||
+      0,
+
+    direction:
+      currentConditions.windDirection||
+      "none"
   };
 
-  let m=t.match(/(\d+(?:\.\d+)?)\s*(?:km\/?h|kmh|kph|kilometres? per hour|kilometers? per hour|km)\b/);
+  let m=
+    t.match(
+      /(\d+(?:\.\d+)?)\s*(?:km\/?h|kmh|kph|kilometres? per hour|kilometers? per hour|km)\b/
+    );
 
   if(m){
-    r.speed=Number(m[1]);
+
+    r.speed=
+      Number(m[1]);
+
   }else{
-    m=t.match(/(\d+(?:\.\d+)?)\s*(?:mph|miles? per hour)\b/);
+
+    m=
+      t.match(
+        /(\d+(?:\.\d+)?)\s*(?:mph|miles? per hour)\b/
+      );
 
     if(m){
-      r.speed=Number(m[1])*1.60934;
-    }else{
-      m=t.match(/(\d+(?:\.\d+)?)\s+wind\b/);
 
-      if(m&&Number(m[1])<=80){
-        r.speed=Number(m[1]);
+      r.speed=
+        Number(m[1])*
+        1.60934;
+
+    }else{
+
+      m=
+        t.match(
+          /(\d+(?:\.\d+)?)\s+wind\b/
+        );
+
+      if(
+        m&&
+        Number(m[1])<=80
+      ){
+
+        r.speed=
+          Number(m[1]);
+
       }
+
     }
+
   }
 
-  if(/\bheadwind\b|\bhead wind\b|\binto the wind\b|\bwind against\b/.test(t)){
-    r.direction="head";
-  }else if(/\btailwind\b|\btail wind\b|\bdownwind\b|\bwind behind\b/.test(t)){
-    r.direction="tail";
-  }else if(/\bleft to right\b|\bleft-to-right\b/.test(t)){
-    r.direction="ltr";
-  }else if(/\bright to left\b|\bright-to-left\b/.test(t)){
-    r.direction="rtl";
-  }else if(/\bcrosswind\b|\bcross wind\b/.test(t)){
-    r.direction="cross";
+  if(
+    /\bheadwind\b|\bhead wind\b|\binto the wind\b|\bwind against\b/
+      .test(t)
+  ){
+
+    r.direction=
+      "head";
+
+  }else if(
+    /\btailwind\b|\btail wind\b|\bdownwind\b|\bwind behind\b/
+      .test(t)
+  ){
+
+    r.direction=
+      "tail";
+
+  }else if(
+    /\bleft to right\b|\bleft-to-right\b/
+      .test(t)
+  ){
+
+    r.direction=
+      "ltr";
+
+  }else if(
+    /\bright to left\b|\bright-to-left\b/
+      .test(t)
+  ){
+
+    r.direction=
+      "rtl";
+
+  }else if(
+    /\bcrosswind\b|\bcross wind\b/
+      .test(t)
+  ){
+
+    r.direction=
+      "cross";
+
   }
 
   return r;
+
 }
 
 function parseElevation(t){
-  let m=t.match(/(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)?\s*(?:uphill|up hill)\b/);
+
+  let m=
+    t.match(
+      /(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)?\s*(?:uphill|up hill)\b/
+    );
 
   if(m){
-    return Number(m[1]);
+
+    return Number(
+      m[1]
+    );
+
   }
 
-  m=t.match(/(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)?\s*(?:downhill|down hill)\b/);
+  m=
+    t.match(
+      /(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)?\s*(?:downhill|down hill)\b/
+    );
 
   if(m){
-    return-Number(m[1]);
+
+    return -Number(
+      m[1]
+    );
+
   }
 
-  if(/\buphill\b|\bup hill\b/.test(t)){
+  if(
+    /\buphill\b|\bup hill\b/
+      .test(t)
+  ){
+
     return 5;
+
   }
 
-  if(/\bdownhill\b|\bdown hill\b/.test(t)){
-    return-5;
+  if(
+    /\bdownhill\b|\bdown hill\b/
+      .test(t)
+  ){
+
+    return -5;
+
   }
 
   return 0;
+
 }
 
 function parseHazards(t){
+
   return{
-    water:/\bwater\b|\bpond\b|\blake\b|\bcreek\b|\bhazard\b/.test(t),
-    bunker:/\bbunker\b|\bsand\b/.test(t),
-    trees:/\btrees?\b/.test(t),
-    trouble:/\btrouble\b|\bob\b|\bout of bounds\b/.test(t),
-    left:/\bleft\b/.test(t),
-    right:/\bright\b/.test(t),
-    short:/\bshort\b|\bfront\b/.test(t),
-    long:/\blong\b|\bback\b/.test(t)
+
+    water:
+      /\bwater\b|\bpond\b|\blake\b|\bcreek\b|\bhazard\b/
+        .test(t),
+
+    bunker:
+      /\bbunker\b|\bsand\b/
+        .test(t),
+
+    trees:
+      /\btrees?\b/
+        .test(t),
+
+    trouble:
+      /\btrouble\b|\bob\b|\bout of bounds\b/
+        .test(t),
+
+    left:
+      /\bleft\b/
+        .test(t),
+
+    right:
+      /\bright\b/
+        .test(t),
+
+    short:
+      /\bshort\b|\bfront\b/
+        .test(t),
+
+    long:
+      /\blong\b|\bback\b/
+        .test(t)
+
   };
+
 }
 
-function calculatePlayingDistance(base,lie,q,wind,elevation){
-  let p=base;
+function calculatePlayingDistance(
+  base,
+  lie,
+  q,
+  wind,
+  elevation
+){
 
-  if(lie==="light rough"){
+  let p=
+    base;
+
+  if(
+    lie==="light rough"
+  ){
+
     p*=1.015;
-  }else if(lie==="rough"){
+
+  }else if(
+    lie==="rough"
+  ){
+
     p*=1.04;
-  }else if(lie==="deep rough"){
+
+  }else if(
+    lie==="deep rough"
+  ){
+
     p*=1.07;
-  }else if(lie==="fairway bunker"){
+
+  }else if(
+    lie==="fairway bunker"
+  ){
+
     p*=1.045;
+
   }
 
-  if(q==="bad"&&(lie==="rough"||lie==="deep rough")){
+  if(
+    q==="bad"&&
+    (
+      lie==="rough"||
+      lie==="deep rough"
+    )
+  ){
+
     p*=1.025;
+
   }
 
-  if(q==="good"&&(lie==="rough"||lie==="light rough")){
-    p-=base*.01;
+  if(
+    q==="good"&&
+    (
+      lie==="rough"||
+      lie==="light rough"
+    )
+  ){
+
+    p-=
+      base*.01;
+
   }
 
-  const windAdj=(wind.speed/1.60934)*.75*YARDS_TO_METRES;
+  const windAdj=
+    (
+      wind.speed/
+      1.60934
+    )*
+    .75*
+    YARDS_TO_METRES;
 
-  if(wind.direction==="head"){
+  if(
+    wind.direction==="head"
+  ){
+
     p+=windAdj;
+
   }
 
-  if(wind.direction==="tail"){
+  if(
+    wind.direction==="tail"
+  ){
+
     p-=windAdj;
+
   }
 
-  if(elevation>0){
-    p+=base*.05;
+  if(
+    elevation>0
+  ){
+
+    p+=
+      base*.05;
+
   }
 
-  if(elevation<0){
-    p-=base*.05;
+  if(
+    elevation<0
+  ){
+
+    p-=
+      base*.05;
+
   }
 
-  return Math.max(1,p);
+  return Math.max(
+    1,
+    p
+  );
+
 }
 
-function describeLie(lie,q){
-  if(lie==="deep rough"){
+function describeLie(
+  lie,
+  q
+){
+
+  if(
+    lie==="deep rough"
+  ){
+
     return q==="bad"
       ?"deep rough, sitting down"
       :"deep rough";
+
   }
 
-  if(lie==="rough"){
+  if(
+    lie==="rough"
+  ){
+
     return q==="good"
       ?"rough, sitting up"
       :q==="bad"
       ?"rough, sitting down"
       :"rough";
+
   }
 
   return lie;
+
 }
 
 function buildHazardAdvice(h){
+
   if(h.water){
-    if(h.left)return"Water left — favour right-centre.";
-    if(h.right)return"Water right — favour left-centre.";
-    if(h.short)return"Water short — cover it.";
-    if(h.long)return"Water long — centre is enough.";
-    return"Water in play — safe side.";
+
+    if(h.left){
+      return "Water left — favour right-centre.";
+    }
+
+    if(h.right){
+      return "Water right — favour left-centre.";
+    }
+
+    if(h.short){
+      return "Water short — cover it.";
+    }
+
+    if(h.long){
+      return "Water long — centre is enough.";
+    }
+
+    return "Water in play — safe side.";
+
   }
 
   if(h.bunker){
-    if(h.left)return"Bunker left — favour right.";
-    if(h.right)return"Bunker right — favour left.";
-    if(h.short)return"Bunker short — cover it.";
-    if(h.long)return"Bunker long — centre is enough.";
-    return"Bunker in play.";
+
+    if(h.left){
+      return "Bunker left — favour right.";
+    }
+
+    if(h.right){
+      return "Bunker right — favour left.";
+    }
+
+    if(h.short){
+      return "Bunker short — cover it.";
+    }
+
+    if(h.long){
+      return "Bunker long — centre is enough.";
+    }
+
+    return "Bunker in play.";
+
   }
 
   if(h.trees){
+
     return h.left
       ?"Trees left — favour right."
       :h.right
       ?"Trees right — favour left."
       :"Take the clear window.";
+
   }
 
   if(h.trouble){
+
     return h.left
       ?"Trouble left — favour right."
       :h.right
       ?"Trouble right — favour left."
       :"Keep the big miss out.";
+
   }
 
-  return"";
+  return "";
+
 }
 
 function buildWindAdvice(w){
-  const s=w.speed
-    ?Math.round(w.speed)+" km/h "
-    :"";
 
-  if(w.direction==="head"){
-    return s+"headwind — flight it down.";
+  const s=
+    w.speed
+      ?Math.round(
+        w.speed
+      )+
+      " km/h "
+      :"";
+
+  if(
+    w.direction==="head"
+  ){
+
+    return s+
+      "headwind — flight it down.";
+
   }
 
-  if(w.direction==="tail"){
-    return s+"tailwind — allow extra carry.";
+  if(
+    w.direction==="tail"
+  ){
+
+    return s+
+      "tailwind — allow extra carry.";
+
   }
 
-  if(w.direction==="ltr"){
-    return s+"left-to-right — start left.";
+  if(
+    w.direction==="ltr"
+  ){
+
+    return s+
+      "left-to-right — start left.";
+
   }
 
-  if(w.direction==="rtl"){
-    return s+"right-to-left — start right.";
+  if(
+    w.direction==="rtl"
+  ){
+
+    return s+
+      "right-to-left — start right.";
+
   }
 
-  if(w.direction==="cross"){
-    return s+"crosswind — allow for it.";
+  if(
+    w.direction==="cross"
+  ){
+
+    return s+
+      "crosswind — allow for it.";
+
   }
 
   return w.speed
     ?s+"wind."
     :"";
+
 }
 
-function buildLieCue(lie,q){
-  if(lie==="deep rough"){
-    return"Get it out cleanly.";
+function buildLieCue(
+  lie,
+  q
+){
+
+  if(
+    lie==="deep rough"
+  ){
+
+    return "Get it out cleanly.";
+
   }
 
-  if(lie==="rough"&&q==="good"){
-    return"Flyer possible.";
+  if(
+    lie==="rough"&&
+    q==="good"
+  ){
+
+    return "Flyer possible.";
+
   }
 
-  if(lie==="rough"&&q==="bad"){
-    return"Clean contact first.";
+  if(
+    lie==="rough"&&
+    q==="bad"
+  ){
+
+    return "Clean contact first.";
+
   }
 
-  if(lie==="fairway bunker"){
-    return"Clean strike.";
+  if(
+    lie==="fairway bunker"
+  ){
+
+    return "Clean strike.";
+
   }
 
-  if(lie==="greenside bunker"){
-    return"Use the bounce.";
+  if(
+    lie==="greenside bunker"
+  ){
+
+    return "Use the bounce.";
+
   }
 
-  if(lie==="bunker"){
-    return"Check the lip.";
+  if(
+    lie==="bunker"
+  ){
+
+    return "Check the lip.";
+
   }
 
-  return"";
+  return "";
+
 }
 
 function handleGolfCommand(command){
-  const original=command.trim();
-  const text=normaliseSpeech(original);
-  const hole=holes[currentHole];
-  const distanceInfo=parseDistance(text);
 
-  const base=distanceInfo
-    ?distanceInfo.value
-    :hole.centre;
+  const original=
+    command.trim();
 
-  const lie=parseLie(text);
-  const q=parseLieQuality(text);
-  const wind=parseWind(text);
-  const elevation=parseElevation(text);
-  const hazard=parseHazards(text);
+  const text=
+    normaliseSpeech(
+      original
+    );
 
-  const useful=Boolean(
-    distanceInfo||
-    lie!=="fairway"||
-    elevation||
-    hazard.water||
-    hazard.bunker||
-    hazard.trees||
-    hazard.trouble||
-    /\bwind\b|\bheadwind\b|\btailwind\b|\bcrosswind\b/.test(text)
-  );
+  const hole=
+    holes[currentHole];
+
+  const distanceInfo=
+    parseDistance(
+      text
+    );
+
+  const base=
+    distanceInfo
+      ?distanceInfo.value
+      :hole.centre;
+
+  const lie=
+    parseLie(
+      text
+    );
+
+  const q=
+    parseLieQuality(
+      text
+    );
+
+  const wind=
+    parseWind(
+      text
+    );
+
+  const elevation=
+    parseElevation(
+      text
+    );
+
+  const hazard=
+    parseHazards(
+      text
+    );
+
+  const useful=
+    Boolean(
+
+      distanceInfo||
+
+      lie!=="fairway"||
+
+      elevation||
+
+      hazard.water||
+      hazard.bunker||
+      hazard.trees||
+      hazard.trouble||
+
+      /\bwind\b|\bheadwind\b|\btailwind\b|\bcrosswind\b/
+        .test(text)
+
+    );
 
   if(!useful){
-    const m="Give me the distance, lie or trouble. Example: 155 rough, water left.";
 
-    setCaddieAnswers(m);
-    $("lastShot").textContent="Heard: "+original;
-    speak(m);
+    const m=
+      "Give me the distance, lie or trouble. Example: 155 rough, water left.";
+
+    setCaddieAnswers(
+      m
+    );
+
+    $("lastShot")
+      .textContent=
+      "Heard: "+
+      original;
+
+    speak(
+      m
+    );
 
     return;
+
   }
 
-  const playing=calculatePlayingDistance(
-    base,
-    lie,
-    q,
-    wind,
-    elevation
-  );
+  const playing=
+    calculatePlayingDistance(
+      base,
+      lie,
+      q,
+      wind,
+      elevation
+    );
 
-  const club=chooseClubForShot(
-    playing,
-    lie,
-    hazard
-  );
+  const club=
+    chooseClubForShot(
+      playing,
+      lie,
+      hazard
+    );
 
-  setRecommendedClub(club);
+  setRecommendedClub(
+    club
+  );
 
   const parts=[];
 
   parts.push(
-    (distanceInfo
-      ?formatDistance(base)+", "
-      :""
+    (
+      distanceInfo
+        ?formatDistance(base)+", "
+        :""
     )+
-    describeLie(lie,q)+"."
+    describeLie(
+      lie,
+      q
+    )+
+    "."
   );
 
-  if(Math.abs(playing-base)>=2){
-    parts.push("Playing "+formatDistance(playing)+".");
+  if(
+    Math.abs(
+      playing-base
+    )>=2
+  ){
+
+    parts.push(
+      "Playing "+
+      formatDistance(
+        playing
+      )+
+      "."
+    );
+
   }
 
-  parts.push(club+".");
+  parts.push(
+    club+
+    "."
+  );
 
-  const hazardAdvice=buildHazardAdvice(hazard);
+  const hazardAdvice=
+    buildHazardAdvice(
+      hazard
+    );
+
   if(hazardAdvice){
-    parts.push(hazardAdvice);
+
+    parts.push(
+      hazardAdvice
+    );
+
   }
 
-  const windAdvice=buildWindAdvice(wind);
+  const windAdvice=
+    buildWindAdvice(
+      wind
+    );
+
   if(windAdvice){
-    parts.push(windAdvice);
+
+    parts.push(
+      windAdvice
+    );
+
   }
 
-  const lieCue=buildLieCue(lie,q);
+  const lieCue=
+    buildLieCue(
+      lie,
+      q
+    );
+
   if(lieCue){
-    parts.push(lieCue);
+
+    parts.push(
+      lieCue
+    );
+
   }
 
-  if(elevation>0){
-    parts.push("Uphill — take the number.");
-  }else if(elevation<0){
-    parts.push("Downhill — control the carry.");
+  if(
+    elevation>0
+  ){
+
+    parts.push(
+      "Uphill — take the number."
+    );
+
+  }else if(
+    elevation<0
+  ){
+
+    parts.push(
+      "Downhill — control the carry."
+    );
+
   }
 
-  if(/\bdraw\b/.test(text)){
-    parts.push("Set the draw start line.");
+  if(
+    /\bdraw\b/
+      .test(text)
+  ){
+
+    parts.push(
+      "Set the draw start line."
+    );
+
   }
 
-  if(/\bfade\b/.test(text)){
-    parts.push("Set the fade start line.");
+  if(
+    /\bfade\b/
+      .test(text)
+  ){
+
+    parts.push(
+      "Set the fade start line."
+    );
+
   }
 
-  if(/\bknockdown\b|\bpunch\b|\blow shot\b/.test(text)){
-    parts.push("Three-quarter finish.");
+  if(
+    /\bknockdown\b|\bpunch\b|\blow shot\b/
+      .test(text)
+  ){
+
+    parts.push(
+      "Three-quarter finish."
+    );
+
   }
 
-  parts.push("Commit.");
+  parts.push(
+    "Commit."
+  );
 
-  const advice=parts
-    .join(" ")
-    .replace(/\s+/g," ")
-    .trim();
+  const advice=
+    parts
+      .join(" ")
+      .replace(
+        /\s+/g,
+        " "
+      )
+      .trim();
 
-  $("lastShot").textContent="Heard: "+original;
+  $("lastShot")
+    .textContent=
+    "Heard: "+
+    original;
 
-  setCaddieAnswers(advice);
-  speak(advice);
+  setCaddieAnswers(
+    advice
+  );
+
+  speak(
+    advice
+  );
+
 }
 
 function speak(text){
-  if(!("speechSynthesis"in window)){
+
+  if(
+    !(
+      "speechSynthesis"
+      in window
+    )
+  ){
+
     return;
+
   }
 
   speechSynthesis.cancel();
 
-  const u=new SpeechSynthesisUtterance(text);
+  const u=
+    new SpeechSynthesisUtterance(
+      text
+    );
 
   u.rate=.95;
   u.pitch=1;
   u.volume=1;
 
-  speechSynthesis.speak(u);
+  speechSynthesis.speak(
+    u
+  );
+
 }
 
 function updateCaddiePage(){
-  if(!$("caddieHole")){
+
+  if(
+    !$("caddieHole")
+  ){
+
     return;
+
   }
 
-  const h=holes[currentHole];
-  const d=displayDistance(h.centre);
-  const n=getCaddieName();
+  const h=
+    holes[currentHole];
 
-  $("largeCaddieName").textContent=n;
-  $("caddieHole").textContent=h.hole;
-  $("caddieDistance").textContent=d.value+" "+d.unit;
-  $("caddieClub").textContent=$("recommendedClub").textContent;
+  const d=
+    displayDistance(
+      h.centre
+    );
+
+  const n=
+    getCaddieName();
+
+  $("largeCaddieName")
+    .textContent=
+    n;
+
+  $("caddieHole")
+    .textContent=
+    h.hole;
+
+  $("caddieDistance")
+    .textContent=
+    d.value+
+    " "+
+    d.unit;
+
+  $("caddieClub")
+    .textContent=
+    $("recommendedClub")
+      .textContent;
+
 }
 
 function renderBag(){
-  $("bagRows").innerHTML="";
 
-  Object.entries(bagMetres).forEach(([club,carry])=>{
-    const r=document.createElement("div");
+  $("bagRows")
+    .innerHTML=
+    "";
 
-    r.className="bag-row";
+  Object
+    .entries(
+      bagMetres
+    )
+    .forEach(
+      ([club,carry])=>{
 
-    r.innerHTML=
-      '<div class="bag-club">'+club+'</div>'+
-      '<input class="bag-input" type="number" data-club="'+club+'" value="'+carry+'">'+
-      '<div class="bag-unit">m</div>';
+        const r=
+          document.createElement(
+            "div"
+          );
 
-    $("bagRows").appendChild(r);
-  });
+        r.className=
+          "bag-row";
+
+        r.innerHTML=
+          '<div class="bag-club">'+
+          club+
+          '</div>'+
+          '<input class="bag-input" type="number" data-club="'+
+          club+
+          '" value="'+
+          carry+
+          '">'+
+          '<div class="bag-unit">m</div>';
+
+        $("bagRows")
+          .appendChild(
+            r
+          );
+
+      }
+    );
+
 }
 
 function saveBag(){
-  $$(".bag-input").forEach(i=>{
-    const v=Number(i.value);
 
-    if(v>=0&&Number.isFinite(v)){
-      bagMetres[i.dataset.club]=v;
-    }
-  });
+  $$(".bag-input")
+    .forEach(
+      i=>{
+
+        const v=
+          Number(
+            i.value
+          );
+
+        if(
+          v>=0&&
+          Number.isFinite(v)
+        ){
+
+          bagMetres[
+            i.dataset.club
+          ]=
+            v;
+
+        }
+
+      }
+    );
 
   localStorage.setItem(
     "drcBagMetres",
-    JSON.stringify(bagMetres)
+    JSON.stringify(
+      bagMetres
+    )
   );
 
   recommendClub();
 
-  alert("My Bag saved.");
+  alert(
+    "My Bag saved."
+  );
+
 }
 
 function saveCourse(){
+
   const c={
-    name:$("courseName").value.trim(),
-    teeType:$("teeType").value,
-    teeColour:$("teeColour").value
+    name:
+      $("courseName")
+        .value
+        .trim(),
+
+    teeType:
+      $("teeType")
+        .value,
+
+    teeColour:
+      $("teeColour")
+        .value
   };
 
   localStorage.setItem(
     "drcCourseSetup",
-    JSON.stringify(c)
+    JSON.stringify(
+      c
+    )
   );
 
-  alert("Course saved.");
+  alert(
+    "Course saved."
+  );
+
 }
 
 function loadCourse(){
-  const c=JSON.parse(
-    localStorage.getItem("drcCourseSetup")||"null"
-  );
+
+  const c=
+    JSON.parse(
+      localStorage.getItem(
+        "drcCourseSetup"
+      )||
+      "null"
+    );
 
   if(!c){
     return;
   }
 
-  $("courseName").value=c.name||"";
-  $("teeType").value=c.teeType||"MEN";
-  $("teeColour").value=c.teeColour||"WHITE";
+  $("courseName")
+    .value=
+    c.name||
+    "";
+
+  $("teeType")
+    .value=
+    c.teeType||
+    "MEN";
+
+  $("teeColour")
+    .value=
+    c.teeColour||
+    "WHITE";
+
 }
 
 function updateCoursePage(){
-  if(!$("courseHoleNumber")){
+
+  if(
+    !$("courseHoleNumber")
+  ){
+
     return;
+
   }
 
-  const h=holes[currentHole];
-  const d=displayDistance(h.centre);
+  const h=
+    holes[currentHole];
 
-  $("courseHoleNumber").textContent=h.hole;
-  $("coursePar").textContent=h.par;
-  $("courseDistance").textContent=d.value+" "+d.unit;
+  const d=
+    displayDistance(
+      h.centre
+    );
+
+  $("courseHoleNumber")
+    .textContent=
+    h.hole;
+
+  $("coursePar")
+    .textContent=
+    h.par;
+
+  $("courseDistance")
+    .textContent=
+    d.value+
+    " "+
+    d.unit;
+
 }
 
 function toggleUnits(){
+
   unitMode=
     unitMode==="metric"
       ?"imperial"
@@ -1726,112 +4026,256 @@ function toggleUnits(){
 
   renderHole();
   updateMorePage();
+
 }
 
 function updateMorePage(){
-  if(!$("unitToggle")){
+
+  if(
+    !$("unitToggle")
+  ){
+
     return;
+
   }
 
-  $("unitToggle").textContent=
+  $("unitToggle")
+    .textContent=
     unitMode==="metric"
       ?"METRES"
       :"YARDS";
 
-  $("moreCaddieName").value=getCaddieName();
+  $("moreCaddieName")
+    .value=
+    getCaddieName();
+
+  updateGpsDisplay();
+
 }
 
 function renderScorecard(){
-  const body=$("scorecardBody");
 
-  body.innerHTML="";
+  const body=
+    $("scorecardBody");
+
+  body.innerHTML=
+    "";
 
   let totalPar=0;
   let totalScore=0;
   let played=0;
 
-  holes.forEach(h=>{
-    totalPar+=h.par;
+  holes.forEach(
+    h=>{
 
-    const d=holeScores[h.hole];
+      totalPar+=
+        h.par;
 
-    const score=
-      d&&d.score>0
-        ?d.score
-        :0;
+      const d=
+        holeScores[
+          h.hole
+        ];
 
-    if(score){
-      totalScore+=score;
-      played++;
+      const score=
+        d&&
+        d.score>0
+          ?d.score
+          :0;
+
+      if(score){
+
+        totalScore+=
+          score;
+
+        played++;
+
+      }
+
+      const r=
+        document.createElement(
+          "tr"
+        );
+
+      r.innerHTML=
+        "<td>"+
+        h.hole+
+        "</td>"+
+        "<td>"+
+        h.par+
+        "</td>"+
+        "<td>"+
+        (
+          score||
+          "–"
+        )+
+        "</td>"+
+        "<td>"+
+        (
+          d
+            ?d.putts
+            :"–"
+        )+
+        "</td>"+
+        "<td>"+
+        (
+          d&&
+          d.gir
+            ?"✓"
+            :"–"
+        )+
+        "</td>"+
+        "<td>"+
+        (
+          d&&
+          d.fairway
+            ?"✓"
+            :"–"
+        )+
+        "</td>"+
+        "<td>"+
+        (
+          d
+            ?d.penalty
+            :"–"
+        )+
+        "</td>";
+
+      body.appendChild(
+        r
+      );
+
     }
+  );
 
-    const r=document.createElement("tr");
+  $("totalPar")
+    .textContent=
+    totalPar;
 
-    r.innerHTML=
-      "<td>"+h.hole+"</td>"+
-      "<td>"+h.par+"</td>"+
-      "<td>"+(score||"–")+"</td>"+
-      "<td>"+(d?d.putts:"–")+"</td>"+
-      "<td>"+(d&&d.gir?"✓":"–")+"</td>"+
-      "<td>"+(d&&d.fairway?"✓":"–")+"</td>"+
-      "<td>"+(d?d.penalty:"–")+"</td>";
+  $("totalScore")
+    .textContent=
+    totalScore||
+    "–";
 
-    body.appendChild(r);
-  });
+  $("toPar")
+    .textContent=
 
-  $("totalPar").textContent=totalPar;
-  $("totalScore").textContent=totalScore||"–";
-
-  $("toPar").textContent=
     played===18
+
       ?(
-        totalScore-totalPar===0
+        totalScore-
+        totalPar===
+        0
+
           ?"E"
-          :totalScore-totalPar>0
-          ?"+"+(totalScore-totalPar)
-          :totalScore-totalPar
+
+          :totalScore-
+           totalPar>
+           0
+
+          ?"+"+
+           (
+             totalScore-
+             totalPar
+           )
+
+          :totalScore-
+           totalPar
       )
+
       :"–";
+
 }
 
-function selectPracticeType(btn,type){
-  practiceType=type;
+function selectPracticeType(
+  btn,
+  type
+){
 
-  $$(".practice-type").forEach(
-    b=>b.classList.remove("active")
-  );
+  practiceType=
+    type;
 
-  btn.classList.add("active");
+  $$(".practice-type")
+    .forEach(
+      b=>
+        b.classList
+          .remove(
+            "active"
+          )
+    );
+
+  btn.classList
+    .add(
+      "active"
+    );
+
 }
 
-function selectShape(btn,shape){
-  practiceShape=shape;
+function selectShape(
+  btn,
+  shape
+){
 
-  $$(".shape-btn").forEach(
-    b=>b.classList.remove("active")
-  );
+  practiceShape=
+    shape;
 
-  btn.classList.add("active");
+  $$(".shape-btn")
+    .forEach(
+      b=>
+        b.classList
+          .remove(
+            "active"
+          )
+    );
+
+  btn.classList
+    .add(
+      "active"
+    );
+
 }
 
 function practiceAdd(type){
-  practiceCounts[type]++;
+
+  practiceCounts[
+    type
+  ]++;
+
   renderPracticeCounts();
+
 }
 
 function renderPracticeCounts(){
-  $("practiceGood").textContent=practiceCounts.good;
-  $("practiceLeft").textContent=practiceCounts.left;
-  $("practiceRight").textContent=practiceCounts.right;
-  $("practiceShort").textContent=practiceCounts.short;
-  $("practiceLong").textContent=practiceCounts.long;
+
+  $("practiceGood")
+    .textContent=
+    practiceCounts.good;
+
+  $("practiceLeft")
+    .textContent=
+    practiceCounts.left;
+
+  $("practiceRight")
+    .textContent=
+    practiceCounts.right;
+
+  $("practiceShort")
+    .textContent=
+    practiceCounts.short;
+
+  $("practiceLong")
+    .textContent=
+    practiceCounts.long;
+
 }
 
 function renderPractice(){
+
   renderPracticeCounts();
+
 }
 
 function resetPractice(){
+
   practiceCounts={
     good:0,
     left:0,
@@ -1840,30 +4284,56 @@ function resetPractice(){
     long:0
   };
 
-  $("practiceNote").value="";
+  $("practiceNote")
+    .value=
+    "";
 
   renderPracticeCounts();
+
 }
 
 function savePractice(){
-  const s=JSON.parse(
-    localStorage.getItem("drcPracticeHistory")||"[]"
-  );
+
+  const s=
+    JSON.parse(
+      localStorage.getItem(
+        "drcPracticeHistory"
+      )||
+      "[]"
+    );
 
   s.unshift({
-    date:new Date().toISOString(),
-    type:practiceType,
-    shape:practiceShape,
-    counts:{...practiceCounts},
-    note:$("practiceNote").value.trim()
+    date:
+      new Date()
+        .toISOString(),
+
+    type:
+      practiceType,
+
+    shape:
+      practiceShape,
+
+    counts:{
+      ...practiceCounts
+    },
+
+    note:
+      $("practiceNote")
+        .value
+        .trim()
   });
 
   localStorage.setItem(
     "drcPracticeHistory",
-    JSON.stringify(s)
+    JSON.stringify(
+      s
+    )
   );
 
-  alert("Practice session saved.");
+  alert(
+    "Practice session saved."
+  );
+
 }
 
 function renderChecklist(
@@ -1874,39 +4344,82 @@ function renderChecklist(
   progressId,
   textId
 ){
-  const c=$(containerId);
 
-  c.innerHTML="";
+  const c=
+    $(containerId);
 
-  steps.forEach((step,i)=>{
-    const r=document.createElement("div");
+  c.innerHTML=
+    "";
 
-    r.className="check-row";
+  steps.forEach(
+    (step,i)=>{
 
-    r.innerHTML=
-      '<button class="check-button '+
-      (state[i]?"done":"")+
-      '" onclick="'+toggleName+'('+i+')">'+
-      (state[i]?"✓":"")+
-      '</button>'+
-      '<div>'+
-      '<div class="check-title">'+step[0]+'</div>'+
-      '<div class="check-small">'+step[1]+'</div>'+
-      '</div>';
+      const r=
+        document.createElement(
+          "div"
+        );
 
-    c.appendChild(r);
-  });
+      r.className=
+        "check-row";
 
-  const done=state.filter(Boolean).length;
+      r.innerHTML=
+        '<button class="check-button '+
+        (
+          state[i]
+            ?"done"
+            :""
+        )+
+        '" onclick="'+
+        toggleName+
+        '('+
+        i+
+        ')">'+
+        (
+          state[i]
+            ?"✓"
+            :""
+        )+
+        '</button>'+
+        '<div>'+
+        '<div class="check-title">'+
+        step[0]+
+        '</div>'+
+        '<div class="check-small">'+
+        step[1]+
+        '</div>'+
+        '</div>';
 
-  $(progressId).style.width=
-    (done/steps.length*100)+"%";
+      c.appendChild(
+        r
+      );
 
-  $(textId).textContent=
-    done+" of 8 complete";
+    }
+  );
+
+  const done=
+    state
+      .filter(Boolean)
+      .length;
+
+  $(progressId)
+    .style
+    .width=
+    (
+      done/
+      steps.length*
+      100
+    )+
+    "%";
+
+  $(textId)
+    .textContent=
+    done+
+    " of 8 complete";
+
 }
 
 function renderWarmup(){
+
   renderChecklist(
     "warmupRows",
     warmupSteps,
@@ -1915,31 +4428,44 @@ function renderWarmup(){
     "warmupProgress",
     "warmupProgressText"
   );
+
 }
 
 function toggleWarmup(i){
-  warmupState[i]=!warmupState[i];
+
+  warmupState[i]=
+    !warmupState[i];
 
   localStorage.setItem(
     "drcWarmupState",
-    JSON.stringify(warmupState)
+    JSON.stringify(
+      warmupState
+    )
   );
 
   renderWarmup();
+
 }
 
 function resetWarmup(){
-  warmupState=new Array(8).fill(false);
+
+  warmupState=
+    new Array(8)
+      .fill(false);
 
   localStorage.setItem(
     "drcWarmupState",
-    JSON.stringify(warmupState)
+    JSON.stringify(
+      warmupState
+    )
   );
 
   renderWarmup();
+
 }
 
 function renderRoutine(){
+
   renderChecklist(
     "routineRows",
     routineSteps,
@@ -1948,62 +4474,103 @@ function renderRoutine(){
     "routineProgress",
     "routineProgressText"
   );
+
 }
 
 function toggleRoutine(i){
-  routineState[i]=!routineState[i];
+
+  routineState[i]=
+    !routineState[i];
 
   localStorage.setItem(
     "drcRoutineState",
-    JSON.stringify(routineState)
+    JSON.stringify(
+      routineState
+    )
   );
 
   renderRoutine();
+
 }
 
 function resetRoutine(){
-  routineState=new Array(8).fill(false);
+
+  routineState=
+    new Array(8)
+      .fill(false);
 
   localStorage.setItem(
     "drcRoutineState",
-    JSON.stringify(routineState)
+    JSON.stringify(
+      routineState
+    )
   );
 
   renderRoutine();
+
 }
 
 function loadSettings(){
+
   const savedCaddie=
-    localStorage.getItem("drcCaddieName");
+    localStorage.getItem(
+      "drcCaddieName"
+    );
 
   if(savedCaddie){
-    $("caddieName").value=savedCaddie;
+
+    $("caddieName")
+      .value=
+      savedCaddie;
+
   }
 
   const savedHole=
-    Number(localStorage.getItem("drcCurrentHole"));
+    Number(
+      localStorage.getItem(
+        "drcCurrentHole"
+      )
+    );
 
   if(
-    Number.isInteger(savedHole)&&
+    Number.isInteger(
+      savedHole
+    )&&
     savedHole>=0&&
     savedHole<=17
   ){
-    currentHole=savedHole;
+
+    currentHole=
+      savedHole;
+
   }
 
-  const n=getCaddieName();
+  const n=
+    getCaddieName();
 
-  $("askName").textContent=n;
-  $("largeCaddieName").textContent=n;
-  $("moreCaddieName").value=n;
+  $("askName")
+    .textContent=
+    n;
+
+  $("largeCaddieName")
+    .textContent=
+    n;
+
+  $("moreCaddieName")
+    .value=
+    n;
 
   setCaddieAnswers(
-    "Ready. Ask "+n+" for the shot."
+    "Ready. Ask "+
+    n+
+    " for the shot."
   );
 
   loadCourse();
   updateMorePage();
   renderConditions();
+  updateGpsDisplay();
+
 }
 
 loadSettings();
@@ -2012,7 +4579,9 @@ renderWarmup();
 renderRoutine();
 renderHole();
 setupRecognition();
+startGps();
+
 </script>
 
 </body>
-</html>
+  </html>
