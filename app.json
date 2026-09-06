@@ -25,6 +25,18 @@
       },
       "package": "com.dalecopeland.drcvirtualgolf"
     },
+    "plugins": [
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Allow DRC Virtual Golf to use the microphone.",
+          "speechRecognitionPermission": "Allow DRC Virtual Golf to use speech recognition.",
+          "androidSpeechServicePackages": [
+            "com.google.android.googlequicksearchbox"
+          ]
+        }
+      ]
+    ],
     "web": {}
   }
 }
