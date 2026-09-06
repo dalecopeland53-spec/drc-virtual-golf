@@ -2,185 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tour Pro Elite</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { backgroundColor: #030812; color: #fff; min-height: 100vh; padding-bottom: 20px; }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #101a30; background: #030812; }
-        .menu-icon { color: #fff; font-size: 20px; cursor: pointer; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        body { 
+            backgroundColor: #03081e; 
+            color: #ffffff; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 15px;
+        }
+        .top-bar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+        }
+        .menu-icon { color: #fff; font-size: 24px; }
         .brand-box { text-align: center; }
-        .brand-title { color: #d4af37; font-size: 16px; font-weight: bold; letter-spacing: 2px; }
-        .brand-sub { color: #d4af37; font-size: 8px; letter-spacing: 3px; margin-top: -2px; }
-        .weather-box { background: #0d1527; padding: 6px 10px; border-radius: 6px; text-align: right; font-size: 11px; }
-        .wind-txt { color: #8fa0c0; font-size: 9px; margin-top: 2px; }
-        .main-layout { display: flex; padding: 8px; gap: 8px; }
+        .brand-title { color: #d4af37; font-size: 20px; font-weight: bold; }
+        .brand-sub { color: #d4af37; font-size: 12px; letter-spacing: 2px; }
+        .weather-box { background: #0b1536; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 20px; }
+        .wind-txt { color: #8fa0c0; font-size: 14px; }
+        .main-layout { display: flex; gap: 15px; }
         .left-col { flex: 0.46; }
-        .right-col { flex: 0.54; display: flex; flex-direction: column; gap: 8px; }
-        .radar-box { height: 340px; background: #112511; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; position: relative; border: 1px solid #1e3d1e; }
-        .flag-badge { background: rgba(0,0,0,0.7); padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; color: #fff; }
-        .range-arc { width: 100%; height: 1px; background: rgba(255,255,255,0.15); display: flex; justify-content: center; }
-        .arc-text { color: #557555; font-size: 9px; margin-top: -12px; background: #112511; padding: 0 4px; }
-        .ball-marker { width: 10px; height: 10px; background: #fff; border-radius: 50%; position: absolute; bottom: 30px; box-shadow: 0 0 8px #fff; }
-        .pod-card { background: #0d1527; border-radius: 8px; padding: 10px; border: 1px solid #16223f; }
-        .pod-header { color: #607898; font-size: 10px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #1a2744; padding-bottom: 4px; margin-bottom: 6px; letter-spacing: 0.5px; }
-        .par-text { color: #8fa0c0; float: right; }
-        .metric-val { color: #ffcc00; font-size: 26px; font-weight: bold; margin-top: 4px; }
-        .speech-bubble { color: #a0b2d6; font-size: 10px; font-style: italic; line-height: 14px; }
-        .club-name { color: #fff; font-size: 18px; font-weight: bold; margin-top: 2px; }
-        .carry-val { color: #ffcc00; font-size: 12px; margin-top: 2px; }
-        .panel-card { background: #0a0f1d; border-radius: 8px; padding: 12px; margin: 8px; border: 1px solid #16223f; }
-        .panel-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .panel-title { color: #8fa0c0; font-size: 11px; font-weight: bold; }
-        .adren-btn { background: #16223f; border: 1px solid #25355a; padding: 5px 10px; border-radius: 4px; color: #8fa0c0; font-size: 9px; font-weight: bold; cursor: pointer; }
-        .adren-btn.active { background: #ff9800; color: #030812; border-color: #ff9800; }
-        .chip-cluster { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; justify-content: center; }
-        .lie-chip { background: #16223f; padding: 6px 12px; border-radius: 4px; color: #8fa0c0; font-size: 10px; font-weight: 600; border: none; cursor: pointer; }
-        .lie-chip.active { background: #d4af37; color: #030812; font-weight: bold; }
-        .commit-btn { background: #1a73e8; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; }
-        .clear-btn { background: none; border: none; color: #f44336; font-size: 11px; width: 100%; margin-top: 10px; cursor: pointer; }
-        .log-card { background: #0d1527; border-radius: 8px; padding: 12px; margin: 8px; border: 1px solid #16223f; }
-        .log-title { color: #fff; font-size: 12px; font-weight: bold; margin-bottom: 8px; border-bottom: 1px solid #1a2744; padding-bottom: 4px; }
-        .empty-text { color: #435875; font-size: 11px; font-style: italic; text-align: center; padding: 8px 0; }
-        .log-item-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #16223f; font-size: 12px; }
-        .sg-text-val { color: #4caf50; font-weight: bold; }
+        .right-col { flex: 0.54; display: flex; flex-direction: column; gap: 15px; }
+        .radar-box { height: 340px; background: #0b1536; border-radius: 12px; position: relative; }
+        .flag-badge { background: #ffcc00; color: #000; padding: 2px 6px; font-size: 12px; font-weight: bold; border-radius: 4px; }
+        .range-arc { width: 100%; height: auto; }
+        .arc-text { color: #557555; font-size: 12px; }
+        .ball-marker { width: 10px; height: 10px; background: #fff; border-radius: 50%; }
+        .pod-card { background: #0b1536; padding: 12px; border-radius: 12px; }
+        .pod-header { color: #60789b; font-size: 12px; text-transform: uppercase; margin-bottom: 5px; }
+        .par-text { color: #8fa0c0; font-size: 14px; }
+        .metric-val { color: #ffcc00; font-size: 24px; font-weight: bold; }
+        .speech-bubble { color: #a0aec0; font-size: 13px; font-style: italic; }
+        .club-name { color: #fff; font-size: 16px; font-weight: bold; }
+        .carry-val { color: #ffcc00; font-size: 18px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- 1. TOP TELEMETRY BAR -->
+    <!-- Top Navigation Bar -->
     <div class="top-bar">
         <div class="menu-icon">☰</div>
         <div class="brand-box">
             <div class="brand-title">TOUR PRO</div>
-            <div class="brand-sub">— ELITE —</div>
+            <div class="brand-sub">ELITE</div>
         </div>
-        <div class="weather-box">
-            <div>24°C</div>
-            <div class="wind-txt">💨 8 km/h</div>
-        </div>
+        <div style="width: 24px;"></div>
     </div>
 
-    <!-- 2. SPLIT LAYOUT -->
+    <!-- Weather Information Bar -->
+    <div class="weather-box">
+        <span class="wind-txt">💨 Wind: 12 mph NW • Temp: 74°F</span>
+    </div>
+
+    <!-- Interface Workspace Grid -->
     <div class="main-layout">
+        <!-- Left Workspace Section (Radar/Map Display Component) -->
         <div class="left-col">
             <div class="radar-box">
-                <div class="flag-badge" id="mapFlag">⛳ 498m</div>
-                <div class="range-arc"><span class="arc-text">280 m</span></div>
-                <div class="range-arc"><span class="arc-text">230 m</span></div>
-                <div class="ball-marker"></div>
+                <div style="padding: 10px; display: flex; justify-content: space-between;">
+                    <span class="flag-badge">Hole 4</span>
+                    <span style="color: #8fa0c0; font-size: 14px;">Par 4</span>
+                </div>
+                <!-- Visual placeholder graphic elements go here -->
             </div>
         </div>
 
+        <!-- Right Workspace Section (Data Output Pods Component) -->
         <div class="right-col">
+            <!-- Analytics Overview Component Card -->
             <div class="pod-card">
-                <div class="pod-header">Hole 1 <span class="par-text">Par 5</span></div>
-                <div class="metric-val" id="distCentre">498 m</div>
-            </div>
-
-            <div class="pod-card">
-                <div class="pod-header">AI Voice Caddie</div>
-                <div class="speech-bubble" id="caddieBubble">
-                    "Target requires 498m. Wind limits adjusted carry parameter to 223.2m target."
+                <div class="pod-header">Distance Metrics</div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <div>
+                        <div class="par-text">To Pin</div>
+                        <div class="metric-val">165 <span style="font-size: 14px; color:#8fa0c0;">yds</span></div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="par-text">Plays Like</div>
+                        <div class="metric-val" style="color: #fff;">162 <span style="font-size: 14px; color:#8fa0c0;">yds</span></div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Virtual Assistant Caddie Advice Component Card -->
             <div class="pod-card">
-                <div class="pod-header">Recommended Club</div>
-                <div class="club-name" id="recClub">Driver</div>
-                <div class="carry-val" id="recCarry">Est: 223.2m</div>
+                <div class="pod-header">AI Caddie Recommendation</div>
+                <div class="speech-bubble">"Wind is blowing slightly left-to-right. Recommend an easy 7-iron aiming just down the left side of the green."</div>
+            </div>
+
+            <!-- Club History Selection Performance Component Card -->
+            <div class="pod-card">
+                <div class="pod-header">Club Selector Suggestions</div>
+                <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                    <span class="club-name">7 Iron</span>
+                    <span class="carry-val">165 yds avg</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 5px; opacity: 0.6;">
+                    <span class="club-name">8 Iron</span>
+                    <span class="carry-val" style="color: #fff;">150 yds avg</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 3. OPERATIONS CONTROL -->
-    <div class="panel-card">
-        <div class="panel-header-row">
-            <div class="panel-title">Operations Control Pipeline</div>
-            <button class="adren-btn" id="adrenToggle" onclick="toggleAdrenaline()">Adrenaline Dampener</button>
-        </div>
-        
-        <div class="chip-cluster">
-            <button class="lie-chip active" onclick="selectLie('tee', this)">TEE</button>
-            <button class="lie-chip" onclick="selectLie('fairway', this)">FAIRWAY</button>
-            <button class="lie-chip" onclick="selectLie('rough', this)">ROUGH</button>
-            <button class="lie-chip" onclick="selectLie('sand', this)">SAND</button>
-            <button class="lie-chip" onclick="selectLie('green', this)">GREEN</button>
-        </div>
-
-        <button class="commit-btn" onclick="executeShot()">Execute Matrix Shot Log</button>
-        <button class="clear-btn" id="resetBtn" style="display:none;" onclick="resetRound()">Reset Hole Telemetry Matrix</button>
-    </div>
-
-    <!-- 4. DATA LOG PIPELINE -->
-    <div class="log-card">
-        <div class="log-title">Live Strokes Gained Data Streams</div>
-        <div id="logCanvas">
-            <div class="empty-text">Awaiting tournament telemetry entries...</div>
-        </div>
-    </div>
-
-    <script>
-        let shots = [];
-        let selectedLie = 'tee';
-        let selectedClub = 'Driver';
-        let currentDistance = 498;
-        let adrenalineOn = false;
-        
-        const temp = 24;
-        const wind = 8;
-
-        function getAdjustedCarry() {
-            let base = 230;
-            base += (temp - 20) * 0.12;
-            base -= wind * 0.85;
-            if (adrenalineOn) base = base * 0.94;
-            return Math.max(0, base).toFixed(1);
-        }
-
-        function updateUI() {
-            const carry = getAdjustedCarry();
-            document.getElementById('distCentre').innerText = currentDistance + " m";
-            document.getElementById('mapFlag').innerText = "⛳ " + currentDistance + "m";
-            document.getElementById('recClub').innerText = selectedClub;
-            document.getElementById('recCarry').innerText = "Est: " + carry + "m";
-            
-            document.getElementById('caddieBubble').innerText = 
-                `"Target requires ${currentDistance}m. Wind limits adjusted carry parameter to ${carry}m target."`;
-            
-            if (shots.length > 0) {
-                document.getElementById('resetBtn').style.display = 'block';
-            } else {
-                document.getElementById('resetBtn').style.display = 'none';
-            }
-            
-            renderLog();
-        }
-
-        function toggleAdrenaline() {
-            adrenalineOn = !adrenalineOn;
-            const btn = document.getElementById('adrenToggle');
-            if (adrenalineOn) {
-                btn.classList.add('active');
-                btn.innerText = "⚡ Adrenaline ON";
-            } else {
-                btn.classList.remove('active');
-                btn.innerText = "Adrenaline Dampener";
-            }
-            updateUI();
-        }
-
-        function selectLie(lie, element) {
-            selectedLie = lie;
-            document.querySelectorAll('.lie-chip').forEach(chip => chip.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function executeShot() {
-            const carry = parseFloat(getAdjustedCarry());
-            shots.push({ club: selectedClub, lie: selectedLie });
-            
-            currentDistance = Math.max(0, currentDistance - Math.round(carry));
-            
-            if (currentDistance === 0) {
-
+</body>
+</html>
