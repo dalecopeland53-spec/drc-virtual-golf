@@ -52,8 +52,6 @@ button{
   background:var(--bg);
 }
 
-/* HEADER */
-
 .header{
   display:grid;
   grid-template-columns:34px 1fr 84px;
@@ -101,8 +99,6 @@ button{
   font-size:10px;
 }
 
-/* ONE-SCREEN ROUND PAGE */
-
 .page{
   min-height:0;
   overflow:hidden;
@@ -119,8 +115,6 @@ button{
   gap:4px;
 }
 
-/* MAP */
-
 .map-card{
   min-height:0;
   height:100%;
@@ -128,7 +122,6 @@ button{
   overflow:hidden;
   border:1px solid #1b415d;
   border-radius:11px;
-
   background:
     linear-gradient(
       90deg,
@@ -144,15 +137,12 @@ button{
 
 .water{
   position:absolute;
-  inset:0 0 0 auto;
-  width:20%;
   background:linear-gradient(#145069,#072e47);
+  transition:.2s ease;
 }
 
 .fairway{
   position:absolute;
-  inset:0 13% 0 19%;
-
   background:
     linear-gradient(
       90deg,
@@ -161,65 +151,38 @@ button{
       #55bc70,
       #2d9a56
     );
-
-  clip-path:polygon(
-    40% 100%,
-    67% 87%,
-    55% 76%,
-    75% 63%,
-    60% 49%,
-    72% 36%,
-    58% 22%,
-    63% 0,
-    35% 0,
-    40% 22%,
-    25% 36%,
-    39% 49%,
-    24% 64%,
-    38% 77%,
-    27% 91%
-  );
+  transition:.2s ease;
 }
 
 .green{
   position:absolute;
-  top:2%;
-  left:34%;
-  width:45%;
-  height:8%;
   border-radius:50%;
   background:#69ca72;
+  transition:.2s ease;
 }
 
 .bunker{
   position:absolute;
-  top:10%;
-  left:28%;
-  width:28%;
-  height:4%;
   border-radius:50%;
   background:#ddcf98;
-  transform:rotate(-20deg);
+  transition:.2s ease;
 }
 
 .flag{
   position:absolute;
-  top:3%;
-  left:50%;
   transform:translateX(-50%);
   font-size:17px;
   z-index:8;
+  transition:.2s ease;
 }
 
 .shot-line{
   position:absolute;
-  top:9%;
-  bottom:10%;
-  left:50%;
   width:2px;
   transform:translateX(-50%);
   background:rgba(255,255,255,.62);
   z-index:5;
+  transition:.2s ease;
 }
 
 .marker{
@@ -233,17 +196,9 @@ button{
   z-index:7;
 }
 
-.marker.one{
-  top:18%;
-}
-
-.marker.two{
-  top:47%;
-}
-
-.marker.three{
-  top:72%;
-}
+.marker.one{top:18%}
+.marker.two{top:47%}
+.marker.three{top:72%}
 
 .marker-label{
   position:absolute;
@@ -256,17 +211,9 @@ button{
   white-space:nowrap;
 }
 
-.marker-label.one{
-  top:16%;
-}
-
-.marker-label.two{
-  top:45%;
-}
-
-.marker-label.three{
-  top:70%;
-}
+.marker-label.one{top:16%}
+.marker-label.two{top:45%}
+.marker-label.three{top:70%}
 
 .player-dot{
   position:absolute;
@@ -306,8 +253,6 @@ button{
   color:#fff;
 }
 
-/* RIGHT COLUMN */
-
 .right{
   min-height:0;
   display:grid;
@@ -322,8 +267,6 @@ button{
   border:1px solid var(--line);
   border-radius:10px;
 }
-
-/* HOLE */
 
 .hole-panel{
   padding:4px 6px;
@@ -361,8 +304,6 @@ button{
   color:var(--gold);
   font-size:18px;
 }
-
-/* DISTANCE */
 
 .distance-panel{
   padding:4px 5px;
@@ -405,8 +346,6 @@ button{
   float:right;
   color:#fff;
 }
-
-/* VOICE CADDIE */
 
 .voice-panel{
   padding:4px 6px;
@@ -497,8 +436,6 @@ button{
   overflow:auto;
 }
 
-/* CLUB */
-
 .club-panel{
   padding:4px 6px;
   display:grid;
@@ -549,8 +486,6 @@ button{
   font-size:8px;
 }
 
-/* LAST SHOT */
-
 .last-shot-panel{
   padding:4px 6px;
   display:flex;
@@ -562,8 +497,6 @@ button{
   color:#9eb0c2;
   font-size:8px;
 }
-
-/* SCORE */
 
 .score-panel{
   min-height:0;
@@ -638,8 +571,6 @@ button{
   color:#fff;
 }
 
-/* ACTIONS */
-
 .actions{
   display:grid;
   grid-template-columns:1.35fr 1fr;
@@ -663,8 +594,6 @@ button{
   font-size:8px;
   font-weight:800;
 }
-
-/* BOTTOM NAV */
 
 .bottom-nav{
   min-height:0;
@@ -692,7 +621,6 @@ button{
 }
 
 @media(max-width:380px){
-
   .header{
     grid-template-columns:31px 1fr 75px;
   }
@@ -720,9 +648,7 @@ button{
   .marker-label{
     font-size:11px;
   }
-
 }
-
 </style>
 </head>
 
@@ -752,13 +678,12 @@ button{
 
 <div class="map-card">
 
-  <div class="water"></div>
-  <div class="fairway"></div>
-  <div class="green"></div>
-  <div class="bunker"></div>
-  <div class="shot-line"></div>
-
-  <div class="flag">🚩</div>
+  <div id="water" class="water"></div>
+  <div id="fairway" class="fairway"></div>
+  <div id="green" class="green"></div>
+  <div id="bunker" class="bunker"></div>
+  <div id="shotLine" class="shot-line"></div>
+  <div id="flag" class="flag">🚩</div>
 
   <div class="marker one"></div>
   <div class="marker two"></div>
@@ -982,12 +907,7 @@ button{
 
     <div class="score-label">Score</div>
 
-    <div
-      id="scoreValue"
-      class="score-number"
-    >
-      0
-    </div>
+    <div id="scoreValue" class="score-number">0</div>
 
     <div class="score-controls">
 
@@ -1013,12 +933,7 @@ button{
 
     <div class="score-label">Putts</div>
 
-    <div
-      id="puttsValue"
-      class="score-number"
-    >
-      0
-    </div>
+    <div id="puttsValue" class="score-number">0</div>
 
     <div class="score-controls">
 
@@ -1056,9 +971,7 @@ button{
 
   <div class="score-cell">
 
-    <div class="score-label">
-      Fairway
-    </div>
+    <div class="score-label">Fairway</div>
 
     <button
       id="fairwayButton"
@@ -1072,16 +985,9 @@ button{
 
   <div class="score-cell">
 
-    <div class="score-label">
-      Penalty
-    </div>
+    <div class="score-label">Penalty</div>
 
-    <div
-      id="penaltyValue"
-      class="score-number"
-    >
-      0
-    </div>
+    <div id="penaltyValue" class="score-number">0</div>
 
     <div class="score-controls">
 
@@ -1170,12 +1076,6 @@ let unitMode =
   ||
   "metric";
 
-/*
-  TEMPORARY DISPLAY DATA ONLY.
-
-  These are not real course GPS measurements.
-*/
-
 const holes = [
   {hole:1,par:5,si:5,front:480,centre:498,back:512},
   {hole:2,par:4,si:11,front:356,centre:369,back:382},
@@ -1195,6 +1095,171 @@ const holes = [
   {hole:16,par:3,si:18,front:121,centre:132,back:143},
   {hole:17,par:4,si:12,front:355,centre:369,back:382},
   {hole:18,par:4,si:14,front:361,centre:375,back:389}
+];
+
+const holeMaps = [
+  {
+    fairway:"polygon(40% 100%,67% 87%,55% 76%,75% 63%,60% 49%,72% 36%,58% 22%,63% 0,35% 0,40% 22%,25% 36%,39% 49%,24% 64%,38% 77%,27% 91%)",
+    fairwayInset:"0 13% 0 19%",
+    green:{top:"2%",left:"34%",width:"45%",height:"8%"},
+    bunker:{top:"10%",left:"28%",width:"28%",height:"4%",rotate:"-20deg"},
+    water:{top:"0",right:"0",bottom:"0",left:"auto",width:"20%",height:"auto"},
+    flag:{top:"3%",left:"50%"},
+    line:{top:"9%",bottom:"10%",left:"50%"}
+  },
+  {
+    fairway:"polygon(58% 100%,74% 86%,58% 72%,68% 60%,48% 48%,57% 34%,38% 20%,43% 0,20% 0,25% 18%,19% 35%,34% 50%,25% 66%,40% 80%,35% 92%)",
+    fairwayInset:"0 7% 0 21%",
+    green:{top:"2%",left:"24%",width:"41%",height:"8%"},
+    bunker:{top:"9%",left:"58%",width:"24%",height:"4%",rotate:"18deg"},
+    water:{top:"0",left:"0",bottom:"0",right:"auto",width:"15%",height:"auto"},
+    flag:{top:"3%",left:"43%"},
+    line:{top:"9%",bottom:"10%",left:"47%"}
+  },
+  {
+    fairway:"polygon(47% 100%,58% 80%,55% 58%,63% 40%,56% 0,38% 0,41% 40%,33% 58%,39% 80%)",
+    fairwayInset:"0 20% 0 20%",
+    green:{top:"2%",left:"36%",width:"35%",height:"7%"},
+    bunker:{top:"9%",left:"26%",width:"22%",height:"3.5%",rotate:"-10deg"},
+    water:{top:"34%",right:"0",width:"24%",height:"28%",bottom:"auto",left:"auto"},
+    flag:{top:"3%",left:"53%"},
+    line:{top:"9%",bottom:"10%",left:"50%"}
+  },
+  {
+    fairway:"polygon(30% 100%,48% 90%,39% 75%,56% 63%,45% 50%,63% 35%,58% 21%,72% 0,47% 0,38% 18%,26% 35%,35% 52%,22% 67%,31% 82%,20% 93%)",
+    fairwayInset:"0 9% 0 18%",
+    green:{top:"2%",left:"48%",width:"38%",height:"8%"},
+    bunker:{top:"10%",left:"38%",width:"25%",height:"4%",rotate:"22deg"},
+    water:{top:"0",right:"0",width:"17%",height:"45%",bottom:"auto",left:"auto"},
+    flag:{top:"3%",left:"67%"},
+    line:{top:"9%",bottom:"10%",left:"49%"}
+  },
+  {
+    fairway:"polygon(56% 100%,68% 86%,54% 72%,66% 55%,49% 40%,55% 22%,43% 0,24% 0,28% 20%,19% 39%,31% 58%,24% 74%,39% 88%,36% 100%)",
+    fairwayInset:"0 8% 0 20%",
+    green:{top:"2%",left:"25%",width:"42%",height:"8%"},
+    bunker:{top:"10%",left:"58%",width:"25%",height:"4%",rotate:"-24deg"},
+    water:{top:"55%",left:"0",width:"18%",height:"45%",right:"auto",bottom:"auto"},
+    flag:{top:"3%",left:"44%"},
+    line:{top:"9%",bottom:"10%",left:"50%"}
+  },
+  {
+    fairway:"polygon(48% 100%,58% 78%,52% 60%,59% 40%,55% 0,34% 0,38% 40%,31% 61%,39% 79%)",
+    fairwayInset:"0 22% 0 18%",
+    green:{top:"2%",left:"35%",width:"34%",height:"7%"},
+    bunker:{top:"9%",left:"57%",width:"20%",height:"3.5%",rotate:"15deg"},
+    water:{top:"0",right:"0",width:"18%",height:"100%",bottom:"0",left:"auto"},
+    flag:{top:"3%",left:"51%"},
+    line:{top:"9%",bottom:"10%",left:"49%"}
+  },
+  {
+    fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 60%,48% 44%,60% 29%,52% 14%,60% 0,40% 0,33% 15%,23% 31%,34% 46%,24% 62%,35% 76%,25% 91%)",
+    fairwayInset:"0 14% 0 18%",
+    green:{top:"2%",left:"37%",width:"38%",height:"8%"},
+    bunker:{top:"11%",left:"27%",width:"26%",height:"4%",rotate:"-15deg"},
+    water:{top:"28%",right:"0",width:"20%",height:"35%",bottom:"auto",left:"auto"},
+    flag:{top:"3%",left:"55%"},
+    line:{top:"9%",bottom:"10%",left:"48%"}
+  },
+  {
+    fairway:"polygon(64% 100%,74% 86%,61% 72%,69% 57%,52% 42%,58% 28%,43% 14%,47% 0,26% 0,29% 18%,20% 33%,34% 48%,25% 63%,39% 78%,36% 92%)",
+    fairwayInset:"0 8% 0 18%",
+    green:{top:"2%",left:"27%",width:"40%",height:"8%"},
+    bunker:{top:"9%",left:"55%",width:"24%",height:"4%",rotate:"25deg"},
+    water:{top:"0",left:"0",width:"16%",height:"52%",right:"auto",bottom:"auto"},
+    flag:{top:"3%",left:"46%"},
+    line:{top:"9%",bottom:"10%",left:"52%"}
+  },
+  {
+    fairway:"polygon(34% 100%,50% 87%,43% 72%,56% 57%,45% 41%,58% 26%,53% 13%,68% 0,46% 0,35% 13%,22% 29%,33% 45%,21% 60%,32% 75%,22% 91%)",
+    fairwayInset:"0 11% 0 18%",
+    green:{top:"2%",left:"45%",width:"38%",height:"8%"},
+    bunker:{top:"10%",left:"29%",width:"26%",height:"4%",rotate:"-18deg"},
+    water:{top:"60%",right:"0",width:"19%",height:"40%",bottom:"auto",left:"auto"},
+    flag:{top:"3%",left:"63%"},
+    line:{top:"9%",bottom:"10%",left:"48%"}
+  },
+  {
+    fairway:"polygon(55% 100%,68% 88%,57% 73%,66% 58%,51% 45%,62% 30%,56% 16%,64% 0,43% 0,37% 15%,29% 31%,39% 46%,30% 62%,41% 78%,36% 92%)",
+    fairwayInset:"0 10% 0 17%",
+    green:{top:"2%",left:"41%",width:"40%",height:"8%"},
+    bunker:{top:"11%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},
+    water:{top:"0",right:"0",width:"14%",height:"100%",bottom:"0",left:"auto"},
+    flag:{top:"3%",left:"60%"},
+    line:{top:"9%",bottom:"10%",left:"51%"}
+  },
+  {
+    fairway:"polygon(44% 100%,61% 88%,49% 74%,66% 59%,50% 44%,61% 29%,48% 14%,53% 0,30% 0,35% 17%,23% 34%,37% 49%,25% 65%,39% 80%,29% 93%)",
+    fairwayInset:"0 10% 0 19%",
+    green:{top:"2%",left:"31%",width:"42%",height:"8%"},
+    bunker:{top:"10%",left:"59%",width:"24%",height:"4%",rotate:"-20deg"},
+    water:{top:"0",left:"0",width:"16%",height:"100%",right:"auto",bottom:"0"},
+    flag:{top:"3%",left:"50%"},
+    line:{top:"9%",bottom:"10%",left:"50%"}
+  },
+  {
+    fairway:"polygon(49% 100%,57% 80%,53% 62%,61% 42%,55% 0,35% 0,39% 42%,32% 61%,40% 80%)",
+    fairwayInset:"0 21% 0 19%",
+    green:{top:"2%",left:"36%",width:"35%",height:"7%"},
+    bunker:{top:"9%",left:"27%",width:"21%",height:"3.5%",rotate:"17deg"},
+    water:{top:"37%",left:"0",width:"22%",height:"27%",right:"auto",bottom:"auto"},
+    flag:{top:"3%",left:"53%"},
+    line:{top:"9%",bottom:"10%",left:"50%"}
+  },
+  {
+    fairway:"polygon(63% 100%,73% 85%,58% 72%,70% 56%,53% 41%,60% 26%,44% 12%,49% 0,28% 0,31% 16%,20% 31%,34% 47%,25% 64%,39% 80%,35% 93%)",
+    fairwayInset:"0 8% 0 19%",
+    green:{top:"2%",left:"29%",width:"40%",height:"8%"},
+    bunker:{top:"10%",left:"58%",width:"24%",height:"4%",rotate:"-25deg"},
+    water:{top:"0",right:"0",width:"17%",height:"48%",bottom:"auto",left:"auto"},
+    flag:{top:"3%",left:"47%"},
+    line:{top:"9%",bottom:"10%",left:"51%"}
+  },
+  {
+    fairway:"polygon(32% 100%,48% 88%,39% 73%,55% 59%,43% 44%,58% 29%,51% 14%,66% 0,45% 0,34% 14%,22% 30%,33% 46%,21% 62%,33% 78%,23% 92%)",
+    fairwayInset:"0 12% 0 17%",
+    green:{top:"2%",left:"43%",width:"39%",height:"8%"},
+    bunker:{top:"10%",left:"28%",width:"25%",height:"4%",rotate:"-18deg"},
+    water:{top:"54%",left:"0",width:"18%",height:"46%",right:"auto",bottom:"auto"},
+    flag:{top:"3%",left:"62%"},
+    line:{top:"9%",bottom:"10%",left:"48%"}
+  },
+  {
+    fairway:"polygon(55% 100%,70% 87%,57% 74%,69% 59%,51% 44%,62% 28%,55% 14%,63% 0,41% 0,35% 15%,27% 31%,38% 47%,29% 62%,42% 79%,36% 92%)",
+    fairwayInset:"0 10% 0 17%",
+    green:{top:"2%",left:"40%",width:"40%",height:"8%"},
+    bunker:{top:"10%",left:"30%",width:"24%",height:"4%",rotate:"20deg"},
+    water:{top:"0",right:"0",width:"15%",height:"100%",bottom:"0",left:"auto"},
+    flag:{top:"3%",left:"59%"},
+    line:{top:"9%",bottom:"10%",left:"51%"}
+  },
+  {
+    fairway:"polygon(48% 100%,58% 79%,52% 60%,60% 40%,55% 0,35% 0,39% 40%,31% 60%,39% 79%)",
+    fairwayInset:"0 21% 0 19%",
+    green:{top:"2%",left:"36%",width:"34%",height:"7%"},
+    bunker:{top:"9%",left:"56%",width:"21%",height:"3.5%",rotate:"-12deg"},
+    water:{top:"0",left:"0",width:"17%",height:"100%",right:"auto",bottom:"0"},
+    flag:{top:"3%",left:"51%"},
+    line:{top:"9%",bottom:"10%",left:"49%"}
+  },
+  {
+    fairway:"polygon(38% 100%,52% 88%,43% 73%,57% 59%,47% 44%,60% 29%,53% 14%,61% 0,39% 0,33% 15%,23% 31%,34% 47%,24% 63%,36% 79%,26% 92%)",
+    fairwayInset:"0 13% 0 18%",
+    green:{top:"2%",left:"38%",width:"39%",height:"8%"},
+    bunker:{top:"10%",left:"28%",width:"26%",height:"4%",rotate:"-16deg"},
+    water:{top:"30%",right:"0",width:"20%",height:"34%",bottom:"auto",left:"auto"},
+    flag:{top:"3%",left:"56%"},
+    line:{top:"9%",bottom:"10%",left:"48%"}
+  },
+  {
+    fairway:"polygon(61% 100%,72% 86%,59% 72%,68% 57%,52% 43%,59% 29%,44% 14%,49% 0,28% 0,31% 17%,21% 33%,35% 48%,25% 64%,39% 79%,35% 93%)",
+    fairwayInset:"0 8% 0 19%",
+    green:{top:"2%",left:"29%",width:"40%",height:"8%"},
+    bunker:{top:"10%",left:"56%",width:"24%",height:"4%",rotate:"22deg"},
+    water:{top:"55%",left:"0",width:"17%",height:"45%",right:"auto",bottom:"auto"},
+    flag:{top:"3%",left:"47%"},
+    line:{top:"9%",bottom:"10%",left:"51%"}
+  }
 ];
 
 const bagMetres = {
@@ -1229,18 +1294,106 @@ function displayDistance(metres){
         Math.round(
           metres / YARDS_TO_METRES
         ),
-      unit:
-        "yds"
+      unit:"yds"
     };
 
   }
 
   return{
-    value:
-      Math.round(metres),
-    unit:
-      "m"
+    value:Math.round(metres),
+    unit:"m"
   };
+
+}
+
+function applyMapLayout(){
+
+  const map =
+    holeMaps[currentHole];
+
+  const fairway =
+    document.getElementById("fairway");
+
+  const green =
+    document.getElementById("green");
+
+  const bunker =
+    document.getElementById("bunker");
+
+  const water =
+    document.getElementById("water");
+
+  const flag =
+    document.getElementById("flag");
+
+  const shotLine =
+    document.getElementById("shotLine");
+
+  fairway.style.inset =
+    map.fairwayInset;
+
+  fairway.style.clipPath =
+    map.fairway;
+
+  green.style.top =
+    map.green.top;
+
+  green.style.left =
+    map.green.left;
+
+  green.style.width =
+    map.green.width;
+
+  green.style.height =
+    map.green.height;
+
+  bunker.style.top =
+    map.bunker.top;
+
+  bunker.style.left =
+    map.bunker.left;
+
+  bunker.style.width =
+    map.bunker.width;
+
+  bunker.style.height =
+    map.bunker.height;
+
+  bunker.style.transform =
+    "rotate(" + map.bunker.rotate + ")";
+
+  water.style.top =
+    map.water.top;
+
+  water.style.right =
+    map.water.right;
+
+  water.style.bottom =
+    map.water.bottom;
+
+  water.style.left =
+    map.water.left;
+
+  water.style.width =
+    map.water.width;
+
+  water.style.height =
+    map.water.height;
+
+  flag.style.top =
+    map.flag.top;
+
+  flag.style.left =
+    map.flag.left;
+
+  shotLine.style.top =
+    map.line.top;
+
+  shotLine.style.bottom =
+    map.line.bottom;
+
+  shotLine.style.left =
+    map.line.left;
 
 }
 
@@ -1265,19 +1418,13 @@ function renderHole(){
       hole.si;
 
   const front =
-    displayDistance(
-      hole.front
-    );
+    displayDistance(hole.front);
 
   const centre =
-    displayDistance(
-      hole.centre
-    );
+    displayDistance(hole.centre);
 
   const back =
-    displayDistance(
-      hole.back
-    );
+    displayDistance(hole.back);
 
   document
     .getElementById("frontDistance")
@@ -1326,6 +1473,8 @@ function renderHole(){
           centre.unit;
       }
     );
+
+  applyMapLayout();
 
   loadHoleScore();
 
@@ -1383,9 +1532,7 @@ function saveScores(){
 
   localStorage.setItem(
     "drcHoleScores",
-    JSON.stringify(
-      holeScores
-    )
+    JSON.stringify(holeScores)
   );
 
 }
@@ -1438,7 +1585,6 @@ function changeScore(amount){
     );
 
   saveScores();
-
   loadHoleScore();
 
 }
@@ -1455,7 +1601,6 @@ function changePutts(amount){
     );
 
   saveScores();
-
   loadHoleScore();
 
 }
@@ -1472,7 +1617,6 @@ function changePenalty(amount){
     );
 
   saveScores();
-
   loadHoleScore();
 
 }
@@ -1486,7 +1630,6 @@ function toggleGir(){
     !data.gir;
 
   saveScores();
-
   loadHoleScore();
 
 }
@@ -1500,7 +1643,6 @@ function toggleFairway(){
     !data.fairway;
 
   saveScores();
-
   loadHoleScore();
 
 }
@@ -1516,38 +1658,33 @@ function recommendClub(){
   let smallest =
     Infinity;
 
-  Object.entries(
-    bagMetres
-  )
-  .forEach(
-    ([club,carry]) => {
+  Object.entries(bagMetres)
+    .forEach(
+      ([club,carry]) => {
 
-      const difference =
-        Math.abs(
-          target - carry
-        );
+        const difference =
+          Math.abs(
+            target - carry
+          );
 
-      if(difference < smallest){
+        if(difference < smallest){
 
-        smallest =
-          difference;
+          smallest =
+            difference;
 
-        selected =
-          club;
+          selected =
+            club;
+
+        }
 
       }
-
-    }
-  );
+    );
 
   if(target > 210){
-    selected =
-      "Driver";
+    selected = "Driver";
   }
 
-  setRecommendedClub(
-    selected
-  );
+  setRecommendedClub(selected);
 
 }
 
@@ -1693,14 +1830,11 @@ function setupRecognition(){
   recognition.onstart =
     function(){
 
-      listening =
-        true;
+      listening = true;
 
       document
         .getElementById("micButton")
-        .classList.add(
-          "listening"
-        );
+        .classList.add("listening");
 
       document
         .getElementById("caddieAnswer")
@@ -1717,9 +1851,7 @@ function setupRecognition(){
           .transcript
           .trim();
 
-      handleGolfCommand(
-        transcript
-      );
+      handleGolfCommand(transcript);
 
     };
 
@@ -1730,8 +1862,7 @@ function setupRecognition(){
         "I couldn't hear that clearly.";
 
       if(
-        event.error ===
-        "not-allowed"
+        event.error === "not-allowed"
       ){
         message =
           "Microphone permission is blocked.";
@@ -1747,14 +1878,11 @@ function setupRecognition(){
   recognition.onend =
     function(){
 
-      listening =
-        false;
+      listening = false;
 
       document
         .getElementById("micButton")
-        .classList.remove(
-          "listening"
-        );
+        .classList.remove("listening");
 
     };
 
@@ -1793,7 +1921,6 @@ function askCaddie(){
   if(listening){
 
     recognition.stop();
-
     return;
 
   }
@@ -1838,19 +1965,15 @@ function handleGolfCommand(command){
     ||
     text.includes("headwind")
   ){
-
     advice +=
       "Keep the flight controlled and don't force it. ";
-
   }
 
   if(
     text.includes("rough")
   ){
-
     advice +=
       "Check the lie first and prioritise clean contact. ";
-
   }
 
   if(
@@ -1858,19 +1981,15 @@ function handleGolfCommand(command){
     ||
     text.includes("sand")
   ){
-
     advice +=
       "Commit to the strike and use the bounce. ";
-
   }
 
   if(
     text.includes("water")
   ){
-
     advice +=
       "Take the penalty area out of play where possible. ";
-
   }
 
   advice +=
@@ -1885,9 +2004,7 @@ function handleGolfCommand(command){
     .textContent =
       advice;
 
-  speak(
-    advice
-  );
+  speak(advice);
 
 }
 
@@ -1896,10 +2013,7 @@ function speak(text){
   if(
     !voiceEnabled
     ||
-    !(
-      "speechSynthesis"
-      in window
-    )
+    !("speechSynthesis" in window)
   ){
     return;
   }
@@ -1909,34 +2023,22 @@ function speak(text){
     .cancel();
 
   const utterance =
-    new SpeechSynthesisUtterance(
-      text
-    );
+    new SpeechSynthesisUtterance(text);
 
-  utterance.rate =
-    0.95;
-
-  utterance.pitch =
-    1;
-
-  utterance.volume =
-    1;
+  utterance.rate = 0.95;
+  utterance.pitch = 1;
+  utterance.volume = 1;
 
   window
     .speechSynthesis
-    .speak(
-      utterance
-    );
+    .speak(utterance);
 
 }
 
 function showScorecard(){
 
-  let totalScore =
-    0;
-
-  let totalPar =
-    0;
+  let totalScore = 0;
+  let totalPar = 0;
 
   let text =
     "DRC VIRTUAL GOLF\n\n";
@@ -1958,8 +2060,7 @@ function showScorecard(){
         0;
 
       if(score > 0){
-        totalScore +=
-          score;
+        totalScore += score;
       }
 
       text +=
@@ -2000,9 +2101,7 @@ function showScorecard(){
 
   }
 
-  alert(
-    text
-  );
+  alert(text);
 
 }
 
@@ -2029,8 +2128,7 @@ function loadSettings(){
 
   if(savedVoice === "false"){
 
-    voiceEnabled =
-      false;
+    voiceEnabled = false;
 
     document
       .getElementById("voiceToggle")
@@ -2039,9 +2137,7 @@ function loadSettings(){
 
     document
       .getElementById("voiceToggle")
-      .classList.add(
-        "off"
-      );
+      .classList.add("off");
 
   }
 
@@ -2059,10 +2155,7 @@ function loadSettings(){
     &&
     savedHole <= 17
   ){
-
-    currentHole =
-      savedHole;
-
+    currentHole = savedHole;
   }
 
   const name =
@@ -2085,9 +2178,7 @@ function loadSettings(){
 }
 
 loadSettings();
-
 setupRecognition();
-
 renderHole();
 
 </script>
