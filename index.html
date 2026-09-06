@@ -108,7 +108,7 @@ button{
   overflow:hidden;
   padding:4px;
   display:grid;
-  grid-template-rows:minmax(0,1fr) 58px 36px;
+  grid-template-rows:minmax(0,1fr) 64px 34px;
   gap:4px;
 }
 
@@ -566,6 +566,7 @@ button{
 /* SCORE */
 
 .score-panel{
+  min-height:0;
   display:grid;
   grid-template-columns:1.25fr 1fr 1fr 1fr 1fr;
   background:var(--panel);
@@ -576,9 +577,11 @@ button{
 
 .score-cell{
   min-width:0;
+  min-height:0;
   border-right:1px solid #18334a;
   text-align:center;
-  padding:3px 1px;
+  padding:2px 1px;
+  overflow:hidden;
 }
 
 .score-cell:last-child{
@@ -588,40 +591,46 @@ button{
 .score-label{
   font-size:8px;
   font-weight:800;
+  line-height:10px;
 }
 
 .score-number{
-  font-size:16px;
+  font-size:14px;
+  line-height:16px;
   font-weight:900;
-  margin-top:2px;
+  margin-top:1px;
 }
 
 .score-controls{
   display:flex;
   justify-content:center;
+  align-items:center;
   gap:2px;
   margin-top:2px;
 }
 
 .score-btn{
-  width:21px;
-  height:21px;
-  border-radius:7px;
+  width:20px;
+  height:20px;
+  line-height:18px;
+  border-radius:6px;
   background:#0a2941;
   border:1px solid #28546f;
   color:#fff;
-  font-size:14px;
+  font-size:13px;
+  font-weight:800;
 }
 
 .circle{
-  width:26px;
-  height:26px;
+  width:24px;
+  height:24px;
+  line-height:22px;
   border-radius:50%;
-  margin-top:7px;
+  margin-top:6px;
   background:#0d2639;
   border:1px solid #2c566f;
   color:#a8bac9;
-  font-size:13px;
+  font-size:12px;
 }
 
 .circle.active{
@@ -635,12 +644,13 @@ button{
   display:grid;
   grid-template-columns:1.35fr 1fr;
   gap:4px;
+  min-height:0;
 }
 
 .next{
   background:var(--gold);
   color:#06101a;
-  border-radius:10px;
+  border-radius:9px;
   font-size:10px;
   font-weight:900;
 }
@@ -649,7 +659,7 @@ button{
   background:#071e31;
   color:#fff;
   border:1px solid #22547a;
-  border-radius:10px;
+  border-radius:9px;
   font-size:8px;
   font-weight:800;
 }
@@ -722,30 +732,16 @@ button{
 
 <header class="header">
 
-  <div class="menu">
-    ☰
-  </div>
+  <div class="menu">☰</div>
 
   <div class="brand">
-
-    <div class="brand-main">
-      DRC VIRTUAL GOLF
-    </div>
-
-    <div class="brand-sub">
-      ELITE
-    </div>
-
+    <div class="brand-main">DRC VIRTUAL GOLF</div>
+    <div class="brand-sub">ELITE</div>
   </div>
 
   <div class="weather">
-
-    <strong>
-      ☀️ 24°C
-    </strong>
-
+    <strong>☀️ 24°C</strong>
     Wind 8 km/h
-
   </div>
 
 </header>
@@ -757,23 +753,15 @@ button{
 <div class="map-card">
 
   <div class="water"></div>
-
   <div class="fairway"></div>
-
   <div class="green"></div>
-
   <div class="bunker"></div>
-
   <div class="shot-line"></div>
 
-  <div class="flag">
-    🚩
-  </div>
+  <div class="flag">🚩</div>
 
   <div class="marker one"></div>
-
   <div class="marker two"></div>
-
   <div class="marker three"></div>
 
   <div class="marker-label one">
@@ -794,15 +782,8 @@ button{
   <div class="player-dot"></div>
 
   <div class="map-switch">
-
-    <button class="active">
-      GPS
-    </button>
-
-    <button>
-      Aerial
-    </button>
-
+    <button class="active">GPS</button>
+    <button>Aerial</button>
   </div>
 
 </div>
@@ -812,34 +793,20 @@ button{
   <div class="panel hole-panel">
 
     <div>
-
       <div class="hole-title">
-        Hole
-        <span id="holeNumber">1</span>
+        Hole <span id="holeNumber">1</span>
       </div>
 
       <div class="hole-meta">
-        Par
-        <span id="holePar">5</span>
-
+        Par <span id="holePar">5</span>
         &nbsp;|&nbsp;
-
-        S.I.
-        <span id="holeSI">5</span>
+        S.I. <span id="holeSI">5</span>
       </div>
-
     </div>
 
     <div class="hole-nav">
-
-      <button onclick="previousHole()">
-        ‹
-      </button>
-
-      <button onclick="nextHole()">
-        ›
-      </button>
-
+      <button onclick="previousHole()">‹</button>
+      <button onclick="nextHole()">›</button>
     </div>
 
   </div>
@@ -848,20 +815,11 @@ button{
 
     <div class="to-centre">
 
-      <div class="label">
-        To Centre
-      </div>
+      <div class="label">To Centre</div>
 
       <div class="big-distance">
-
-        <span id="centreBig">
-          498
-        </span>
-
-        <small class="unit">
-          m
-        </small>
-
+        <span id="centreBig">498</span>
+        <small class="unit">m</small>
       </div>
 
     </div>
@@ -869,7 +827,6 @@ button{
     <div class="distance-list">
 
       Front
-
       <strong>
         <span id="frontDistance">480</span>
         <span class="unit">m</span>
@@ -878,7 +835,6 @@ button{
       <br>
 
       Centre
-
       <strong>
         <span id="centreDistance">498</span>
         <span class="unit">m</span>
@@ -887,7 +843,6 @@ button{
       <br>
 
       Back
-
       <strong>
         <span id="backDistance">512</span>
         <span class="unit">m</span>
@@ -901,9 +856,7 @@ button{
 
     <div class="voice-top">
 
-      <div class="voice-title">
-        Voice Caddie
-      </div>
+      <div class="voice-title">Voice Caddie</div>
 
       <div class="voice-tools">
 
@@ -938,10 +891,7 @@ button{
       </button>
 
       <div class="ask-name">
-        Ask
-        <span id="askName">
-          Pete
-        </span>
+        Ask <span id="askName">Pete</span>
       </div>
 
       <div class="tap-text">
@@ -967,9 +917,7 @@ button{
 
     <div class="club-row">
 
-      <div class="club-icon">
-        🏌️
-      </div>
+      <div class="club-icon">🏌️</div>
 
       <div
         id="recommendedClub"
@@ -979,13 +927,10 @@ button{
       </div>
 
       <div class="carry">
-
         Est. Carry
-
         <strong id="recommendedCarry">
           230 m
         </strong>
-
       </div>
 
     </div>
@@ -995,7 +940,6 @@ button{
       class="club-select"
       onchange="manualClubChange()"
     >
-
       <option>Driver</option>
       <option>3 Wood</option>
       <option>5 Wood</option>
@@ -1009,7 +953,6 @@ button{
       <option>GW</option>
       <option>SW</option>
       <option>LW</option>
-
     </select>
 
   </div>
@@ -1037,9 +980,7 @@ button{
 
   <div class="score-cell">
 
-    <div class="score-label">
-      Score
-    </div>
+    <div class="score-label">Score</div>
 
     <div
       id="scoreValue"
@@ -1070,9 +1011,7 @@ button{
 
   <div class="score-cell">
 
-    <div class="score-label">
-      Putts
-    </div>
+    <div class="score-label">Putts</div>
 
     <div
       id="puttsValue"
@@ -1103,9 +1042,7 @@ button{
 
   <div class="score-cell">
 
-    <div class="score-label">
-      GIR
-    </div>
+    <div class="score-label">GIR</div>
 
     <button
       id="girButton"
@@ -1191,53 +1128,28 @@ button{
 <nav class="bottom-nav">
 
   <button class="active">
-
-    <span class="nav-icon">
-      🏌️
-    </span>
-
+    <span class="nav-icon">🏌️</span>
     Round
-
   </button>
 
   <button>
-
-    <span class="nav-icon">
-      💬
-    </span>
-
+    <span class="nav-icon">💬</span>
     Caddie
-
   </button>
 
   <button>
-
-    <span class="nav-icon">
-      🎒
-    </span>
-
+    <span class="nav-icon">🎒</span>
     My Bag
-
   </button>
 
   <button>
-
-    <span class="nav-icon">
-      ⛳
-    </span>
-
+    <span class="nav-icon">⛳</span>
     Course
-
   </button>
 
   <button>
-
-    <span class="nav-icon">
-      •••
-    </span>
-
+    <span class="nav-icon">•••</span>
     More
-
   </button>
 
 </nav>
@@ -1249,18 +1161,14 @@ button{
 const YARDS_TO_METRES = 0.9144;
 
 let currentHole = 0;
-
 let voiceEnabled = true;
-
 let recognition = null;
-
 let listening = false;
 
 let unitMode =
   localStorage.getItem("drcUnitMode")
   ||
   "metric";
-
 
 /*
   TEMPORARY DISPLAY DATA ONLY.
@@ -1269,7 +1177,6 @@ let unitMode =
 */
 
 const holes = [
-
   {hole:1,par:5,si:5,front:480,centre:498,back:512},
   {hole:2,par:4,si:11,front:356,centre:369,back:382},
   {hole:3,par:3,si:15,front:142,centre:151,back:160},
@@ -1288,40 +1195,23 @@ const holes = [
   {hole:16,par:3,si:18,front:121,centre:132,back:143},
   {hole:17,par:4,si:12,front:355,centre:369,back:382},
   {hole:18,par:4,si:14,front:361,centre:375,back:389}
-
 ];
 
-
 const bagMetres = {
-
   "Driver":230,
-
   "3 Wood":210,
-
   "5 Wood":195,
-
   "4 Iron":180,
-
   "5 Iron":170,
-
   "6 Iron":160,
-
   "7 Iron":150,
-
   "8 Iron":140,
-
   "9 Iron":130,
-
   "PW":115,
-
   "GW":100,
-
   "SW":85,
-
   "LW":70
-
 };
-
 
 let holeScores =
   JSON.parse(
@@ -1330,109 +1220,89 @@ let holeScores =
     "{}"
   );
 
-
 function displayDistance(metres){
 
   if(unitMode === "imperial"){
 
     return{
-
       value:
         Math.round(
           metres / YARDS_TO_METRES
         ),
-
       unit:
         "yds"
-
     };
 
   }
 
   return{
-
     value:
       Math.round(metres),
-
     unit:
       "m"
-
   };
 
 }
-
 
 function renderHole(){
 
   const hole =
     holes[currentHole];
 
-
   document
     .getElementById("holeNumber")
     .textContent =
       hole.hole;
-
 
   document
     .getElementById("holePar")
     .textContent =
       hole.par;
 
-
   document
     .getElementById("holeSI")
     .textContent =
       hole.si;
-
 
   const front =
     displayDistance(
       hole.front
     );
 
-
   const centre =
     displayDistance(
       hole.centre
     );
-
 
   const back =
     displayDistance(
       hole.back
     );
 
-
   document
     .getElementById("frontDistance")
     .textContent =
       front.value;
-
 
   document
     .getElementById("centreDistance")
     .textContent =
       centre.value;
 
-
   document
     .getElementById("centreBig")
     .textContent =
       centre.value;
-
 
   document
     .getElementById("backDistance")
     .textContent =
       back.value;
 
-
   document
     .getElementById("mapFullDistance")
     .textContent =
       centre.value;
-
 
   document
     .getElementById("mapMidDistance")
@@ -1441,7 +1311,6 @@ function renderHole(){
         centre.value * 0.56
       );
 
-
   document
     .getElementById("mapNearDistance")
     .textContent =
@@ -1449,23 +1318,18 @@ function renderHole(){
         centre.value * 0.46
       );
 
-
   document
     .querySelectorAll(".unit")
     .forEach(
       element => {
-
         element.textContent =
           centre.unit;
-
       }
     );
-
 
   loadHoleScore();
 
   recommendClub();
-
 
   localStorage.setItem(
     "drcCurrentHole",
@@ -1474,53 +1338,39 @@ function renderHole(){
 
 }
 
-
 function nextHole(){
 
   if(currentHole < 17){
-
     currentHole++;
-
   }
 
   renderHole();
 
 }
-
 
 function previousHole(){
 
   if(currentHole > 0){
-
     currentHole--;
-
   }
 
   renderHole();
 
 }
-
 
 function getScoreData(){
 
   const number =
     holes[currentHole].hole;
 
-
   if(!holeScores[number]){
 
     holeScores[number] = {
-
       score:0,
-
       putts:0,
-
       gir:false,
-
       fairway:false,
-
       penalty:0
-
     };
 
   }
@@ -1529,45 +1379,36 @@ function getScoreData(){
 
 }
 
-
 function saveScores(){
 
   localStorage.setItem(
-
     "drcHoleScores",
-
     JSON.stringify(
       holeScores
     )
-
   );
 
 }
-
 
 function loadHoleScore(){
 
   const data =
     getScoreData();
 
-
   document
     .getElementById("scoreValue")
     .textContent =
       data.score;
-
 
   document
     .getElementById("puttsValue")
     .textContent =
       data.putts;
 
-
   document
     .getElementById("penaltyValue")
     .textContent =
       data.penalty;
-
 
   document
     .getElementById("girButton")
@@ -1575,7 +1416,6 @@ function loadHoleScore(){
       "active",
       data.gir
     );
-
 
   document
     .getElementById("fairwayButton")
@@ -1586,12 +1426,10 @@ function loadHoleScore(){
 
 }
 
-
 function changeScore(amount){
 
   const data =
     getScoreData();
-
 
   data.score =
     Math.max(
@@ -1599,19 +1437,16 @@ function changeScore(amount){
       data.score + amount
     );
 
-
   saveScores();
 
   loadHoleScore();
 
 }
 
-
 function changePutts(amount){
 
   const data =
     getScoreData();
-
 
   data.putts =
     Math.max(
@@ -1619,19 +1454,16 @@ function changePutts(amount){
       data.putts + amount
     );
 
-
   saveScores();
 
   loadHoleScore();
 
 }
 
-
 function changePenalty(amount){
 
   const data =
     getScoreData();
-
 
   data.penalty =
     Math.max(
@@ -1639,40 +1471,33 @@ function changePenalty(amount){
       data.penalty + amount
     );
 
-
   saveScores();
 
   loadHoleScore();
 
 }
-
 
 function toggleGir(){
 
   const data =
     getScoreData();
 
-
   data.gir =
     !data.gir;
-
 
   saveScores();
 
   loadHoleScore();
 
 }
-
 
 function toggleFairway(){
 
   const data =
     getScoreData();
 
-
   data.fairway =
     !data.fairway;
-
 
   saveScores();
 
@@ -1680,20 +1505,16 @@ function toggleFairway(){
 
 }
 
-
 function recommendClub(){
 
   const target =
     holes[currentHole].centre;
 
-
   let selected =
     "Driver";
 
-
   let smallest =
     Infinity;
-
 
   Object.entries(
     bagMetres
@@ -1706,12 +1527,10 @@ function recommendClub(){
           target - carry
         );
 
-
       if(difference < smallest){
 
         smallest =
           difference;
-
 
         selected =
           club;
@@ -1721,21 +1540,16 @@ function recommendClub(){
     }
   );
 
-
   if(target > 210){
-
     selected =
       "Driver";
-
   }
-
 
   setRecommendedClub(
     selected
   );
 
 }
-
 
 function setRecommendedClub(club){
 
@@ -1744,12 +1558,10 @@ function setRecommendedClub(club){
     .textContent =
       club;
 
-
   const carry =
     displayDistance(
       bagMetres[club]
     );
-
 
   document
     .getElementById("recommendedCarry")
@@ -1760,14 +1572,12 @@ function setRecommendedClub(club){
       +
       carry.unit;
 
-
   document
     .getElementById("clubSelect")
     .value =
       club;
 
 }
-
 
 function manualClubChange(){
 
@@ -1779,7 +1589,6 @@ function manualClubChange(){
 
 }
 
-
 function getCaddieName(){
 
   const value =
@@ -1788,35 +1597,29 @@ function getCaddieName(){
       .value
       .trim();
 
-
   return value || "Pete";
 
 }
-
 
 function saveCaddieName(){
 
   const name =
     getCaddieName();
 
-
   document
     .getElementById("caddieName")
     .value =
       name;
-
 
   document
     .getElementById("askName")
     .textContent =
       name;
 
-
   localStorage.setItem(
     "drcCaddieName",
     name
   );
-
 
   document
     .getElementById("caddieAnswer")
@@ -1829,17 +1632,14 @@ function saveCaddieName(){
 
 }
 
-
 function toggleVoice(){
 
   voiceEnabled =
     !voiceEnabled;
 
-
   const button =
     document
       .getElementById("voiceToggle");
-
 
   button.textContent =
     voiceEnabled
@@ -1848,27 +1648,21 @@ function toggleVoice(){
     :
     "OFF";
 
-
   button.classList.toggle(
     "off",
     !voiceEnabled
   );
 
-
   localStorage.setItem(
-
     "drcVoiceEnabled",
-
     voiceEnabled
     ?
     "true"
     :
     "false"
-
   );
 
 }
-
 
 function setupRecognition(){
 
@@ -1877,33 +1671,24 @@ function setupRecognition(){
     ||
     window.webkitSpeechRecognition;
 
-
   if(!SpeechRecognition){
-
     return false;
-
   }
-
 
   recognition =
     new SpeechRecognition();
 
-
   recognition.lang =
     "en-AU";
-
 
   recognition.continuous =
     false;
 
-
   recognition.interimResults =
     false;
 
-
   recognition.maxAlternatives =
     1;
-
 
   recognition.onstart =
     function(){
@@ -1911,13 +1696,11 @@ function setupRecognition(){
       listening =
         true;
 
-
       document
         .getElementById("micButton")
         .classList.add(
           "listening"
         );
-
 
       document
         .getElementById("caddieAnswer")
@@ -1925,7 +1708,6 @@ function setupRecognition(){
           "Listening...";
 
     };
-
 
   recognition.onresult =
     function(event){
@@ -1935,13 +1717,11 @@ function setupRecognition(){
           .transcript
           .trim();
 
-
       handleGolfCommand(
         transcript
       );
 
     };
-
 
   recognition.onerror =
     function(event){
@@ -1949,17 +1729,13 @@ function setupRecognition(){
       let message =
         "I couldn't hear that clearly.";
 
-
       if(
         event.error ===
         "not-allowed"
       ){
-
         message =
           "Microphone permission is blocked.";
-
       }
-
 
       document
         .getElementById("caddieAnswer")
@@ -1968,13 +1744,11 @@ function setupRecognition(){
 
     };
 
-
   recognition.onend =
     function(){
 
       listening =
         false;
-
 
       document
         .getElementById("micButton")
@@ -1984,11 +1758,9 @@ function setupRecognition(){
 
     };
 
-
   return true;
 
 }
-
 
 function askCaddie(){
 
@@ -2002,7 +1774,6 @@ function askCaddie(){
     return;
 
   }
-
 
   if(
     !recognition
@@ -2019,7 +1790,6 @@ function askCaddie(){
 
   }
 
-
   if(listening){
 
     recognition.stop();
@@ -2028,40 +1798,31 @@ function askCaddie(){
 
   }
 
-
   try{
-
     recognition.start();
-
   }
   catch(error){
-
   }
 
 }
-
 
 function handleGolfCommand(command){
 
   const text =
     command.toLowerCase();
 
-
   const hole =
     holes[currentHole];
-
 
   const distance =
     displayDistance(
       hole.centre
     );
 
-
   const club =
     document
       .getElementById("recommendedClub")
       .textContent;
-
 
   let advice =
     distance.value
@@ -2071,7 +1832,6 @@ function handleGolfCommand(command){
     distance.unit
     +
     " to the centre. ";
-
 
   if(
     text.includes("wind")
@@ -2084,7 +1844,6 @@ function handleGolfCommand(command){
 
   }
 
-
   if(
     text.includes("rough")
   ){
@@ -2093,7 +1852,6 @@ function handleGolfCommand(command){
       "Check the lie first and prioritise clean contact. ";
 
   }
-
 
   if(
     text.includes("bunker")
@@ -2106,7 +1864,6 @@ function handleGolfCommand(command){
 
   }
 
-
   if(
     text.includes("water")
   ){
@@ -2116,7 +1873,6 @@ function handleGolfCommand(command){
 
   }
 
-
   advice +=
     "I like the "
     +
@@ -2124,19 +1880,16 @@ function handleGolfCommand(command){
     +
     ". Commit to the target and swing freely.";
 
-
   document
     .getElementById("caddieAnswer")
     .textContent =
       advice;
-
 
   speak(
     advice
   );
 
 }
-
 
 function speak(text){
 
@@ -2148,34 +1901,26 @@ function speak(text){
       in window
     )
   ){
-
     return;
-
   }
-
 
   window
     .speechSynthesis
     .cancel();
-
 
   const utterance =
     new SpeechSynthesisUtterance(
       text
     );
 
-
   utterance.rate =
     0.95;
-
 
   utterance.pitch =
     1;
 
-
   utterance.volume =
     1;
-
 
   window
     .speechSynthesis
@@ -2185,20 +1930,16 @@ function speak(text){
 
 }
 
-
 function showScorecard(){
 
   let totalScore =
     0;
 
-
   let totalPar =
     0;
 
-
   let text =
     "DRC VIRTUAL GOLF\n\n";
-
 
   holes.forEach(
     hole => {
@@ -2206,10 +1947,8 @@ function showScorecard(){
       const data =
         holeScores[hole.hole];
 
-
       totalPar +=
         hole.par;
-
 
       const score =
         data
@@ -2218,14 +1957,10 @@ function showScorecard(){
         :
         0;
 
-
       if(score > 0){
-
         totalScore +=
           score;
-
       }
-
 
       text +=
         "Hole "
@@ -2251,12 +1986,10 @@ function showScorecard(){
     }
   );
 
-
   text +=
     "\nPar: "
     +
     totalPar;
-
 
   if(totalScore > 0){
 
@@ -2267,13 +2000,11 @@ function showScorecard(){
 
   }
 
-
   alert(
     text
   );
 
 }
-
 
 function loadSettings(){
 
@@ -2281,7 +2012,6 @@ function loadSettings(){
     localStorage.getItem(
       "drcCaddieName"
     );
-
 
   if(savedCaddie){
 
@@ -2292,24 +2022,20 @@ function loadSettings(){
 
   }
 
-
   const savedVoice =
     localStorage.getItem(
       "drcVoiceEnabled"
     );
-
 
   if(savedVoice === "false"){
 
     voiceEnabled =
       false;
 
-
     document
       .getElementById("voiceToggle")
       .textContent =
         "OFF";
-
 
     document
       .getElementById("voiceToggle")
@@ -2319,14 +2045,12 @@ function loadSettings(){
 
   }
 
-
   const savedHole =
     Number(
       localStorage.getItem(
         "drcCurrentHole"
       )
     );
-
 
   if(
     Number.isInteger(savedHole)
@@ -2341,16 +2065,13 @@ function loadSettings(){
 
   }
 
-
   const name =
     getCaddieName();
-
 
   document
     .getElementById("askName")
     .textContent =
       name;
-
 
   document
     .getElementById("caddieAnswer")
@@ -2362,7 +2083,6 @@ function loadSettings(){
       " for the shot.";
 
 }
-
 
 loadSettings();
 
