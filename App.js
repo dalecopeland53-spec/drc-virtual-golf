@@ -15,26 +15,21 @@ export default function App() {
     'https://dalecopeland53-spec.github.io/drc-virtual-golf/';
 
   useEffect(() => {
-    const requestMicrophonePermission = async () => {
+    const requestPermissions = async () => {
       if (Platform.OS !== 'android') return;
 
       try {
-        await PermissionsAndroid.request(
+        await PermissionsAndroid.requestMultiple([
           PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-          {
-            title: 'DRC Virtual Golf Microphone',
-            message:
-              'DRC Virtual Golf needs microphone access so you can speak to your caddie.',
-            buttonPositive: 'Allow',
-            buttonNegative: 'Not now',
-          }
-        );
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+        ]);
       } catch (error) {
-        console.log('Microphone permission error:', error);
+        console.log('Permission error:', error);
       }
     };
 
-    requestMicrophonePermission();
+    requestPermissions();
   }, []);
 
   return (
@@ -49,6 +44,7 @@ export default function App() {
         style={styles.webview}
         javaScriptEnabled={true}
         domStorageEnabled={true}
+        geolocationEnabled={true}
         startInLoadingState={true}
         mediaPlaybackRequiresUserAction={false}
         allowsInlineMediaPlayback={true}
