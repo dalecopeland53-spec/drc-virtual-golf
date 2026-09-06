@@ -32,7 +32,8 @@
           "microphonePermission": "Allow DRC Virtual Golf to use the microphone.",
           "speechRecognitionPermission": "Allow DRC Virtual Golf to use speech recognition.",
           "androidSpeechServicePackages": [
-            "com.google.android.googlequicksearchbox"
+            "com.google.android.googlequicksearchbox",
+            "com.google.android.as"
           ]
         }
       ]
