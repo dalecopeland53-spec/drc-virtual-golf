@@ -100,12 +100,7 @@ try{
 const results=event?.results;
 if(!results||!results.length)return;
 
-let text='';
-for(let i=0;i<results.length;i++){
-const t=results[i]?.transcript?.trim();
-if(t)text=t;
-}
-
+const text=results[0]?.transcript?.trim()||'';
 if(!text)return;
 
 lastTextRef.current=text;
@@ -171,7 +166,7 @@ lang:'en-AU',
 interimResults:true,
 maxAlternatives:1,
 continuous:false,
-androidRecognitionServicePackage:'com.google.android.googlequicksearchbox'
+androidRecognitionServicePackage:'com.google.android.as'
 });
 
 }catch(e){
