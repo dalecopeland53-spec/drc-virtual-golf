@@ -1,665 +1,736 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  />
-
-  <title>DRC Virtual Golf</title>
-
-  <meta name="theme-color" content="#020814" />
-  <meta name="mobile-web-app-capable" content="yes" />
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg: #020814;
-      --panel: #071321;
-      --panel2: #0b1c2e;
-      --border: #1b3a59;
-      --gold: #e5b83f;
-      --blue: #1677ff;
-      --blue2: #0d56af;
-      --text: #ffffff;
-      --muted: #91a4bc;
-      --danger: #e25555;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      min-height: 100vh;
-      padding-bottom: max(90px, env(safe-area-inset-bottom));
-    }
-
-    button,
-    input,
-    select {
-      font-family: inherit;
-    }
-
-    button {
-      cursor: pointer;
-      border: 0;
-    }
-
-    .app {
-      width: 100%;
-      max-width: 620px;
-      margin: 0 auto;
-    }
-
-    .topbar {
-      height: 72px;
-      display: grid;
-      grid-template-columns: 54px 1fr 118px;
-      align-items: center;
-      padding: 8px 14px;
-      border-bottom: 1px solid #10253a;
-      background: #020a14;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-
-    .menu {
-      font-size: 30px;
-      color: #d3dce7;
-    }
-
-    .brand-main {
-      color: var(--gold);
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-align: center;
-    }
-
-    .brand-sub {
-      color: #4da0ff;
-      text-align: center;
-      font-size: 11px;
-      letter-spacing: 4px;
-      margin-top: 2px;
-    }
-
-    .weather {
-      text-align: right;
-      font-size: 12px;
-      color: #d7e2ef;
-      line-height: 1.5;
-    }
-
-    .weather strong {
-      font-size: 16px;
-    }
-
-    .content {
-      padding: 10px;
-    }
-
-    .hole-header {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px;
-      align-items: center;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 13px;
-      margin-bottom: 10px;
-    }
-
-    .hole-title {
-      font-size: 34px;
-      font-weight: 800;
-    }
-
-    .hole-meta {
-      color: var(--muted);
-      font-size: 15px;
-      margin-top: 2px;
-    }
-
-    .hole-nav {
-      display: flex;
-      gap: 8px;
-    }
-
-    .nav-arrow {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #071321;
-      color: var(--gold);
-      border: 1px solid #8c6b1c;
-      font-size: 30px;
-    }
-
-    .course-map {
-      position: relative;
-      height: 440px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid #153b54;
-      background:
-        linear-gradient(
-          90deg,
-          #073624 0%,
-          #10553b 18%,
-          #176b45 45%,
-          #10553b 72%,
-          #073624 100%
-        );
-      margin-bottom: 10px;
-    }
-
-    .fairway {
-      position: absolute;
-      left: 25%;
-      width: 50%;
-      height: 100%;
-      background:
-        linear-gradient(
-          90deg,
-          #1b8a51,
-          #39a85f 45%,
-          #46b569 55%,
-          #1b8a51
-        );
-      clip-path: polygon(
-        44% 100%,
-        72% 87%,
-        58% 75%,
-        77% 60%,
-        60% 46%,
-        68% 29%,
-        52% 0%,
-        35% 0%,
-        38% 28%,
-        22% 47%,
-        38% 64%,
-        27% 79%,
-        36% 90%
-      );
-    }
-
-    .water {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 23%;
-      height: 100%;
-      background: linear-gradient(#134b6b, #082e49);
-      opacity: 0.85;
-    }
-
-    .green {
-      position: absolute;
-      top: 18px;
-      left: 39%;
-      width: 95px;
-      height: 58px;
-      border-radius: 50%;
-      background: #67c56f;
-    }
-
-    .bunker {
-      position: absolute;
-      top: 72px;
-      left: 30%;
-      width: 50px;
-      height: 25px;
-      border-radius: 50%;
-      background: #d9cf9a;
-      transform: rotate(-20deg);
-    }
-
-    .flag {
-      position: absolute;
-      top: 32px;
-      left: 50%;
-      font-size: 25px;
-      transform: translateX(-50%);
-      z-index: 3;
-    }
-
-    .distance-marker {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      font-weight: 800;
-      font-size: 26px;
-      text-shadow: 0 2px 4px #000;
-      z-index: 4;
-    }
-
-    .marker-back {
-      top: 65px;
-    }
-
-    .marker-mid {
-      top: 205px;
-    }
-
-    .marker-front {
-      top: 330px;
-    }
-
-    .gps-dot {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #087cff;
-      border: 4px solid white;
-      box-shadow: 0 0 0 4px rgba(0,124,255,0.25);
-      z-index: 5;
-    }
-
-    .map-toggle {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      background: #06101b;
-      border-radius: 24px;
-      padding: 5px;
-      display: flex;
-      gap: 4px;
-      z-index: 8;
-    }
-
-    .map-toggle button {
-      padding: 9px 14px;
-      border-radius: 18px;
-      background: transparent;
-      color: #c3cfdd;
-      font-size: 13px;
-    }
-
-    .map-toggle .active {
-      background: var(--blue);
-      color: white;
-    }
-
-    .distance-card,
-    .voice-card,
-    .club-card,
-    .shot-card,
-    .score-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      margin-bottom: 10px;
-    }
-
-    .distance-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 14px;
-      align-items: center;
-    }
-
-    .distance-label {
-      font-size: 15px;
-      color: #d9e3ef;
-    }
-
-    .distance-big {
-      font-size: 52px;
-      font-weight: 900;
-      color: var(--gold);
-      line-height: 1;
-      margin-top: 4px;
-    }
-
-    .distance-big span {
-      font-size: 24px;
-      color: var(--gold);
-    }
-
-    .distance-list {
-      border-left: 1px solid #173551;
-      padding-left: 18px;
-      line-height: 2;
-      color: #9eb4cf;
-      font-size: 15px;
-    }
-
-    .distance-list strong {
-      color: #fff;
-      float: right;
-      margin-left: 15px;
-    }
-
-    .voice-card {
-      padding: 14px;
-    }
-
-    .voice-top {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .voice-title {
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    .voice-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .voice-switch {
-      background: var(--blue);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .voice-switch.off {
-      background: #24384d;
-      color: #9fb0c5;
-    }
-
-    .caddie-name {
-      border: 1px solid #294563;
-      background: #07111c;
-      color: white;
-      border-radius: 18px;
-      padding: 8px 12px;
-      min-width: 90px;
-      font-size: 13px;
-    }
-
-    .ask-area {
-      text-align: center;
-      padding: 6px 0 12px;
-    }
-
-    .mic-button {
-      width: 86px;
-      height: 86px;
-      border-radius: 50%;
-      background: var(--blue);
-      color: white;
-      font-size: 38px;
-      box-shadow: 0 0 24px rgba(22,119,255,0.3);
-    }
-
-    .mic-button.listening {
-      background: var(--danger);
-    }
-
-    .ask-label {
-      margin-top: 8px;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .ask-sub {
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .caddie-answer {
-      background: #06111d;
-      border: 1px solid #24425f;
-      border-radius: 14px;
-      padding: 13px;
-      font-size: 15px;
-      line-height: 1.5;
-      color: #dbe6f2;
-      min-height: 72px;
-    }
-
-    .club-card {
-      padding: 14px;
-    }
-
-    .section-heading {
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .club-main {
-      display: grid;
-      grid-template-columns: 62px 1fr auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .club-icon {
-      font-size: 45px;
-      text-align: center;
-    }
-
-    .club-name-large {
-      font-size: 31px;
-      font-weight: 900;
-    }
-
-    .carry-box {
-      text-align: right;
-      color: #91a9c5;
-      font-size: 12px;
-    }
-
-    .carry-box strong {
-      display: block;
-      font-size: 27px;
-      color: var(--gold);
-      margin-top: 4px;
-    }
-
-    .club-select {
-      width: 100%;
-      margin-top: 12px;
-      background: #0b2945;
-      border: 1px solid #1c5584;
-      color: white;
-      border-radius: 24px;
-      padding: 11px;
-      font-size: 14px;
-    }
-
-    .shot-card {
-      padding: 14px;
-    }
-
-    .shot-row {
-      color: #91a7c1;
-      font-size: 14px;
-    }
-
-    .score-card {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr;
-      overflow: hidden;
-    }
-
-    .score-cell {
-      min-height: 126px;
-      text-align: center;
-      padding: 12px 5px;
-      border-right: 1px solid #193650;
-    }
-
-    .score-cell:last-child {
-      border-right: none;
-    }
-
-    .score-label {
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .score-number {
-      font-size: 32px;
-      font-weight: 800;
-      margin: 5px 0;
-    }
-
-    .score-controls {
-      display: flex;
-      justify-content: center;
-      gap: 5px;
-      margin-top: 7px;
-    }
-
-    .small-btn {
-      width: 35px;
-      height: 35px;
-      border-radius: 10px;
-      background: #0c2941;
-      border: 1px solid #255374;
-      color: white;
-      font-size: 22px;
-    }
-
-    .boolean {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #10253a;
-      border: 1px solid #285679;
-      color: #9fb2c8;
-      font-size: 20px;
-      margin: 12px auto 0;
-    }
-
-    .boolean.active {
-      background: var(--blue);
-      color: white;
-    }
-
-    .bottom-actions {
-      display: grid;
-      grid-template-columns: 1.35fr 1fr;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .next-hole {
-      background: var(--gold);
-      color: #06101b;
-      border-radius: 14px;
-      padding: 17px 10px;
-      font-size: 18px;
-      font-weight: 900;
-    }
-
-    .scorecard-btn {
-      background: #071d31;
-      color: white;
-      border: 1px solid #1b5380;
-      border-radius: 14px;
-      padding: 17px 10px;
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 76px;
-      background: #020b14;
-      border-top: 1px solid #16324a;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      z-index: 50;
-    }
-
-    .bottom-nav button {
-      background: transparent;
-      color: #8395aa;
-      font-size: 11px;
-      padding-top: 8px;
-    }
-
-    .bottom-nav .active {
-      color: var(--gold);
-    }
-
-    .nav-icon {
-      display: block;
-      font-size: 25px;
-      margin-bottom: 3px;
-    }
-
-    @media(max-width: 390px) {
-      .topbar {
-        grid-template-columns: 38px 1fr 96px;
-      }
-
-      .brand-main {
-        font-size: 18px;
-      }
-
-      .weather {
-        font-size: 10px;
-      }
-
-      .course-map {
-        height: 385px;
-      }
-
-      .distance-big {
-        font-size: 43px;
-      }
-
-      .club-name-large {
-        font-size: 26px;
-      }
-
-      .score-cell {
-        padding-left: 2px;
-        padding-right: 2px;
-      }
-
-      .small-btn {
-        width: 30px;
-        height: 32px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+<title>DRC Virtual Golf</title>
+
+<meta name="theme-color" content="#020913">
+<meta name="mobile-web-app-capable" content="yes">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#020913;
+  --panel:#06111e;
+  --panel2:#091827;
+  --line:#1e3951;
+  --gold:#e7b941;
+  --blue:#1478ff;
+  --text:#ffffff;
+  --muted:#93a9bf;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body{
+  padding-bottom:84px;
+}
+
+button,input,select{
+  font-family:inherit;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
+.app{
+  width:100%;
+  max-width:760px;
+  margin:auto;
+}
+
+/* HEADER */
+
+.header{
+  height:68px;
+  display:grid;
+  grid-template-columns:46px 1fr 105px;
+  align-items:center;
+  padding:5px 10px;
+  border-bottom:1px solid #15304a;
+}
+
+.menu{
+  color:#d8e2ec;
+  font-size:30px;
+}
+
+.brand{
+  text-align:center;
+}
+
+.brand-main{
+  color:var(--gold);
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:2px;
+  line-height:1;
+}
+
+.brand-sub{
+  color:#5a9df2;
+  font-size:10px;
+  letter-spacing:5px;
+  margin-top:5px;
+}
+
+.weather{
+  text-align:right;
+  font-size:11px;
+  color:#d7e3ee;
+  line-height:1.45;
+}
+
+.weather strong{
+  font-size:15px;
+}
+
+/* MAIN */
+
+.page{
+  padding:7px;
+}
+
+.play-grid{
+  display:grid;
+  grid-template-columns:49% 51%;
+  gap:7px;
+  align-items:stretch;
+}
+
+/* LEFT MAP */
+
+.map-card{
+  position:relative;
+  min-height:610px;
+  overflow:hidden;
+  border-radius:15px;
+  border:1px solid #1b4058;
+  background:
+    linear-gradient(
+      90deg,
+      #073a27 0%,
+      #0b5737 19%,
+      #138448 37%,
+      #33a85c 49%,
+      #16894c 61%,
+      #0b5737 80%,
+      #073a27 100%
+    );
+}
+
+.map-water{
+  position:absolute;
+  top:0;
+  right:0;
+  width:18%;
+  height:100%;
+  background:linear-gradient(#15546e,#082e46);
+}
+
+.fairway{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:23%;
+  right:15%;
+  background:linear-gradient(
+    90deg,
+    #1c864a,
+    #39aa5f,
+    #47b86b,
+    #228f50
+  );
+
+  clip-path:polygon(
+    42% 100%,
+    66% 87%,
+    55% 74%,
+    72% 62%,
+    58% 48%,
+    70% 34%,
+    58% 18%,
+    62% 0,
+    35% 0,
+    39% 18%,
+    28% 35%,
+    39% 48%,
+    24% 63%,
+    38% 77%,
+    28% 90%
+  );
+}
+
+.green{
+  position:absolute;
+  top:28px;
+  left:36%;
+  width:100px;
+  height:60px;
+  border-radius:50%;
+  background:#68c96f;
+}
+
+.bunker{
+  position:absolute;
+  top:77px;
+  left:31%;
+  width:62px;
+  height:23px;
+  border-radius:50%;
+  background:#d7cc91;
+  transform:rotate(-18deg);
+}
+
+.flag{
+  position:absolute;
+  top:37px;
+  left:51%;
+  transform:translateX(-50%);
+  font-size:24px;
+  z-index:5;
+}
+
+.map-line{
+  position:absolute;
+  top:74px;
+  bottom:85px;
+  left:50%;
+  width:2px;
+  background:rgba(255,255,255,.55);
+  transform:translateX(-50%);
+}
+
+.map-dot{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#fff;
+  z-index:6;
+}
+
+.dot1{top:92px;}
+.dot2{top:265px;}
+.dot3{top:430px;}
+
+.map-distance{
+  position:absolute;
+  left:55%;
+  color:white;
+  font-size:18px;
+  font-weight:800;
+  text-shadow:0 2px 4px #000;
+  z-index:7;
+  white-space:nowrap;
+}
+
+.distance1{top:80px;}
+.distance2{top:252px;}
+.distance3{top:417px;}
+
+.player-dot{
+  position:absolute;
+  left:50%;
+  bottom:70px;
+  transform:translateX(-50%);
+  width:29px;
+  height:29px;
+  border-radius:50%;
+  background:var(--blue);
+  border:4px solid white;
+  box-shadow:0 0 0 3px rgba(20,120,255,.3);
+  z-index:8;
+}
+
+.map-switch{
+  position:absolute;
+  left:9px;
+  bottom:10px;
+  display:flex;
+  background:#03101c;
+  border-radius:24px;
+  padding:4px;
+  z-index:10;
+}
+
+.map-switch button{
+  color:#cbd7e2;
+  background:transparent;
+  padding:8px 11px;
+  border-radius:18px;
+  font-size:11px;
+}
+
+.map-switch .active{
+  background:var(--blue);
+  color:white;
+}
+
+/* RIGHT COLUMN */
+
+.right-stack{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+
+/* HOLE */
+
+.hole-panel{
+  min-height:92px;
+  padding:10px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+}
+
+.hole-title{
+  font-size:28px;
+  font-weight:900;
+}
+
+.hole-meta{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:2px;
+}
+
+.hole-buttons{
+  display:flex;
+  gap:6px;
+}
+
+.hole-buttons button{
+  width:42px;
+  height:42px;
+  background:#08131d;
+  color:var(--gold);
+  border:1px solid #87691c;
+  border-radius:11px;
+  font-size:26px;
+}
+
+/* DISTANCES */
+
+.distance-panel{
+  padding:10px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  min-height:118px;
+}
+
+.to-centre{
+  padding-right:7px;
+  border-right:1px solid #183349;
+}
+
+.small-heading{
+  font-size:13px;
+  color:#dce5ee;
+}
+
+.big-distance{
+  margin-top:5px;
+  color:var(--gold);
+  font-size:39px;
+  line-height:1;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.big-distance small{
+  font-size:19px;
+}
+
+.distance-list{
+  padding-left:9px;
+  font-size:12px;
+  color:#8da7bf;
+  line-height:2;
+}
+
+.distance-list strong{
+  color:#fff;
+  float:right;
+}
+
+/* VOICE */
+
+.voice-panel{
+  padding:10px;
+  min-height:236px;
+}
+
+.voice-top{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:5px;
+  align-items:center;
+}
+
+.voice-title{
+  font-size:14px;
+  font-weight:800;
+}
+
+.voice-control{
+  display:flex;
+  gap:4px;
+  align-items:center;
+}
+
+.voice-toggle{
+  background:var(--blue);
+  color:white;
+  border-radius:16px;
+  padding:6px 8px;
+  font-size:10px;
+  font-weight:900;
+}
+
+.voice-toggle.off{
+  background:#273a4c;
+  color:#9aabbc;
+}
+
+.caddie-input{
+  width:64px;
+  background:#07101b;
+  border:1px solid #294864;
+  color:white;
+  border-radius:16px;
+  padding:6px 7px;
+  text-align:center;
+  font-size:11px;
+}
+
+.ask-box{
+  text-align:center;
+  margin-top:8px;
+}
+
+.mic{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:var(--blue);
+  color:white;
+  font-size:29px;
+}
+
+.mic.listening{
+  background:#c93434;
+}
+
+.ask-name{
+  font-size:14px;
+  font-weight:800;
+  margin-top:4px;
+}
+
+.ask-sub{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.answer{
+  margin-top:7px;
+  background:#04101b;
+  border:1px solid #223f56;
+  border-radius:11px;
+  min-height:80px;
+  padding:8px;
+  font-size:11px;
+  line-height:1.45;
+  color:#d7e2eb;
+}
+
+/* CLUB */
+
+.club-panel{
+  padding:9px;
+  min-height:128px;
+}
+
+.panel-title{
+  font-size:14px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+
+.club-row{
+  display:grid;
+  grid-template-columns:38px 1fr auto;
+  gap:5px;
+  align-items:center;
+}
+
+.club-icon{
+  font-size:29px;
+}
+
+.club-name{
+  font-size:22px;
+  font-weight:900;
+}
+
+.carry{
+  text-align:right;
+  font-size:9px;
+  color:#95abc0;
+}
+
+.carry strong{
+  display:block;
+  color:var(--gold);
+  font-size:18px;
+  margin-top:2px;
+}
+
+.club-select{
+  margin-top:6px;
+  width:100%;
+  padding:7px;
+  border-radius:17px;
+  background:#09243c;
+  border:1px solid #20557d;
+  color:white;
+  font-size:10px;
+}
+
+/* LAST SHOT */
+
+.last-shot{
+  padding:9px;
+  min-height:67px;
+}
+
+.last-shot-text{
+  font-size:11px;
+  color:#9db0c3;
+}
+
+/* SCORE */
+
+.score-panel{
+  margin-top:7px;
+  display:grid;
+  grid-template-columns:1.35fr repeat(4,1fr);
+  overflow:hidden;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+
+.score-cell{
+  min-height:105px;
+  padding:8px 3px;
+  text-align:center;
+  border-right:1px solid #18354c;
+}
+
+.score-cell:last-child{
+  border-right:0;
+}
+
+.score-label{
+  font-size:11px;
+  font-weight:800;
+}
+
+.score-number{
+  font-size:24px;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.score-controls{
+  display:flex;
+  justify-content:center;
+  gap:4px;
+  margin-top:7px;
+}
+
+.score-btn{
+  width:29px;
+  height:29px;
+  background:#0a2941;
+  border:1px solid #265573;
+  color:white;
+  border-radius:9px;
+  font-size:19px;
+}
+
+.circle-toggle{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  margin-top:16px;
+  background:#0b2133;
+  border:1px solid #28506c;
+  color:#a8b9c8;
+  font-size:18px;
+}
+
+.circle-toggle.active{
+  background:var(--blue);
+  color:#fff;
+}
+
+/* ACTION BUTTONS */
+
+.actions{
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  gap:7px;
+  margin-top:7px;
+}
+
+.next-hole{
+  padding:14px 5px;
+  border-radius:12px;
+  background:var(--gold);
+  color:#07101a;
+  font-size:15px;
+  font-weight:900;
+}
+
+.view-score{
+  padding:14px 5px;
+  border-radius:12px;
+  background:#071d30;
+  color:#fff;
+  border:1px solid #21557c;
+  font-size:12px;
+  font-weight:800;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:76px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  background:#020b13;
+  border-top:1px solid #163249;
+  z-index:100;
+}
+
+.bottom-nav button{
+  background:transparent;
+  color:#8d9caf;
+  font-size:10px;
+}
+
+.bottom-nav .active{
+  color:var(--gold);
+}
+
+.nav-icon{
+  display:block;
+  font-size:23px;
+  margin-bottom:3px;
+}
+
+/* SMALLER PHONES */
+
+@media(max-width:380px){
+
+  .brand-main{
+    font-size:16px;
+  }
+
+  .brand-sub{
+    font-size:8px;
+  }
+
+  .weather{
+    font-size:9px;
+  }
+
+  .play-grid{
+    grid-template-columns:48% 52%;
+    gap:5px;
+  }
+
+  .map-card{
+    min-height:590px;
+  }
+
+  .hole-title{
+    font-size:24px;
+  }
+
+  .hole-buttons button{
+    width:36px;
+    height:38px;
+  }
+
+  .big-distance{
+    font-size:32px;
+  }
+
+  .voice-title{
+    font-size:12px;
+  }
+
+  .caddie-input{
+    width:58px;
+  }
+
+  .club-name{
+    font-size:18px;
+  }
+
+  .score-btn{
+    width:26px;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <div class="topbar">
+  <header class="header">
 
     <div class="menu">☰</div>
 
-    <div>
+    <div class="brand">
       <div class="brand-main">DRC VIRTUAL GOLF</div>
-      <div class="brand-sub">ELITE CADDIE</div>
+      <div class="brand-sub">ELITE</div>
     </div>
 
     <div class="weather">
@@ -667,225 +738,257 @@
       Wind 8 km/h
     </div>
 
-  </div>
+  </header>
 
-  <div class="content">
 
-    <div class="hole-header">
+  <main class="page">
 
-      <div>
-        <div class="hole-title">
-          Hole <span id="holeNumber">1</span>
+    <section class="play-grid">
+
+      <!-- LEFT SIDE -->
+
+      <div class="map-card">
+
+        <div class="map-water"></div>
+        <div class="fairway"></div>
+        <div class="green"></div>
+        <div class="bunker"></div>
+
+        <div class="map-line"></div>
+
+        <div class="flag">🚩</div>
+
+        <div class="map-dot dot1"></div>
+        <div class="map-dot dot2"></div>
+        <div class="map-dot dot3"></div>
+
+        <div class="map-distance distance1">
+          <span id="mapFullDistance">498</span>
+          <span class="unit">m</span>
         </div>
 
-        <div class="hole-meta">
-          Par <span id="holePar">5</span>
-          &nbsp; | &nbsp;
-          S.I. <span id="holeSI">5</span>
-        </div>
-      </div>
-
-      <div class="hole-nav">
-        <button class="nav-arrow" onclick="previousHole()">‹</button>
-        <button class="nav-arrow" onclick="nextHole()">›</button>
-      </div>
-
-    </div>
-
-
-    <div class="course-map">
-
-      <div class="water"></div>
-      <div class="fairway"></div>
-      <div class="green"></div>
-      <div class="bunker"></div>
-      <div class="flag">🚩</div>
-
-      <div class="distance-marker marker-back">
-        <span id="mapBack">498</span> <span class="unitText">m</span>
-      </div>
-
-      <div class="distance-marker marker-mid">
-        <span id="mapCentre">280</span> <span class="unitText">m</span>
-      </div>
-
-      <div class="distance-marker marker-front">
-        <span id="mapFront">230</span> <span class="unitText">m</span>
-      </div>
-
-      <div class="gps-dot"></div>
-
-      <div class="map-toggle">
-        <button class="active">GPS</button>
-        <button>Aerial</button>
-      </div>
-
-    </div>
-
-
-    <div class="distance-card">
-
-      <div>
-        <div class="distance-label">To Centre</div>
-
-        <div class="distance-big">
-          <span id="centreDistance">498</span>
-          <span class="unitText">m</span>
-        </div>
-      </div>
-
-      <div class="distance-list">
-
-        Front
-        <strong>
-          <span id="frontDistance">480</span> <span class="unitText">m</span>
-        </strong>
-        <br>
-
-        Centre
-        <strong>
-          <span id="centreDistanceSmall">498</span> <span class="unitText">m</span>
-        </strong>
-        <br>
-
-        Back
-        <strong>
-          <span id="backDistance">512</span> <span class="unitText">m</span>
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="voice-card">
-
-      <div class="voice-top">
-
-        <div class="voice-title">
-          Voice Caddie
+        <div class="map-distance distance2">
+          <span id="mapMidDistance">280</span>
+          <span class="unit">m</span>
         </div>
 
-        <div class="voice-controls">
+        <div class="map-distance distance3">
+          <span id="mapNearDistance">230</span>
+          <span class="unit">m</span>
+        </div>
 
-          <button
-            id="voiceSwitch"
-            class="voice-switch"
-            onclick="toggleVoice()">
-            ON
-          </button>
+        <div class="player-dot"></div>
 
-          <input
-            id="caddieName"
-            class="caddie-name"
-            type="text"
-            value="Steve"
-            onchange="saveCaddieName()"
-          />
-
+        <div class="map-switch">
+          <button class="active">GPS</button>
+          <button>Aerial</button>
         </div>
 
       </div>
 
 
-      <div class="ask-area">
+      <!-- RIGHT SIDE -->
 
-        <button
-          id="micButton"
-          class="mic-button"
-          onclick="askCaddie()">
-          🎤
-        </button>
+      <div class="right-stack">
 
-        <div class="ask-label">
-          Ask <span id="askName">Steve</span>
+        <div class="panel hole-panel">
+
+          <div>
+            <div class="hole-title">
+              Hole <span id="holeNumber">1</span>
+            </div>
+
+            <div class="hole-meta">
+              Par <span id="holePar">5</span>
+              &nbsp;|&nbsp;
+              S.I. <span id="holeSI">5</span>
+            </div>
+          </div>
+
+          <div class="hole-buttons">
+            <button onclick="previousHole()">‹</button>
+            <button onclick="nextHole()">›</button>
+          </div>
+
         </div>
 
-        <div class="ask-sub">
-          Tap and speak
+
+        <div class="panel distance-panel">
+
+          <div class="to-centre">
+
+            <div class="small-heading">
+              To Centre
+            </div>
+
+            <div class="big-distance">
+              <span id="centreBig">498</span>
+              <small class="unit">m</small>
+            </div>
+
+          </div>
+
+          <div class="distance-list">
+
+            Front
+            <strong>
+              <span id="frontDistance">480</span>
+              <span class="unit">m</span>
+            </strong>
+            <br>
+
+            Centre
+            <strong>
+              <span id="centreDistance">498</span>
+              <span class="unit">m</span>
+            </strong>
+            <br>
+
+            Back
+            <strong>
+              <span id="backDistance">512</span>
+              <span class="unit">m</span>
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="panel voice-panel">
+
+          <div class="voice-top">
+
+            <div class="voice-title">
+              Voice Caddie
+            </div>
+
+            <div class="voice-control">
+
+              <button
+                id="voiceToggle"
+                class="voice-toggle"
+                onclick="toggleVoice()">
+                ON
+              </button>
+
+              <input
+                id="caddieName"
+                class="caddie-input"
+                value="Steve"
+                maxlength="18"
+                onchange="saveCaddieName()"
+              >
+
+            </div>
+
+          </div>
+
+          <div class="ask-box">
+
+            <button
+              id="micButton"
+              class="mic"
+              onclick="askCaddie()">
+              🎤
+            </button>
+
+            <div class="ask-name">
+              Ask <span id="askName">Steve</span>
+            </div>
+
+            <div class="ask-sub">
+              Tap and speak
+            </div>
+
+          </div>
+
+          <div
+            id="caddieAnswer"
+            class="answer">
+            Ready. Ask Steve for the shot.
+          </div>
+
+        </div>
+
+
+        <div class="panel club-panel">
+
+          <div class="panel-title">
+            Recommended Club
+          </div>
+
+          <div class="club-row">
+
+            <div class="club-icon">🏌️</div>
+
+            <div
+              id="recommendedClub"
+              class="club-name">
+              Driver
+            </div>
+
+            <div class="carry">
+              Est. Carry
+              <strong id="recommendedCarry">
+                230 m
+              </strong>
+            </div>
+
+          </div>
+
+          <select
+            id="clubSelect"
+            class="club-select"
+            onchange="manualClubChange()">
+
+            <option>Driver</option>
+            <option>3 Wood</option>
+            <option>5 Wood</option>
+            <option>4 Iron</option>
+            <option>5 Iron</option>
+            <option>6 Iron</option>
+            <option>7 Iron</option>
+            <option>8 Iron</option>
+            <option>9 Iron</option>
+            <option>PW</option>
+            <option>GW</option>
+            <option>SW</option>
+            <option>LW</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="panel last-shot">
+
+          <div class="panel-title">
+            Last Shot
+          </div>
+
+          <div
+            id="lastShot"
+            class="last-shot-text">
+            No shot recorded
+          </div>
+
         </div>
 
       </div>
 
-
-      <div
-        id="caddieAnswer"
-        class="caddie-answer">
-        Ready. Ask Steve for the shot.
-      </div>
-
-    </div>
+    </section>
 
 
-    <div class="club-card">
+    <!-- SCORE -->
 
-      <div class="section-heading">
-        Recommended Club
-      </div>
-
-      <div class="club-main">
-
-        <div class="club-icon">🏌️</div>
-
-        <div
-          id="recommendedClub"
-          class="club-name-large">
-          Driver
-        </div>
-
-        <div class="carry-box">
-          Est. Carry
-          <strong id="recommendedCarry">
-            230 m
-          </strong>
-        </div>
-
-      </div>
-
-
-      <select
-        id="clubSelect"
-        class="club-select"
-        onchange="manualClubChange()">
-
-        <option value="Driver">Use Another Club — Driver</option>
-        <option value="3 Wood">3 Wood</option>
-        <option value="5 Wood">5 Wood</option>
-        <option value="4 Iron">4 Iron</option>
-        <option value="5 Iron">5 Iron</option>
-        <option value="6 Iron">6 Iron</option>
-        <option value="7 Iron">7 Iron</option>
-        <option value="8 Iron">8 Iron</option>
-        <option value="9 Iron">9 Iron</option>
-        <option value="PW">PW</option>
-        <option value="GW">GW</option>
-        <option value="SW">SW</option>
-        <option value="LW">LW</option>
-      </select>
-
-    </div>
-
-
-    <div class="shot-card">
-
-      <div class="section-heading">
-        Last Shot
-      </div>
-
-      <div
-        id="lastShot"
-        class="shot-row">
-        No shot recorded
-      </div>
-
-    </div>
-
-
-    <div class="score-card">
+    <section class="score-panel">
 
       <div class="score-cell">
 
-        <div class="score-label">Score</div>
+        <div class="score-label">
+          Score
+        </div>
 
         <div
           id="scoreValue"
@@ -894,8 +997,19 @@
         </div>
 
         <div class="score-controls">
-          <button class="small-btn" onclick="changeScore(-1)">−</button>
-          <button class="small-btn" onclick="changeScore(1)">+</button>
+
+          <button
+            class="score-btn"
+            onclick="changeScore(-1)">
+            −
+          </button>
+
+          <button
+            class="score-btn"
+            onclick="changeScore(1)">
+            +
+          </button>
+
         </div>
 
       </div>
@@ -903,7 +1017,9 @@
 
       <div class="score-cell">
 
-        <div class="score-label">Putts</div>
+        <div class="score-label">
+          Putts
+        </div>
 
         <div
           id="puttsValue"
@@ -912,8 +1028,19 @@
         </div>
 
         <div class="score-controls">
-          <button class="small-btn" onclick="changePutts(-1)">−</button>
-          <button class="small-btn" onclick="changePutts(1)">+</button>
+
+          <button
+            class="score-btn"
+            onclick="changePutts(-1)">
+            −
+          </button>
+
+          <button
+            class="score-btn"
+            onclick="changePutts(1)">
+            +
+          </button>
+
         </div>
 
       </div>
@@ -921,11 +1048,13 @@
 
       <div class="score-cell">
 
-        <div class="score-label">GIR</div>
+        <div class="score-label">
+          GIR
+        </div>
 
         <button
           id="girButton"
-          class="boolean"
+          class="circle-toggle"
           onclick="toggleGir()">
           ◎
         </button>
@@ -935,11 +1064,13 @@
 
       <div class="score-cell">
 
-        <div class="score-label">Fairway</div>
+        <div class="score-label">
+          Fairway
+        </div>
 
         <button
           id="fairwayButton"
-          class="boolean"
+          class="circle-toggle"
           onclick="toggleFairway()">
           ↗
         </button>
@@ -949,7 +1080,9 @@
 
       <div class="score-cell">
 
-        <div class="score-label">Penalty</div>
+        <div class="score-label">
+          Penalty
+        </div>
 
         <div
           id="penaltyValue"
@@ -958,16 +1091,27 @@
         </div>
 
         <div class="score-controls">
-          <button class="small-btn" onclick="changePenalty(-1)">−</button>
-          <button class="small-btn" onclick="changePenalty(1)">+</button>
+
+          <button
+            class="score-btn"
+            onclick="changePenalty(-1)">
+            −
+          </button>
+
+          <button
+            class="score-btn"
+            onclick="changePenalty(1)">
+            +
+          </button>
+
         </div>
 
       </div>
 
-    </div>
+    </section>
 
 
-    <div class="bottom-actions">
+    <section class="actions">
 
       <button
         class="next-hole"
@@ -976,19 +1120,19 @@
       </button>
 
       <button
-        class="scorecard-btn"
+        class="view-score"
         onclick="showScorecard()">
         ☷ VIEW SCORECARD
       </button>
 
-    </div>
+    </section>
 
-  </div>
+  </main>
 
 </div>
 
 
-<div class="bottom-nav">
+<nav class="bottom-nav">
 
   <button class="active">
     <span class="nav-icon">🏌️</span>
@@ -1015,7 +1159,7 @@
     More
   </button>
 
-</div>
+</nav>
 
 
 <script>
@@ -1031,174 +1175,37 @@ let unitMode =
   localStorage.getItem("drcUnitMode") || "metric";
 
 
+/*
+  TEMPORARY HOLE DATA.
+  We will replace this with real course/GPS data.
+*/
+
 const holes = [
 
-  {
-    hole:1,
-    par:5,
-    si:5,
-    front:480,
-    centre:498,
-    back:512
-  },
+  {hole:1,par:5,si:5,front:480,centre:498,back:512},
+  {hole:2,par:4,si:11,front:356,centre:369,back:382},
+  {hole:3,par:3,si:15,front:142,centre:151,back:160},
+  {hole:4,par:4,si:1,front:396,centre:410,back:423},
+  {hole:5,par:5,si:7,front:475,centre:491,back:506},
+  {hole:6,par:3,si:17,front:128,centre:139,back:150},
+  {hole:7,par:4,si:9,front:348,centre:361,back:374},
+  {hole:8,par:4,si:3,front:382,centre:397,back:410},
+  {hole:9,par:4,si:13,front:335,centre:349,back:362},
 
-  {
-    hole:2,
-    par:4,
-    si:11,
-    front:356,
-    centre:369,
-    back:382
-  },
-
-  {
-    hole:3,
-    par:3,
-    si:15,
-    front:142,
-    centre:151,
-    back:160
-  },
-
-  {
-    hole:4,
-    par:4,
-    si:1,
-    front:396,
-    centre:410,
-    back:423
-  },
-
-  {
-    hole:5,
-    par:5,
-    si:7,
-    front:475,
-    centre:491,
-    back:506
-  },
-
-  {
-    hole:6,
-    par:3,
-    si:17,
-    front:128,
-    centre:139,
-    back:150
-  },
-
-  {
-    hole:7,
-    par:4,
-    si:9,
-    front:348,
-    centre:361,
-    back:374
-  },
-
-  {
-    hole:8,
-    par:4,
-    si:3,
-    front:382,
-    centre:397,
-    back:410
-  },
-
-  {
-    hole:9,
-    par:4,
-    si:13,
-    front:335,
-    centre:349,
-    back:362
-  },
-
-  {
-    hole:10,
-    par:4,
-    si:6,
-    front:368,
-    centre:381,
-    back:394
-  },
-
-  {
-    hole:11,
-    par:5,
-    si:4,
-    front:492,
-    centre:508,
-    back:523
-  },
-
-  {
-    hole:12,
-    par:3,
-    si:16,
-    front:151,
-    centre:162,
-    back:173
-  },
-
-  {
-    hole:13,
-    par:4,
-    si:10,
-    front:346,
-    centre:360,
-    back:373
-  },
-
-  {
-    hole:14,
-    par:4,
-    si:2,
-    front:401,
-    centre:416,
-    back:429
-  },
-
-  {
-    hole:15,
-    par:5,
-    si:8,
-    front:485,
-    centre:501,
-    back:517
-  },
-
-  {
-    hole:16,
-    par:3,
-    si:18,
-    front:121,
-    centre:132,
-    back:143
-  },
-
-  {
-    hole:17,
-    par:4,
-    si:12,
-    front:355,
-    centre:369,
-    back:382
-  },
-
-  {
-    hole:18,
-    par:4,
-    si:14,
-    front:361,
-    centre:375,
-    back:389
-  }
+  {hole:10,par:4,si:6,front:368,centre:381,back:394},
+  {hole:11,par:5,si:4,front:492,centre:508,back:523},
+  {hole:12,par:3,si:16,front:151,centre:162,back:173},
+  {hole:13,par:4,si:10,front:346,centre:360,back:373},
+  {hole:14,par:4,si:2,front:401,centre:416,back:429},
+  {hole:15,par:5,si:8,front:485,centre:501,back:517},
+  {hole:16,par:3,si:18,front:121,centre:132,back:143},
+  {hole:17,par:4,si:12,front:355,centre:369,back:382},
+  {hole:18,par:4,si:14,front:361,centre:375,back:389}
 
 ];
 
 
-const defaultBagMetres = {
+const bagMetres = {
 
   "Driver":230,
   "3 Wood":210,
@@ -1223,49 +1230,47 @@ let holeScores =
   );
 
 
-function displayDistance(valueMetres) {
+function displayDistance(metres){
 
-  if (unitMode === "imperial") {
+  if(unitMode === "imperial"){
 
     return {
-      value: Math.round(
-        valueMetres / YARDS_TO_METRES
-      ),
+      value:Math.round(metres / YARDS_TO_METRES),
       unit:"yds"
     };
 
   }
 
   return {
-    value: Math.round(valueMetres),
+    value:Math.round(metres),
     unit:"m"
   };
 
 }
 
 
-function renderHole() {
+function renderHole(){
 
-  const data = holes[currentHole];
+  const hole = holes[currentHole];
 
   document.getElementById("holeNumber").textContent =
-    data.hole;
+    hole.hole;
 
   document.getElementById("holePar").textContent =
-    data.par;
+    hole.par;
 
   document.getElementById("holeSI").textContent =
-    data.si;
+    hole.si;
 
 
   const front =
-    displayDistance(data.front);
+    displayDistance(hole.front);
 
   const centre =
-    displayDistance(data.centre);
+    displayDistance(hole.centre);
 
   const back =
-    displayDistance(data.back);
+    displayDistance(hole.back);
 
 
   document.getElementById("frontDistance").textContent =
@@ -1274,28 +1279,30 @@ function renderHole() {
   document.getElementById("centreDistance").textContent =
     centre.value;
 
-  document.getElementById("centreDistanceSmall").textContent =
+  document.getElementById("centreBig").textContent =
     centre.value;
 
   document.getElementById("backDistance").textContent =
     back.value;
 
 
-  document.getElementById("mapFront").textContent =
-    Math.round(front.value * 0.46);
-
-  document.getElementById("mapCentre").textContent =
-    Math.round(centre.value * 0.56);
-
-  document.getElementById("mapBack").textContent =
+  document.getElementById("mapFullDistance").textContent =
     centre.value;
 
 
-  document
-    .querySelectorAll(".unitText")
-    .forEach(el => {
+  document.getElementById("mapMidDistance").textContent =
+    Math.round(centre.value * 0.56);
 
-      el.textContent =
+
+  document.getElementById("mapNearDistance").textContent =
+    Math.round(centre.value * 0.46);
+
+
+  document
+    .querySelectorAll(".unit")
+    .forEach(element => {
+
+      element.textContent =
         centre.unit;
 
     });
@@ -1305,13 +1312,6 @@ function renderHole() {
 
   recommendClub();
 
-  saveCurrentHole();
-
-}
-
-
-function saveCurrentHole() {
-
   localStorage.setItem(
     "drcCurrentHole",
     currentHole
@@ -1320,12 +1320,10 @@ function saveCurrentHole() {
 }
 
 
-function nextHole() {
+function nextHole(){
 
-  if (currentHole < 17) {
-
+  if(currentHole < 17){
     currentHole++;
-
   }
 
   renderHole();
@@ -1338,12 +1336,10 @@ function nextHole() {
 }
 
 
-function previousHole() {
+function previousHole(){
 
-  if (currentHole > 0) {
-
+  if(currentHole > 0){
     currentHole--;
-
   }
 
   renderHole();
@@ -1356,31 +1352,30 @@ function previousHole() {
 }
 
 
-function getCurrentScoreData() {
+function getScoreData(){
 
-  const holeNumber =
+  const number =
     holes[currentHole].hole;
 
-  if (!holeScores[holeNumber]) {
 
-    holeScores[holeNumber] = {
+  if(!holeScores[number]){
 
+    holeScores[number] = {
       score:0,
       putts:0,
       gir:false,
       fairway:false,
       penalty:0
-
     };
 
   }
 
-  return holeScores[holeNumber];
+  return holeScores[number];
 
 }
 
 
-function saveHoleScore() {
+function saveScores(){
 
   localStorage.setItem(
     "drcHoleScores",
@@ -1390,10 +1385,11 @@ function saveHoleScore() {
 }
 
 
-function loadHoleScore() {
+function loadHoleScore(){
 
   const data =
-    getCurrentScoreData();
+    getScoreData();
+
 
   document.getElementById("scoreValue").textContent =
     data.score;
@@ -1423,10 +1419,10 @@ function loadHoleScore() {
 }
 
 
-function changeScore(amount) {
+function changeScore(amount){
 
   const data =
-    getCurrentScoreData();
+    getScoreData();
 
   data.score =
     Math.max(
@@ -1434,16 +1430,16 @@ function changeScore(amount) {
       data.score + amount
     );
 
-  saveHoleScore();
+  saveScores();
   loadHoleScore();
 
 }
 
 
-function changePutts(amount) {
+function changePutts(amount){
 
   const data =
-    getCurrentScoreData();
+    getScoreData();
 
   data.putts =
     Math.max(
@@ -1451,16 +1447,16 @@ function changePutts(amount) {
       data.putts + amount
     );
 
-  saveHoleScore();
+  saveScores();
   loadHoleScore();
 
 }
 
 
-function changePenalty(amount) {
+function changePenalty(amount){
 
   const data =
-    getCurrentScoreData();
+    getScoreData();
 
   data.penalty =
     Math.max(
@@ -1468,44 +1464,47 @@ function changePenalty(amount) {
       data.penalty + amount
     );
 
-  saveHoleScore();
+  saveScores();
   loadHoleScore();
 
 }
 
 
-function toggleGir() {
+function toggleGir(){
 
   const data =
-    getCurrentScoreData();
+    getScoreData();
 
   data.gir =
     !data.gir;
 
-  saveHoleScore();
+  saveScores();
   loadHoleScore();
 
 }
 
 
-function toggleFairway() {
+function toggleFairway(){
 
   const data =
-    getCurrentScoreData();
+    getScoreData();
 
   data.fairway =
     !data.fairway;
 
-  saveHoleScore();
+  saveScores();
   loadHoleScore();
 
 }
 
 
-function recommendClub() {
+/* CLUB */
 
-  const distance =
+function recommendClub(){
+
+  const target =
     holes[currentHole].centre;
+
 
   let selected =
     "Driver";
@@ -1514,15 +1513,16 @@ function recommendClub() {
     Infinity;
 
 
-  Object.entries(defaultBagMetres)
-    .forEach(([club, carry]) => {
+  Object.entries(bagMetres)
+    .forEach(([club,carry]) => {
 
       const difference =
         Math.abs(
-          distance - carry
+          target - carry
         );
 
-      if (difference < smallest) {
+
+      if(difference < smallest){
 
         smallest =
           difference;
@@ -1535,111 +1535,93 @@ function recommendClub() {
     });
 
 
-  if (distance > 210) {
-
-    selected =
-      "Driver";
-
+  if(target > 210){
+    selected = "Driver";
   }
 
 
-  document
-    .getElementById("recommendedClub")
-    .textContent =
-      selected;
-
-
-  const carry =
-    displayDistance(
-      defaultBagMetres[selected]
-    );
-
-
-  document
-    .getElementById("recommendedCarry")
-    .textContent =
-      carry.value +
-      " " +
-      carry.unit;
-
-
-  document
-    .getElementById("clubSelect")
-    .value =
-      selected;
+  setRecommendedClub(selected);
 
 }
 
 
-function manualClubChange() {
+function setRecommendedClub(club){
+
+  document.getElementById("recommendedClub").textContent =
+    club;
+
+
+  const carry =
+    displayDistance(
+      bagMetres[club]
+    );
+
+
+  document.getElementById("recommendedCarry").textContent =
+    carry.value +
+    " " +
+    carry.unit;
+
+
+  document.getElementById("clubSelect").value =
+    club;
+
+}
+
+
+function manualClubChange(){
 
   const club =
+    document.getElementById("clubSelect").value;
+
+  setRecommendedClub(club);
+
+}
+
+
+/* CADDIE NAME */
+
+function getCaddieName(){
+
+  const value =
     document
-      .getElementById("clubSelect")
-      .value;
+      .getElementById("caddieName")
+      .value
+      .trim();
 
-
-  document
-    .getElementById("recommendedClub")
-    .textContent =
-      club;
-
-
-  const carry =
-    displayDistance(
-      defaultBagMetres[club]
-    );
-
-
-  document
-    .getElementById("recommendedCarry")
-    .textContent =
-      carry.value +
-      " " +
-      carry.unit;
+  return value || "Steve";
 
 }
 
 
-function getCaddieName() {
-
-  const input =
-    document.getElementById("caddieName");
-
-  return (
-    input.value.trim() ||
-    "Steve"
-  );
-
-}
-
-
-function saveCaddieName() {
+function saveCaddieName(){
 
   const name =
     getCaddieName();
+
 
   localStorage.setItem(
     "drcCaddieName",
     name
   );
 
-  document
-    .getElementById("askName")
-    .textContent =
-      name;
+
+  document.getElementById("askName").textContent =
+    name;
 
 }
 
 
-function toggleVoice() {
+/* VOICE */
+
+function toggleVoice(){
 
   voiceEnabled =
     !voiceEnabled;
 
 
   const button =
-    document.getElementById("voiceSwitch");
+    document.getElementById("voiceToggle");
 
 
   button.textContent =
@@ -1656,17 +1638,15 @@ function toggleVoice() {
 }
 
 
-function setupRecognition() {
+function setupRecognition(){
 
   const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
 
-  if (!SpeechRecognition) {
-
+  if(!SpeechRecognition){
     return false;
-
   }
 
 
@@ -1685,16 +1665,14 @@ function setupRecognition() {
 
 
   recognition.onstart =
-    function() {
+    function(){
 
-      listening =
-        true;
+      listening = true;
 
       document
         .getElementById("micButton")
-        .classList.add(
-          "listening"
-        );
+        .classList.add("listening");
+
 
       document
         .getElementById("caddieAnswer")
@@ -1705,7 +1683,7 @@ function setupRecognition() {
 
 
   recognition.onresult =
-    function(event) {
+    function(event){
 
       const transcript =
         event.results[0][0]
@@ -1721,7 +1699,7 @@ function setupRecognition() {
 
 
   recognition.onerror =
-    function() {
+    function(){
 
       document
         .getElementById("caddieAnswer")
@@ -1732,16 +1710,13 @@ function setupRecognition() {
 
 
   recognition.onend =
-    function() {
+    function(){
 
-      listening =
-        false;
+      listening = false;
 
       document
         .getElementById("micButton")
-        .classList.remove(
-          "listening"
-        );
+        .classList.remove("listening");
 
     };
 
@@ -1751,9 +1726,9 @@ function setupRecognition() {
 }
 
 
-function askCaddie() {
+function askCaddie(){
 
-  if (!voiceEnabled) {
+  if(!voiceEnabled){
 
     document
       .getElementById("caddieAnswer")
@@ -1765,18 +1740,14 @@ function askCaddie() {
   }
 
 
-  if (!recognition) {
+  if(!recognition){
 
-    const available =
-      setupRecognition();
-
-
-    if (!available) {
+    if(!setupRecognition()){
 
       document
         .getElementById("caddieAnswer")
         .textContent =
-          "Voice recognition is not available in this browser.";
+          "Voice recognition is not available on this device.";
 
       return;
 
@@ -1785,57 +1756,56 @@ function askCaddie() {
   }
 
 
-  try {
+  try{
 
     recognition.start();
 
-  } catch(error) {}
+  }catch(error){}
 
 }
 
 
-function handleGolfCommand(command) {
+function handleGolfCommand(command){
 
   const text =
     command.toLowerCase();
 
+
   const hole =
     holes[currentHole];
 
-  const target =
+
+  const distance =
     displayDistance(
       hole.centre
     );
 
 
-  let club =
+  const club =
     document
       .getElementById("recommendedClub")
       .textContent;
 
 
   let advice =
-    "You're " +
-    target.value +
+    distance.value +
     " " +
-    target.unit +
+    distance.unit +
     " to the centre. ";
 
 
-  if (
-    text.includes("wind") ||
-    text.includes("headwind")
-  ) {
+  if(
+    text.includes("headwind") ||
+    text.includes("wind")
+  ){
 
     advice +=
-      "With the wind, keep the flight controlled. ";
+      "Keep the flight controlled and avoid forcing the shot. ";
 
   }
 
 
-  if (
-    text.includes("rough")
-  ) {
+  if(text.includes("rough")){
 
     advice +=
       "Check the lie first and prioritise clean contact. ";
@@ -1843,20 +1813,21 @@ function handleGolfCommand(command) {
   }
 
 
-  if (
-    text.includes("bunker")
-  ) {
+  if(
+    text.includes("bunker") ||
+    text.includes("sand")
+  ){
 
     advice +=
-      "From the bunker, commit to the strike and use the bounce. ";
+      "Commit to the strike and use the bounce. ";
 
   }
 
 
   advice +=
-    "I like the " +
+    "I suggest " +
     club +
-    ". Aim for the safe side and make a committed swing.";
+    ". Aim for the safe side and commit to the swing.";
 
 
   document
@@ -1870,41 +1841,37 @@ function handleGolfCommand(command) {
 }
 
 
-function speak(text) {
+function speak(text){
 
-  if (
+  if(
     !voiceEnabled ||
     !("speechSynthesis" in window)
-  ) {
-
+  ){
     return;
-
   }
 
 
   window.speechSynthesis.cancel();
 
 
-  const utterance =
-    new SpeechSynthesisUtterance(
-      text
-    );
+  const voice =
+    new SpeechSynthesisUtterance(text);
 
 
-  utterance.rate =
-    0.95;
+  voice.rate = 0.95;
+  voice.pitch = 1;
 
-  utterance.pitch =
-    1;
 
   window.speechSynthesis.speak(
-    utterance
+    voice
   );
 
 }
 
 
-function showScorecard() {
+/* SCORECARD */
+
+function showScorecard(){
 
   let text =
     "DRC VIRTUAL GOLF\\n\\n";
@@ -1912,18 +1879,19 @@ function showScorecard() {
 
   holes.forEach(hole => {
 
-    const score =
+    const data =
       holeScores[hole.hole];
+
 
     text +=
       "Hole " +
       hole.hole +
-      "  Par " +
+      " | Par " +
       hole.par +
-      "  Score " +
+      " | Score " +
       (
-        score
-          ? score.score
+        data && data.score
+          ? data.score
           : "-"
       ) +
       "\\n";
@@ -1936,20 +1904,20 @@ function showScorecard() {
 }
 
 
-function loadSettings() {
+/* LOAD */
 
-  const savedCaddie =
+function loadSettings(){
+
+  const caddie =
     localStorage.getItem(
       "drcCaddieName"
     );
 
 
-  if (savedCaddie) {
+  if(caddie){
 
-    document
-      .getElementById("caddieName")
-      .value =
-        savedCaddie;
+    document.getElementById("caddieName").value =
+      caddie;
 
   }
 
@@ -1965,11 +1933,11 @@ function loadSettings() {
     );
 
 
-  if (
-    !Number.isNaN(savedHole) &&
+  if(
+    Number.isInteger(savedHole) &&
     savedHole >= 0 &&
     savedHole <= 17
-  ) {
+  ){
 
     currentHole =
       savedHole;
