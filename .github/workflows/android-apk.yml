@@ -23,7 +23,7 @@ jobs:
         run: npm install -g eas-cli
 
       - name: Link existing Expo project
-        run: eas init --id 97f964e6-4845-41b3-a3de-11431bdefefa --non-interactive
+        run: eas init --id 97f964e6-4845-41b3-a3de-11431bdefefa --non-interactive --force
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
