@@ -1,1 +1,1 @@
-const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const $=id=>document.getElementById(id),$$=s=>document.querySelectorAll(s);
