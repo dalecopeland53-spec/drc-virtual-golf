@@ -1,4 +1,4 @@
-name: Deploy Tour Pro Web App
+name: Deploy DRC Virtual Golf
 
 on:
   push:
