@@ -56,31 +56,31 @@ button{border:0;cursor:pointer}
 
 .menu{font-size:22px;color:#d6e1eb}
 .brand{text-align:center}
-
 .brand-main{
   color:var(--gold);
   font-size:14px;
   font-weight:900;
   letter-spacing:1.2px;
 }
-
 .brand-sub{
   color:#428dea;
   font-size:7px;
   letter-spacing:3.2px;
   margin-top:1px;
 }
-
 .weather{
   text-align:right;
   color:#dce6ee;
   font-size:7px;
   line-height:1.2;
 }
-
 .weather strong{display:block;font-size:10px}
 
-.view{display:none;min-height:0;overflow:hidden}
+.view{
+  display:none;
+  min-height:0;
+  overflow:hidden;
+}
 .view.active{display:block}
 #roundView.active{display:grid}
 
@@ -106,16 +106,7 @@ button{border:0;cursor:pointer}
   overflow:hidden;
   border:1px solid #1b415d;
   border-radius:11px;
-  background:linear-gradient(
-    90deg,
-    #063625 0%,
-    #0b4f33 18%,
-    #146f42 34%,
-    #289857 50%,
-    #147746 66%,
-    #0a5135 83%,
-    #063625 100%
-  );
+  background:linear-gradient(90deg,#063625 0%,#0b4f33 18%,#146f42 34%,#289857 50%,#147746 66%,#0a5135 83%,#063625 100%);
 }
 
 .water{
@@ -123,33 +114,23 @@ button{border:0;cursor:pointer}
   background:linear-gradient(#145069,#072e47);
   transition:.2s ease;
 }
-
 .fairway{
   position:absolute;
-  background:linear-gradient(
-    90deg,
-    #208b4f,
-    #3faa61,
-    #55bc70,
-    #2d9a56
-  );
+  background:linear-gradient(90deg,#208b4f,#3faa61,#55bc70,#2d9a56);
   transition:.2s ease;
 }
-
 .green{
   position:absolute;
   border-radius:50%;
   background:#69ca72;
   transition:.2s ease;
 }
-
 .bunker{
   position:absolute;
   border-radius:50%;
   background:#ddcf98;
   transition:.2s ease;
 }
-
 .flag{
   position:absolute;
   transform:translateX(-50%);
@@ -157,7 +138,6 @@ button{border:0;cursor:pointer}
   z-index:8;
   transition:.2s ease;
 }
-
 .shot-line{
   position:absolute;
   width:2px;
@@ -166,7 +146,6 @@ button{border:0;cursor:pointer}
   z-index:5;
   transition:.2s ease;
 }
-
 .marker{
   position:absolute;
   left:50%;
@@ -177,11 +156,9 @@ button{border:0;cursor:pointer}
   background:#fff;
   z-index:7;
 }
-
 .marker.one{top:18%}
 .marker.two{top:47%}
 .marker.three{top:72%}
-
 .marker-label{
   position:absolute;
   left:55%;
@@ -191,7 +168,6 @@ button{border:0;cursor:pointer}
   text-shadow:0 2px 3px #000;
   z-index:8;
 }
-
 .marker-label.one{top:16%}
 .marker-label.two{top:45%}
 .marker-label.three{top:70%}
@@ -220,7 +196,6 @@ button{border:0;cursor:pointer}
   border-radius:16px;
   padding:3px;
 }
-
 .map-switch button{
   background:transparent;
   color:#c3d0dc;
@@ -228,11 +203,7 @@ button{border:0;cursor:pointer}
   padding:5px 7px;
   font-size:8px;
 }
-
-.map-switch .active{
-  background:var(--blue);
-  color:#fff;
-}
+.map-switch .active{background:var(--blue);color:#fff}
 
 .right{
   min-height:0;
@@ -240,7 +211,6 @@ button{border:0;cursor:pointer}
   grid-template-rows:.65fr .82fr 1.55fr 1.08fr .58fr;
   gap:3px;
 }
-
 .panel{
   min-height:0;
   overflow:hidden;
@@ -248,7 +218,6 @@ button{border:0;cursor:pointer}
   border:1px solid var(--line);
   border-radius:10px;
 }
-
 .hole-panel{
   padding:4px 6px;
   display:grid;
@@ -256,29 +225,13 @@ button{border:0;cursor:pointer}
   gap:4px;
   align-items:center;
 }
-
-.hole-title{
-  font-size:18px;
-  font-weight:900;
-  line-height:1;
-}
-
-.hole-meta{
-  color:var(--muted);
-  font-size:8px;
-  margin-top:3px;
-}
-
+.hole-title{font-size:18px;font-weight:900;line-height:1}
+.hole-meta{color:var(--muted);font-size:8px;margin-top:3px}
 .hole-nav{display:flex;gap:3px}
-
 .hole-nav button{
-  width:25px;
-  height:28px;
-  border-radius:8px;
-  background:#07131f;
-  border:1px solid #85681f;
-  color:var(--gold);
-  font-size:18px;
+  width:25px;height:28px;border-radius:8px;
+  background:#07131f;border:1px solid #85681f;
+  color:var(--gold);font-size:18px;
 }
 
 .distance-panel{
@@ -287,14 +240,8 @@ button{border:0;cursor:pointer}
   grid-template-columns:1fr 1fr;
   align-items:center;
 }
-
-.to-centre{
-  border-right:1px solid #173248;
-  padding-right:5px;
-}
-
+.to-centre{border-right:1px solid #173248;padding-right:5px}
 .label{color:#dfe7ef;font-size:8px}
-
 .big-distance{
   color:var(--gold);
   font-weight:900;
@@ -302,37 +249,28 @@ button{border:0;cursor:pointer}
   line-height:1;
   margin-top:2px;
 }
-
 .big-distance small{font-size:10px}
-
 .distance-list{
   padding-left:5px;
   color:#8fa7bc;
   font-size:8px;
   line-height:1.65;
 }
-
-.distance-list strong{
-  float:right;
-  color:#fff;
-}
+.distance-list strong{float:right;color:#fff}
 
 .voice-panel{
   padding:4px 6px;
   display:grid;
   grid-template-rows:auto 1fr auto;
 }
-
 .voice-top{
   display:grid;
   grid-template-columns:1fr auto;
   gap:3px;
   align-items:center;
 }
-
 .voice-title{font-size:10px;font-weight:900}
 .voice-tools{display:flex;gap:3px}
-
 .voice-toggle{
   background:var(--blue);
   color:#fff;
@@ -341,12 +279,7 @@ button{border:0;cursor:pointer}
   font-size:7px;
   font-weight:900;
 }
-
-.voice-toggle.off{
-  background:#263a4c;
-  color:#9badbd;
-}
-
+.voice-toggle.off{background:#263a4c;color:#9badbd}
 .caddie-name{
   width:50px;
   border:1px solid #294960;
@@ -357,28 +290,14 @@ button{border:0;cursor:pointer}
   padding:4px 3px;
   font-size:8px;
 }
-
 .mic-area{text-align:center;align-self:center}
-
 .mic{
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:var(--blue);
-  color:#fff;
-  font-size:18px;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--blue);color:#fff;font-size:18px;
 }
-
 .mic.listening{background:var(--red)}
-
-.ask-name{
-  font-size:10px;
-  font-weight:800;
-  margin-top:1px;
-}
-
+.ask-name{font-size:10px;font-weight:800;margin-top:1px}
 .tap-text{color:var(--muted);font-size:7px}
-
 .answer{
   height:34px;
   border:1px solid #213f55;
@@ -396,35 +315,17 @@ button{border:0;cursor:pointer}
   display:grid;
   grid-template-rows:auto 1fr auto;
 }
-
-.section-title{
-  font-size:10px;
-  font-weight:900;
-  margin-bottom:1px;
-}
-
+.section-title{font-size:10px;font-weight:900;margin-bottom:1px}
 .club-row{
   display:grid;
   grid-template-columns:24px 1fr auto;
   gap:3px;
   align-items:center;
 }
-
 .club-icon{font-size:18px}
 .club-name{font-size:14px;font-weight:900}
-
-.carry{
-  color:#90a7ba;
-  text-align:right;
-  font-size:7px;
-}
-
-.carry strong{
-  display:block;
-  color:var(--gold);
-  font-size:12px;
-}
-
+.carry{color:#90a7ba;text-align:right;font-size:7px}
+.carry strong{display:block;color:var(--gold);font-size:12px}
 .club-select{
   width:100%;
   background:#09243a;
@@ -434,14 +335,12 @@ button{border:0;cursor:pointer}
   padding:3px 5px;
   font-size:8px;
 }
-
 .last-shot-panel{
   padding:4px 6px;
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
-
 .last-shot{color:#9eb0c2;font-size:8px}
 
 .score-panel{
@@ -453,7 +352,6 @@ button{border:0;cursor:pointer}
   border-radius:10px;
   overflow:hidden;
 }
-
 .score-cell{
   min-width:0;
   min-height:0;
@@ -462,66 +360,36 @@ button{border:0;cursor:pointer}
   padding:2px 1px;
   overflow:hidden;
 }
-
 .score-cell:last-child{border-right:0}
 .score-label{font-size:8px;font-weight:800;line-height:10px}
 .score-number{font-size:14px;line-height:16px;font-weight:900;margin-top:1px}
-
 .score-controls{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:2px;
-  margin-top:2px;
+  display:flex;justify-content:center;align-items:center;
+  gap:2px;margin-top:2px;
 }
-
 .score-btn{
-  width:20px;
-  height:20px;
-  line-height:18px;
-  border-radius:6px;
-  background:#0a2941;
-  border:1px solid #28546f;
-  color:#fff;
-  font-size:13px;
-  font-weight:800;
+  width:20px;height:20px;line-height:18px;
+  border-radius:6px;background:#0a2941;
+  border:1px solid #28546f;color:#fff;
+  font-size:13px;font-weight:800;
 }
-
 .circle{
-  width:24px;
-  height:24px;
-  line-height:22px;
-  border-radius:50%;
-  margin-top:6px;
-  background:#0d2639;
-  border:1px solid #2c566f;
-  color:#a8bac9;
-  font-size:12px;
+  width:24px;height:24px;line-height:22px;
+  border-radius:50%;margin-top:6px;
+  background:#0d2639;border:1px solid #2c566f;
+  color:#a8bac9;font-size:12px;
 }
-
 .circle.active{background:var(--blue);color:#fff}
 
-.actions{
-  display:grid;
-  grid-template-columns:1.35fr 1fr;
-  gap:4px;
-}
-
+.actions{display:grid;grid-template-columns:1.35fr 1fr;gap:4px}
 .next{
-  background:var(--gold);
-  color:#06101a;
-  border-radius:9px;
-  font-size:10px;
-  font-weight:900;
+  background:var(--gold);color:#06101a;
+  border-radius:9px;font-size:10px;font-weight:900;
 }
-
 .scorecard{
-  background:#071e31;
-  color:#fff;
-  border:1px solid #22547a;
-  border-radius:9px;
-  font-size:8px;
-  font-weight:800;
+  background:#071e31;color:#fff;
+  border:1px solid #22547a;border-radius:9px;
+  font-size:8px;font-weight:800;
 }
 
 .bottom-nav{
@@ -531,15 +399,11 @@ button{border:0;cursor:pointer}
   border-top:1px solid #163149;
   padding-bottom:env(safe-area-inset-bottom);
 }
-
-.bottom-nav button{
-  background:transparent;
-  color:#8799aa;
-  font-size:8px;
-}
-
+.bottom-nav button{background:transparent;color:#8799aa;font-size:8px}
 .bottom-nav .active{color:var(--gold)}
 .nav-icon{display:block;font-size:17px;margin-bottom:1px}
+
+/* FULL PAGES */
 
 .screen-page{
   height:100%;
@@ -547,32 +411,14 @@ button{border:0;cursor:pointer}
   overflow-y:auto;
   background:var(--bg);
 }
-
-.screen-title-row{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:4px;
-}
-
+.screen-title-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .back-button{
-  width:34px;
-  height:34px;
-  border-radius:9px;
-  background:#0a2941;
-  border:1px solid #28546f;
-  color:#fff;
-  font-size:20px;
+  width:34px;height:34px;border-radius:9px;
+  background:#0a2941;border:1px solid #28546f;
+  color:#fff;font-size:20px;
 }
-
 .screen-title{font-size:21px;font-weight:900}
-
-.screen-subtitle{
-  font-size:9px;
-  color:var(--muted);
-  margin-bottom:10px;
-}
-
+.screen-subtitle{font-size:9px;color:var(--muted);margin-bottom:10px}
 .large-card{
   background:var(--panel);
   border:1px solid var(--line);
@@ -580,286 +426,139 @@ button{border:0;cursor:pointer}
   padding:10px;
   margin-bottom:8px;
 }
-
-.card-title{
-  font-size:11px;
-  font-weight:900;
-  color:var(--gold);
-  margin-bottom:7px;
-}
-
-.field-label{
-  font-size:8px;
-  color:var(--muted);
-  margin:7px 0 3px;
-}
-
+.card-title{font-size:11px;font-weight:900;color:var(--gold);margin-bottom:7px}
+.field-label{font-size:8px;color:var(--muted);margin:7px 0 3px}
 .field{
-  width:100%;
-  min-height:34px;
-  border:1px solid #244861;
-  border-radius:8px;
-  background:#04101a;
-  color:#fff;
-  padding:7px;
-  font-size:11px;
+  width:100%;min-height:34px;
+  border:1px solid #244861;border-radius:8px;
+  background:#04101a;color:#fff;padding:7px;font-size:11px;
 }
-
 .page-button{
-  width:100%;
-  min-height:38px;
-  margin-top:8px;
-  border-radius:9px;
-  background:var(--blue);
-  color:#fff;
-  font-size:10px;
-  font-weight:900;
+  width:100%;min-height:38px;margin-top:8px;
+  border-radius:9px;background:var(--blue);
+  color:#fff;font-size:10px;font-weight:900;
 }
-
-.page-button.gold{
-  background:var(--gold);
-  color:#06101a;
-}
-
+.page-button.gold{background:var(--gold);color:#06101a}
 .caddie-centre{text-align:center}
-
 .large-mic{
-  width:68px;
-  height:68px;
-  border-radius:50%;
-  background:var(--blue);
-  color:#fff;
-  font-size:30px;
+  width:68px;height:68px;border-radius:50%;
+  background:var(--blue);color:#fff;font-size:30px;
   margin:10px auto 6px;
 }
-
 .large-mic.listening{background:var(--red)}
-
 .caddie-response-large{
-  min-height:100px;
-  margin-top:10px;
-  border:1px solid #244861;
-  background:#04101a;
-  border-radius:10px;
-  padding:10px;
-  font-size:11px;
-  line-height:1.45;
-  text-align:left;
+  min-height:100px;margin-top:10px;
+  border:1px solid #244861;background:#04101a;
+  border-radius:10px;padding:10px;
+  font-size:11px;line-height:1.45;text-align:left;
 }
-
 .bag-row{
-  display:grid;
-  grid-template-columns:1fr 82px 24px;
-  gap:6px;
-  align-items:center;
-  padding:6px 0;
+  display:grid;grid-template-columns:1fr 82px 24px;
+  gap:6px;align-items:center;padding:6px 0;
   border-bottom:1px solid #18334a;
 }
-
 .bag-club{font-size:11px;font-weight:800}
-
 .bag-input{
-  width:100%;
-  background:#04101a;
-  color:#fff;
-  border:1px solid #244861;
-  border-radius:7px;
-  padding:6px;
-  text-align:center;
+  width:100%;background:#04101a;color:#fff;
+  border:1px solid #244861;border-radius:7px;
+  padding:6px;text-align:center;
 }
-
 .bag-unit{color:var(--muted);font-size:8px}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-
 .setting-row{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:10px;
-  align-items:center;
-  padding:9px 0;
+  display:grid;grid-template-columns:1fr auto;
+  gap:10px;align-items:center;padding:9px 0;
   border-bottom:1px solid #18334a;
 }
-
 .setting-main{font-size:10px;font-weight:800}
 .setting-small{color:var(--muted);font-size:8px;margin-top:2px}
-
 .small-toggle{
-  padding:6px 10px;
-  border-radius:15px;
-  background:#0a2941;
-  color:#fff;
-  border:1px solid #28546f;
-  font-size:8px;
-  font-weight:800;
+  padding:6px 10px;border-radius:15px;
+  background:#0a2941;color:#fff;
+  border:1px solid #28546f;font-size:8px;font-weight:800;
 }
-
 .small-toggle.on{background:var(--blue)}
 .more-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-
 .more-card{
-  min-height:88px;
-  border-radius:11px;
-  background:var(--panel);
-  border:1px solid var(--line);
-  padding:10px;
-  text-align:left;
-  color:#fff;
+  min-height:88px;border-radius:11px;
+  background:var(--panel);border:1px solid var(--line);
+  padding:10px;text-align:left;color:#fff;
 }
-
 .more-icon{font-size:22px;margin-bottom:7px}
 .more-title{font-size:11px;font-weight:900}
 .more-small{color:var(--muted);font-size:8px;margin-top:3px}
 
-.score-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:8px;
-}
+/* SCORECARD */
 
+.score-table{width:100%;border-collapse:collapse;font-size:8px}
 .score-table th{
-  background:#0a2941;
-  color:var(--gold);
-  padding:6px 2px;
-  border:1px solid #244861;
+  background:#0a2941;color:var(--gold);
+  padding:6px 2px;border:1px solid #244861;
 }
-
-.score-table td{
-  text-align:center;
-  padding:6px 2px;
-  border:1px solid #18334a;
-}
-
+.score-table td{text-align:center;padding:6px 2px;border:1px solid #18334a}
 .score-table tr:nth-child(even){background:#06111c}
-
-.score-total{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:6px;
-  margin-top:8px;
-}
-
+.score-total{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
 .total-box{
-  background:#04101a;
-  border:1px solid #244861;
-  border-radius:8px;
-  padding:7px;
-  text-align:center;
+  background:#04101a;border:1px solid #244861;
+  border-radius:8px;padding:7px;text-align:center;
 }
-
 .total-label{color:var(--muted);font-size:7px}
 .total-value{color:var(--gold);font-size:17px;font-weight:900;margin-top:2px}
 
-.practice-type-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:6px;
-}
+/* PRACTICE */
 
+.practice-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 .practice-type{
-  padding:11px 5px;
-  border-radius:9px;
-  background:#061827;
-  color:#fff;
-  border:1px solid #244861;
-  font-size:9px;
-  font-weight:800;
+  padding:11px 5px;border-radius:9px;
+  background:#061827;color:#fff;
+  border:1px solid #244861;font-size:9px;font-weight:800;
 }
-
 .practice-type.active{border-color:var(--gold);color:var(--gold)}
-
-.shape-row{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:5px;
-}
-
+.shape-row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
 .shape-btn{
-  padding:8px 3px;
-  border-radius:8px;
-  background:#061827;
-  color:#fff;
-  border:1px solid #244861;
-  font-size:8px;
+  padding:8px 3px;border-radius:8px;
+  background:#061827;color:#fff;
+  border:1px solid #244861;font-size:8px;
 }
-
 .shape-btn.active{background:var(--blue)}
-
 .practice-count-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:4px;
-  margin-top:7px;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:4px;margin-top:7px;
 }
-
 .practice-counter{
-  text-align:center;
-  background:#04101a;
-  border:1px solid #18334a;
-  border-radius:8px;
-  padding:5px 2px;
+  text-align:center;background:#04101a;
+  border:1px solid #18334a;border-radius:8px;padding:5px 2px;
 }
-
 .practice-counter-name{font-size:7px;color:var(--muted)}
 .practice-counter-value{font-size:16px;font-weight:900;margin:2px 0}
-
 .practice-plus{
-  width:25px;
-  height:25px;
-  border-radius:7px;
-  background:#0a2941;
-  color:#fff;
+  width:25px;height:25px;border-radius:7px;
+  background:#0a2941;color:#fff;
 }
+
+/* WARMUP / ROUTINES */
 
 .check-row{
-  display:grid;
-  grid-template-columns:34px 1fr;
-  gap:8px;
-  align-items:center;
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:9px;
-  margin-bottom:6px;
+  display:grid;grid-template-columns:34px 1fr;
+  gap:8px;align-items:center;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:10px;padding:9px;margin-bottom:6px;
 }
-
 .check-button{
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  background:#061827;
-  border:1px solid #31546c;
-  color:#fff;
+  width:30px;height:30px;border-radius:50%;
+  background:#061827;border:1px solid #31546c;color:#fff;
 }
-
-.check-button.done{
-  background:var(--green);
-  border-color:var(--green);
-}
-
+.check-button.done{background:var(--green);border-color:var(--green)}
 .check-title{font-size:11px;font-weight:900}
 .check-small{color:var(--muted);font-size:8px;margin-top:2px}
-
 .progress-bar{
-  width:100%;
-  height:9px;
-  border-radius:10px;
-  background:#061827;
-  overflow:hidden;
-  margin-top:5px;
+  width:100%;height:9px;border-radius:10px;
+  background:#061827;overflow:hidden;margin-top:5px;
 }
-
 .progress-fill{
-  height:100%;
-  width:0;
-  background:var(--gold);
-  transition:.2s;
+  height:100%;width:0;background:var(--gold);transition:.2s;
 }
-
-.progress-text{
-  font-size:9px;
-  color:var(--muted);
-  margin-top:5px;
-}
+.progress-text{font-size:9px;color:var(--muted);margin-top:5px}
 
 @media(max-width:380px){
   .header{grid-template-columns:31px 1fr 75px}
@@ -879,12 +578,10 @@ button{border:0;cursor:pointer}
 
 <header class="header">
   <div class="menu">☰</div>
-
   <div class="brand">
     <div class="brand-main">DRC VIRTUAL GOLF</div>
     <div class="brand-sub">ELITE</div>
   </div>
-
   <div class="weather">
     <strong>☀️ 24°C</strong>
     Wind 8 km/h
@@ -908,18 +605,13 @@ button{border:0;cursor:pointer}
   <div class="marker three"></div>
 
   <div class="marker-label one">
-    <span id="mapFullDistance">498</span>
-    <span class="unit">m</span>
+    <span id="mapFullDistance">498</span> <span class="unit">m</span>
   </div>
-
   <div class="marker-label two">
-    <span id="mapMidDistance">279</span>
-    <span class="unit">m</span>
+    <span id="mapMidDistance">279</span> <span class="unit">m</span>
   </div>
-
   <div class="marker-label three">
-    <span id="mapNearDistance">229</span>
-    <span class="unit">m</span>
+    <span id="mapNearDistance">229</span> <span class="unit">m</span>
   </div>
 
   <div class="player-dot"></div>
@@ -940,7 +632,6 @@ button{border:0;cursor:pointer}
       S.I. <span id="holeSI">5</span>
     </div>
   </div>
-
   <div class="hole-nav">
     <button onclick="previousHole()">‹</button>
     <button onclick="nextHole()">›</button>
@@ -955,33 +646,19 @@ button{border:0;cursor:pointer}
       <small class="unit">m</small>
     </div>
   </div>
-
   <div class="distance-list">
-    Front
-    <strong><span id="frontDistance">480</span> <span class="unit">m</span></strong>
-    <br>
-    Centre
-    <strong><span id="centreDistance">498</span> <span class="unit">m</span></strong>
-    <br>
-    Back
-    <strong><span id="backDistance">512</span> <span class="unit">m</span></strong>
+    Front <strong><span id="frontDistance">480</span> <span class="unit">m</span></strong><br>
+    Centre <strong><span id="centreDistance">498</span> <span class="unit">m</span></strong><br>
+    Back <strong><span id="backDistance">512</span> <span class="unit">m</span></strong>
   </div>
 </div>
 
 <div class="panel voice-panel">
   <div class="voice-top">
     <div class="voice-title">Voice Caddie</div>
-
     <div class="voice-tools">
       <button id="voiceToggle" class="voice-toggle" onclick="toggleVoice()">ON</button>
-
-      <input
-        id="caddieName"
-        class="caddie-name"
-        maxlength="18"
-        value="Pete"
-        onchange="saveCaddieName()"
-      >
+      <input id="caddieName" class="caddie-name" maxlength="18" value="Pete" onchange="saveCaddieName()">
     </div>
   </div>
 
@@ -991,14 +668,11 @@ button{border:0;cursor:pointer}
     <div class="tap-text">Tap and speak</div>
   </div>
 
-  <div id="caddieAnswer" class="answer">
-    Ready. Ask Pete for the shot.
-  </div>
+  <div id="caddieAnswer" class="answer">Ready. Ask Pete for the shot.</div>
 </div>
 
 <div class="panel club-panel">
   <div class="section-title">Recommended Club</div>
-
   <div class="club-row">
     <div class="club-icon">🏌️</div>
     <div id="recommendedClub" class="club-name">Driver</div>
@@ -1082,69 +756,53 @@ button{border:0;cursor:pointer}
 </main>
 
 <main id="caddieView" class="view screen-page">
-
 <div class="screen-title">Voice Caddie</div>
 <div class="screen-subtitle">Your caddie for the current hole</div>
 
 <div class="large-card caddie-centre">
   <div class="card-title">Ask <span id="largeCaddieName">Pete</span></div>
-
   <button id="largeMic" class="large-mic" onclick="askCaddie()">🎤</button>
-
   <div class="tap-text">Tap and speak</div>
-
-  <div id="largeCaddieAnswer" class="caddie-response-large">
-    Ready for your question.
-  </div>
+  <div id="largeCaddieAnswer" class="caddie-response-large">Ready for your question.</div>
 </div>
 
 <div class="large-card">
   <div class="card-title">Current Shot</div>
-
   <div class="two-col">
     <div>
       <div class="field-label">Hole</div>
       <div id="caddieHole" class="field">1</div>
     </div>
-
     <div>
       <div class="field-label">To Centre</div>
       <div id="caddieDistance" class="field">498 m</div>
     </div>
   </div>
-
   <div class="field-label">Recommended Club</div>
   <div id="caddieClub" class="field">Driver</div>
 </div>
-
 </main>
 
 <main id="bagView" class="view screen-page">
-
 <div class="screen-title">My Bag</div>
 <div class="screen-subtitle">Set your normal carry distance for each club</div>
-
 <div class="large-card">
   <div class="card-title">Club Distances</div>
   <div id="bagRows"></div>
   <button class="page-button gold" onclick="saveBag()">SAVE MY BAG</button>
 </div>
-
 </main>
 
 <main id="courseView" class="view screen-page">
-
 <div class="screen-title">Course</div>
 <div class="screen-subtitle">Round setup and course details</div>
 
 <div class="large-card">
   <div class="card-title">Course Setup</div>
-
   <div class="field-label">Course Name</div>
   <input id="courseName" class="field" placeholder="Enter course name">
 
   <div class="two-col">
-
     <div>
       <div class="field-label">Tee Type</div>
       <select id="teeType" class="field">
@@ -1152,7 +810,6 @@ button{border:0;cursor:pointer}
         <option>LADIES</option>
       </select>
     </div>
-
     <div>
       <div class="field-label">Tee Colour</div>
       <select id="teeColour" class="field">
@@ -1163,7 +820,6 @@ button{border:0;cursor:pointer}
         <option>BLACK</option>
       </select>
     </div>
-
   </div>
 
   <button class="page-button gold" onclick="saveCourse()">SAVE COURSE</button>
@@ -1171,32 +827,26 @@ button{border:0;cursor:pointer}
 
 <div class="large-card">
   <div class="card-title">Current Hole</div>
-
   <div class="two-col">
     <div>
       <div class="field-label">Hole</div>
       <div id="courseHoleNumber" class="field">1</div>
     </div>
-
     <div>
       <div class="field-label">Par</div>
       <div id="coursePar" class="field">5</div>
     </div>
   </div>
-
   <div class="field-label">Centre Distance</div>
   <div id="courseDistance" class="field">498 m</div>
 </div>
-
 </main>
 
 <main id="moreView" class="view screen-page">
-
 <div class="screen-title">More</div>
 <div class="screen-subtitle">Round tools and app settings</div>
 
 <div class="more-grid">
-
   <button class="more-card" onclick="openTool('scorecard')">
     <div class="more-icon">📋</div>
     <div class="more-title">Scorecard</div>
@@ -1220,11 +870,9 @@ button{border:0;cursor:pointer}
     <div class="more-title">Routines</div>
     <div class="more-small">Shot checklist</div>
   </button>
-
 </div>
 
 <div class="large-card" style="margin-top:8px">
-
   <div class="card-title">Settings</div>
 
   <div class="setting-row">
@@ -1232,10 +880,7 @@ button{border:0;cursor:pointer}
       <div class="setting-main">Voice Caddie</div>
       <div class="setting-small">Turn spoken caddie advice on or off</div>
     </div>
-
-    <button id="moreVoiceToggle" class="small-toggle on" onclick="toggleVoiceFromMore()">
-      ON
-    </button>
+    <button id="moreVoiceToggle" class="small-toggle on" onclick="toggleVoiceFromMore()">ON</button>
   </div>
 
   <div class="setting-row">
@@ -1243,90 +888,58 @@ button{border:0;cursor:pointer}
       <div class="setting-main">Distance Units</div>
       <div class="setting-small">Metres or yards</div>
     </div>
-
-    <button id="unitToggle" class="small-toggle" onclick="toggleUnits()">
-      METRES
-    </button>
+    <button id="unitToggle" class="small-toggle" onclick="toggleUnits()">METRES</button>
   </div>
 
   <div class="field-label">Caddie Name</div>
-
-  <input
-    id="moreCaddieName"
-    class="field"
-    value="Pete"
-    onchange="saveCaddieNameFromMore()"
-  >
-
+  <input id="moreCaddieName" class="field" value="Pete" onchange="saveCaddieNameFromMore()">
 </div>
-
 </main>
 
 <main id="scorecardView" class="view screen-page">
-
 <div class="screen-title-row">
   <button class="back-button" onclick="showView('more')">‹</button>
   <div class="screen-title">Scorecard</div>
 </div>
-
 <div class="screen-subtitle">Full 18-hole round</div>
 
 <div class="large-card">
-
 <table class="score-table">
 <thead>
 <tr>
-  <th>Hole</th>
-  <th>Par</th>
-  <th>Score</th>
-  <th>Putts</th>
-  <th>GIR</th>
-  <th>FW</th>
-  <th>Pen</th>
+<th>Hole</th><th>Par</th><th>Score</th><th>Putts</th><th>GIR</th><th>FW</th><th>Pen</th>
 </tr>
 </thead>
-
 <tbody id="scorecardBody"></tbody>
 </table>
 
 <div class="score-total">
-
   <div class="total-box">
     <div class="total-label">PAR</div>
     <div id="totalPar" class="total-value">72</div>
   </div>
-
   <div class="total-box">
     <div class="total-label">SCORE</div>
     <div id="totalScore" class="total-value">0</div>
   </div>
-
   <div class="total-box">
     <div class="total-label">TO PAR</div>
     <div id="toPar" class="total-value">—</div>
   </div>
-
+</div>
 </div>
 
-</div>
-
-<button class="page-button gold" onclick="showView('round')">
-  RETURN TO ROUND
-</button>
-
+<button class="page-button gold" onclick="showView('round')">RETURN TO ROUND</button>
 </main>
 
 <main id="practiceView" class="view screen-page">
-
 <div class="screen-title-row">
   <button class="back-button" onclick="showView('more')">‹</button>
   <div class="screen-title">Practice</div>
 </div>
-
 <div class="screen-subtitle">Record a focused practice session</div>
 
 <div class="large-card">
-
 <div class="card-title">Practice Type</div>
 
 <div class="practice-type-grid">
@@ -1339,7 +952,6 @@ button{border:0;cursor:pointer}
 </div>
 
 <div class="field-label">Shot Shape</div>
-
 <div class="shape-row">
   <button class="shape-btn active" onclick="selectShape(this,'STRAIGHT')">STRAIGHT</button>
   <button class="shape-btn" onclick="selectShape(this,'DRAW')">DRAW</button>
@@ -1347,147 +959,98 @@ button{border:0;cursor:pointer}
 </div>
 
 <div class="field-label">Shot Results</div>
-
 <div class="practice-count-grid">
 
 <div class="practice-counter">
-  <div class="practice-counter-name">GOOD</div>
-  <div id="practiceGood" class="practice-counter-value">0</div>
-  <button class="practice-plus" onclick="practiceAdd('good')">+</button>
+<div class="practice-counter-name">GOOD</div>
+<div id="practiceGood" class="practice-counter-value">0</div>
+<button class="practice-plus" onclick="practiceAdd('good')">+</button>
 </div>
 
 <div class="practice-counter">
-  <div class="practice-counter-name">LEFT</div>
-  <div id="practiceLeft" class="practice-counter-value">0</div>
-  <button class="practice-plus" onclick="practiceAdd('left')">+</button>
+<div class="practice-counter-name">LEFT</div>
+<div id="practiceLeft" class="practice-counter-value">0</div>
+<button class="practice-plus" onclick="practiceAdd('left')">+</button>
 </div>
 
 <div class="practice-counter">
-  <div class="practice-counter-name">RIGHT</div>
-  <div id="practiceRight" class="practice-counter-value">0</div>
-  <button class="practice-plus" onclick="practiceAdd('right')">+</button>
+<div class="practice-counter-name">RIGHT</div>
+<div id="practiceRight" class="practice-counter-value">0</div>
+<button class="practice-plus" onclick="practiceAdd('right')">+</button>
 </div>
 
 <div class="practice-counter">
-  <div class="practice-counter-name">SHORT</div>
-  <div id="practiceShort" class="practice-counter-value">0</div>
-  <button class="practice-plus" onclick="practiceAdd('short')">+</button>
+<div class="practice-counter-name">SHORT</div>
+<div id="practiceShort" class="practice-counter-value">0</div>
+<button class="practice-plus" onclick="practiceAdd('short')">+</button>
 </div>
 
 <div class="practice-counter">
-  <div class="practice-counter-name">LONG</div>
-  <div id="practiceLong" class="practice-counter-value">0</div>
-  <button class="practice-plus" onclick="practiceAdd('long')">+</button>
+<div class="practice-counter-name">LONG</div>
+<div id="practiceLong" class="practice-counter-value">0</div>
+<button class="practice-plus" onclick="practiceAdd('long')">+</button>
 </div>
 
 </div>
 
 <div class="field-label">Session Note</div>
+<textarea id="practiceNote" class="field" rows="3" placeholder="What did you notice?"></textarea>
 
-<textarea
-  id="practiceNote"
-  class="field"
-  rows="3"
-  placeholder="What did you notice?"
-></textarea>
-
-<button class="page-button gold" onclick="savePractice()">
-  SAVE PRACTICE SESSION
-</button>
-
-<button class="page-button" onclick="resetPractice()">
-  RESET COUNTS
-</button>
-
+<button class="page-button gold" onclick="savePractice()">SAVE PRACTICE SESSION</button>
+<button class="page-button" onclick="resetPractice()">RESET COUNTS</button>
 </div>
-
 </main>
 
 <main id="warmupView" class="view screen-page">
-
 <div class="screen-title-row">
   <button class="back-button" onclick="showView('more')">‹</button>
   <div class="screen-title">Warm-Up</div>
 </div>
-
 <div class="screen-subtitle">Eight steps before you tee off</div>
 
 <div class="large-card">
   <div class="card-title">Progress</div>
-
-  <div class="progress-bar">
-    <div id="warmupProgress" class="progress-fill"></div>
-  </div>
-
-  <div id="warmupProgressText" class="progress-text">
-    0 of 8 complete
-  </div>
+  <div class="progress-bar"><div id="warmupProgress" class="progress-fill"></div></div>
+  <div id="warmupProgressText" class="progress-text">0 of 8 complete</div>
 </div>
 
 <div id="warmupRows"></div>
-
-<button class="page-button" onclick="resetWarmup()">
-  RESET WARM-UP
-</button>
-
+<button class="page-button" onclick="resetWarmup()">RESET WARM-UP</button>
 </main>
 
 <main id="routinesView" class="view screen-page">
-
 <div class="screen-title-row">
   <button class="back-button" onclick="showView('more')">‹</button>
   <div class="screen-title">Routines</div>
 </div>
-
 <div class="screen-subtitle">Simple shot routine — one decision at a time</div>
 
 <div class="large-card">
   <div class="card-title">Shot Routine</div>
-
-  <div class="progress-bar">
-    <div id="routineProgress" class="progress-fill"></div>
-  </div>
-
-  <div id="routineProgressText" class="progress-text">
-    0 of 8 complete
-  </div>
+  <div class="progress-bar"><div id="routineProgress" class="progress-fill"></div></div>
+  <div id="routineProgressText" class="progress-text">0 of 8 complete</div>
 </div>
 
 <div id="routineRows"></div>
-
-<button class="page-button gold" onclick="resetRoutine()">
-  START NEXT SHOT
-</button>
-
+<button class="page-button gold" onclick="resetRoutine()">START NEXT SHOT</button>
 </main>
 
 <nav class="bottom-nav">
-
 <button id="navRound" class="active" onclick="showView('round')">
-  <span class="nav-icon">🏌️</span>
-  Round
+<span class="nav-icon">🏌️</span>Round
 </button>
-
 <button id="navCaddie" onclick="showView('caddie')">
-  <span class="nav-icon">💬</span>
-  Caddie
+<span class="nav-icon">💬</span>Caddie
 </button>
-
 <button id="navBag" onclick="showView('bag')">
-  <span class="nav-icon">🎒</span>
-  My Bag
+<span class="nav-icon">🎒</span>My Bag
 </button>
-
 <button id="navCourse" onclick="showView('course')">
-  <span class="nav-icon">⛳</span>
-  Course
+<span class="nav-icon">⛳</span>Course
 </button>
-
 <button id="navMore" onclick="showView('more')">
-  <span class="nav-icon">•••</span>
-  More
+<span class="nav-icon">•••</span>More
 </button>
-
 </nav>
 
 </div>
@@ -1501,10 +1064,7 @@ let voiceEnabled = true;
 let recognition = null;
 let listening = false;
 
-let unitMode =
-  localStorage.getItem("drcUnitMode")
-  ||
-  "metric";
+let unitMode = localStorage.getItem("drcUnitMode") || "metric";
 
 const holes = [
 {hole:1,par:5,si:5,front:480,centre:498,back:512},
@@ -1525,48 +1085,9 @@ const holes = [
 {hole:16,par:3,si:18,front:121,centre:132,back:143},
 {hole:17,par:4,si:12,front:355,centre:369,back:382},
 {hole:18,par:4,si:14,front:361,centre:375,back:389}
-];const holeMaps = [
-{
-fairway:"polygon(40% 100%,67% 87%,55% 76%,75% 63%,60% 49%,72% 36%,58% 22%,63% 0,35% 0,40% 22%,25% 36%,39% 49%,24% 64%,38% 77%,27% 91%)",
-fairwayInset:"0 13% 0 19%",
-green:{top:"2%",left:"34%",width:"45%",height:"8%"},
-bunker:{top:"10%",left:"28%",width:"28%",height:"4%",rotate:"-20deg"},
-water:{top:"0",right:"0",bottom:"0",left:"auto",width:"20%",height:"auto"},
-flag:{top:"3%",left:"50%"},
-line:{top:"9%",bottom:"10%",left:"50%"}
-},
-{
-fairway:"polygon(58% 100%,74% 86%,58% 72%,68% 60%,48% 48%,57% 34%,38% 20%,43% 0,20% 0,25% 18%,19% 35%,34% 50%,25% 66%,40% 80%,35% 92%)",
-fairwayInset:"0 7% 0 21%",
-green:{top:"2%",left:"24%",width:"41%",height:"8%"},
-bunker:{top:"9%",left:"58%",width:"24%",height:"4%",rotate:"18deg"},
-water:{top:"0",left:"0",bottom:"0",right:"auto",width:"15%",height:"auto"},
-flag:{top:"3%",left:"43%"},
-line:{top:"9%",bottom:"10%",left:"47%"}
-},
-{
-fairway:"polygon(47% 100%,58% 80%,55% 58%,63% 40%,56% 0,38% 0,41% 40%,33% 58%,39% 80%)",
-fairwayInset:"0 20% 0 20%",
-green:{top:"2%",left:"36%",width:"35%",height:"7%"},
-bunker:{top:"9%",left:"26%",width:"22%",height:"3.5%",rotate:"-10deg"},
-water:{top:"34%",right:"0",width:"24%",height:"28%",bottom:"auto",left:"auto"},
-flag:{top:"3%",left:"53%"},
-line:{top:"9%",bottom:"10%",left:"50%"}
-},
-{
-fairway:"polygon(30% 100%,48% 90%,39% 75%,56% 63%,45% 50%,63% 35%,58% 21%,72% 0,47% 0,38% 18%,26% 35%,35% 52%,22% 67%,31% 82%,20% 93%)",
-fairwayInset:"0 9% 0 18%",
-green:{top:"2%",left:"48%",width:"38%",height:"8%"},
-bunker:{top:"10%",left:"38%",width:"25%",height:"4%",rotate:"22deg"},
-water:{top:"0",right:"0",width:"17%",height:"45%",bottom:"auto",left:"auto"},
-flag:{top:"3%",left:"67%"},
-line:{top:"9%",bottom:"10%",left:"49%"}
-},
-{
-fairway:"polygon(56% 100%,68% 86%,54% 72%,66% 55%,49% 40%,55% 22%,43% 0,24% 0,28% 20%,19% 39%,31% 58%,24% 74%,39% 88%,36% 100%)",
-fairwayInset:"0 8% 0 20%",
-green:{top:"2%",left:"25%",width:"42%",height:"8%"},
-bunker:{top:"10%",left:"58%",width:"25%",height:"4%",rotate:"-24deg"},const holeMaps = [
+];
+
+const holeMaps = [
 {fairway:"polygon(40% 100%,67% 87%,55% 76%,75% 63%,60% 49%,72% 36%,58% 22%,63% 0,35% 0,40% 22%,25% 36%,39% 49%,24% 64%,38% 77%,27% 91%)",fairwayInset:"0 13% 0 19%",green:{top:"2%",left:"34%",width:"45%",height:"8%"},bunker:{top:"10%",left:"28%",width:"28%",height:"4%",rotate:"-20deg"},water:{top:"0",right:"0",bottom:"0",left:"auto",width:"20%",height:"auto"},flag:{top:"3%",left:"50%"},line:{top:"9%",bottom:"10%",left:"50%"}},
 {fairway:"polygon(58% 100%,74% 86%,58% 72%,68% 60%,48% 48%,57% 34%,38% 20%,43% 0,20% 0,25% 18%,19% 35%,34% 50%,25% 66%,40% 80%,35% 92%)",fairwayInset:"0 7% 0 21%",green:{top:"2%",left:"24%",width:"41%",height:"8%"},bunker:{top:"9%",left:"58%",width:"24%",height:"4%",rotate:"18deg"},water:{top:"0",left:"0",bottom:"0",right:"auto",width:"15%",height:"auto"},flag:{top:"3%",left:"43%"},line:{top:"9%",bottom:"10%",left:"47%"}},
 {fairway:"polygon(47% 100%,58% 80%,55% 58%,63% 40%,56% 0,38% 0,41% 40%,33% 58%,39% 80%)",fairwayInset:"0 20% 0 20%",green:{top:"2%",left:"36%",width:"35%",height:"7%"},bunker:{top:"9%",left:"26%",width:"22%",height:"3.5%",rotate:"-10deg"},water:{top:"34%",right:"0",width:"24%",height:"28%",bottom:"auto",left:"auto"},flag:{top:"3%",left:"53%"},line:{top:"9%",bottom:"10%",left:"50%"}},
@@ -1587,10 +1108,7 @@ bunker:{top:"10%",left:"58%",width:"25%",height:"4%",rotate:"-24deg"},const hole
 {fairway:"polygon(61% 100%,72% 86%,59% 72%,68% 57%,52% 43%,59% 29%,44% 14%,49% 0,28% 0,31% 17%,21% 33%,35% 48%,25% 64%,39% 79%,35% 93%)",fairwayInset:"0 8% 0 19%",green:{top:"2%",left:"29%",width:"40%",height:"8%"},bunker:{top:"10%",left:"56%",width:"24%",height:"4%",rotate:"22deg"},water:{top:"55%",left:"0",width:"17%",height:"45%",right:"auto",bottom:"auto"},flag:{top:"3%",left:"47%"},line:{top:"9%",bottom:"10%",left:"51%"}}
 ];
 
-let bagMetres =
-JSON.parse(localStorage.getItem("drcBagMetres") || "null")
-||
-{
+let bagMetres = JSON.parse(localStorage.getItem("drcBagMetres") || "null") || {
 "Driver":230,
 "3 Wood":210,
 "5 Wood":195,
@@ -1606,89 +1124,59 @@ JSON.parse(localStorage.getItem("drcBagMetres") || "null")
 "LW":70
 };
 
-let holeScores =
-JSON.parse(localStorage.getItem("drcHoleScores") || "{}");
+let holeScores = JSON.parse(localStorage.getItem("drcHoleScores") || "{}");
 
 let practiceType = "Wedges";
 let practiceShape = "STRAIGHT";
-
-let practiceCounts = {
-  good:0,
-  left:0,
-  right:0,
-  short:0,
-  long:0
-};
+let practiceCounts = {good:0,left:0,right:0,short:0,long:0};
 
 const warmupSteps = [
-  ["Loosen Up","Easy movement and mobility"],
-  ["Short Wedges","Build rhythm with short wedges"],
-  ["Mid Irons","Controlled mid-iron strikes"],
-  ["Long Club","A few longer clubs"],
-  ["Driver","Finish full swings with driver"],
-  ["Chipping","Check strike and landing spot"],
-  ["Putting","Speed first, then start line"],
-  ["Ready","One committed final shot"]
+["Loosen Up","Easy movement and mobility"],
+["Short Wedges","Build rhythm with short wedges"],
+["Mid Irons","Controlled mid-iron strikes"],
+["Long Club","A few longer clubs"],
+["Driver","Finish full swings with driver"],
+["Chipping","Check strike and landing spot"],
+["Putting","Speed first, then start line"],
+["Ready","One committed final shot"]
 ];
 
 const routineSteps = [
-  ["Target","Choose the exact target"],
-  ["Lie","Read the lie before choosing the shot"],
-  ["Club","Choose the club for the shot required"],
-  ["Picture","See the ball flight and landing point"],
-  ["Commit","Commit fully to the decision"],
-  ["Breathe","One calm breath"],
-  ["Reset","Step in and execute"],
-  ["Next","Accept the result and move on"]
+["Target","Choose the exact target"],
+["Lie","Read the lie before choosing the shot"],
+["Club","Choose the club for the shot required"],
+["Picture","See the ball flight and landing point"],
+["Commit","Commit fully to the decision"],
+["Breathe","One calm breath"],
+["Reset","Step in and execute"],
+["Next","Accept the result and move on"]
 ];
 
-let warmupState =
-JSON.parse(localStorage.getItem("drcWarmupState") || "null")
-||
-new Array(8).fill(false);
-
-let routineState =
-JSON.parse(localStorage.getItem("drcRoutineState") || "null")
-||
-new Array(8).fill(false);
+let warmupState = JSON.parse(localStorage.getItem("drcWarmupState") || "null") || new Array(8).fill(false);
+let routineState = JSON.parse(localStorage.getItem("drcRoutineState") || "null") || new Array(8).fill(false);
 
 function displayDistance(metres){
-
-  if(unitMode === "imperial"){
-    return{
-      value:Math.round(metres / YARDS_TO_METRES),
-      unit:"yds"
-    };
+  if(unitMode==="imperial"){
+    return {value:Math.round(metres/YARDS_TO_METRES),unit:"yds"};
   }
-
-  return{
-    value:Math.round(metres),
-    unit:"m"
-  };
+  return {value:Math.round(metres),unit:"m"};
 }
 
 function hideAllViews(){
-
-  document.querySelectorAll(".view").forEach(v=>{
-    v.classList.remove("active");
-  });
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
 }
 
 function clearBottomNav(){
-
-  document.querySelectorAll(".bottom-nav button").forEach(b=>{
-    b.classList.remove("active");
-  });
+  document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));
 }
 
 function showView(name){
-
   hideAllViews();
   clearBottomNav();
 
   document.getElementById(name+"View").classList.add("active");
 
-  const navMap = {
+  const navMap={
     round:"navRound",
     caddie:"navCaddie",
     bag:"navBag",
@@ -1696,10 +1184,7 @@ function showView(name){
     more:"navMore"
   };
 
-  if(navMap[name]){
-    document.getElementById(navMap[name]).classList.add("active");
-  }
-
+  if(navMap[name]) document.getElementById(navMap[name]).classList.add("active");
   if(name==="caddie") updateCaddiePage();
   if(name==="bag") renderBag();
   if(name==="course") updateCoursePage();
@@ -1707,12 +1192,9 @@ function showView(name){
 }
 
 function openTool(name){
-
   hideAllViews();
   clearBottomNav();
-
   document.getElementById(name+"View").classList.add("active");
-
   document.getElementById("navMore").classList.add("active");
 
   if(name==="scorecard") renderScorecard();
@@ -1722,72 +1204,64 @@ function openTool(name){
 }
 
 function applyMapLayout(){
+  const map=holeMaps[currentHole];
+  const fairway=document.getElementById("fairway");
+  const green=document.getElementById("green");
+  const bunker=document.getElementById("bunker");
+  const water=document.getElementById("water");
+  const flag=document.getElementById("flag");
+  const shotLine=document.getElementById("shotLine");
 
-  const map = holeMaps[currentHole];
+  fairway.style.inset=map.fairwayInset;
+  fairway.style.clipPath=map.fairway;
 
-  const fairway = document.getElementById("fairway");
-  const green = document.getElementById("green");
-  const bunker = document.getElementById("bunker");
-  const water = document.getElementById("water");
-  const flag = document.getElementById("flag");
-  const shotLine = document.getElementById("shotLine");
+  green.style.top=map.green.top;
+  green.style.left=map.green.left;
+  green.style.width=map.green.width;
+  green.style.height=map.green.height;
 
-  fairway.style.inset = map.fairwayInset;
-  fairway.style.clipPath = map.fairway;
+  bunker.style.top=map.bunker.top;
+  bunker.style.left=map.bunker.left;
+  bunker.style.width=map.bunker.width;
+  bunker.style.height=map.bunker.height;
+  bunker.style.transform="rotate("+map.bunker.rotate+")";
 
-  green.style.top = map.green.top;
-  green.style.left = map.green.left;
-  green.style.width = map.green.width;
-  green.style.height = map.green.height;
+  water.style.top=map.water.top;
+  water.style.right=map.water.right;
+  water.style.bottom=map.water.bottom;
+  water.style.left=map.water.left;
+  water.style.width=map.water.width;
+  water.style.height=map.water.height;
 
-  bunker.style.top = map.bunker.top;
-  bunker.style.left = map.bunker.left;
-  bunker.style.width = map.bunker.width;
-  bunker.style.height = map.bunker.height;
-  bunker.style.transform = "rotate("+map.bunker.rotate+")";
+  flag.style.top=map.flag.top;
+  flag.style.left=map.flag.left;
 
-  water.style.top = map.water.top;
-  water.style.right = map.water.right;
-  water.style.bottom = map.water.bottom;
-  water.style.left = map.water.left;
-  water.style.width = map.water.width;
-  water.style.height = map.water.height;
-
-  flag.style.top = map.flag.top;
-  flag.style.left = map.flag.left;
-
-  shotLine.style.top = map.line.top;
-  shotLine.style.bottom = map.line.bottom;
-  shotLine.style.left = map.line.left;
+  shotLine.style.top=map.line.top;
+  shotLine.style.bottom=map.line.bottom;
+  shotLine.style.left=map.line.left;
 }
 
 function renderHole(){
+  const hole=holes[currentHole];
 
-  const hole = holes[currentHole];
+  document.getElementById("holeNumber").textContent=hole.hole;
+  document.getElementById("holePar").textContent=hole.par;
+  document.getElementById("holeSI").textContent=hole.si;
 
-  document.getElementById("holeNumber").textContent = hole.hole;
-  document.getElementById("holePar").textContent = hole.par;
-  document.getElementById("holeSI").textContent = hole.si;
+  const front=displayDistance(hole.front);
+  const centre=displayDistance(hole.centre);
+  const back=displayDistance(hole.back);
 
-  const front = displayDistance(hole.front);
-  const centre = displayDistance(hole.centre);
-  const back = displayDistance(hole.back);
+  document.getElementById("frontDistance").textContent=front.value;
+  document.getElementById("centreDistance").textContent=centre.value;
+  document.getElementById("centreBig").textContent=centre.value;
+  document.getElementById("backDistance").textContent=back.value;
 
-  document.getElementById("frontDistance").textContent = front.value;
-  document.getElementById("centreDistance").textContent = centre.value;
-  document.getElementById("centreBig").textContent = centre.value;
-  document.getElementById("backDistance").textContent = back.value;
+  document.getElementById("mapFullDistance").textContent=centre.value;
+  document.getElementById("mapMidDistance").textContent=Math.round(centre.value*.56);
+  document.getElementById("mapNearDistance").textContent=Math.round(centre.value*.46);
 
-  document.getElementById("mapFullDistance").textContent = centre.value;
-  document.getElementById("mapMidDistance").textContent =
-    Math.round(centre.value*.56);
-
-  document.getElementById("mapNearDistance").textContent =
-    Math.round(centre.value*.46);
-
-  document.querySelectorAll(".unit").forEach(el=>{
-    el.textContent = centre.unit;
-  });
+  document.querySelectorAll(".unit").forEach(el=>el.textContent=centre.unit);
 
   applyMapLayout();
   loadHoleScore();
@@ -1810,17 +1284,10 @@ function previousHole(){
 }
 
 function getScoreData(){
-
-  const number = holes[currentHole].hole;
+  const number=holes[currentHole].hole;
 
   if(!holeScores[number]){
-    holeScores[number] = {
-      score:0,
-      putts:0,
-      gir:false,
-      fairway:false,
-      penalty:0
-    };
+    holeScores[number]={score:0,putts:0,gir:false,fairway:false,penalty:0};
   }
 
   return holeScores[number];
@@ -1831,68 +1298,60 @@ function saveScores(){
 }
 
 function loadHoleScore(){
+  const data=getScoreData();
 
-  const data = getScoreData();
+  document.getElementById("scoreValue").textContent=data.score;
+  document.getElementById("puttsValue").textContent=data.putts;
+  document.getElementById("penaltyValue").textContent=data.penalty;
 
-  document.getElementById("scoreValue").textContent = data.score;
-  document.getElementById("puttsValue").textContent = data.putts;
-  document.getElementById("penaltyValue").textContent = data.penalty;
-
-  document.getElementById("girButton")
-    .classList.toggle("active",data.gir);
-
-  document.getElementById("fairwayButton")
-    .classList.toggle("active",data.fairway);
+  document.getElementById("girButton").classList.toggle("active",data.gir);
+  document.getElementById("fairwayButton").classList.toggle("active",data.fairway);
 }
 
 function changeScore(amount){
-  const data = getScoreData();
-  data.score = Math.max(0,data.score+amount);
+  const data=getScoreData();
+  data.score=Math.max(0,data.score+amount);
   saveScores();
   loadHoleScore();
 }
 
 function changePutts(amount){
-  const data = getScoreData();
-  data.putts = Math.max(0,data.putts+amount);
+  const data=getScoreData();
+  data.putts=Math.max(0,data.putts+amount);
   saveScores();
   loadHoleScore();
 }
 
 function changePenalty(amount){
-  const data = getScoreData();
-  data.penalty = Math.max(0,data.penalty+amount);
+  const data=getScoreData();
+  data.penalty=Math.max(0,data.penalty+amount);
   saveScores();
   loadHoleScore();
 }
 
 function toggleGir(){
-  const data = getScoreData();
-  data.gir = !data.gir;
+  const data=getScoreData();
+  data.gir=!data.gir;
   saveScores();
   loadHoleScore();
 }
 
 function toggleFairway(){
-  const data = getScoreData();
-  data.fairway = !data.fairway;
+  const data=getScoreData();
+  data.fairway=!data.fairway;
   saveScores();
   loadHoleScore();
 }
 
-function chooseClubForPlayingDistance(targetMetres){
-
-  let selected = "Driver";
-  let smallest = Infinity;
+function chooseClub(target){
+  let selected="Driver";
+  let smallest=Infinity;
 
   Object.entries(bagMetres).forEach(([club,carry])=>{
-
-    const difference =
-      Math.abs(Number(carry)-targetMetres);
-
+    const difference=Math.abs(target-Number(carry));
     if(difference<smallest){
-      smallest = difference;
-      selected = club;
+      smallest=difference;
+      selected=club;
     }
   });
 
@@ -1900,32 +1359,23 @@ function chooseClubForPlayingDistance(targetMetres){
 }
 
 function recommendClub(){
+  const target=holes[currentHole].centre;
+  let selected=chooseClub(target);
 
-  const target = holes[currentHole].centre;
-
-  let selected =
-    chooseClubForPlayingDistance(target);
-
-  const longestCarry =
-    Math.max(...Object.values(bagMetres).map(Number));
-
-  if(target>longestCarry){
-    selected = "Driver";
-  }
+  const longest=Math.max(...Object.values(bagMetres).map(Number));
+  if(target>longest) selected="Driver";
 
   setRecommendedClub(selected);
 }
 
 function setRecommendedClub(club){
+  if(!bagMetres[club]) return;
 
-  document.getElementById("recommendedClub").textContent = club;
+  document.getElementById("recommendedClub").textContent=club;
 
-  const carry = displayDistance(bagMetres[club]);
-
-  document.getElementById("recommendedCarry").textContent =
-    carry.value+" "+carry.unit;
-
-  document.getElementById("clubSelect").value = club;
+  const carry=displayDistance(bagMetres[club]);
+  document.getElementById("recommendedCarry").textContent=carry.value+" "+carry.unit;
+  document.getElementById("clubSelect").value=club;
 
   updateCaddiePage();
 }
@@ -1935,55 +1385,37 @@ function manualClubChange(){
 }
 
 function getCaddieName(){
-
-  const value =
-    document.getElementById("caddieName").value.trim();
-
+  const value=document.getElementById("caddieName").value.trim();
   return value || "Pete";
 }
 
 function saveCaddieName(){
+  const name=getCaddieName();
 
-  const name = getCaddieName();
-
-  document.getElementById("caddieName").value = name;
-  document.getElementById("askName").textContent = name;
+  document.getElementById("caddieName").value=name;
+  document.getElementById("askName").textContent=name;
+  document.getElementById("largeCaddieName").textContent=name;
+  document.getElementById("moreCaddieName").value=name;
 
   localStorage.setItem("drcCaddieName",name);
 
-  document.getElementById("caddieAnswer").textContent =
-    "Ready. Ask "+name+" for the shot.";
-
-  document.getElementById("largeCaddieName").textContent = name;
-  document.getElementById("moreCaddieName").value = name;
+  setCaddieAnswers("Ready. Ask "+name+" for the shot.");
 }
 
 function saveCaddieNameFromMore(){
-
-  const name =
-    document.getElementById("moreCaddieName").value.trim()
-    ||
-    "Pete";
-
-  document.getElementById("caddieName").value = name;
-
+  const name=document.getElementById("moreCaddieName").value.trim() || "Pete";
+  document.getElementById("caddieName").value=name;
   saveCaddieName();
 }
 
 function toggleVoice(){
+  voiceEnabled=!voiceEnabled;
 
-  voiceEnabled = !voiceEnabled;
-
-  const button = document.getElementById("voiceToggle");
-
-  button.textContent = voiceEnabled ? "ON" : "OFF";
+  const button=document.getElementById("voiceToggle");
+  button.textContent=voiceEnabled ? "ON" : "OFF";
   button.classList.toggle("off",!voiceEnabled);
 
-  localStorage.setItem(
-    "drcVoiceEnabled",
-    voiceEnabled ? "true" : "false"
-  );
-
+  localStorage.setItem("drcVoiceEnabled",voiceEnabled ? "true" : "false");
   updateMorePage();
 }
 
@@ -1991,1111 +1423,428 @@ function toggleVoiceFromMore(){
   toggleVoice();
 }
 
-function setupRecognition(){
+/* MICROPHONE */
 
-  const SpeechRecognition =
-    window.SpeechRecognition
-    ||
-    window.webkitSpeechRecognition;
+function setupRecognition(){
+  const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if(!SpeechRecognition){
+    recognition=null;
     return false;
   }
 
-  recognition = new SpeechRecognition();
+  try{
+    recognition=new SpeechRecognition();
 
-  recognition.lang = "en-AU";
-  recognition.continuous = false;
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
+    recognition.lang="en-AU";
+    recognition.continuous=false;
+    recognition.interimResults=false;
+    recognition.maxAlternatives=1;
 
-  recognition.onstart = function(){
+    recognition.onstart=function(){
+      listening=true;
+      document.getElementById("micButton").classList.add("listening");
+      document.getElementById("largeMic").classList.add("listening");
+      setCaddieAnswers("Listening...");
+    };
 
-    listening = true;
+    recognition.onresult=function(event){
+      if(!event.results || !event.results.length) return;
 
-    document.getElementById("micButton")
-      .classList.add("listening");
+      const transcript=event.results[0][0].transcript.trim();
 
-    document.getElementById("largeMic")
-      .classList.add("listening");
+      if(transcript){
+        handleGolfCommand(transcript);
+      }else{
+        setCaddieAnswers("I didn't catch that. Tap the mic and try again.");
+      }
+    };
 
-    setCaddieAnswers("Listening...");
-  };
+    recognition.onerror=function(event){
+      let message="I couldn't hear that clearly. Tap the mic and try again.";
 
-  recognition.onresult = function(event){
+      if(event.error==="not-allowed" || event.error==="service-not-allowed"){
+        message="Microphone permission is blocked. Allow microphone access for DRC Virtual Golf.";
+      }else if(event.error==="no-speech"){
+        message="I didn't hear anything. Tap the mic and speak again.";
+      }else if(event.error==="audio-capture"){
+        message="The microphone isn't available right now.";
+      }else if(event.error==="network"){
+        message="Voice recognition couldn't reach the speech service.";
+      }
 
-    const transcript =
-      event.results[0][0].transcript.trim();
+      setCaddieAnswers(message);
+    };
 
-    handleGolfCommand(transcript);
-  };
+    recognition.onend=function(){
+      listening=false;
+      document.getElementById("micButton").classList.remove("listening");
+      document.getElementById("largeMic").classList.remove("listening");
+    };
 
-  recognition.onerror = function(event){
-
-    let message = "I couldn't hear that clearly.";
-
-    if(event.error==="not-allowed"){
-      message = "Microphone permission is blocked.";
-    }
-
-    setCaddieAnswers(message);
-  };
-
-  recognition.onend = function(){
-
-    listening = false;
-
-    document.getElementById("micButton")
-      .classList.remove("listening");
-
-    document.getElementById("largeMic")
-      .classList.remove("listening");
-  };
-
-  return true;
+    return true;
+  }catch(error){
+    recognition=null;
+    return false;
+  }
 }
 
 function setCaddieAnswers(text){
-
-  document.getElementById("caddieAnswer").textContent = text;
-  document.getElementById("largeCaddieAnswer").textContent = text;
+  document.getElementById("caddieAnswer").textContent=text;
+  document.getElementById("largeCaddieAnswer").textContent=text;
 }
 
 function askCaddie(){
-
   if(!voiceEnabled){
     setCaddieAnswers("Voice Caddie is switched off.");
     return;
   }
 
-  if(!recognition && !setupRecognition()){
-    setCaddieAnswers(
-      "Voice recognition is not available on this device."
-    );
+  if(listening && recognition){
+    try{recognition.stop();}catch(error){}
     return;
   }
 
-  if(listening){
-    recognition.stop();
-    return;
+  if(!recognition){
+    if(!setupRecognition()){
+      setCaddieAnswers("Voice recognition is not available on this device.");
+      return;
+    }
   }
 
   try{
     recognition.start();
-  }
-  catch(error){}
-}
+  }catch(error){
+    recognition=null;
 
-/* SMART CADDIE */
-
-function wordsToNumber(text){
-
-  const ones = {
-    zero:0,one:1,two:2,three:3,four:4,five:5,
-    six:6,seven:7,eight:8,nine:9,ten:10,
-    eleven:11,twelve:12,thirteen:13,fourteen:14,
-    fifteen:15,sixteen:16,seventeen:17,
-    eighteen:18,nineteen:19
-  };
-
-  const tens = {
-    twenty:20,thirty:30,forty:40,fifty:50,
-    sixty:60,seventy:70,eighty:80,ninety:90
-  };
-
-  const parts =
-    text.toLowerCase().replace(/-/g," ").split(/\s+/);
-
-  let total = 0;
-  let current = 0;
-  let found = false;
-
-  for(const part of parts){
-
-    if(ones[part]!==undefined){
-      current += ones[part];
-      found = true;
-    }
-
-    else if(tens[part]!==undefined){
-      current += tens[part];
-      found = true;
-    }
-
-    else if(part==="hundred"){
-      current = (current || 1) * 100;
-      found = true;
-    }
-
-    else if(part==="thousand"){
-      total += (current || 1) * 1000;
-      current = 0;
-      found = true;
-    }
-
-    else if(found){
-      break;
+    if(setupRecognition()){
+      try{
+        recognition.start();
+      }catch(secondError){
+        setCaddieAnswers("The microphone couldn't start. Tap again.");
+      }
+    }else{
+      setCaddieAnswers("Voice recognition is not available on this device.");
     }
   }
-
-  return found ? total+current : null;
 }
 
-function firstSpokenNumber(text){
+/* SMART PETE */
 
-  const digit =
-    text.match(/\b\d+(?:\.\d+)?\b/);
+function parseDistance(text){
+  const match=text.match(/(\d+(?:\.\d+)?)\s*(metres?|meters?|m|yards?|yds?)/i);
 
-  if(digit){
-    return Number(digit[0]);
+  if(!match) return null;
+
+  const value=Number(match[1]);
+  const unit=match[2].toLowerCase();
+
+  if(unit.startsWith("yard") || unit.startsWith("yd")){
+    return value*YARDS_TO_METRES;
   }
 
-  return wordsToNumber(text);
+  return value;
 }
 
-function metresFromSpokenDistance(text,value){
+function parseWind(text){
+  const result={speed:0,direction:"none"};
 
-  if(value===null || value===undefined){
-    return null;
-  }
+  const km=text.match(/(\d+(?:\.\d+)?)\s*(?:km\/?h|kph|kilometres? per hour|kilometers? per hour)/i);
+  const mph=text.match(/(\d+(?:\.\d+)?)\s*mph/i);
 
-  if(
-    /\byards?\b|\byds?\b/.test(text)
-  ){
-    return value * YARDS_TO_METRES;
-  }
+  if(km) result.speed=Number(km[1]);
+  if(mph) result.speed=Number(mph[1])*1.60934;
 
-  if(
-    /\bmetres?\b|\bmeters?\b/.test(text)
-  ){
-    return value;
-  }
+  if(/\bheadwind\b|\binto the wind\b/i.test(text)) result.direction="head";
+  else if(/\btailwind\b|\bdownwind\b/i.test(text)) result.direction="tail";
+  else if(/\bleft to right\b/i.test(text)) result.direction="ltr";
+  else if(/\bright to left\b/i.test(text)) result.direction="rtl";
+  else if(/\bcrosswind\b/i.test(text)) result.direction="cross";
 
-  return unitMode==="imperial"
-    ?
-    value * YARDS_TO_METRES
-    :
-    value;
+  return result;
 }
 
-function extractDistanceMetres(text){
-
-  const patterns = [
-    /(?:distance|yardage|range|to pin|to flag|to centre|to center|remaining|got|have|about|playing)\s+(?:is\s+)?(\d+(?:\.\d+)?)/,
-    /(\d+(?:\.\d+)?)\s*(?:metres?|meters?|yards?|yds?)/
-  ];
-
-  for(const pattern of patterns){
-
-    const match = text.match(pattern);
-
-    if(match){
-      return metresFromSpokenDistance(
-        text,
-        Number(match[1])
-      );
-    }
-  }
-
-  const number = firstSpokenNumber(text);
-
-  if(number!==null && number>=30){
-    return metresFromSpokenDistance(text,number);
-  }
-
-  return null;
-}
-
-function extractWind(text){
-
-  let speedKmh = 0;
-
-  const windMatch =
-    text.match(
-      /(\d+(?:\.\d+)?)\s*(?:km\/?h|kph|kilometres? per hour|kilometers? per hour|mph)/
-    );
-
-  if(windMatch){
-
-    speedKmh = Number(windMatch[1]);
-
-    if(/\bmph\b/.test(text)){
-      speedKmh *= 1.60934;
-    }
-  }
-
-  else if(
-    /\bstrong wind\b|\bstrong headwind\b|\bstrong tailwind\b/.test(text)
-  ){
-    speedKmh = 25;
-  }
-
-  else if(
-    /\bwind\b|\bheadwind\b|\btailwind\b|\bcrosswind\b/.test(text)
-  ){
-    speedKmh = 10;
-  }
-
-  let direction = "none";
-
-  if(
-    /\bheadwind\b|\binto the wind\b/.test(text)
-  ){
-    direction = "head";
-  }
-
-  else if(
-    /\btailwind\b|\bdownwind\b|\bwind behind\b/.test(text)
-  ){
-    direction = "tail";
-  }
-
-  else if(
-    /\bleft to right\b|\bleft-to-right\b/.test(text)
-  ){
-    direction = "ltr";
-  }
-
-  else if(
-    /\bright to left\b|\bright-to-left\b/.test(text)
-  ){
-    direction = "rtl";
-  }
-
-  else if(/\bcrosswind\b/.test(text)){
-    direction = "cross";
-  }
-
-  return{
-    speedKmh,
-    direction
-  };
-}
-
-function extractElevation(text){
-
-  let metres = 0;
-
-  const match =
-    text.match(
-      /(\d+(?:\.\d+)?)\s*(?:metres?|meters?)\s*(uphill|downhill|up|down)/
-    );
-
-  if(match){
-
-    metres =
-      Number(match[1]) *
-      (
-        match[2].startsWith("down")
-        ?
-        -1
-        :
-        1
-      );
-  }
-
-  else if(/\buphill\b|\bup hill\b/.test(text)){
-    metres = 5;
-  }
-
-  else if(/\bdownhill\b|\bdown hill\b/.test(text)){
-    metres = -5;
-  }
-
-  return metres;
-}
-
-function extractLie(text){
-
-  if(/\bgreenside bunker\b/.test(text)){
-    return "greenside bunker";
-  }
-
-  if(/\bfairway bunker\b/.test(text)){
-    return "fairway bunker";
-  }
-
-  if(
-    /\bdeep rough\b|\bheavy rough\b|\bthick rough\b/.test(text)
-  ){
-    return "deep rough";
-  }
-
-  if(/\brough\b/.test(text)){
-    return "rough";
-  }
-
-  if(/\bbunker\b|\bsand\b/.test(text)){
-    return "bunker";
-  }
-
-  if(/\bwater\b/.test(text)){
-    return "water";
-  }
-
-  if(/\btee\b|\btee box\b/.test(text)){
-    return "tee";
-  }
-
+function parseLie(text){
+  if(/\bdeep rough\b|\bheavy rough\b|\bthick rough\b/i.test(text)) return "deep rough";
+  if(/\brough\b/i.test(text)) return "rough";
+  if(/\bfairway bunker\b/i.test(text)) return "fairway bunker";
+  if(/\bgreenside bunker\b/i.test(text)) return "greenside bunker";
+  if(/\bbunker\b|\bsand\b/i.test(text)) return "bunker";
+  if(/\btee\b/i.test(text)) return "tee";
   return "fairway";
 }
 
-function lieDistanceFactor(lie){
+function parseElevation(text){
+  const uphill=text.match(/(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)\s*(?:uphill|up hill|up)/i);
+  const downhill=text.match(/(\d+(?:\.\d+)?)\s*(?:metres?|meters?|m)\s*(?:downhill|down hill|down)/i);
 
-  if(lie==="rough"){
-    return 1.05;
-  }
+  if(uphill) return Number(uphill[1]);
+  if(downhill) return -Number(downhill[1]);
+  if(/\buphill\b|\bup hill\b/i.test(text)) return 5;
+  if(/\bdownhill\b|\bdown hill\b/i.test(text)) return -5;
 
-  if(lie==="deep rough"){
-    return 1.12;
-  }
-
-  if(lie==="fairway bunker"){
-    return 1.08;
-  }
-
-  if(
-    lie==="bunker"
-    ||
-    lie==="greenside bunker"
-  ){
-    return 1.03;
-  }
-
-  return 1;
+  return 0;
 }
 
-function adjustedPlayingDistance(
-  baseMetres,
-  lie,
-  wind,
-  elevationMetres
-){
+function calculatePlayingDistance(base,lie,wind,elevation){
+  let playing=base;
 
-  let adjusted =
-    baseMetres * lieDistanceFactor(lie);
+  if(lie==="rough") playing*=1.05;
+  if(lie==="deep rough") playing*=1.10;
+  if(lie==="fairway bunker") playing*=1.06;
 
-  const mph =
-    wind.speedKmh / 1.60934;
+  const windMph=wind.speed/1.60934;
+  const windAdjustment=windMph*0.75*YARDS_TO_METRES;
 
-  const windChange =
-    0.75 *
-    mph *
-    YARDS_TO_METRES;
+  if(wind.direction==="head") playing+=windAdjustment;
+  if(wind.direction==="tail") playing-=windAdjustment;
 
-  if(wind.direction==="head"){
-    adjusted += windChange;
-  }
+  if(elevation>0) playing*=1.05;
+  if(elevation<0) playing*=0.95;
 
-  if(wind.direction==="tail"){
-    adjusted -= windChange;
-  }
-
-  if(elevationMetres>0){
-    adjusted *= 1.05;
-  }
-
-  if(elevationMetres<0){
-    adjusted *= 0.95;
-  }
-
-  return Math.max(1,adjusted);
+  return Math.max(1,playing);
 }
 
-function hazardInfo(text){
-
-  const hazards = [];
-
-  if(/\bwater\b/.test(text)){
-    hazards.push("water");
-  }
-
-  if(/\bbunker\b|\bsand\b/.test(text)){
-    hazards.push("bunker");
-  }
-
-  if(/\btrees?\b/.test(text)){
-    hazards.push("trees");
-  }
-
-  let side = "";
-
-  if(/\bright\b/.test(text)){
-    side = "right";
-  }
-
-  else if(/\bleft\b/.test(text)){
-    side = "left";
-  }
-
-  return{
-    hazards,
-    side
-  };
-}
-
-function formatMetresForUser(metres){
-
-  const distance =
-    displayDistance(metres);
-
-  return (
-    distance.value+
-    " "+
-    distance.unit
-  );
-}
-
-function caddieClubForShot(
-  playingMetres,
-  lie
-){
-
-  if(
-    lie==="greenside bunker"
-    &&
-    playingMetres<45
-  ){
-    return bagMetres["SW"]!==undefined
-      ?
-      "SW"
-      :
-      chooseClubForPlayingDistance(playingMetres);
-  }
-
-  if(
-    lie==="deep rough"
-    &&
-    playingMetres>175
-  ){
-
-    const saferClubs =
-      [
-        "5 Iron",
-        "6 Iron",
-        "7 Iron",
-        "5 Wood"
-      ]
-      .filter(club=>
-        bagMetres[club]!==undefined
-      );
-
-    if(saferClubs.length){
-
-      saferClubs.sort(
-        (a,b)=>
-          Math.abs(bagMetres[a]-playingMetres)
-          -
-          Math.abs(bagMetres[b]-playingMetres)
-      );
-
-      return saferClubs[0];
-    }
-  }
-
-  return chooseClubForPlayingDistance(
-    playingMetres
-  );
-}
-
-function buildPeteAdvice(command){
-
-  const text =
-    command.toLowerCase();
-
-  const hole =
-    holes[currentHole];
-
-  const spokenDistance =
-    extractDistanceMetres(text);
-
-  const baseDistance =
-    spokenDistance!==null
-    ?
-    spokenDistance
-    :
-    hole.centre;
-
-  const lie =
-    extractLie(text);
-
-  const wind =
-    extractWind(text);
-
-  const elevation =
-    extractElevation(text);
-
-  const hazard =
-    hazardInfo(text);
-
-  const playing =
-    adjustedPlayingDistance(
-      baseDistance,
-      lie,
-      wind,
-      elevation
-    );
-
-  const club =
-    caddieClubForShot(
-      playing,
-      lie
-    );
-
-  const carry =
-    Number(
-      bagMetres[club]
-      ||
-      0
-    );
-
-  setRecommendedClub(club);
-
-  let parts = [];
-
-  parts.push(
-    formatMetresForUser(baseDistance)
-    +
-    " actual"
-  );
-
-  if(
-    Math.abs(
-      playing-baseDistance
-    )>=3
-  ){
-    parts.push(
-      "playing about "
-      +
-      formatMetresForUser(playing)
-    );
-  }
-
-  parts.push(
-    club+
-    " is the call"
-  );
-
-  if(lie==="rough"){
-
-    parts.push(
-      "ball first, expect a little less control"
-    );
-  }
-
-  else if(lie==="deep rough"){
-
-    parts.push(
-      "priority is clean contact; don't force maximum carry"
-    );
-  }
-
-  else if(lie==="fairway bunker"){
-
-    parts.push(
-      "pick it clean and favour control"
-    );
-  }
-
-  else if(
-    lie==="greenside bunker"
-    ||
-    lie==="bunker"
-  ){
-
-    parts.push(
-      "use the bounce and commit through the sand"
-    );
-  }
-
-  else if(lie==="water"){
-
-    parts.push(
-      "take the penalty area out of play"
-    );
-  }
-
-  if(wind.direction==="head"){
-
-    parts.push(
-      "flight it down and don't chase extra speed"
-    );
-  }
-
-  else if(wind.direction==="tail"){
-
-    parts.push(
-      "allow for the ball carrying and releasing farther"
-    );
-  }
-
-  else if(wind.direction==="ltr"){
-
-    parts.push(
-      "start it a little left and let the wind move it"
-    );
-  }
-
-  else if(wind.direction==="rtl"){
-
-    parts.push(
-      "start it a little right and let the wind move it"
-    );
-  }
-
-  else if(wind.direction==="cross"){
-
-    parts.push(
-      "allow for the crosswind rather than fighting it"
-    );
-  }
-
-  if(elevation>0){
-
-    parts.push(
-      "uphill makes it play longer"
-    );
-  }
-
-  else if(elevation<0){
-
-    parts.push(
-      "downhill makes it play shorter"
-    );
-  }
-
-  if(
-    hazard.hazards.includes("water")
-  ){
-
-    if(hazard.side){
-
-      parts.push(
-        "water "+
-        hazard.side+
-        " — favour the opposite side"
-      );
-    }
-
-    else{
-
-      parts.push(
-        "choose a target that keeps water out of the big miss"
-      );
-    }
-  }
-
-  else if(
-    hazard.hazards.includes("bunker")
-  ){
-
-    if(hazard.side){
-
-      parts.push(
-        "bunker "+
-        hazard.side+
-        " — favour the opposite side"
-      );
-    }
-
-    else{
-
-      parts.push(
-        "don't short-side yourself against the bunker"
-      );
-    }
-  }
-
-  else if(
-    hazard.hazards.includes("trees")
-  ){
-
-    if(hazard.side){
-
-      parts.push(
-        "trees "+
-        hazard.side+
-        " — favour the opposite side"
-      );
-    }
-
-    else{
-
-      parts.push(
-        "take the clear window"
-      );
-    }
-  }
-
-  if(
-    carry
-    &&
-    Math.abs(
-      carry-playing
-    )>15
-    &&
-    baseDistance<260
-  ){
-
-    parts.push(
-      "your saved "+
-      club+
-      " carry is "+
-      formatMetresForUser(carry)
-    );
-  }
-
-  if(/\bfront\b/.test(text)){
-
-    parts.push(
-      "front number is the priority"
-    );
-  }
-
-  if(/\bback\b/.test(text)){
-
-    parts.push(
-      "don't chase the back number unless the miss long is safe"
-    );
-  }
-
-  if(
-    /\bpin\b|\bflag\b/.test(text)
-  ){
-
-    parts.push(
-      "commit to the landing number, not the flag itself"
-    );
-  }
-
-  if(
-    /\bknockdown\b|\bpunch\b|\blow\b/.test(text)
-  ){
-
-    parts.push(
-      "three-quarter finish, stable tempo, lower flight"
-    );
-  }
-
-  if(/\bdraw\b/.test(text)){
-
-    parts.push(
-      "set the start line for the draw and don't over-turn it"
-    );
-  }
-
-  if(/\bfade\b/.test(text)){
-
-    parts.push(
-      "set the start line left of target and hold the face"
-    );
-  }
-
-  if(
-    !/\bhelp\b|\bwhat should i hit\b|\bwhat club\b|\bclub\b/.test(text)
-    &&
-    spokenDistance===null
-    &&
-    hazard.hazards.length===0
-    &&
-    lie==="fairway"
-    &&
-    wind.direction==="none"
-  ){
-
-    parts.push(
-      "give me the distance, lie, wind or trouble and I'll tighten the call"
-    );
-  }
-
-  return parts.join(". ")+".";
+function formatDistance(metres){
+  const d=displayDistance(metres);
+  return d.value+" "+d.unit;
 }
 
 function handleGolfCommand(command){
+  const text=command.toLowerCase();
+  const hole=holes[currentHole];
 
-  const advice =
-    buildPeteAdvice(command);
+  const spokenDistance=parseDistance(text);
+  const baseDistance=spokenDistance!==null ? spokenDistance : hole.centre;
+
+  const lie=parseLie(text);
+  const wind=parseWind(text);
+  const elevation=parseElevation(text);
+
+  const playing=calculatePlayingDistance(baseDistance,lie,wind,elevation);
+
+  let club=chooseClub(playing);
+
+  if(lie==="greenside bunker" && playing<50 && bagMetres["SW"]){
+    club="SW";
+  }
+
+  setRecommendedClub(club);
+
+  let advice=formatDistance(baseDistance)+" actual";
+
+  if(Math.abs(playing-baseDistance)>=3){
+    advice+=", playing about "+formatDistance(playing);
+  }
+
+  advice+=". I like the "+club+".";
+
+  if(lie==="rough"){
+    advice+=" Check the lie and prioritise clean contact.";
+  }
+
+  if(lie==="deep rough"){
+    advice+=" Clean contact first. Don't force maximum carry.";
+  }
+
+  if(lie==="fairway bunker"){
+    advice+=" Pick it clean and favour control.";
+  }
+
+  if(lie==="bunker" || lie==="greenside bunker"){
+    advice+=" Use the bounce and commit through the sand.";
+  }
+
+  if(wind.direction==="head"){
+    advice+=" Flight it down and don't chase extra speed.";
+  }
+
+  if(wind.direction==="tail"){
+    advice+=" Allow for the extra carry and release.";
+  }
+
+  if(wind.direction==="ltr"){
+    advice+=" Wind left to right. Start it slightly left.";
+  }
+
+  if(wind.direction==="rtl"){
+    advice+=" Wind right to left. Start it slightly right.";
+  }
+
+  if(wind.direction==="cross"){
+    advice+=" Allow for the crosswind rather than fighting it.";
+  }
+
+  if(/\bwater\b/i.test(text)){
+    if(/\bright\b/i.test(text)){
+      advice+=" Water right. Favour the left-centre.";
+    }else if(/\bleft\b/i.test(text)){
+      advice+=" Water left. Favour the right-centre.";
+    }else{
+      advice+=" Keep the water out of the big miss.";
+    }
+  }
+
+  if(/\btrees?\b/i.test(text)){
+    if(/\bright\b/i.test(text)){
+      advice+=" Trees right. Favour the left side.";
+    }else if(/\bleft\b/i.test(text)){
+      advice+=" Trees left. Favour the right side.";
+    }else{
+      advice+=" Take the clearest window.";
+    }
+  }
+
+  if(/\bdraw\b/i.test(text)){
+    advice+=" Set the start line for the draw and commit.";
+  }
+
+  if(/\bfade\b/i.test(text)){
+    advice+=" Set the start line for the fade and commit.";
+  }
+
+  advice+=" Commit to the target and swing freely.";
+
+  document.getElementById("lastShot").textContent="Heard: "+command;
 
   setCaddieAnswers(advice);
-
-  document.getElementById("lastShot").textContent =
-    "Heard: "+command;
-
   speak(advice);
 }
 
 function speak(text){
-
-  if(
-    !voiceEnabled
-    ||
-    !("speechSynthesis" in window)
-  ){
-    return;
-  }
+  if(!voiceEnabled || !("speechSynthesis" in window)) return;
 
   window.speechSynthesis.cancel();
 
-  const utterance =
-    new SpeechSynthesisUtterance(text);
-
-  utterance.rate = .95;
-  utterance.pitch = 1;
-  utterance.volume = 1;
+  const utterance=new SpeechSynthesisUtterance(text);
+  utterance.rate=.95;
+  utterance.pitch=1;
+  utterance.volume=1;
 
   window.speechSynthesis.speak(utterance);
 }
 
 function updateCaddiePage(){
+  if(!document.getElementById("caddieHole")) return;
 
-  if(
-    !document.getElementById("caddieHole")
-  ){
-    return;
-  }
+  const hole=holes[currentHole];
+  const distance=displayDistance(hole.centre);
+  const name=getCaddieName();
 
-  const hole =
-    holes[currentHole];
-
-  const distance =
-    displayDistance(hole.centre);
-
-  const name =
-    getCaddieName();
-
-  document.getElementById("largeCaddieName").textContent =
-    name;
-
-  document.getElementById("caddieHole").textContent =
-    hole.hole;
-
-  document.getElementById("caddieDistance").textContent =
-    distance.value+
-    " "+
-    distance.unit;
-
-  document.getElementById("caddieClub").textContent =
-    document.getElementById("recommendedClub").textContent;
+  document.getElementById("largeCaddieName").textContent=name;
+  document.getElementById("caddieHole").textContent=hole.hole;
+  document.getElementById("caddieDistance").textContent=distance.value+" "+distance.unit;
+  document.getElementById("caddieClub").textContent=document.getElementById("recommendedClub").textContent;
 }
 
 function renderBag(){
+  const container=document.getElementById("bagRows");
+  container.innerHTML="";
 
-  const container =
-    document.getElementById("bagRows");
+  Object.entries(bagMetres).forEach(([club,carry])=>{
+    const row=document.createElement("div");
+    row.className="bag-row";
 
-  container.innerHTML = "";
+    row.innerHTML=
+      '<div class="bag-club">'+club+'</div>'+
+      '<input class="bag-input" type="number" data-club="'+club+'" value="'+carry+'">'+
+      '<div class="bag-unit">m</div>';
 
-  Object.entries(bagMetres).forEach(
-    ([club,carry])=>{
-
-      const row =
-        document.createElement("div");
-
-      row.className =
-        "bag-row";
-
-      row.innerHTML =
-        '<div class="bag-club">'+club+'</div>'+
-        '<input class="bag-input" type="number" data-club="'+
-        club+
-        '" value="'+
-        carry+
-        '">'+
-        '<div class="bag-unit">m</div>';
-
-      container.appendChild(row);
-    }
-  );
+    container.appendChild(row);
+  });
 }
 
 function saveBag(){
+  document.querySelectorAll(".bag-input").forEach(input=>{
+    const club=input.dataset.club;
+    const value=Number(input.value);
 
-  document.querySelectorAll(".bag-input")
-    .forEach(input=>{
+    if(value>=0) bagMetres[club]=value;
+  });
 
-      const club =
-        input.dataset.club;
-
-      const value =
-        Number(input.value);
-
-      if(value>=0){
-        bagMetres[club] = value;
-      }
-    });
-
-  localStorage.setItem(
-    "drcBagMetres",
-    JSON.stringify(bagMetres)
-  );
-
+  localStorage.setItem("drcBagMetres",JSON.stringify(bagMetres));
   recommendClub();
-
   alert("My Bag saved.");
 }
 
 function saveCourse(){
-
-  const course = {
-    name:
-      document.getElementById("courseName")
-      .value
-      .trim(),
-
-    teeType:
-      document.getElementById("teeType")
-      .value,
-
-    teeColour:
-      document.getElementById("teeColour")
-      .value
+  const course={
+    name:document.getElementById("courseName").value.trim(),
+    teeType:document.getElementById("teeType").value,
+    teeColour:document.getElementById("teeColour").value
   };
 
-  localStorage.setItem(
-    "drcCourseSetup",
-    JSON.stringify(course)
-  );
-
+  localStorage.setItem("drcCourseSetup",JSON.stringify(course));
   alert("Course saved.");
 }
 
 function loadCourse(){
+  const course=JSON.parse(localStorage.getItem("drcCourseSetup") || "null");
+  if(!course) return;
 
-  const course =
-    JSON.parse(
-      localStorage.getItem("drcCourseSetup")
-      ||
-      "null"
-    );
-
-  if(!course){
-    return;
-  }
-
-  document.getElementById("courseName").value =
-    course.name || "";
-
-  document.getElementById("teeType").value =
-    course.teeType || "MEN";
-
-  document.getElementById("teeColour").value =
-    course.teeColour || "WHITE";
+  document.getElementById("courseName").value=course.name || "";
+  document.getElementById("teeType").value=course.teeType || "MEN";
+  document.getElementById("teeColour").value=course.teeColour || "WHITE";
 }
 
 function updateCoursePage(){
+  if(!document.getElementById("courseHoleNumber")) return;
 
-  if(
-    !document.getElementById("courseHoleNumber")
-  ){
-    return;
-  }
+  const hole=holes[currentHole];
+  const distance=displayDistance(hole.centre);
 
-  const hole =
-    holes[currentHole];
-
-  const distance =
-    displayDistance(hole.centre);
-
-  document.getElementById("courseHoleNumber").textContent =
-    hole.hole;
-
-  document.getElementById("coursePar").textContent =
-    hole.par;
-
-  document.getElementById("courseDistance").textContent =
-    distance.value+
-    " "+
-    distance.unit;
+  document.getElementById("courseHoleNumber").textContent=hole.hole;
+  document.getElementById("coursePar").textContent=hole.par;
+  document.getElementById("courseDistance").textContent=distance.value+" "+distance.unit;
 }
 
 function toggleUnits(){
+  unitMode=unitMode==="metric" ? "imperial" : "metric";
 
-  unitMode =
-    unitMode==="metric"
-    ?
-    "imperial"
-    :
-    "metric";
-
-  localStorage.setItem(
-    "drcUnitMode",
-    unitMode
-  );
+  localStorage.setItem("drcUnitMode",unitMode);
 
   renderHole();
   updateMorePage();
 }
 
 function updateMorePage(){
+  if(!document.getElementById("moreVoiceToggle")) return;
 
-  if(
-    !document.getElementById("moreVoiceToggle")
-  ){
-    return;
-  }
+  const voice=document.getElementById("moreVoiceToggle");
 
-  const voice =
-    document.getElementById("moreVoiceToggle");
+  voice.textContent=voiceEnabled ? "ON" : "OFF";
+  voice.classList.toggle("on",voiceEnabled);
 
-  voice.textContent =
-    voiceEnabled
-    ?
-    "ON"
-    :
-    "OFF";
+  document.getElementById("unitToggle").textContent=
+    unitMode==="metric" ? "METRES" : "YARDS";
 
-  voice.classList.toggle(
-    "on",
-    voiceEnabled
-  );
-
-  document.getElementById("unitToggle").textContent =
-    unitMode==="metric"
-    ?
-    "METRES"
-    :
-    "YARDS";
-
-  document.getElementById("moreCaddieName").value =
-    getCaddieName();
+  document.getElementById("moreCaddieName").value=getCaddieName();
 }
 
 /* SCORECARD */
 
 function renderScorecard(){
+  const body=document.getElementById("scorecardBody");
+  body.innerHTML="";
 
-  const body =
-    document.getElementById("scorecardBody");
-
-  body.innerHTML = "";
-
-  let totalPar = 0;
-  let totalScore = 0;
-  let holesPlayed = 0;
+  let totalPar=0;
+  let totalScore=0;
+  let holesPlayed=0;
 
   holes.forEach(hole=>{
+    totalPar+=hole.par;
 
-    totalPar += hole.par;
-
-    const data =
-      holeScores[hole.hole];
-
-    const score =
-      data && data.score>0
-      ?
-      data.score
-      :
-      0;
+    const data=holeScores[hole.hole];
+    const score=data && data.score>0 ? data.score : 0;
 
     if(score>0){
-      totalScore += score;
+      totalScore+=score;
       holesPlayed++;
     }
 
-    const row =
-      document.createElement("tr");
+    const row=document.createElement("tr");
 
-    row.innerHTML =
+    row.innerHTML=
       "<td>"+hole.hole+"</td>"+
       "<td>"+hole.par+"</td>"+
       "<td>"+(score || "–")+"</td>"+
@@ -3107,85 +1856,46 @@ function renderScorecard(){
     body.appendChild(row);
   });
 
-  document.getElementById("totalPar").textContent =
-    totalPar;
-
-  document.getElementById("totalScore").textContent =
-    totalScore || "–";
+  document.getElementById("totalPar").textContent=totalPar;
+  document.getElementById("totalScore").textContent=totalScore || "–";
 
   if(holesPlayed===18){
+    const difference=totalScore-totalPar;
 
-    const difference =
-      totalScore-totalPar;
-
-    document.getElementById("toPar").textContent =
-      difference===0
-      ?
-      "E"
-      :
-      difference>0
-      ?
-      "+"+difference
-      :
-      difference;
-  }
-
-  else{
-
-    document.getElementById("toPar").textContent =
-      "–";
+    document.getElementById("toPar").textContent=
+      difference===0 ? "E" : difference>0 ? "+"+difference : difference;
+  }else{
+    document.getElementById("toPar").textContent="–";
   }
 }
 
 /* PRACTICE */
 
 function selectPracticeType(button,type){
+  practiceType=type;
 
-  practiceType = type;
-
-  document.querySelectorAll(".practice-type")
-    .forEach(b=>{
-      b.classList.remove("active");
-    });
-
+  document.querySelectorAll(".practice-type").forEach(b=>b.classList.remove("active"));
   button.classList.add("active");
 }
 
 function selectShape(button,shape){
+  practiceShape=shape;
 
-  practiceShape = shape;
-
-  document.querySelectorAll(".shape-btn")
-    .forEach(b=>{
-      b.classList.remove("active");
-    });
-
+  document.querySelectorAll(".shape-btn").forEach(b=>b.classList.remove("active"));
   button.classList.add("active");
 }
 
 function practiceAdd(type){
-
   practiceCounts[type]++;
-
   renderPracticeCounts();
 }
 
 function renderPracticeCounts(){
-
-  document.getElementById("practiceGood").textContent =
-    practiceCounts.good;
-
-  document.getElementById("practiceLeft").textContent =
-    practiceCounts.left;
-
-  document.getElementById("practiceRight").textContent =
-    practiceCounts.right;
-
-  document.getElementById("practiceShort").textContent =
-    practiceCounts.short;
-
-  document.getElementById("practiceLong").textContent =
-    practiceCounts.long;
+  document.getElementById("practiceGood").textContent=practiceCounts.good;
+  document.getElementById("practiceLeft").textContent=practiceCounts.left;
+  document.getElementById("practiceRight").textContent=practiceCounts.right;
+  document.getElementById("practiceShort").textContent=practiceCounts.short;
+  document.getElementById("practiceLong").textContent=practiceCounts.long;
 }
 
 function renderPractice(){
@@ -3193,268 +1903,150 @@ function renderPractice(){
 }
 
 function resetPractice(){
-
-  practiceCounts = {
-    good:0,
-    left:0,
-    right:0,
-    short:0,
-    long:0
-  };
-
-  document.getElementById("practiceNote").value =
-    "";
-
+  practiceCounts={good:0,left:0,right:0,short:0,long:0};
+  document.getElementById("practiceNote").value="";
   renderPracticeCounts();
 }
 
 function savePractice(){
-
-  const saved =
-    JSON.parse(
-      localStorage.getItem("drcPracticeHistory")
-      ||
-      "[]"
-    );
+  const saved=JSON.parse(localStorage.getItem("drcPracticeHistory") || "[]");
 
   saved.unshift({
-    date:
-      new Date().toISOString(),
-
-    type:
-      practiceType,
-
-    shape:
-      practiceShape,
-
-    counts:{
-      ...practiceCounts
-    },
-
-    note:
-      document.getElementById("practiceNote")
-      .value
-      .trim()
+    date:new Date().toISOString(),
+    type:practiceType,
+    shape:practiceShape,
+    counts:{...practiceCounts},
+    note:document.getElementById("practiceNote").value.trim()
   });
 
-  localStorage.setItem(
-    "drcPracticeHistory",
-    JSON.stringify(saved)
-  );
-
+  localStorage.setItem("drcPracticeHistory",JSON.stringify(saved));
   alert("Practice session saved.");
 }
 
 /* WARM-UP */
 
 function renderWarmup(){
+  const container=document.getElementById("warmupRows");
+  container.innerHTML="";
 
-  const container =
-    document.getElementById("warmupRows");
+  warmupSteps.forEach((step,index)=>{
+    const row=document.createElement("div");
+    row.className="check-row";
 
-  container.innerHTML = "";
+    row.innerHTML=
+      '<button class="check-button '+(warmupState[index] ? "done" : "")+
+      '" onclick="toggleWarmup('+index+')">'+
+      (warmupState[index] ? "✓" : "")+
+      '</button>'+
+      '<div>'+
+      '<div class="check-title">'+step[0]+'</div>'+
+      '<div class="check-small">'+step[1]+'</div>'+
+      '</div>';
 
-  warmupSteps.forEach(
-    (step,index)=>{
+    container.appendChild(row);
+  });
 
-      const row =
-        document.createElement("div");
+  const complete=warmupState.filter(Boolean).length;
+  const percent=complete/warmupSteps.length*100;
 
-      row.className =
-        "check-row";
-
-      row.innerHTML =
-        '<button class="check-button '+
-        (warmupState[index] ? "done" : "")+
-        '" onclick="toggleWarmup('+index+')">'+
-        (warmupState[index] ? "✓" : "")+
-        '</button>'+
-        '<div>'+
-        '<div class="check-title">'+step[0]+'</div>'+
-        '<div class="check-small">'+step[1]+'</div>'+
-        '</div>';
-
-      container.appendChild(row);
-    }
-  );
-
-  const complete =
-    warmupState.filter(Boolean).length;
-
-  const percent =
-    complete /
-    warmupSteps.length *
-    100;
-
-  document.getElementById("warmupProgress").style.width =
-    percent+"%";
-
-  document.getElementById("warmupProgressText").textContent =
-    complete+" of 8 complete";
+  document.getElementById("warmupProgress").style.width=percent+"%";
+  document.getElementById("warmupProgressText").textContent=complete+" of 8 complete";
 }
 
 function toggleWarmup(index){
+  warmupState[index]=!warmupState[index];
 
-  warmupState[index] =
-    !warmupState[index];
-
-  localStorage.setItem(
-    "drcWarmupState",
-    JSON.stringify(warmupState)
-  );
-
+  localStorage.setItem("drcWarmupState",JSON.stringify(warmupState));
   renderWarmup();
 }
 
 function resetWarmup(){
+  warmupState=new Array(8).fill(false);
 
-  warmupState =
-    new Array(8).fill(false);
-
-  localStorage.setItem(
-    "drcWarmupState",
-    JSON.stringify(warmupState)
-  );
-
+  localStorage.setItem("drcWarmupState",JSON.stringify(warmupState));
   renderWarmup();
 }
 
 /* ROUTINES */
 
 function renderRoutine(){
+  const container=document.getElementById("routineRows");
+  container.innerHTML="";
 
-  const container =
-    document.getElementById("routineRows");
+  routineSteps.forEach((step,index)=>{
+    const row=document.createElement("div");
+    row.className="check-row";
 
-  container.innerHTML = "";
+    row.innerHTML=
+      '<button class="check-button '+(routineState[index] ? "done" : "")+
+      '" onclick="toggleRoutine('+index+')">'+
+      (routineState[index] ? "✓" : "")+
+      '</button>'+
+      '<div>'+
+      '<div class="check-title">'+step[0]+'</div>'+
+      '<div class="check-small">'+step[1]+'</div>'+
+      '</div>';
 
-  routineSteps.forEach(
-    (step,index)=>{
+    container.appendChild(row);
+  });
 
-      const row =
-        document.createElement("div");
+  const complete=routineState.filter(Boolean).length;
+  const percent=complete/routineSteps.length*100;
 
-      row.className =
-        "check-row";
-
-      row.innerHTML =
-        '<button class="check-button '+
-        (routineState[index] ? "done" : "")+
-        '" onclick="toggleRoutine('+index+')">'+
-        (routineState[index] ? "✓" : "")+
-        '</button>'+
-        '<div>'+
-        '<div class="check-title">'+step[0]+'</div>'+
-        '<div class="check-small">'+step[1]+'</div>'+
-        '</div>';
-
-      container.appendChild(row);
-    }
-  );
-
-  const complete =
-    routineState.filter(Boolean).length;
-
-  const percent =
-    complete /
-    routineSteps.length *
-    100;
-
-  document.getElementById("routineProgress").style.width =
-    percent+"%";
-
-  document.getElementById("routineProgressText").textContent =
-    complete+" of 8 complete";
+  document.getElementById("routineProgress").style.width=percent+"%";
+  document.getElementById("routineProgressText").textContent=complete+" of 8 complete";
 }
 
 function toggleRoutine(index){
+  routineState[index]=!routineState[index];
 
-  routineState[index] =
-    !routineState[index];
-
-  localStorage.setItem(
-    "drcRoutineState",
-    JSON.stringify(routineState)
-  );
-
+  localStorage.setItem("drcRoutineState",JSON.stringify(routineState));
   renderRoutine();
 }
 
 function resetRoutine(){
+  routineState=new Array(8).fill(false);
 
-  routineState =
-    new Array(8).fill(false);
-
-  localStorage.setItem(
-    "drcRoutineState",
-    JSON.stringify(routineState)
-  );
-
+  localStorage.setItem("drcRoutineState",JSON.stringify(routineState));
   renderRoutine();
 }
 
 function loadSettings(){
-
-  const savedCaddie =
-    localStorage.getItem("drcCaddieName");
+  const savedCaddie=localStorage.getItem("drcCaddieName");
 
   if(savedCaddie){
-
-    document.getElementById("caddieName").value =
-      savedCaddie;
+    document.getElementById("caddieName").value=savedCaddie;
   }
 
-  const savedVoice =
-    localStorage.getItem("drcVoiceEnabled");
+  const savedVoice=localStorage.getItem("drcVoiceEnabled");
 
   if(savedVoice==="false"){
-
-    voiceEnabled = false;
-
-    document.getElementById("voiceToggle").textContent =
-      "OFF";
-
-    document.getElementById("voiceToggle")
-      .classList.add("off");
+    voiceEnabled=false;
+    document.getElementById("voiceToggle").textContent="OFF";
+    document.getElementById("voiceToggle").classList.add("off");
   }
 
-  const savedHole =
-    Number(
-      localStorage.getItem("drcCurrentHole")
-    );
+  const savedHole=Number(localStorage.getItem("drcCurrentHole"));
 
-  if(
-    Number.isInteger(savedHole)
-    &&
-    savedHole>=0
-    &&
-    savedHole<=17
-  ){
-    currentHole = savedHole;
+  if(Number.isInteger(savedHole) && savedHole>=0 && savedHole<=17){
+    currentHole=savedHole;
   }
 
-  const name =
-    getCaddieName();
+  const name=getCaddieName();
 
-  document.getElementById("askName").textContent =
-    name;
-
-  setCaddieAnswers(
-    "Ready. Ask "+name+" for the shot."
-  );
+  document.getElementById("askName").textContent=name;
+  setCaddieAnswers("Ready. Ask "+name+" for the shot.");
 
   loadCourse();
   updateMorePage();
 }
 
 loadSettings();
-setupRecognition();
 renderBag();
 renderWarmup();
 renderRoutine();
 renderHole();
 
 </script>
-
 </body>
 </html>
