@@ -23,24 +23,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4.2.2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: |
-          npm install
-          npx expo install react-native-web react-dom @expo/metro-runtime
-
-      - name: Build Web Application
-        run: npx expo export --platform web
+      - name: Setup Pages
+        uses: actions/configure-pages@v5.0.0
 
       - name: Upload Static Web Bundle Artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:
-          path: './dist'
+          path: '.'
 
       - name: Deploy Live Project Link to Web
         id: deployment
