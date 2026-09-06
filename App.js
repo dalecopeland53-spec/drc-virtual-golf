@@ -9,32 +9,47 @@ const[recognizing,setRecognizing]=useState(false);
 const recognizingRef=useRef(false);
 const lastTranscriptRef=useRef('');
 const commandSentRef=useRef(false);
-const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/';
+
+const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/?voicefix=20260907';
 
 const sendToWeb=code=>{
 try{
-if(webRef.current)webRef.current.injectJavaScript(`try{${code}}catch(e){console.log("DRC injected error",e)};true;`);
-}catch(e){console.log('WebView injection error:',e)}
+if(webRef.current){
+webRef.current.injectJavaScript(`
+try{
+${code}
+}catch(e){}
+true;
+`);
+}
+}catch(e){}
 };
 
-const setWebAnswer=message=>{
+const showAnswer=text=>{
 sendToWeb(`
-if(typeof setCaddieAnswers==="function"){
-setCaddieAnswers(${JSON.stringify(message)});
-}else{
-window.dispatchEvent(new CustomEvent("DRC_CADDIE_STATUS",{detail:${JSON.stringify(message)}}));
-}`);
+(function(){
+var a=document.getElementById("caddieAnswer");
+var b=document.getElementById("largeCaddieAnswer");
+if(a)a.textContent=${JSON.stringify(text)};
+if(b)b.textContent=${JSON.stringify(text)};
+})();
+`);
 };
 
-const setListening=listening=>{
+const setListening=on=>{
 sendToWeb(`
-if(typeof setListeningState==="function")setListeningState(${listening?'true':'false'});
-window.dispatchEvent(new CustomEvent("DRC_LISTENING",{detail:${listening?'true':'false'}}));
+(function(){
+var a=document.getElementById("micButton");
+var b=document.getElementById("largeMic");
+if(a)a.classList.toggle("listening",${on});
+if(b)b.classList.toggle("listening",${on});
+})();
 `);
 };
 
 const deliverCommand=text=>{
 const clean=(text||'').trim();
+
 if(!clean||commandSentRef.current)return;
 
 commandSentRef.current=true;
@@ -43,25 +58,24 @@ lastTranscriptRef.current=clean;
 sendToWeb(`
 (function(){
 var speech=${JSON.stringify(clean)};
-window.DRC_LAST_SPEECH=speech;
 
-window.dispatchEvent(
-new CustomEvent("DRC_SPEECH_RESULT",{detail:speech})
-);
-
-if(typeof handleGolfCommand==="function"){
-handleGolfCommand(speech);
-}else if(typeof window.handleGolfCommand==="function"){
+if(typeof window.handleGolfCommand==="function"){
 window.handleGolfCommand(speech);
-}else if(typeof setCaddieAnswers==="function"){
-setCaddieAnswers("I heard: "+speech);
+}else if(typeof handleGolfCommand==="function"){
+handleGolfCommand(speech);
+}else{
+var a=document.getElementById("caddieAnswer");
+var b=document.getElementById("largeCaddieAnswer");
+var msg="I heard: "+speech;
+if(a)a.textContent=msg;
+if(b)b.textContent=msg;
 }
 })();
 `);
 };
 
 useEffect(()=>{
-const requestPermissions=async()=>{
+const permissions=async()=>{
 if(Platform.OS!=='android')return;
 
 try{
@@ -70,18 +84,14 @@ PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
 PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION
 ]);
-}catch(e){
-console.log('Permission error:',e);
-}
+}catch(e){}
 };
 
-requestPermissions();
+permissions();
 
 return()=>{
 try{
-if(recognizingRef.current){
 ExpoSpeechRecognitionModule.abort();
-}
 }catch(e){}
 };
 },[]);
@@ -91,24 +101,17 @@ recognizingRef.current=true;
 setRecognizing(true);
 lastTranscriptRef.current='';
 commandSentRef.current=false;
-
 setListening(true);
-setWebAnswer('Listening...');
+showAnswer('Listening...');
 });
 
 useSpeechRecognitionEvent('result',event=>{
-const text=event?.results?.[0]?.transcript?.trim()||'';
+const text=
+event?.results?.[0]?.transcript?.trim()||'';
 
 if(!text)return;
 
 lastTranscriptRef.current=text;
-
-sendToWeb(`
-window.DRC_LAST_SPEECH=${JSON.stringify(text)};
-window.dispatchEvent(
-new CustomEvent("DRC_SPEECH_INTERIM",{detail:${JSON.stringify(text)}})
-);
-`);
 
 if(event?.isFinal===true){
 deliverCommand(text);
@@ -120,10 +123,18 @@ recognizingRef.current=false;
 setRecognizing(false);
 setListening(false);
 
-if(!commandSentRef.current&&lastTranscriptRef.current){
+if(
+!commandSentRef.current&&
+lastTranscriptRef.current
+){
 deliverCommand(lastTranscriptRef.current);
-}else if(!commandSentRef.current){
-setWebAnswer("Didn't hear anything. Tap the mic and speak again.");
+return;
+}
+
+if(!commandSentRef.current){
+showAnswer(
+"Didn't hear anything. Tap the mic and speak again."
+);
 }
 });
 
@@ -132,21 +143,30 @@ recognizingRef.current=false;
 setRecognizing(false);
 setListening(false);
 
-const saved=lastTranscriptRef.current;
-
-if(saved&&!commandSentRef.current){
-deliverCommand(saved);
+if(
+lastTranscriptRef.current&&
+!commandSentRef.current
+){
+deliverCommand(lastTranscriptRef.current);
 return;
 }
 
-let message="Didn't catch that. Tap the mic and try again.";
 const error=event?.error||'';
 
-if(error==='not-allowed'||error==='permission-denied'){
+let message=
+"Didn't catch that. Tap the mic and try again.";
+
+if(
+error==='not-allowed'||
+error==='permission-denied'
+){
 message='Microphone permission is blocked.';
 }else if(error==='audio-capture'){
 message="The microphone isn't available right now.";
-}else if(error==='no-speech'||error==='speech-timeout'){
+}else if(
+error==='no-speech'||
+error==='speech-timeout'
+){
 message="Didn't hear anything. Tap the mic and speak again.";
 }else if(error==='network'){
 message="Voice recognition couldn't reach the speech service.";
@@ -156,17 +176,14 @@ message='Speech recognition is not available on this phone.';
 message='The microphone is busy. Tap it again.';
 }
 
-console.log(
-'Speech recognition error:',
-error,
-event?.message||''
-);
-
-setWebAnswer(message);
+showAnswer(message);
 });
 
 const startNativeSpeech=async()=>{
 try{
+
+showAnswer('Native microphone received.');
+
 if(recognizingRef.current){
 try{
 ExpoSpeechRecognitionModule.stop();
@@ -181,11 +198,11 @@ const permission=
 await ExpoSpeechRecognitionModule.requestPermissionsAsync();
 
 if(!permission?.granted){
-setWebAnswer('Microphone permission is blocked.');
+showAnswer('Microphone permission is blocked.');
 return;
 }
 
-setWebAnswer('Starting microphone...');
+showAnswer('Starting microphone...');
 
 ExpoSpeechRecognitionModule.start({
 lang:'en-AU',
@@ -199,17 +216,15 @@ requiresOnDeviceRecognition:false
 recognizingRef.current=false;
 setRecognizing(false);
 
-console.log('Speech start error:',e);
-
-setListening(false);
-setWebAnswer("The microphone couldn't start. Tap it again.");
+showAnswer(
+"The microphone couldn't start."
+);
 }
 };
 
 const onMessage=event=>{
 try{
-const raw=event?.nativeEvent?.data;
-if(!raw)return;
+const raw=event.nativeEvent.data;
 
 let data;
 
@@ -227,131 +242,74 @@ data?.type==='ASK_CADDIE'
 startNativeSpeech();
 }
 
-}catch(e){
-console.log('WebView message error:',e);
-}
+}catch(e){}
 };
 
-const injectedJavaScript=`
+const bridge=`
 (function(){
 
-if(window.__DRC_NATIVE_BRIDGE_INSTALLED__)return;
-
-window.__DRC_NATIVE_BRIDGE_INSTALLED__=true;
-
-function nativeSpeech(){
+function sendMic(){
 
 try{
 
-window.ReactNativeWebView.postMessage(
-JSON.stringify({type:"DRC_START_SPEECH"})
-);
+var a=document.getElementById("caddieAnswer");
+var b=document.getElementById("largeCaddieAnswer");
 
-return true;
+if(a)a.textContent="Mic button received.";
+if(b)b.textContent="Mic button received.";
+
+window.ReactNativeWebView.postMessage(
+JSON.stringify({
+type:"DRC_START_SPEECH"
+})
+);
 
 }catch(e){
 
-try{
-if(typeof setCaddieAnswers==="function"){
-setCaddieAnswers("Microphone bridge unavailable.");
-}
-}catch(x){}
+var a=document.getElementById("caddieAnswer");
+var b=document.getElementById("largeCaddieAnswer");
 
-return false;
-}
+if(a)a.textContent="Native bridge unavailable.";
+if(b)b.textContent="Native bridge unavailable.";
 }
 
-window.DRCNativeSpeech=nativeSpeech;
-window.askCaddieNative=nativeSpeech;
+}
 
-try{
-window.askCaddie=nativeSpeech;
-}catch(e){}
+window.DRCNativeSpeech=sendMic;
 
 document.addEventListener(
 "click",
-function(ev){
+function(e){
 
-try{
+var target=e.target;
 
-var el=ev.target;
-
-if(!el)return;
+if(!target)return;
 
 var button=
-el.closest?
-el.closest('button,[role="button"],[data-action],a'):
+target.closest?
+target.closest("button"):
 null;
 
 if(!button)return;
 
-var buttonText=
-(button.innerText||"").trim();
+if(
+button.id==="micButton"||
+button.id==="largeMic"
+){
 
-var details=(
-(button.innerText||"")+" "+
-(button.getAttribute("aria-label")||"")+" "+
-(button.getAttribute("title")||"")+" "+
-(button.getAttribute("data-action")||"")+" "+
-(button.id||"")+" "+
-(button.className||"")
-).toLowerCase();
+e.preventDefault();
+e.stopPropagation();
 
-var isMic=
-buttonText.indexOf("🎤")!==-1||
-details.indexOf("mic")!==-1||
-details.indexOf("microphone")!==-1||
-details.indexOf("voice")!==-1||
-details.indexOf("ask caddie")!==-1||
-details.indexOf("ask-caddie")!==-1||
-details.indexOf("caddie-mic")!==-1;
-
-if(isMic){
-
-ev.preventDefault();
-ev.stopPropagation();
-
-if(ev.stopImmediatePropagation){
-ev.stopImmediatePropagation();
+if(e.stopImmediatePropagation){
+e.stopImmediatePropagation();
 }
 
-nativeSpeech();
+sendMic();
 }
 
-}catch(e){}
 },
 true
 );
-
-window.addEventListener(
-"DRC_FORCE_MIC",
-nativeSpeech
-);
-
-setInterval(function(){
-
-try{
-
-window.askCaddie=nativeSpeech;
-
-var buttons=document.querySelectorAll("button");
-
-buttons.forEach(function(button){
-
-if(
-(button.innerText||"").trim().indexOf("🎤")!==-1
-){
-button.setAttribute(
-"data-drc-native-mic",
-"true"
-);
-}
-
-});
-
-}catch(e){}
-
-},1000);
 
 })();
 true;
@@ -367,17 +325,31 @@ backgroundColor="#03081e"
 
 <WebView
 ref={webRef}
-source={{uri:liveProjectUrl}}
+source={{
+uri:liveProjectUrl,
+headers:{
+'Cache-Control':'no-cache'
+}
+}}
 style={styles.webview}
 javaScriptEnabled={true}
 domStorageEnabled={true}
 geolocationEnabled={true}
+cacheEnabled={false}
+cacheMode="LOAD_NO_CACHE"
 startInLoadingState={true}
 mediaPlaybackRequiresUserAction={false}
 allowsInlineMediaPlayback={true}
 mixedContentMode="compatibility"
-injectedJavaScript={injectedJavaScript}
+injectedJavaScriptBeforeContentLoaded={bridge}
+injectedJavaScript={bridge}
 onMessage={onMessage}
+onLoadEnd={()=>{
+sendToWeb(`
+var a=document.getElementById("caddieAnswer");
+if(a)a.textContent="Ready. Tap the microphone.";
+`);
+}}
 />
 
 </SafeAreaView>
