@@ -12,18 +12,15 @@ const[distance,setDistance]=useState('150');
 const[lie,setLie]=useState('FAIRWAY');
 const[wind,setWind]=useState('NONE');
 const recognizingRef=useRef(false);
+const lastTextRef=useRef('');
 
 useEffect(()=>{
 (async()=>{
 if(Platform.OS==='android'){
-try{
-await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO);
-}catch(e){}
+try{await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO)}catch(e){}
 }
 })();
-return()=>{
-try{ExpoSpeechRecognitionModule.abort()}catch(e){}
-};
+return()=>{try{ExpoSpeechRecognitionModule.abort()}catch(e){}};
 },[]);
 
 const getClub=d=>{
@@ -45,30 +42,18 @@ return'Lob Wedge';
 const makeAdvice=(spoken='')=>{
 let d=parseInt(distance,10)||150;
 const txt=spoken.toLowerCase();
-
 const nums=txt.match(/\d+/g);
+
 if(nums&&nums.length){
 const n=parseInt(nums[0],10);
-if(n>=30&&n<=400){
-d=n;
-setDistance(String(n));
-}
+if(n>=30&&n<=400){d=n;setDistance(String(n))}
 }
 
 let selectedLie=lie;
-if(txt.includes('rough')){
-selectedLie='ROUGH';
-setLie('ROUGH');
-}else if(txt.includes('bunker')){
-selectedLie='BUNKER';
-setLie('BUNKER');
-}else if(txt.includes('tee')){
-selectedLie='TEE';
-setLie('TEE');
-}else if(txt.includes('fairway')){
-selectedLie='FAIRWAY';
-setLie('FAIRWAY');
-}
+if(txt.includes('rough')){selectedLie='ROUGH';setLie('ROUGH')}
+else if(txt.includes('bunker')){selectedLie='BUNKER';setLie('BUNKER')}
+else if(txt.includes('tee')){selectedLie='TEE';setLie('TEE')}
+else if(txt.includes('fairway')){selectedLie='FAIRWAY';setLie('FAIRWAY')}
 
 let adjusted=d;
 let note='';
@@ -94,56 +79,82 @@ note+=' From the fairway bunker, favour clean contact.';
 }
 
 const club=getClub(adjusted);
-const msg=`${caddieName}: ${d} metres, ${selectedLie.toLowerCase()}. Plays about ${adjusted} metres. ${club}.${note}`;
-setAnswer(msg);
+setAnswer(`${caddieName}: ${d} metres, ${selectedLie.toLowerCase()}. Plays about ${adjusted} metres. ${club}.${note}`);
 };
 
 useSpeechRecognitionEvent('start',()=>{
 recognizingRef.current=true;
+lastTextRef.current='';
 setListening(true);
 setStatus('LISTENING');
 setTranscript('');
+setAnswer('Speak now...');
+});
+
+useSpeechRecognitionEvent('speechstart',()=>{
+setStatus('SPEECH DETECTED');
 });
 
 useSpeechRecognitionEvent('result',event=>{
-const text=event?.results?.[0]?.transcript?.trim()||'';
+try{
+const results=event?.results;
+if(!results||!results.length)return;
+
+let text='';
+for(let i=0;i<results.length;i++){
+const t=results[i]?.transcript?.trim();
+if(t)text=t;
+}
+
 if(!text)return;
 
+lastTextRef.current=text;
 setTranscript(text);
-
-if(event.isFinal){
+setStatus('HEARD YOU');
 makeAdvice(text);
+}catch(e){
+setStatus('RESULT ERROR');
+setAnswer(String(e?.message||e));
 }
+});
+
+useSpeechRecognitionEvent('nomatch',()=>{
+setStatus('NO MATCH');
+setAnswer("I heard sound but couldn't recognise the words.");
 });
 
 useSpeechRecognitionEvent('end',()=>{
 recognizingRef.current=false;
 setListening(false);
+
+if(lastTextRef.current){
 setStatus('READY');
+}else{
+setStatus('ENDED - NO WORDS');
+setAnswer('Microphone worked, but Android returned no speech text.');
+}
 });
 
 useSpeechRecognitionEvent('error',event=>{
 recognizingRef.current=false;
 setListening(false);
 
-const e=event?.error||'';
+const err=event?.error||'unknown';
+const code=event?.code;
+const message=event?.message||'';
 
-if(e==='no-speech'){
-setStatus('NO SPEECH HEARD');
-setAnswer('Tap the microphone and speak again.');
-}else if(e==='not-allowed'||e==='permission-denied'){
-setStatus('MICROPHONE BLOCKED');
-setAnswer('Microphone permission is blocked.');
-}else{
 setStatus('VOICE ERROR');
-setAnswer(`Voice error: ${e||'unknown'}`);
-}
+setAnswer(`ERROR: ${err}${code!==undefined?' | CODE: '+code:''}${message?' | '+message:''}`);
 });
 
 const startSpeech=async()=>{
 if(recognizingRef.current)return;
 
 try{
+lastTextRef.current='';
+setTranscript('');
+setStatus('CHECKING MICROPHONE');
+
 const permission=await ExpoSpeechRecognitionModule.requestPermissionsAsync();
 
 if(!permission?.granted){
@@ -152,26 +163,28 @@ setAnswer('Microphone permission is blocked.');
 return;
 }
 
-setStatus('STARTING');
+setStatus('STARTING GOOGLE SPEECH');
+setAnswer('Starting Google speech recognition...');
 
 ExpoSpeechRecognitionModule.start({
 lang:'en-AU',
 interimResults:true,
-continuous:false
+maxAlternatives:1,
+continuous:false,
+androidRecognitionServicePackage:'com.google.android.googlequicksearchbox'
 });
 
 }catch(e){
 recognizingRef.current=false;
 setListening(false);
-setStatus('VOICE ERROR');
-setAnswer("The microphone couldn't start.");
+setStatus('START ERROR');
+setAnswer(`START ERROR: ${String(e?.message||e)}`);
 }
 };
 
 return(
 <SafeAreaView style={s.app}>
 <StatusBar barStyle="light-content" backgroundColor="#03081e"/>
-
 <ScrollView contentContainerStyle={s.content}>
 
 <Text style={s.brand}>DRC</Text>
@@ -180,12 +193,7 @@ return(
 
 <View style={s.card}>
 <Text style={s.label}>CADDIE NAME</Text>
-<TextInput
-style={s.input}
-value={caddieName}
-onChangeText={setCaddieName}
-placeholderTextColor="#71809d"
-/>
+<TextInput style={s.input} value={caddieName} onChangeText={setCaddieName} placeholderTextColor="#71809d"/>
 
 <Text style={s.label}>DISTANCE</Text>
 <View style={s.distanceRow}>
@@ -193,12 +201,7 @@ placeholderTextColor="#71809d"
 <Text style={s.smallButtonText}>−</Text>
 </TouchableOpacity>
 
-<TextInput
-style={s.distanceInput}
-value={distance}
-onChangeText={setDistance}
-keyboardType="number-pad"
-/>
+<TextInput style={s.distanceInput} value={distance} onChangeText={setDistance} keyboardType="number-pad"/>
 
 <Text style={s.metres}>m</Text>
 
@@ -212,10 +215,7 @@ keyboardType="number-pad"
 <Text style={s.label}>LIE</Text>
 <View style={s.row}>
 {['TEE','FAIRWAY','ROUGH','BUNKER'].map(x=>(
-<TouchableOpacity
-key={x}
-style={[s.choice,lie===x&&s.choiceActive]}
-onPress={()=>setLie(x)}>
+<TouchableOpacity key={x} style={[s.choice,lie===x&&s.choiceActive]} onPress={()=>setLie(x)}>
 <Text style={[s.choiceText,lie===x&&s.choiceTextActive]}>{x}</Text>
 </TouchableOpacity>
 ))}
@@ -223,15 +223,8 @@ onPress={()=>setLie(x)}>
 
 <Text style={s.label}>WIND</Text>
 <View style={s.row}>
-{[
-['NONE','NONE'],
-['HEAD','HEADWIND'],
-['TAIL','TAILWIND']
-].map(([v,t])=>(
-<TouchableOpacity
-key={v}
-style={[s.choice,wind===v&&s.choiceActive]}
-onPress={()=>setWind(v)}>
+{[['NONE','NONE'],['HEAD','HEADWIND'],['TAIL','TAILWIND']].map(([v,t])=>(
+<TouchableOpacity key={v} style={[s.choice,wind===v&&s.choiceActive]} onPress={()=>setWind(v)}>
 <Text style={[s.choiceText,wind===v&&s.choiceTextActive]}>{t}</Text>
 </TouchableOpacity>
 ))}
@@ -242,15 +235,11 @@ onPress={()=>setWind(v)}>
 <Text style={s.voiceTitle}>VOICE CADDIE</Text>
 <Text style={s.status}>{status}</Text>
 
-<TouchableOpacity
-style={[s.mic,listening&&s.micListening]}
-onPress={startSpeech}>
+<TouchableOpacity style={[s.mic,listening&&s.micListening]} onPress={startSpeech}>
 <Text style={s.micIcon}>🎤</Text>
 </TouchableOpacity>
 
-<Text style={s.tapText}>
-{listening?'Speak now...':`Tap and ask ${caddieName}`}
-</Text>
+<Text style={s.tapText}>{listening?'Speak now...':`Tap and ask ${caddieName}`}</Text>
 
 {!!transcript&&(
 <View style={s.transcriptBox}>
@@ -263,9 +252,7 @@ onPress={startSpeech}>
 <Text style={s.answer}>{answer}</Text>
 </View>
 
-<TouchableOpacity
-style={s.askButton}
-onPress={()=>makeAdvice('')}>
+<TouchableOpacity style={s.askButton} onPress={()=>makeAdvice('')}>
 <Text style={s.askButtonText}>ASK {caddieName.toUpperCase()}</Text>
 </TouchableOpacity>
 </View>
@@ -298,7 +285,7 @@ choiceText:{color:'#9eb0ca',fontSize:11,fontWeight:'800'},
 choiceTextActive:{color:'#fff'},
 voiceCard:{backgroundColor:'#091329',borderWidth:1,borderColor:'#365d95',borderRadius:22,padding:18,alignItems:'center'},
 voiceTitle:{color:'#fff',fontSize:20,fontWeight:'900',letterSpacing:2},
-status:{color:'#58a8ff',fontSize:12,fontWeight:'800',letterSpacing:2,marginTop:5,marginBottom:18},
+status:{color:'#58a8ff',fontSize:12,fontWeight:'800',letterSpacing:2,marginTop:5,marginBottom:18,textAlign:'center'},
 mic:{width:92,height:92,borderRadius:46,backgroundColor:'#126be1',alignItems:'center',justifyContent:'center',borderWidth:4,borderColor:'#65b2ff'},
 micListening:{transform:[{scale:1.08}],borderColor:'#fff'},
 micIcon:{fontSize:42},
