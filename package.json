@@ -7,6 +7,7 @@
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.74.1",
-    "react-native-webview": "13.8.6"
+    "react-native-webview": "13.8.6",
+    "expo-speech-recognition": "0.3.2"
   }
 }
