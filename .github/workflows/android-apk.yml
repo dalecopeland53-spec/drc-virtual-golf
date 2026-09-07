@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
 
     steps:
       - name: Checkout repository
@@ -15,19 +16,28 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
 
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Install EAS CLI
-        run: npm install -g eas-cli
+      - name: Generate Android project
+        run: npx expo prebuild --platform android --no-install
 
-      - name: Link existing Expo project
-        run: eas init --id 97f964e6-4845-41b3-a3de-11431bdefefa --non-interactive --force
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Build installable APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
 
-      - name: Build Android APK
-        run: eas build --platform android --profile preview --non-interactive --wait
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: DRC-Virtual-Golf-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
