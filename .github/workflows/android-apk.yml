@@ -29,6 +29,13 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Repair app icon PNG
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+          convert drc-virtual-golf-icon.png -strip PNG32:drc-virtual-golf-icon-fixed.png
+          mv drc-virtual-golf-icon-fixed.png drc-virtual-golf-icon.png
+
       - name: Generate Android project
         run: npx expo prebuild --platform android --no-install
 
