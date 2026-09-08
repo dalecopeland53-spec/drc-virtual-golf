@@ -33,3 +33,14 @@ html,body,.app,.screen-page{background:linear-gradient(145deg,#ffffff 0%,#d9dee4
 .login-field-wrap{border-color:#8d9dac;background:linear-gradient(145deg,#fff,#dce2e7);box-shadow:inset 0 1px 4px rgba(8,43,87,.1)}.login-field-icon,.login-field{color:#082b57}.login-field::placeholder{color:#63778a}.login-eye{color:#425f7a}.forgot{color:#0868c9}
 .login-go{background:linear-gradient(145deg,#1684e8,#06488f);color:#fff;border-color:#8eb9e0;box-shadow:0 0 14px rgba(8,104,201,.3)}
 .social-button{border-color:#8d9dac;background:linear-gradient(145deg,#fff,#d8dfe5);color:#082b57;box-shadow:0 2px 7px rgba(8,43,87,.12)}.login-links{color:#0b3d78}.login-links span+span:before{color:#75889a}.login-or{color:#60758a}
+
+/* DRC LOGIN S24 FIT — APPROVED SIZING-ONLY UPDATE */
+.login-screen{left:0;right:0;top:0;bottom:0;width:100vw;max-width:100vw;height:100dvh;padding:10px 14px;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.login-shell{width:100%;max-width:350px;height:100%;max-height:790px;margin:0 auto}
+.login-logo{width:clamp(118px,36vw,154px);height:clamp(118px,36vw,154px);flex:0 0 auto}
+.login-tag{font-size:clamp(10px,3vw,12px);letter-spacing:clamp(.8px,.35vw,1.6px);white-space:nowrap;margin-bottom:10px}
+.login-card{width:100%;max-width:100%;min-width:0;padding:16px 14px 14px;border-radius:24px}
+.login-title{font-size:clamp(21px,6vw,25px);margin-bottom:11px}
+.login-field-wrap{width:100%;height:43px;margin-bottom:8px}.login-field-icon{width:38px}.login-field{font-size:13px}.login-eye{width:36px}
+.forgot{font-size:10px;margin-bottom:8px}.login-go{height:44px;font-size:14px}.login-or{margin:9px 0}.social-button{height:39px;margin-bottom:7px;font-size:11px}.login-links{font-size:9px;gap:7px;white-space:nowrap}.login-links span+span:before{margin-right:7px}
+@media(max-width:360px){.login-screen{padding-left:10px;padding-right:10px}.login-shell{max-width:330px}.login-card{padding-left:12px;padding-right:12px}.login-logo{width:118px;height:118px}.login-tag{margin-bottom:7px}.social-button{font-size:10px}}
