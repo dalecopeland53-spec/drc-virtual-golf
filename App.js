@@ -9,6 +9,8 @@ const webRef=useRef(null);
 const recognizingRef=useRef(false);
 const lastTranscriptRef=useRef('');
 const commandSentRef=useRef(false);
+const webReadyRef=useRef(false);
+const pendingCommandRef=useRef('');
 
 const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/?compactvoice=20260907';
 
@@ -80,6 +82,12 @@ if(!clean||commandSentRef.current)return;
 commandSentRef.current=true;
 lastTranscriptRef.current=clean;
 showHeard(clean);
+
+if(!webReadyRef.current){
+pendingCommandRef.current=clean;
+showAnswer('Caddie is loading your shot...');
+return;
+}
 
 sendToWeb(`
 (function(){
@@ -235,13 +243,18 @@ return;
 showHeard('Listening...');
 showAnswer('Listening...');
 
+const defaultService=Platform.OS==='android'
+?ExpoSpeechRecognitionModule.getDefaultRecognitionService?.()?.packageName
+:undefined;
+
 ExpoSpeechRecognitionModule.start({
 lang:'en-AU',
 interimResults:true,
 maxAlternatives:1,
 continuous:false,
 requiresOnDeviceRecognition:false,
-addsPunctuation:false
+addsPunctuation:false,
+androidRecognitionServicePackage:defaultService||undefined
 });
 }catch(e){
 recognizingRef.current=false;
@@ -272,6 +285,17 @@ return;
 
 if(data?.type==='DRC_SPEAK_ANSWER'&&data?.text){
 speakAnswer(data.text);
+return;
+}
+
+if(data?.type==='DRC_WEB_READY'){
+webReadyRef.current=true;
+const pending=pendingCommandRef.current;
+pendingCommandRef.current='';
+if(pending){
+commandSentRef.current=false;
+deliverCommand(pending);
+}
 }
 }catch(e){}
 };
@@ -360,21 +384,28 @@ text:String(text||"")
 }
 
 function connectCaddie(){
+var connected=false;
 try{
 if(typeof window.handleGolfCommand==="function"){
 window.DRC_RUN_COMMAND=function(text){
 return window.handleGolfCommand(text);
 };
+connected=true;
 }else if(typeof handleGolfCommand==="function"){
 window.DRC_RUN_COMMAND=function(text){
 return handleGolfCommand(text);
 };
+connected=true;
 }
 }catch(e){}
 
 window.speak=function(text){
 sendSpeech(text);
 };
+
+if(connected){
+try{window.ReactNativeWebView.postMessage(JSON.stringify({type:"DRC_WEB_READY"}));}catch(e){}
+}
 }
 
 window.DRCNativeSpeech=sendMic;
@@ -443,8 +474,9 @@ injectedJavaScriptBeforeContentLoaded={compactBridge}
 injectedJavaScript={compactBridge}
 onMessage={onMessage}
 onLoadEnd={()=>{
+webReadyRef.current=false;
 sendToWeb(compactBridge);
-showAnswer('Ready. Ask Pete for the shot.');
+sendToWeb('(function(){var n=localStorage.getItem("drcCaddieName")||"Pete";var t="Ready. Ask "+n+" for the shot.";if(window.setCaddieAnswers)window.setCaddieAnswers(t);})();');
 }}
 />
 </SafeAreaView>
