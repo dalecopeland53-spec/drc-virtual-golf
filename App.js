@@ -12,7 +12,7 @@ const commandSentRef=useRef(false);
 const webReadyRef=useRef(false);
 const pendingCommandRef=useRef('');
 
-const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/?build=20260909a';
+const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/?build=20260909b';
 
 const sendToWeb=code=>{
 try{
@@ -333,7 +333,7 @@ style.textContent=
 '.club-panel{order:5!important;min-height:62px!important;padding:7px 10px!important;margin:0!important}'+
 '.club-panel .section-title{font-size:10px!important}.club-row{min-height:32px!important}.club-name{font-size:20px!important}.club-icon{font-size:22px!important}.carry{font-size:9px!important}.carry strong{font-size:17px!important}.club-select{height:29px!important;font-size:12px!important}'+
 '.last-shot-panel{display:none!important}'+
-'.score-panel{min-height:82px!important;margin:6px 0!important;padding:0!important}.score-cell{padding:5px 2px!important}.score-label{font-size:10px!important}.score-number{font-size:20px!important;line-height:23px!important}.score-btn,.circle{width:28px!important;height:28px!important;font-size:18px!important}'+
+'.score-panel{min-height:82px!important;margin:6px 0!important;padding:0!important}.score-cell{padding:4px 2px!important}.score-label{font-size:10px!important}.score-number{font-size:20px!important;line-height:22px!important}.score-controls{margin-top:0!important;transform:translateY(-4px)!important}.score-btn,.circle{width:28px!important;height:28px!important;font-size:18px!important}'+
 '.actions{height:46px!important;margin:0 0 5px!important;gap:6px!important}.actions button{height:44px!important;font-size:13px!important;padding:0 8px!important}'+
 '.bottom-nav{position:fixed!important;left:0!important;right:0!important;bottom:0!important;height:68px!important;padding:5px 4px 8px!important;background:#020812!important;z-index:9999!important;border-top:1px solid #17304c!important}'+
 '.bottom-nav button{font-size:10px!important;padding:2px!important}.nav-icon{font-size:20px!important;margin-bottom:1px!important}'+
