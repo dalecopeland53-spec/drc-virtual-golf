@@ -13,6 +13,8 @@ var u=document.querySelector("#scorecardView .screen-subtitle");if(u)u.textConte
 var v=document.querySelector(".actions .scorecard");if(v)v.innerHTML="☷ ROUND SUMMARY";
 var oldNext=window.nextHole;window.nextHole=function(){if(currentHole>=17){openTool("scorecard");return}oldNext()}
 var compact=document.createElement("link");compact.rel="stylesheet";compact.href="drc-style-build3.css?v=20260909-b3";document.head.appendChild(compact);
+var b4css=document.createElement("link");b4css.rel="stylesheet";b4css.href="drc-style-build4.css?v=20260909-b4";document.head.appendChild(b4css);
 var stable=document.createElement("script");stable.src="drc-stability.js?v=20260909-s1";stable.defer=false;document.body.appendChild(stable);
 var intel=document.createElement("script");intel.src="drc-intelligence.js?v=20260909-ci2";intel.defer=false;document.body.appendChild(intel);
+var b4=document.createElement("script");b4.src="drc-build4.js?v=20260909-b4";b4.defer=false;document.body.appendChild(b4);
 })();
