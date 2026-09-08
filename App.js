@@ -12,7 +12,7 @@ const commandSentRef=useRef(false);
 const webReadyRef=useRef(false);
 const pendingCommandRef=useRef('');
 
-const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/?build=20260908';
+const liveProjectUrl='https://dalecopeland53-spec.github.io/drc-virtual-golf/?build=20260909a';
 
 const sendToWeb=code=>{
 try{
