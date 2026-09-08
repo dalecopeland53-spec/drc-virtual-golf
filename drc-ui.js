@@ -12,6 +12,7 @@ var t=document.querySelector("#scorecardView .screen-title");if(t)t.textContent=
 var u=document.querySelector("#scorecardView .screen-subtitle");if(u)u.textContent="Your complete 18-hole round";
 var v=document.querySelector(".actions .scorecard");if(v)v.innerHTML="☷ ROUND SUMMARY";
 var oldNext=window.nextHole;window.nextHole=function(){if(currentHole>=17){openTool("scorecard");return}oldNext()}
+var compact=document.createElement("link");compact.rel="stylesheet";compact.href="drc-style-build3.css?v=20260909-b3";document.head.appendChild(compact);
 var stable=document.createElement("script");stable.src="drc-stability.js?v=20260909-s1";stable.defer=false;document.body.appendChild(stable);
 var intel=document.createElement("script");intel.src="drc-intelligence.js?v=20260909-ci2";intel.defer=false;document.body.appendChild(intel);
 })();
