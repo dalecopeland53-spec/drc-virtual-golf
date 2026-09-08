@@ -11,10 +11,11 @@ var m=document.querySelector(".menu");if(m){m.setAttribute("role","button");m.se
 var t=document.querySelector("#scorecardView .screen-title");if(t)t.textContent="Round Summary";
 var u=document.querySelector("#scorecardView .screen-subtitle");if(u)u.textContent="Your complete 18-hole round";
 var v=document.querySelector(".actions .scorecard");if(v)v.innerHTML="☷ ROUND SUMMARY";
+var routineCard=document.querySelector('.more-card[onclick*="routines"]');if(routineCard){var rt=routineCard.querySelector('.more-title'),rs=routineCard.querySelector('.more-small');if(rt)rt.textContent='Pre-Shot Routine';if(rs)rs.textContent='Your own routine'}
 var oldNext=window.nextHole;window.nextHole=function(){if(currentHole>=17){openTool("scorecard");return}oldNext()}
 var compact=document.createElement("link");compact.rel="stylesheet";compact.href="drc-style-build3.css?v=20260909-b3";document.head.appendChild(compact);
-var b4css=document.createElement("link");b4css.rel="stylesheet";b4css.href="drc-style-build4.css?v=20260909-b4";document.head.appendChild(b4css);
+var b6css=document.createElement("link");b6css.rel="stylesheet";b6css.href="drc-style-build4.css?v=20260909-b6";document.head.appendChild(b6css);
 var stable=document.createElement("script");stable.src="drc-stability.js?v=20260909-s1";stable.defer=false;document.body.appendChild(stable);
 var intel=document.createElement("script");intel.src="drc-intelligence.js?v=20260909-ci2";intel.defer=false;document.body.appendChild(intel);
-var b4=document.createElement("script");b4.src="drc-build4.js?v=20260909-b4";b4.defer=false;document.body.appendChild(b4);
+var b6=document.createElement("script");b6.src="drc-build4.js?v=20260909-b6";b6.defer=false;document.body.appendChild(b6);
 })();
