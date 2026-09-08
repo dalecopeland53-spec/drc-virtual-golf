@@ -54,3 +54,14 @@ html,body,.app,.screen-page{background:linear-gradient(145deg,#ffffff 0%,#d9dee4
 .login-field-wrap{height:38px;margin-bottom:6px}.login-field-icon{font-size:15px}.login-field{font-size:12px}.login-eye{font-size:15px}
 .forgot{font-size:9px;margin:0 2px 6px}.login-go{height:39px;font-size:13px}.login-or{margin:6px 0;font-size:8px}.social-button{height:35px;margin-bottom:5px;font-size:10px}.login-links{font-size:8px;margin-top:2px}
 @media(max-height:760px){.login-logo{width:105px;height:105px}.login-tag{margin-bottom:5px}.login-card{padding:9px 11px 8px}.login-title{font-size:19px;margin-bottom:6px}.login-field-wrap{height:35px;margin-bottom:5px}.login-go{height:36px}.social-button{height:32px;margin-bottom:4px}.login-or{margin:5px 0}}
+
+/* APPROVED COMPACT WELCOME — replaces old tall sign-in */
+.welcome-shell{justify-content:center;gap:18px;max-height:620px}
+.welcome-shell .login-logo{width:min(48vw,176px);height:min(48vw,176px);margin:0}
+.welcome-copy{width:100%;display:flex;flex-direction:column;align-items:center}
+.welcome-title{color:#0b3d78;font-size:clamp(24px,7vw,31px);font-weight:900;text-align:center;margin:0 0 7px}
+.welcome-shell .login-tag{color:#526b84;font-size:clamp(12px,3.5vw,15px);letter-spacing:1.2px;margin:0 0 22px}
+.welcome-go{width:min(100%,330px);height:48px;font-size:13px}
+.welcome-links{margin-top:14px;font-size:10px}
+#welcomeHelp{cursor:pointer}
+@media(max-height:700px){.welcome-shell{gap:10px}.welcome-shell .login-logo{width:118px;height:118px}.welcome-title{font-size:23px}.welcome-shell .login-tag{margin-bottom:12px}.welcome-go{height:42px}}
