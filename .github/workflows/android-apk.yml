@@ -21,13 +21,39 @@ jobs:
           cache: npm
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
 
       - name: Install locked dependencies
         run: npm ci
+
+      - name: Repair and verify DRC icon PNG
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct,zlib
+          p=Path('drc-virtual-golf-icon.png')
+          b=p.read_bytes()
+          sig=b'\x89PNG\r\n\x1a\n'
+          if not b.startswith(sig): raise SystemExit('DRC icon is not a PNG')
+          out=bytearray(sig); i=8; chunks=0
+          while i < len(b):
+              if i+12>len(b): raise SystemExit('Truncated PNG chunk header')
+              n=struct.unpack('>I',b[i:i+4])[0]
+              typ=b[i+4:i+8]
+              end=i+12+n
+              if end>len(b): raise SystemExit(f'Truncated PNG chunk {typ!r}')
+              data=b[i+8:i+8+n]
+              out += struct.pack('>I',n)+typ+data+struct.pack('>I',zlib.crc32(typ+data)&0xffffffff)
+              chunks += 1; i=end
+              if typ==b'IEND': break
+          if not out.endswith(b'IEND\xaeB`\x82'): raise SystemExit('PNG has no valid IEND')
+          p.write_bytes(out)
+          print(f'DRC icon CRCs repaired across {chunks} chunks')
+          PY
+          file drc-virtual-golf-icon.png
 
       - name: Generate Android project
         run: npx expo prebuild --platform android --no-install
