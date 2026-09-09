@@ -24,10 +24,9 @@ jobs:
           java-version: 17
       - name: Install locked dependencies
         run: npm ci
-      - name: Install approved DRC Android icon
+      - name: Verify approved DRC Android icon
         run: |
-          test -s drc-virtual-golf-icon.b64
-          base64 --decode --ignore-garbage drc-virtual-golf-icon.b64 > drc-virtual-golf-icon.png
+          test -s drc-virtual-golf-icon.png
           python3 - <<'PY'
           from pathlib import Path
           import struct,zlib
