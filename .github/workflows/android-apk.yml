@@ -9,107 +9,54 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 45
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
-
       - name: Install locked dependencies
         run: npm ci
-
-      - name: Guarantee valid DRC Android icon
+      - name: Verify approved DRC Android icon
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import struct,zlib,math
+          import struct,zlib
           p=Path('drc-virtual-golf-icon.png')
-          def valid_png(b):
-              if not b.startswith(b'\x89PNG\r\n\x1a\n'): return False
-              i=8
-              try:
-                  while i<len(b):
-                      if i+12>len(b): return False
-                      n=struct.unpack('>I',b[i:i+4])[0]; typ=b[i+4:i+8]; end=i+12+n
-                      if end>len(b): return False
-                      data=b[i+8:i+8+n]; crc=struct.unpack('>I',b[i+8+n:i+12+n])[0]
-                      if (zlib.crc32(typ+data)&0xffffffff)!=crc: return False
-                      i=end
-                      if typ==b'IEND': return True
-              except Exception: return False
-              return False
-          src=p.read_bytes() if p.exists() else b''
-          if valid_png(src):
-              print('Existing DRC icon verified')
-              raise SystemExit(0)
-          W=H=1024
-          raw=bytearray()
-          cx=cy=512
-          for y in range(H):
-              row=bytearray([0])
-              for x in range(W):
-                  r,g,b=3,8,30
-                  d=math.hypot(x-cx,y-cy)
-                  if 370<d<410: r,g,b=225,190,74
-                  if d<=350: r,g,b=10,31,61
-                  # golf ball
-                  bd=math.hypot(x-430,y-430)
-                  if bd<180:
-                      shade=max(0,min(28,int((x+y-500)/35)))
-                      r=g=b=238-shade
-                      for dx,dy in ((-75,-60),(0,-90),(75,-55),(-105,15),(-35,5),(45,10),(105,20),(-70,75),(15,80),(90,75)):
-                          if (x-(430+dx))**2+(y-(430+dy))**2<12**2: r=g=b=188
-                  # gold flag pole + flag
-                  if 610<=x<=626 and 300<=y<=690: r,g,b=225,190,74
-                  if 626<x<790 and 305<y<390 and y>305+(x-626)*0.22: r,g,b=225,190,74
-                  if (x-618)**2+(y-710)**2<115**2 and y>690: r,g,b=225,190,74
-                  # simple D R C block letters
-                  def rect(x1,y1,x2,y2): return x1<=x<=x2 and y1<=y<=y2
-                  if rect(250,790,275,900) or rect(275,790,325,815) or rect(275,875,325,900) or rect(320,810,345,880): r,g,b=245,247,251
-                  if rect(380,790,405,900) or rect(405,790,455,815) or rect(405,835,455,860) or rect(450,805,475,845) or (430<=x<=480 and 850<=y<=900 and x-y<-390): r,g,b=245,247,251
-                  if rect(520,790,545,900) or rect(545,790,610,815) or rect(545,875,610,900): r,g,b=245,247,251
-                  row.extend((r,g,b))
-              raw.extend(row)
-          def chunk(t,d): return struct.pack('>I',len(d))+t+d+struct.pack('>I',zlib.crc32(t+d)&0xffffffff)
-          png=b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',W,H,8,2,0,0,0))+chunk(b'IDAT',zlib.compress(bytes(raw),9))+chunk(b'IEND',b'')
-          p.write_bytes(png)
-          if not valid_png(png): raise SystemExit('Fallback DRC icon generation failed')
-          print('Corrupt source icon replaced in build workspace with valid DRC fallback icon')
+          b=p.read_bytes() if p.exists() else b''
+          if not b.startswith(b'\x89PNG\r\n\x1a\n'):
+              raise SystemExit('DRC icon missing or invalid PNG')
+          i=8; ok=False
+          while i<len(b):
+              if i+12>len(b): break
+              n=struct.unpack('>I',b[i:i+4])[0]; typ=b[i+4:i+8]; end=i+12+n
+              if end>len(b): break
+              data=b[i+8:i+8+n]; crc=struct.unpack('>I',b[i+8+n:i+12+n])[0]
+              if (zlib.crc32(typ+data)&0xffffffff)!=crc: break
+              i=end
+              if typ==b'IEND': ok=True; break
+          if not ok: raise SystemExit('DRC icon failed PNG integrity check')
+          print('Approved DRC icon verified — no fallback substitution allowed')
           PY
           file drc-virtual-golf-icon.png
-
       - name: Generate Android project
         run: npx expo prebuild --platform android --no-install
-
       - name: Embed production JavaScript bundle
         run: |
-          mkdir -p android/app/src/main/assets
-          mkdir -p android/app/src/main/res
-          npx expo export:embed \
-            --platform android \
-            --dev false \
-            --entry-file node_modules/expo/AppEntry.js \
-            --bundle-output android/app/src/main/assets/index.android.bundle \
-            --assets-dest android/app/src/main/res
-
+          mkdir -p android/app/src/main/assets android/app/src/main/res
+          npx expo export:embed --platform android --dev false --entry-file node_modules/expo/AppEntry.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
       - name: Build standalone release APK
         working-directory: android
         run: ./gradlew assembleRelease --no-daemon
-
       - name: Verify standalone bundle is packaged
         run: unzip -l android/app/build/outputs/apk/release/app-release.apk | grep -q 'assets/index.android.bundle'
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
