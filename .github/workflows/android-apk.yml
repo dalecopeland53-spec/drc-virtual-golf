@@ -1,16 +1,16 @@
-name: Build Android APK
+name: DRC Clean Android APK
 
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]
+    branches: ["clean-rebuild-20260910"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - name: Checkout repository
+      - name: Checkout clean rebuild
         uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -24,63 +24,25 @@ jobs:
           java-version: 17
       - name: Install locked dependencies
         run: npm ci
-      - name: Generate clean DRC Android icon
-        run: |
-          python3 - <<'PY'
-          import struct,zlib,math
-          W=H=1024
-          bg=(238,242,246,255); blue=(9,69,145,255); navy=(4,43,98,255); gold=(212,164,55,255); white=(250,251,253,255)
-          px=[list(bg) for _ in range(W*H)]
-          def setp(x,y,c):
-              if 0<=x<W and 0<=y<H: px[y*W+x]=list(c)
-          cx=cy=512
-          for y in range(H):
-              for x in range(W):
-                  dx=x-cx; dy=y-cy; rr=dx*dx+dy*dy
-                  if rr<=380*380: setp(x,y,blue)
-                  if 365*365<=rr<=385*385: setp(x,y,gold)
-          font={'D':['11110','10001','10001','10001','10001','10001','11110'],'R':['11110','10001','10001','11110','10100','10010','10001'],'C':['01111','10000','10000','10000','10000','10000','01111']}
-          scale=38; gap=28
-          widths=[5*scale]*3; total=sum(widths)+2*gap; x0=(W-total)//2; y0=400
-          for ch in 'DRC':
-              pat=font[ch]
-              for ry,row in enumerate(pat):
-                  for rx,v in enumerate(row):
-                      if v=='1':
-                          for yy in range(scale):
-                              for xx in range(scale): setp(x0+rx*scale+xx,y0+ry*scale+yy,white)
-              x0+=5*scale+gap
-          # small golf ball top-right
-          bx,by,br=760,300,52
-          for y in range(by-br-4,by+br+5):
-              for x in range(bx-br-4,bx+br+5):
-                  rr=(x-bx)**2+(y-by)**2
-                  if rr<=br*br: setp(x,y,white)
-                  if br*br<=rr<=(br+4)**2: setp(x,y,gold)
-          raw=b''.join(b'\x00'+bytes(sum((p for p in px[y*W:(y+1)*W]),[])) for y in range(H))
-          def chunk(t,d): return struct.pack('>I',len(d))+t+d+struct.pack('>I',zlib.crc32(t+d)&0xffffffff)
-          png=b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',W,H,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(raw,9))+chunk(b'IEND',b'')
-          open('drc-virtual-golf-icon.png','wb').write(png)
-          print('Clean silver-blue DRC icon generated',len(png),'bytes')
-          PY
-          file drc-virtual-golf-icon.png
+      - name: Expo config check
+        run: npx expo config --type public
       - name: Generate Android project
-        run: npx expo prebuild --platform android --no-install
+        run: npx expo prebuild --platform android --no-install --clean
       - name: Embed production JavaScript bundle
         run: |
           mkdir -p android/app/src/main/assets android/app/src/main/res
           npx expo export:embed --platform android --dev false --entry-file node_modules/expo/AppEntry.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
       - name: Build standalone release APK
         working-directory: android
-        run: ./gradlew assembleRelease --no-daemon
-      - name: Verify standalone bundle is packaged
-        run: unzip -l android/app/build/outputs/apk/release/app-release.apk | grep -q 'assets/index.android.bundle'
-      - name: Upload APK
+        run: ./gradlew clean assembleRelease --no-daemon
+      - name: Verify new clean bundle
+        run: |
+          unzip -l android/app/build/outputs/apk/release/app-release.apk | grep -q 'assets/index.android.bundle'
+          test -s android/app/build/outputs/apk/release/app-release.apk
+      - name: Upload clean APK
         uses: actions/upload-artifact@v4
         with:
-          name: DRC-Virtual-Golf-APK
+          name: DRC-Virtual-Golf-CLEAN-v2
           path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
           retention-days: 14
-
-# Build trigger: 2026-09-10 08:03 AEST
