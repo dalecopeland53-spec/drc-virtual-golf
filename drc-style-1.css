@@ -1,0 +1,66 @@
+/* ========================================================
+   DRC VIRTUAL GOLF ELITE - THE PLATINUM COLLECTION STYLES
+   ======================================================== */
+
+/* 1. Main Screen Background (Anti-glare Matte Silver-White) */
+.app-container {
+  flex: 1;
+  background-color: #F2F4F5;
+  padding: 16px;
+}
+
+/* 2. Premium Card Shape (The white boxes with smooth rounded edges) */
+.premium-card {
+  background-color: #FFFFFF;
+  border-radius: 20px; /* Gives it that smooth, expensive smartphone shape */
+  border: 1px solid #D1D5DB; /* Elegant thin metallic separation border */
+  padding: 20px;
+  margin-bottom: 16px;
+  
+  /* Subtle drop shadow to make the cards "pop" off the screen */
+  shadow-color: #000000;
+  shadow-offset: { width: 0, height: 4 };
+  shadow-opacity: 0.05;
+  shadow-radius: 8px;
+  elevation: 3; 
+}
+
+/* 3. Main Headings & Branding Text (Deep Contrast Blue) */
+.text-header {
+  color: #003366;
+  font-size: 24px;
+  font-weight: 'bold';
+  text-align: 'center';
+  margin-bottom: 8px;
+}
+
+/* 4. Action Buttons & Highlight Writing (Electric Blue) */
+.btn-electric-blue {
+  background-color: #0066CC;
+  border-radius: 12px; /* Smooth rounded button corners */
+  padding: 14px;
+  align-items: 'center';
+  justify-content: 'center';
+  margin-top: 10px;
+}
+
+/* Button Text */
+.btn-text {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: '700';
+}
+
+/* 5. Sub-text & Dynamic Grid Details (Muted Slate Gray) */
+.text-secondary {
+  color: #5A6E7F;
+  font-size: 14px;
+}
+
+/* 6. Grid Borders for Scorecards or Golf Bag Lists */
+.grid-border {
+  border-top-width: 1px;
+  border-top-color: #D1D5DB;
+  padding-top: 10px;
+  margin-top: 10px;
+}
