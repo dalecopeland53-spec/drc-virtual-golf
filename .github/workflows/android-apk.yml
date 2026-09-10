@@ -32,30 +32,27 @@ jobs:
         run: |
           mkdir -p android/app/src/main/assets android/app/src/main/res
           npx expo export:embed --platform android --dev false --entry-file node_modules/expo/AppEntry.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-      - name: Sanitize bundled PNG assets
+      - name: Replace broken bundled icon
         run: |
           python3 -m pip install --quiet pillow
           python3 - <<'PY'
           from pathlib import Path
-          from PIL import Image
+          from PIL import Image, ImageDraw
+          targets=[]
           roots=[Path('android/app/src/main/res'),Path('android/app/build/generated/res/react/release')]
-          count=0
           for root in roots:
-              if not root.exists():
-                  continue
-              for p in root.rglob('*.png'):
-                  try:
-                      with Image.open(p) as im:
-                          im.load()
-                          mode='RGBA' if 'A' in im.getbands() else 'RGB'
-                          clean=im.convert(mode)
-                      clean.save(p,format='PNG',optimize=False,compress_level=6)
-                      count+=1
-                      print('sanitized',p)
-                  except Exception as e:
-                      print('failed to sanitize',p,e)
-                      raise
-          print('sanitized PNG count:',count)
+              if root.exists():
+                  targets += list(root.rglob('drcvirtualgolficon.png'))
+          if not targets:
+              raise SystemExit('drcvirtualgolficon.png not found after bundle')
+          for p in targets:
+              p.parent.mkdir(parents=True,exist_ok=True)
+              im=Image.new('RGBA',(256,256),(242,245,248,255))
+              d=ImageDraw.Draw(im)
+              d.ellipse((28,28,228,228),outline=(7,59,120,255),width=14,fill=(255,255,255,255))
+              d.ellipse((104,104,152,152),fill=(8,120,209,255))
+              im.save(p,format='PNG',optimize=False,compress_level=6)
+              print('replaced',p)
           PY
       - name: Build standalone release APK
         working-directory: android
