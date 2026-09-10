@@ -1,31 +1,20 @@
 {
   "expo": {
-    "name": "DRC Virtual Golf Elite",
+    "name": "DRC Virtual Golf Elite CLEAN",
     "slug": "drc-virtual-golf",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./drc-virtual-golf-icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "resizeMode": "contain",
-      "backgroundColor": "#F2F4F5"
-    },
-    "ios": {
-      "supportsTablet": true,
-      "icon": "./drc-virtual-golf-icon.png"
-    },
+    "splash": {"resizeMode":"contain","backgroundColor":"#EEF2F6"},
+    "ios": {"supportsTablet":true,"icon":"./drc-virtual-golf-icon.png"},
     "android": {
-      "permissions": [
-        "android.permission.ACCESS_FINE_LOCATION",
-        "android.permission.ACCESS_COARSE_LOCATION"
-      ],
-      "adaptiveIcon": {
-        "foregroundImage": "./drc-virtual-golf-icon.png",
-        "backgroundColor": "#F2F4F5"
-      },
-      "package": "com.dalecopeland.drcvirtualgolf"
+      "versionCode": 200,
+      "permissions":["android.permission.ACCESS_FINE_LOCATION","android.permission.ACCESS_COARSE_LOCATION"],
+      "adaptiveIcon":{"foregroundImage":"./drc-virtual-golf-icon.png","backgroundColor":"#EEF2F6"},
+      "package":"com.dalecopeland.drcvirtualgolf"
     },
     "web": {},
-    "owner": "raffa68s-team"
+    "owner":"raffa68s-team"
   }
 }
