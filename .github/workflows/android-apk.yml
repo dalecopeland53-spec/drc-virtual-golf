@@ -17,14 +17,14 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 20
-        cache: 'npm' # Speeds up subsequent runs by caching dependencies
+        # Removed the npm cache line to prevent lockfile errors
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'zulu'
-        cache: 'gradle' # Speeds up subsequent runs by caching Gradle dependencies
+        # Removed the gradle cache line for a clean, stable run
 
     - name: Install dependencies
       run: npm install
@@ -37,10 +37,9 @@ jobs:
         cd android
         ./gradlew assembleRelease
 
-    # This step uses a search pattern to guarantee your APK is found and packaged
     - name: Upload Finished APK Asset
       uses: actions/upload-artifact@v4
       with:
         name: drc-golf-elite-apk
         path: android/app/build/outputs/apk/**/*.apk
-        if-no-files-found: error # This forces the build to fail explicitly if no APK was created
+        if-no-files-found: error
