@@ -1,6 +1,8 @@
 {
   "name": "drc-virtual-golf",
   "version": "1.0.0",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -8,13 +10,12 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~51.0.0",
-    "expo-status-bar": "~1.12.1",
-    "react": "18.2.0",
-    "react-native": "0.74.1"
+    "expo": "~55.0.0",
+    "expo-status-bar": "~3.0.0",
+    "react": "19.2.0",
+    "react-native": "0.83.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
-  },
-  "private": true
+    "@babel/core": "^7.25.2"
+  }
 }
