@@ -50,7 +50,6 @@ jobs:
                           for yy in range(scale):
                               for xx in range(scale): setp(x0+rx*scale+xx,y0+ry*scale+yy,white)
               x0+=5*scale+gap
-          # small golf ball top-right
           bx,by,br=760,300,52
           for y in range(by-br-4,by+br+5):
               for x in range(bx-br-4,bx+br+5):
@@ -83,4 +82,4 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-# Build trigger: 2026-09-10 08:03 AEST
+# Build trigger: 2026-09-11 12:30 AEST
