@@ -5,6 +5,9 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -74,12 +77,24 @@ jobs:
         run: ./gradlew assembleRelease --no-daemon
       - name: Verify standalone bundle is packaged
         run: unzip -l android/app/build/outputs/apk/release/app-release.apk | grep -q 'assets/index.android.bundle'
-      - name: Upload APK
+      - name: Prepare named APK
+        run: cp android/app/build/outputs/apk/release/app-release.apk DRC-Virtual-Golf.apk
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: DRC-Virtual-Golf-APK
-          path: android/app/build/outputs/apk/release/app-release.apk
+          path: DRC-Virtual-Golf.apk
           if-no-files-found: error
           retention-days: 14
-
-# Build trigger: 2026-09-11 12:30 AEST
+      - name: Publish persistent APK release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git tag -f virtual-golf-latest "$GITHUB_SHA"
+          git push origin refs/tags/virtual-golf-latest --force
+          if gh release view virtual-golf-latest >/dev/null 2>&1; then
+            gh release upload virtual-golf-latest DRC-Virtual-Golf.apk --clobber
+            gh release edit virtual-golf-latest --title "DRC Virtual Golf - Latest Android APK" --notes "Latest installable Android APK for DRC Virtual Golf. Tap DRC-Virtual-Golf.apk under Assets to download and install."
+          else
+            gh release create virtual-golf-latest DRC-Virtual-Golf.apk --title "DRC Virtual Golf - Latest Android APK" --notes "Latest installable Android APK for DRC Virtual Golf. Tap DRC-Virtual-Golf.apk under Assets to download and install." --latest
+          fi
