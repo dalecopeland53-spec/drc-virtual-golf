@@ -1,280 +1,273 @@
 import React, { useState } from 'react';
 import { 
-  SafeAreaView, 
-  ScrollView, 
   StyleSheet, 
   Text, 
-  TextInput, 
-  TouchableOpacity, 
   View, 
-  Platform, 
-  StatusBar as RNStatusBar 
+  SafeAreaView, 
+  ScrollView, 
+  TouchableOpacity, 
+  StatusBar 
 } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 
-// Global Configuration Palette
-const C = { 
-  bg: '#D8D0C2', 
-  bg2: '#CFC5B5', 
-  panel: '#E8E1D7', 
-  panel2: '#D4CAB9', 
-  blue: '#123A63', 
-  blue2: '#0B2A49', 
-  line: '#A99F90', 
-  white: '#F8F5EF', 
-  muted: '#5F625F', 
-  good: '#2F684F' 
+// A clean custom Card component that securely avoids unterminated JSX syntax errors
+const Card = ({ children, style }) => {
+  return (
+    <View style={[styles.card, style]}>
+      {children}
+    </View>
+  );
 };
 
-// Default Bag Distances (In Metres)
-const starter = [
-  ['Driver', 230], ['3W', 210], ['5W', 195], 
-  ['4i', 180], ['5i', 170], ['6i', 160], 
-  ['7i', 150], ['8i', 140], ['9i', 130], 
-  ['PW', 115], ['GW', 100], ['SW', 85], 
-  ['LW', 70], ['Putter', 0]
-].map(([name, distance], i) => ({ id: String(i), name, distance }));
-
-const tabs = ['Home', 'Round', 'Caddie', 'Bag', 'Course', 'More'];
-
-// Global Reusable Atomic Components
-const Card = ({ children, style }) => (
-  <View style={[styles.card, style]}>{children}</View>
-);
-
-const Btn = ({ label, onPress, small = false, secondary = false }) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={0.75} style={[styles.btn, small && styles.btnSmall, secondary && styles.btn2]}>
-    <Text style={[styles.btnText, secondary && styles.btnText2]}>{label}</Text>
-  </TouchableOpacity>
-);
-
-const Step = ({ value, minus, plus }) => (
-  <View style={styles.step}>
-    <TouchableOpacity onPress={minus} style={styles.stepBtn}>
-      <Text style={styles.stepTxt}>−</Text>
-    </TouchableOpacity>
-    <View style={styles.val}>
-      <Text style={styles.valTxt}>{value}</Text>
-    </View>
-    <TouchableOpacity onPress={plus} style={styles.stepBtn}>
-      <Text style={styles.stepTxt}>+</Text>
-    </TouchableOpacity>
-  </View>
-);
-
-// Main Application Tree
 export default function App() {
-  // Application State Hooks
-  const [tab, setTab] = useState('Home');
-  const [more, setMore] = useState(null);
-  const [units, setUnits] = useState('METRES');
-  const [hdc, setHdc] = useState('12');
-  const [course, setCourse] = useState('Yeppoon Golf Club');
-  const [tee, setTee] = useState('WHITE');
-  const [hole, setHole] = useState(1);
-  const [listening, setListening] = useState(false);
-  const [heard, setHeard] = useState('Tap the microphone and ask for the shot.');
-  const [advice, setAdvice] = useState('498 metres to centre. Driver. Aim just right of centre and commit.');
-  const [clubs, setClubs] = useState(starter);
-  const [score, setScore] = useState(0);
-  const [putts, setPutts] = useState(0);
-  const [gir, setGir] = useState(false);
-  const [fw, setFw] = useState(false);
-  const [pen, setPen] = useState(0);
-  const [map, setMap] = useState(false);
+  const [playerName] = useState("Golfer");
+  const [selectedTab, setSelectedTab] = useState("dashboard");
 
-  // Dynamic Unit & Yardage Conversions
-  const ul = units === 'METRES' ? 'm' : 'yd';
-  const dist = n => units === 'METRES' ? n : Math.round(n * 1.09361);
-  
-  // Target Constants for Caddie Logic Calculations
-  const CURRENT_TARGET_DISTANCE = 498; 
+  // Sample data array for virtual golf rounds
+  const rounds = [
+    { id: '1', course: 'Augusta National', score: '-2', date: '10/09/2026' },
+    { id: '2', course: 'St Andrews Links', score: 'E', date: '08/09/2026' },
+    { id: '3', course: 'Pebble Beach GL', score: '+3', date: '03/09/2026' },
+  ];
 
-  // View Navigation Controllers
-  const go = t => { setMore(null); setTab(t); };
-  const open = p => { setTab('More'); setMore(p); };
-  
-  // Microphone Control Thread Mock
-  const ask = () => {
-    if (listening) { setListening(false); return; }
-    setListening(true); 
-    setHeard('Listening…');
-    setTimeout(() => {
-      setListening(false);
-      setHeard(`Heard: ${CURRENT_TARGET_DISTANCE} metres to green, light rough, slight headwind.`);
-      setAdvice(`Driver. Play it as ${dist(CURRENT_TARGET_DISTANCE + 9)} ${ul}. Smooth swing, centre target, commit.`);
-    }, 1200);
-  };
-
-  // Screen View Layout Modules
-  const Header = () => (
-    <View style={styles.header}>
-      <View>
-        <Text style={styles.logo}>DRC</Text>
-        <Text style={styles.logoSub}>VIRTUAL GOLF ELITE</Text>
-        <Text style={styles.tag}>Your caddie. Your game.</Text>
-      </View>
-      <View style={styles.hdc}>
-        <Text style={styles.hdcL}>HDC</Text>
-        <TextInput 
-          value={hdc} 
-          onChangeText={v => setHdc(v.replace(/[^0-9.]/g, '') || '0')} 
-          keyboardType="decimal-pad" 
-          style={styles.hdcI} 
-        />
-      </View>
-    </View>
-  );
-
-  const Home = () => (
-    <View>
-      <Card>
-        <Text style={styles.eye}>READY TO PLAY</Text>
-        <Text style={styles.hero}>{course}</Text>
-        <Text style={styles.sub}>Handicap {hdc} • {units}</Text>
-      </Card>
-      <View style={styles.grid2}>
-        {['Scorecard', 'Practice', 'Warm-Up', 'Routines'].map(x => (
-          <TouchableOpacity key={x} style={styles.tile} onPress={() => x === 'Scorecard' ? go('Round') : open(x)}>
-            <Text style={styles.tileT}>{x}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <TouchableOpacity onPress={() => open('Advice Only')}>
-        <Card>
-          <Text style={styles.title}>QUICK ADVICE</Text>
-          <Text style={styles.body}>No warm-up? Use Advice Only. Target, lie, club, picture, commit.</Text>
-        </Card>
-      </TouchableOpacity>
-      <Btn label="START ROUND" onPress={() => go('Round')} />
-    </View>
-  );
-
-  const Round = () => (
-    <View>
-      <View style={styles.row}>
-        <View>
-          <Text style={styles.page}>HOLE {hole}</Text>
-          <Text style={styles.sub}>{course} • Par 5 • S.I. 5</Text>
-        </View>
-        <View style={styles.row}>
-          <Btn small secondary label="‹" onPress={() => setHole(Math.max(1, hole - 1))} />
-          <Text style={styles.hole}>{hole}</Text>
-          <Btn small secondary label="›" onPress={() => setHole(Math.min(18, hole + 1))} />
-        </View>
-      </View>
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#1A2B3C" />
       
-      <TouchableOpacity style={styles.map} onPress={() => setMap(!map)}>
-        <Text style={styles.mapT}>{map ? 'CLOSE HOLE VIEW' : 'TAP FOR HOLE VIEW'}</Text>
-        {map && (
-          <View style={styles.mapIn}>
-            <Text style={styles.mapLabel}>TEE  •  FAIRWAY  •  GREEN</Text>
+      {/* Top Banner Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>DRC VIRTUAL GOLF</Text>
+        <Text style={styles.headerSubtitle}>ELITE SIMULATION</Text>
+      </View>
+
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        {/* Navigation Tabs */}
+        <View style={styles.tabContainer}>
+          <TouchableOpacity 
+            style={[styles.tabButton, selectedTab === 'dashboard' && styles.activeTab]}
+            onPress={() => setSelectedTab('dashboard')}
+          >
+            <Text style={[styles.tabText, selectedTab === 'dashboard' && styles.activeTabText]}>DASHBOARD</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={[styles.tabButton, selectedTab === 'rounds' && styles.activeTab]}
+            onPress={() => setSelectedTab('rounds')}
+          >
+            <Text style={[styles.tabText, selectedTab === 'rounds' && styles.activeTabText]}>MY ROUNDS</Text>
+          </TouchableOpacity>
+        </View>
+
+        {selectedTab === 'dashboard' ? (
+          <View>
+            {/* Welcome Message Hero */}
+            <View style={styles.welcomeHero}>
+              <Text style={styles.welcomeText}>WELCOME BACK,</Text>
+              <Text style={styles.page}>{playerName.toUpperCase()}</Text>
+            </View>
+
+            {/* Metrics Dashboard Row */}
+            <View style={styles.statsRow}>
+              {/* Correctly terminated, standalone custom Cards */}
+              <Card style={styles.statCard}>
+                <Text style={styles.statLabel}>HANDICAP</Text>
+                <Text style={styles.statValue}>4.2</Text>
+              </Card>
+
+              <Card style={styles.statCard}>
+                <Text style={styles.statLabel}>AVG SCORE</Text>
+                <Text style={styles.statValue}>74.5</Text>
+              </Card>
+            </View>
+
+            <Card style={styles.mainActionCard}>
+              <Text style={styles.actionTitle}>Ready for your next round?</Text>
+              <Text style={styles.actionBody}>Connect your golf simulator setup or launch a solo target practice range run.</Text>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>START SIMULATOR SESSION</Text>
+              </TouchableOpacity>
+            </Card>
+          </View>
+        ) : (
+          <View>
+            {/* Rounds Tab List View */}
+            <Text style={styles.sectionHeader}>Recent Simulation Matches</Text>
+            {rounds.map((round) => (
+              <Card key={round.id} style={styles.roundItem}>
+                <View>
+                  <Text style={styles.roundCourse}>{round.course}</Text>
+                  <Text style={styles.roundDate}>{round.date}</Text>
+                </View>
+                <View style={styles.scoreBadge}>
+                  <Text style={styles.scoreText}>{round.score}</Text>
+                </View>
+              </Card>
+            ))}
           </View>
         )}
-      </TouchableOpacity>
-      
-      <View style={styles.grid3}>
-        {[
-          ['FRONT', 480], 
-          ['CENTRE', 498], 
-          ['BACK', 512]
-        ].map(([x, n]) => (
-          <Card key={x} style={styles.distanceCard}>
-            <Text style={styles.eye}>{x}</Text>
-            <Text style={styles.distance}>{dist(n)}</Text>
-            <Text style={styles.unit}>{ul}</Text>
-          </Card>
-        ))}
-      </View>
-      
-      <Card>
-        <View style={styles.row}>
-          <Text style={styles.title}>ASK PETE</Text>
-          <Text style={styles.ready}>{listening ? 'LISTENING' : 'READY'}</Text>
-        </View>
-        <Text style={styles.heard}>{heard}</Text>
-        <Text style={styles.advice}>{advice}</Text>
-        <Btn label={listening ? 'STOP MIC' : '🎙  ASK CADDIE'} onPress={ask} />
-      </Card>
-      
-      <Card>
-        <Text style={styles.title}>HOLE SCORE</Text>
-        <View style={styles.scoreRow}>
-          <View>
-            <Text style={styles.eye}>SCORE</Text>
-            <Step value={score} minus={() => setScore(Math.max(0, score - 1))} plus={() => setScore(score + 1)} />
-          </View>
-          <View>
-            <Text style={styles.eye}>PUTTS</Text>
-            <Step value={putts} minus={() => setPutts(Math.max(0, putts - 1))} plus={() => setPutts(putts + 1)} />
-          </View>
-        </View>
-        <View style={styles.toggles}>
-          <Btn small secondary label={`GIR ${gir ? '✓' : '—'}`} onPress={() => setGir(!gir)} />
-          <Btn small secondary label={`FW ${fw ? '✓' : '—'}`} onPress={() => setFw(!fw)} />
-          <Btn small secondary label={`PEN ${pen}`} onPress={() => setPen(pen + 1)} />
-        </View>
-      </Card>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
+}
 
-  const CaddieView = () => (
-    <View style={styles.center}>
-      <Text style={styles.page}>CADDIE</Text>
-      <Text style={styles.sub}>Tap only when you want advice.</Text>
-      <Card style={styles.centerCard}>
-        <TouchableOpacity onPress={ask} style={styles.mic}>
-          <Text style={styles.micT}>🎙</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>ASK PETE</Text>
-        <Text style={styles.heard}>{heard}</Text>
-        <Text style={styles.advice}>{advice}</Text>
-      </Card>
-    </View>
-  );
-
-  const Bag = () => (
-    <View>
-      <Text style={styles.page}>MY BAG</Text>
-      <Text style={styles.sub}>14 clubs • real carry distances</Text>
-      {clubs.map(c => (
-        <View key={c.id} style={styles.club}>
-          <Text style={styles.clubT}>{c.name}</Text>
-          <Step 
-            value={`${dist(c.distance)} ${ul}`} 
-            minus={() => setClubs(prev => prev.map(x => x.id === c.id && x.name !== 'Putter' ? { ...x, distance: Math.max(0, x.distance - 1) } : x))} 
-            plus={() => setClubs(prev => prev.map(x => x.id === c.id && x.name !== 'Putter' ? { ...x, distance: x.distance + 1 } : x))} 
-          />
-        </View>
-      ))}
-    </View>
-  );
-
-  const CourseView = () => (
-    <View>
-      <Text style={styles.page}>COURSE</Text>
-      <Card>
-        <Text style={styles.title}>COURSE SETUP</Text>
-        <TextInput style={styles.input} value={course} onChangeText={setCourse} />
-        <View style={styles.wrap}>
-          {['BLACK', 'BLUE', 'WHITE', 'RED', 'YELLOW'].map(x => (
-            <TouchableOpacity key={x} onPress={() => setTee(x)} style={[styles.tee, tee === x && styles.teeOn]}>
-              <Text style={[styles.teeT, tee === x && styles.teeTOn]}>{x}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </Card>
-      <Card>
-        <Text style={styles.title}>COURSE INFO</Text>
-        <Text style={styles.body}>{course}{'\n'}Phone • Email • Membership • Cart hire • Club hire • Pro shop</Text>
-      </Card>
-    </View>
-  );
-
-  const Detail = ({ name }) => (
-    <View>
-      <TouchableOpacity onPress={() => setMore(null)}>
-        <Text style={styles.back}>‹ BACK</Text>
-      </TouchableOpacity>
-      <Text style={styles.page}>{name.toUpperCase()}</Text>
-      <Card>
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0F172A', // Sleek dark aesthetic matching the application icon
+  },
+  header: {
+    backgroundColor: '#1E293B',
+    padding: 20,
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: '#0284C7', // Accent blue line matching neon app design
+  },
+  headerTitle: {
+    color: '#F8FAFC',
+    fontSize: 22,
+    fontWeight: '900',
+    letterSpacing: 2,
+  },
+  headerSubtitle: {
+    color: '#0284C7',
+    fontSize: 12,
+    fontWeight: '700',
+    letterSpacing: 4,
+    marginTop: 2,
+  },
+  scrollContent: {
+    padding: 16,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#1E293B',
+    borderRadius: 8,
+    padding: 4,
+    marginBottom: 20,
+  },
+  tabButton: {
+    flex: 1,
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderRadius: 6,
+  },
+  activeTab: {
+    backgroundColor: '#0284C7',
+  },
+  tabText: {
+    color: '#94A3B8',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  activeTabText: {
+    color: '#FFFFFF',
+  },
+  welcomeHero: {
+    marginBottom: 20,
+  },
+  welcomeText: {
+    color: '#94A3B8',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  page: {
+    color: '#FFFFFF',
+    fontSize: 28,
+    fontWeight: '800',
+    marginTop: 2,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  card: {
+    backgroundColor: '#1E293B',
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#334155',
+  },
+  statCard: {
+    width: '47%',
+    alignItems: 'center',
+  },
+  statLabel: {
+    color: '#94A3B8',
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 1,
+  },
+  statValue: {
+    color: '#0284C7',
+    fontSize: 24,
+    fontWeight: '800',
+    marginTop: 6,
+  },
+  mainActionCard: {
+    marginTop: 10,
+    alignItems: 'center',
+    paddingVertical: 24,
+  },
+  actionTitle: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 8,
+  },
+  actionBody: {
+    color: '#94A3B8',
+    textAlign: 'center',
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  button: {
+    backgroundColor: '#0284C7',
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    width: '100%',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: '800',
+    fontSize: 14,
+    letterSpacing: 1,
+  },
+  sectionHeader: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 14,
+  },
+  roundItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  roundCourse: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  roundDate: {
+    color: '#64748B',
+    fontSize: 12,
+    marginTop: 4,
+  },
+  scoreBadge: {
+    backgroundColor: '#0F172A',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#0284C7',
+  },
+  scoreText: {
+    color: '#0284C7',
+    fontWeight: '700',
+    fontSize: 14,
+  },
+});
