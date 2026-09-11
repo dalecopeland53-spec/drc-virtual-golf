@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  SafeAreaView, 
-  ScrollView, 
-  TouchableOpacity, 
-  StatusBar 
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  StatusBar,
+  Image
 } from 'react-native';
 
-// A clean custom Card component that securely avoids unterminated JSX syntax errors
 const Card = ({ children, style }) => {
   return (
     <View style={[styles.card, style]}>
@@ -22,7 +22,6 @@ export default function App() {
   const [playerName] = useState("Golfer");
   const [selectedTab, setSelectedTab] = useState("dashboard");
 
-  // Sample data array for virtual golf rounds
   const rounds = [
     { id: '1', course: 'Augusta National', score: '-2', date: '10/09/2026' },
     { id: '2', course: 'St Andrews Links', score: 'E', date: '08/09/2026' },
@@ -32,23 +31,26 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1A2B3C" />
-      
-      {/* Top Banner Header */}
+
       <View style={styles.header}>
+        <Image
+          source={require('./Screenshot_20260911_210040_Google.jpg')}
+          style={styles.referenceImage}
+          resizeMode="cover"
+        />
         <Text style={styles.headerTitle}>DRC VIRTUAL GOLF</Text>
         <Text style={styles.headerSubtitle}>ELITE SIMULATION</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Navigation Tabs */}
         <View style={styles.tabContainer}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[styles.tabButton, selectedTab === 'dashboard' && styles.activeTab]}
             onPress={() => setSelectedTab('dashboard')}
           >
             <Text style={[styles.tabText, selectedTab === 'dashboard' && styles.activeTabText]}>DASHBOARD</Text>
           </TouchableOpacity>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[styles.tabButton, selectedTab === 'rounds' && styles.activeTab]}
             onPress={() => setSelectedTab('rounds')}
           >
@@ -58,15 +60,12 @@ export default function App() {
 
         {selectedTab === 'dashboard' ? (
           <View>
-            {/* Welcome Message Hero */}
             <View style={styles.welcomeHero}>
               <Text style={styles.welcomeText}>WELCOME BACK,</Text>
               <Text style={styles.page}>{playerName.toUpperCase()}</Text>
             </View>
 
-            {/* Metrics Dashboard Row */}
             <View style={styles.statsRow}>
-              {/* Correctly terminated, standalone custom Cards */}
               <Card style={styles.statCard}>
                 <Text style={styles.statLabel}>HANDICAP</Text>
                 <Text style={styles.statValue}>4.2</Text>
@@ -88,7 +87,6 @@ export default function App() {
           </View>
         ) : (
           <View>
-            {/* Rounds Tab List View */}
             <Text style={styles.sectionHeader}>Recent Simulation Matches</Text>
             {rounds.map((round) => (
               <Card key={round.id} style={styles.roundItem}>
@@ -111,14 +109,22 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F172A', // Sleek dark aesthetic matching the application icon
+    backgroundColor: '#0F172A',
   },
   header: {
     backgroundColor: '#1E293B',
-    padding: 20,
+    paddingHorizontal: 16,
+    paddingTop: 10,
+    paddingBottom: 14,
     alignItems: 'center',
     borderBottomWidth: 2,
-    borderBottomColor: '#0284C7', // Accent blue line matching neon app design
+    borderBottomColor: '#0284C7',
+  },
+  referenceImage: {
+    width: '100%',
+    height: 145,
+    borderRadius: 10,
+    marginBottom: 12,
   },
   headerTitle: {
     color: '#F8FAFC',
