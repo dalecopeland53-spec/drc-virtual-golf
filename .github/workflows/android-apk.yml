@@ -30,19 +30,15 @@ jobs:
     - name: Generate Native Android Directory
       run: npx expo prebuild --platform android
 
+    # Changed from assembleDebug to assembleRelease
     - name: Build Android APK via Gradle
       run: |
         cd android
-        ./gradlew assembleDebug
+        ./gradlew assembleRelease
 
+    # Updated path to grab the release APK instead of the debug one
     - name: Upload Finished APK Asset
       uses: actions/upload-artifact@v4
       with:
         name: drc-golf-elite-apk
-        path: android/app/build/outputs/apk/debug/app-debug.apk
-
-    - name: Upload Finished APK Asset
-      uses: actions/upload-artifact@v4
-      with:
-        name: drc-shot-tracker-apk
-        path: android/app/build/outputs/apk/debug/app-debug.apk
+        path: android/app/build/outputs/apk/release/app-release-unsigned.apk
