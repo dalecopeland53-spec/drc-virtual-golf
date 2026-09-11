@@ -4,27 +4,26 @@
     "slug": "drc-virtual-golf",
     "version": "1.0.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
     "splash": {
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#D8D0C2"
+      "backgroundColor": "#0F172A"
     },
-    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.dalecopeland53.drcvirtualgolf"
+      "bundleIdentifier": "com.drc.virtualgolfelite"
     },
     "android": {
-      "package": "com.dalecopeland53.drcvirtualgolf",
-      "versionCode": 1,
-      "permissions": [
-        "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION",
-        "RECORD_AUDIO"
-      ],
       "adaptiveIcon": {
-        "backgroundColor": "#D8D0C2"
-      }
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#1E293B"
+      },
+      "package": "com.drc.virtualgolfelite"
+    },
+    "web": {
+      "favicon": "./assets/icon.png"
     }
   }
 }
