@@ -4,10 +4,10 @@
     "slug": "drc-virtual-golf",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./Screenshot_20260911_210040_Google.jpg",
+    "icon": "./drc-virtual-golf-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./Screenshot_20260911_210040_Google.jpg",
+      "image": "./drc-virtual-golf-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#E9E4D9"
     },
@@ -32,13 +32,13 @@
         "ACCESS_FINE_LOCATION"
       ],
       "adaptiveIcon": {
-        "foregroundImage": "./Screenshot_20260911_210040_Google.jpg",
+        "foregroundImage": "./drc-virtual-golf-icon.png",
         "backgroundColor": "#E9E4D9"
       },
       "package": "com.drc.virtualgolfelite"
     },
     "web": {
-      "favicon": "./Screenshot_20260911_210040_Google.jpg"
+      "favicon": "./drc-virtual-golf-icon.png"
     }
   }
 }
