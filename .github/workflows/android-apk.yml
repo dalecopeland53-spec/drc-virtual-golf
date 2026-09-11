@@ -74,3 +74,5 @@ jobs:
           name: drc-virtual-golf-elite-apk
           path: app-preview.apk
           retention-days: 7
+
+# rebuild trigger
