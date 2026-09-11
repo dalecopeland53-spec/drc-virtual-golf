@@ -11,17 +11,25 @@
       "resizeMode": "contain",
       "backgroundColor": "#E9E4D9"
     },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "DRC Virtual Golf uses your location to calculate live on-course distances and show your position on the golf hole."
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.drc.virtualgolfelite",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "DRC Virtual Golf uses your location to calculate live golf distances on the course."
+        "NSLocationWhenInUseUsageDescription": "DRC Virtual Golf uses your location to calculate live on-course distances and show your position on the golf hole."
       }
     },
     "android": {
       "permissions": [
-        "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION"
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
       ],
       "adaptiveIcon": {
         "foregroundImage": "./Screenshot_20260911_210040_Google.jpg",
