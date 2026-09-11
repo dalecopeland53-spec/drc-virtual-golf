@@ -39,25 +39,25 @@ const tabs = ['Home', 'Round', 'Caddie', 'Bag', 'Course', 'More'];
 
 // Global Reusable Atomic Components
 const Card = ({ children, style }) => (
-  <View style={[s.card, style]}>{children}</View>
+  <View style={[styles.card, style]}>{children}</View>
 );
 
 const Btn = ({ label, onPress, small = false, secondary = false }) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={0.75} style={[s.btn, small && s.btnSmall, secondary && s.btn2]}>
-    <Text style={[s.btnText, secondary && s.btnText2]}>{label}</Text>
+  <TouchableOpacity onPress={onPress} activeOpacity={0.75} style={[styles.btn, small && styles.btnSmall, secondary && styles.btn2]}>
+    <Text style={[styles.btnText, secondary && styles.btnText2]}>{label}</Text>
   </TouchableOpacity>
 );
 
 const Step = ({ value, minus, plus }) => (
-  <View style={s.step}>
-    <TouchableOpacity onPress={minus} style={s.stepBtn}>
-      <Text style={s.stepTxt}>−</Text>
+  <View style={styles.step}>
+    <TouchableOpacity onPress={minus} style={styles.stepBtn}>
+      <Text style={styles.stepTxt}>−</Text>
     </TouchableOpacity>
-    <View style={s.val}>
-      <Text style={s.valTxt}>{value}</Text>
+    <View style={styles.val}>
+      <Text style={styles.valTxt}>{value}</Text>
     </View>
-    <TouchableOpacity onPress={plus} style={s.stepBtn}>
-      <Text style={s.stepTxt}>+</Text>
+    <TouchableOpacity onPress={plus} style={styles.stepBtn}>
+      <Text style={styles.stepTxt}>+</Text>
     </TouchableOpacity>
   </View>
 );
@@ -69,7 +69,6 @@ export default function App() {
   const [more, setMore] = useState(null);
   const [units, setUnits] = useState('METRES');
   const [hdc, setHdc] = useState('12');
-  const [caddie, setCaddie] = useState('Pete');
   const [course, setCourse] = useState('Yeppoon Golf Club');
   const [tee, setTee] = useState('WHITE');
   const [hole, setHole] = useState(1);
@@ -109,19 +108,19 @@ export default function App() {
 
   // Screen View Layout Modules
   const Header = () => (
-    <View style={s.header}>
+    <View style={styles.header}>
       <View>
-        <Text style={s.logo}>DRC</Text>
-        <Text style={s.logoSub}>VIRTUAL GOLF ELITE</Text>
-        <Text style={s.tag}>Your caddie. Your game.</Text>
+        <Text style={styles.logo}>DRC</Text>
+        <Text style={styles.logoSub}>VIRTUAL GOLF ELITE</Text>
+        <Text style={styles.tag}>Your caddie. Your game.</Text>
       </View>
-      <View style={s.hdc}>
-        <Text style={s.hdcL}>HDC</Text>
+      <View style={styles.hdc}>
+        <Text style={styles.hdcL}>HDC</Text>
         <TextInput 
           value={hdc} 
-          onChangeText={v => setHdc(v.replace(/[^0-9.]/g, ''))} 
+          onChangeText={v => setHdc(v.replace(/[^0-9.]/g, '') || '0')} 
           keyboardType="decimal-pad" 
-          style={s.hdcI} 
+          style={styles.hdcI} 
         />
       </View>
     </View>
@@ -130,21 +129,21 @@ export default function App() {
   const Home = () => (
     <View>
       <Card>
-        <Text style={s.eye}>READY TO PLAY</Text>
-        <Text style={s.hero}>{course}</Text>
-        <Text style={s.sub}>Handicap {hdc} • {units}</Text>
+        <Text style={styles.eye}>READY TO PLAY</Text>
+        <Text style={styles.hero}>{course}</Text>
+        <Text style={styles.sub}>Handicap {hdc} • {units}</Text>
       </Card>
-      <View style={s.grid2}>
+      <View style={styles.grid2}>
         {['Scorecard', 'Practice', 'Warm-Up', 'Routines'].map(x => (
-          <TouchableOpacity key={x} style={s.tile} onPress={() => x === 'Scorecard' ? go('Round') : open(x)}>
-            <Text style={s.tileT}>{x}</Text>
+          <TouchableOpacity key={x} style={styles.tile} onPress={() => x === 'Scorecard' ? go('Round') : open(x)}>
+            <Text style={styles.tileT}>{x}</Text>
           </TouchableOpacity>
         ))}
       </View>
       <TouchableOpacity onPress={() => open('Advice Only')}>
         <Card>
-          <Text style={s.title}>QUICK ADVICE</Text>
-          <Text style={s.body}>No warm-up? Use Advice Only. Target, lie, club, picture, commit.</Text>
+          <Text style={styles.title}>QUICK ADVICE</Text>
+          <Text style={styles.body}>No warm-up? Use Advice Only. Target, lie, club, picture, commit.</Text>
         </Card>
       </TouchableOpacity>
       <Btn label="START ROUND" onPress={() => go('Round')} />
@@ -153,64 +152,64 @@ export default function App() {
 
   const Round = () => (
     <View>
-      <View style={s.row}>
+      <View style={styles.row}>
         <View>
-          <Text style={s.page}>HOLE {hole}</Text>
-          <Text style={s.sub}>{course} • Par 5 • S.I. 5</Text>
+          <Text style={styles.page}>HOLE {hole}</Text>
+          <Text style={styles.sub}>{course} • Par 5 • S.I. 5</Text>
         </View>
-        <View style={s.row}>
+        <View style={styles.row}>
           <Btn small secondary label="‹" onPress={() => setHole(Math.max(1, hole - 1))} />
-          <Text style={s.hole}>{hole}</Text>
+          <Text style={styles.hole}>{hole}</Text>
           <Btn small secondary label="›" onPress={() => setHole(Math.min(18, hole + 1))} />
         </View>
       </View>
       
-      <TouchableOpacity style={s.map} onPress={() => setMap(!map)}>
-        <Text style={s.mapT}>{map ? 'CLOSE HOLE VIEW' : 'TAP FOR HOLE VIEW'}</Text>
+      <TouchableOpacity style={styles.map} onPress={() => setMap(!map)}>
+        <Text style={styles.mapT}>{map ? 'CLOSE HOLE VIEW' : 'TAP FOR HOLE VIEW'}</Text>
         {map && (
-          <View style={s.mapIn}>
-            <Text style={s.mapLabel}>TEE  •  FAIRWAY  •  GREEN</Text>
+          <View style={styles.mapIn}>
+            <Text style={styles.mapLabel}>TEE  •  FAIRWAY  •  GREEN</Text>
           </View>
         )}
       </TouchableOpacity>
       
-      <View style={s.grid3}>
+      <View style={styles.grid3}>
         {[
           ['FRONT', 480], 
           ['CENTRE', 498], 
           ['BACK', 512]
         ].map(([x, n]) => (
-          <Card key={x} style={s.distanceCard}>
-            <Text style={s.eye}>{x}</Text>
-            <Text style={s.distance}>{dist(n)}</Text>
-            <Text style={s.unit}>{ul}</Text>
+          <Card key={x} style={styles.distanceCard}>
+            <Text style={styles.eye}>{x}</Text>
+            <Text style={styles.distance}>{dist(n)}</Text>
+            <Text style={styles.unit}>{ul}</Text>
           </Card>
         ))}
       </View>
       
       <Card>
-        <View style={s.row}>
-          <Text style={s.title}>ASK {caddie.toUpperCase()}</Text>
-          <Text style={s.ready}>{listening ? 'LISTENING' : 'READY'}</Text>
+        <View style={styles.row}>
+          <Text style={styles.title}>ASK PETE</Text>
+          <Text style={styles.ready}>{listening ? 'LISTENING' : 'READY'}</Text>
         </View>
-        <Text style={s.heard}>{heard}</Text>
-        <Text style={s.advice}>{advice}</Text>
+        <Text style={styles.heard}>{heard}</Text>
+        <Text style={styles.advice}>{advice}</Text>
         <Btn label={listening ? 'STOP MIC' : '🎙  ASK CADDIE'} onPress={ask} />
       </Card>
       
       <Card>
-        <Text style={s.title}>HOLE SCORE</Text>
-        <View style={s.scoreRow}>
+        <Text style={styles.title}>HOLE SCORE</Text>
+        <View style={styles.scoreRow}>
           <View>
-            <Text style={s.eye}>SCORE</Text>
+            <Text style={styles.eye}>SCORE</Text>
             <Step value={score} minus={() => setScore(Math.max(0, score - 1))} plus={() => setScore(score + 1)} />
           </View>
           <View>
-            <Text style={s.eye}>PUTTS</Text>
+            <Text style={styles.eye}>PUTTS</Text>
             <Step value={putts} minus={() => setPutts(Math.max(0, putts - 1))} plus={() => setPutts(putts + 1)} />
           </View>
         </View>
-        <View style={s.toggles}>
+        <View style={styles.toggles}>
           <Btn small secondary label={`GIR ${gir ? '✓' : '—'}`} onPress={() => setGir(!gir)} />
           <Btn small secondary label={`FW ${fw ? '✓' : '—'}`} onPress={() => setFw(!fw)} />
           <Btn small secondary label={`PEN ${pen}`} onPress={() => setPen(pen + 1)} />
@@ -219,28 +218,28 @@ export default function App() {
     </View>
   );
 
-  const Caddie = () => (
-    <View style={s.center}>
-      <Text style={s.page}>CADDIE</Text>
-      <Text style={s.sub}>Tap only when you want advice.</Text>
-      <Card style={s.center}>
-        <TouchableOpacity onPress={ask} style={s.mic}>
-          <Text style={s.micT}>🎙</Text>
+  const CaddieView = () => (
+    <View style={styles.center}>
+      <Text style={styles.page}>CADDIE</Text>
+      <Text style={styles.sub}>Tap only when you want advice.</Text>
+      <Card style={styles.centerCard}>
+        <TouchableOpacity onPress={ask} style={styles.mic}>
+          <Text style={styles.micT}>🎙</Text>
         </TouchableOpacity>
-        <Text style={s.title}>ASK {caddie.toUpperCase()}</Text>
-        <Text style={s.heard}>{heard}</Text>
-        <Text style={s.advice}>{advice}</Text>
+        <Text style={styles.title}>ASK PETE</Text>
+        <Text style={styles.heard}>{heard}</Text>
+        <Text style={styles.advice}>{advice}</Text>
       </Card>
     </View>
   );
 
   const Bag = () => (
     <View>
-      <Text style={s.page}>MY BAG</Text>
-      <Text style={s.sub}>14 clubs • real carry distances</Text>
+      <Text style={styles.page}>MY BAG</Text>
+      <Text style={styles.sub}>14 clubs • real carry distances</Text>
       {clubs.map(c => (
-        <View key={c.id} style={s.club}>
-          <Text style={s.clubT}>{c.name}</Text>
+        <View key={c.id} style={styles.club}>
+          <Text style={styles.clubT}>{c.name}</Text>
           <Step 
             value={`${dist(c.distance)} ${ul}`} 
             minus={() => setClubs(prev => prev.map(x => x.id === c.id && x.name !== 'Putter' ? { ...x, distance: Math.max(0, x.distance - 1) } : x))} 
@@ -251,23 +250,23 @@ export default function App() {
     </View>
   );
 
-  const Course = () => (
+  const CourseView = () => (
     <View>
-      <Text style={s.page}>COURSE</Text>
+      <Text style={styles.page}>COURSE</Text>
       <Card>
-        <Text style={s.title}>COURSE SETUP</Text>
-        <TextInput style={s.input} value={course} onChangeText={setCourse} />
-        <View style={s.wrap}>
+        <Text style={styles.title}>COURSE SETUP</Text>
+        <TextInput style={styles.input} value={course} onChangeText={setCourse} />
+        <View style={styles.wrap}>
           {['BLACK', 'BLUE', 'WHITE', 'RED', 'YELLOW'].map(x => (
-            <TouchableOpacity key={x} onPress={() => setTee(x)} style={[s.tee, tee === x && s.teeOn]}>
-              <Text style={[s.teeT, tee === x && s.teeTOn]}>{x}</Text>
+            <TouchableOpacity key={x} onPress={() => setTee(x)} style={[styles.tee, tee === x && styles.teeOn]}>
+              <Text style={[styles.teeT, tee === x && styles.teeTOn]}>{x}</Text>
             </TouchableOpacity>
           ))}
         </View>
       </Card>
       <Card>
-        <Text style={s.title}>COURSE INFO</Text>
-        <Text style={s.body}>{course}{'\n'}Phone • Email • Membership • Cart hire • Club hire • Pro shop</Text>
+        <Text style={styles.title}>COURSE INFO</Text>
+        <Text style={styles.body}>{course}{'\n'}Phone • Email • Membership • Cart hire • Club hire • Pro shop</Text>
       </Card>
     </View>
   );
@@ -275,17 +274,7 @@ export default function App() {
   const Detail = ({ name }) => (
     <View>
       <TouchableOpacity onPress={() => setMore(null)}>
-        <Text style={s.back}>‹ BACK</Text>
+        <Text style={styles.back}>‹ BACK</Text>
       </TouchableOpacity>
-      <Text style={s.page}>{name.toUpperCase()}</Text>
+      <Text style={styles.page}>{name.toUpperCase()}</Text>
       <Card>
-        <Text style={s.body}>Virtual Golf subsystem module for {name}. Reality tracking running active diagnostic states.</Text>
-      </Card>
-    </View>
-  );
-
-  return (
-    <SafeAreaView style={s.safe}>
-      <StatusBar style="dark" />
-      <Header />
-      <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
