@@ -21,7 +21,7 @@ jobs:
           npm install -g expo-cli
 
       - name: Export Native Project Layout
-        run: npx expo export:embed --platform android --dev false --bundle-output index.android.bundle --assets-dest res
+        run: npx expo export:embed --platform android --dev false --entry-file App.js --bundle-output index.android.bundle --assets-dest res
 
       - name: Set Up Java JDK Environment
         uses: actions/setup-java@v4
