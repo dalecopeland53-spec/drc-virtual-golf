@@ -5,33 +5,26 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./drc-virtual-golf-icon.png",
-    "userInterfaceStyle": "light",
-    "plugins": ["expo-speech-recognition"],
+    "userInterfaceStyle": "dark",
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "#C7C2BB"
+      "backgroundColor": "#080C14"
     },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true,
-      "icon": "./drc-virtual-golf-icon.png",
-      "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "DRC Virtual Golf uses your location for on-course GPS.",
-        "NSMicrophoneUsageDescription": "DRC Virtual Golf uses the microphone when you tap Ask Pete.",
-        "NSSpeechRecognitionUsageDescription": "DRC Virtual Golf uses speech recognition when you tap Ask Pete."
-      }
+      "supportsTablet": true
     },
     "android": {
-      "permissions": [
-        "android.permission.ACCESS_FINE_LOCATION",
-        "android.permission.ACCESS_COARSE_LOCATION",
-        "android.permission.RECORD_AUDIO"
-      ],
+      "package": "com.dalecopeland53.drcvirtualgolf",
       "adaptiveIcon": {
-        "foregroundImage": "./drc-virtual-golf-icon.png",
-        "backgroundColor": "#C7C2BB"
-      },
-      "package": "com.dalecopeland.drcvirtualgolf"
+        "backgroundColor": "#080C14"
+      }
     },
-    "owner": "raffa68s-team"
+    "web": {
+      "favicon": "./drc-virtual-golf-icon.png"
+    }
   }
+}
 }
