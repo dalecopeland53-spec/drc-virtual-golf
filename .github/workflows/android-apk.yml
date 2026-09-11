@@ -27,8 +27,39 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Regenerate valid rounded DRC icon
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont
+          size = 1024
+          bg = (216, 208, 194, 255)
+          blue = (18, 58, 99, 255)
+          panel = (232, 225, 215, 255)
+          img = Image.new('RGBA', (size, size), (0,0,0,0))
+          d = ImageDraw.Draw(img)
+          d.rounded_rectangle((42,42,size-42,size-42), radius=190, fill=bg, outline=blue, width=34)
+          d.ellipse((280,210,744,674), fill=panel, outline=blue, width=24)
+          for x,y,r in [(405,330,12),(505,292,11),(603,338,12),(450,420,10),(565,430,10),(505,520,11)]:
+              d.ellipse((x-r,y-r,x+r,y+r), fill=blue)
+          try:
+              font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 170)
+              small = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 54)
+          except:
+              font = ImageFont.load_default(); small = font
+          def centered(text, y, f):
+              box = d.textbbox((0,0), text, font=f)
+              w = box[2]-box[0]
+              d.text(((size-w)/2, y), text, font=f, fill=blue)
+          centered('DRC', 665, font)
+          centered('VIRTUAL GOLF', 845, small)
+          img.convert('RGB').save('drc-virtual-golf-icon.png', format='PNG', optimize=True)
+          PY
+
       - name: Generate native Android project
-        run: npx expo prebuild --platform android --non-interactive
+        env:
+          CI: '1'
+        run: npx expo prebuild --platform android
 
       - name: Build Android APK locally
         working-directory: android
