@@ -1,193 +1,131 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView, Dimensions, Alert } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
-const { width } = Dimensions.get('window');
+const C = {
+  bg: '#D8D0C2',
+  bg2: '#CFC5B5',
+  panel: '#E8E1D7',
+  panel2: '#D4CAB9',
+  blue: '#123A63',
+  blue2: '#0B2A49',
+  line: '#A99F90',
+  white: '#F8F5EF',
+  muted: '#5F625F',
+  good: '#2F684F',
+};
+
+const starterClubs = [
+  ['Driver',230],['3W',210],['5W',195],['4i',180],['5i',170],['6i',160],['7i',150],
+  ['8i',140],['9i',130],['PW',115],['GW',100],['SW',85],['LW',70],['Putter',0],
+].map(([name,distance],i)=>({id:String(i+1),name,distance}));
+
+const tools = ['Scorecard','Practice','Warm-Up','Routines'];
+const tabs = ['Home','Round','Caddie','Bag','Course','More'];
+
+function Card({children, style}) {
+  return <View style={[styles.card, style]}>{children}</View>;
+}
+function Button({label,onPress,secondary=false,small=false}) {
+  return <TouchableOpacity onPress={onPress} activeOpacity={0.82} style={[styles.button,secondary&&styles.buttonSecondary,small&&styles.buttonSmall]}><Text style={[styles.buttonText,secondary&&styles.buttonTextSecondary,small&&styles.buttonTextSmall]}>{label}</Text></TouchableOpacity>;
+}
+function Stepper({value,onMinus,onPlus}) {
+  return <View style={styles.stepper}><TouchableOpacity onPress={onMinus} style={styles.stepBtn}><Text style={styles.stepTxt}>−</Text></TouchableOpacity><View style={styles.valueBox}><Text style={styles.valueTxt}>{value}</Text></View><TouchableOpacity onPress={onPlus} style={styles.stepBtn}><Text style={styles.stepTxt}>+</Text></TouchableOpacity></View>;
+}
 
 export default function App() {
-  // Global App States
-  const [activeTab, setActiveTab] = useState('dashboard');
-  const [isMetres, setIsMetres] = useState(true);
-  
-  // Interactive Feature Hooks
-  const [isListening, setIsListening] = useState(false);
-  const [secretTapCount, setSecretTapCount] = useState(0);
-  const [isMapExpanded, setIsMapExpanded] = useState(false);
-  const [peteResponse, setPeteResponse] = useState(
-    '"498 metres to the centre. With a slight headwind, I\'d suggest driver. Just right of centre."'
-  );
+  const [tab,setTab]=useState('Home');
+  const [units,setUnits]=useState('METRES');
+  const [handicap,setHandicap]=useState('12');
+  const [caddieName,setCaddieName]=useState('Pete');
+  const [course,setCourse]=useState('Yeppoon Golf Club');
+  const [tee,setTee]=useState('WHITE');
+  const [hole,setHole]=useState(1);
+  const [listening,setListening]=useState(false);
+  const [heard,setHeard]=useState('Tap the microphone and ask for the shot.');
+  const [advice,setAdvice]=useState('498 metres to centre. Driver. Aim just right of centre and commit.');
+  const [clubs,setClubs]=useState(starterClubs);
+  const [score,setScore]=useState(0);
+  const [putts,setPutts]=useState(0);
+  const [gir,setGir]=useState(false);
+  const [fw,setFw]=useState(false);
+  const [penalty,setPenalty]=useState(0);
+  const [mapOpen,setMapOpen]=useState(false);
 
-  // LIVE STAT COUNTERS (From your exact mockup parameters)
-  const [scoreCount, setScoreCount] = useState(0);
-  const [puttsCount, setPuttsCount] = useState(0);
-  const [girCount, setGirCount] = useState(0);
-  const [fairwayCount, setFairwayCount] = useState(0);
-  const [penaltyCount, setPenaltyCount] = useState(0);
+  const unitLabel=units==='METRES'?'m':'yd';
+  const displayDistance=n=>units==='METRES'?n:Math.round(n*1.09361);
+  const bestClub=useMemo(()=>clubs.reduce((a,b)=>Math.abs(b.distance-180)<Math.abs(a.distance-180)?b:a,clubs[0]),[clubs]);
 
-  // 14-Club Distance Matrix
-  const [clubs, setClubs] = useState([
-    { id: '1', name: 'Driver', distance: 230, type: 'Wood' },
-    { id: '2', name: '3-Wood', distance: 210, type: 'Wood' },
-    { id: '3', name: '5-Wood', distance: 195, type: 'Wood' },
-    { id: '4', name: '4-Iron', distance: 180, type: 'Iron' },
-    { id: '5', name: '5-Iron', distance: 170, type: 'Iron' },
-    { id: '6', name: '6-Iron', distance: 160, type: 'Iron' },
-    { id: '7', name: '7-Iron', distance: 150, type: 'Iron' },
-    { id: '8', name: '8-Iron', distance: 140, type: 'Iron' },
-    { id: '9', name: '9-Iron', distance: 130, type: 'Iron' },
-    { id: '10', name: 'PW', distance: 115, type: 'Wedge' },
-    { id: '11', name: 'GW', distance: 100, type: 'Wedge' },
-    { id: '12', name: 'SW', distance: 85, type: 'Wedge' },
-    { id: '13', name: 'LW', distance: 70, type: 'Wedge' },
-    { id: '14', name: 'Putter', distance: 0, type: 'Putter' },
-  ]);
-
-  const adjustClubDistance = (id, amount) => {
-    setClubs(prev => prev.map(c => c.id === id ? { ...c, distance: Math.max(0, c.distance + amount) } : c));
+  const askCaddie=()=>{
+    if(listening){setListening(false);return;}
+    setListening(true);
+    setHeard('Listening…');
+    setTimeout(()=>{
+      setListening(false);
+      setHeard('Heard: 180 metres, light rough, slight headwind.');
+      setAdvice(`${bestClub.name}. Play it as ${displayDistance(187)} ${unitLabel}. Smooth swing, centre target, commit.`);
+    },1200);
   };
 
-  // Voice Interaction Activation
-  const handleVoiceTrigger = () => {
-    if (!isListening) {
-      setIsListening(true);
-      setPeteResponse('"Pete is listening to your shot voice link stream..."');
-      setTimeout(() => {
-        setIsListening(false);
-        setPeteResponse('"Data updated via voice. Target adjusted: Driver off the tee box, favor the right portion of the fairway runway."');
-      }, 3000);
-    }
-  };
+  const adjustClub=(id,delta)=>setClubs(prev=>prev.map(c=>c.id===id&&c.name!=='Putter'?{...c,distance:Math.max(0,c.distance+delta)}:c));
 
-  // Secret Developer Override Tracker
-  const processSecretTap = () => {
-    const nextCount = secretTapCount + 1;
-    setSecretTapCount(nextCount);
-    if (nextCount >= 5) {
-      setSecretTapCount(0);
-      Alert.alert(
-        "DRC ELITE MODIFIER DETECTED",
-        "Secret Tour override unlocked. GPS calibration loops, raw atmospheric density feeds, and telemetry logs are now active.",
-        [{ text: "CONFIRM SYSTEM STATUS", style: "default" }]
-      );
-    }
-  };
+  const Header=()=> <View style={styles.header}>
+    <View><Text style={styles.logo}>DRC</Text><Text style={styles.logoSub}>VIRTUAL GOLF ELITE</Text><Text style={styles.tagline}>Your caddie. Your game.</Text></View>
+    <View style={styles.hdcBox}><Text style={styles.hdcLabel}>HDC</Text><TextInput value={handicap} onChangeText={setHandicap} keyboardType="numeric" style={styles.hdcInput}/></View>
+  </View>;
 
-  return (
-    <SafeAreaView style={styles.mainContainer}>
-      
-      {/* 1. BRAND GLOBAL NAVIGATION HEADER PANEL */}
-      <View style={styles.globalHeader}>
-        <TouchableOpacity activeOpacity={0.9} onPress={processSecretTap}>
-          <Text style={styles.brandLogoTextTitle}>DRC</Text>
-          <Text style={styles.brandLogoSubtitleText}>VIRTUAL GOLF ELITE</Text>
-        </TouchableOpacity>
-        
-        <View style={styles.telemetryCoordinateBox}>
-          <Text style={styles.monoCoordinateLine}>LAT: -23.1314° S</Text>
-          <Text style={styles.monoCoordinateLine}>LNG: 150.7423° E</Text>
-        </View>
+  const Home=()=> <View>
+    <Card style={styles.heroCard}><Text style={styles.eyebrow}>READY TO PLAY</Text><Text style={styles.heroTitle}>{course}</Text><Text style={styles.heroMeta}>Handicap {handicap}  •  {units}</Text></Card>
+    <View style={styles.grid2}>{tools.map(t=><TouchableOpacity key={t} style={styles.homeTile} onPress={()=>setTab(t==='Scorecard'?'Round':'More')}><Text style={styles.homeTileText}>{t}</Text><Text style={styles.homeTileSub}>{t==='Scorecard'?'Round scoring':t==='Practice'?'Structured sessions':t==='Warm-Up'?'Quick preparation':'Pre-shot routine'}</Text></TouchableOpacity>)}</View>
+    <Card><Text style={styles.sectionTitle}>QUICK ADVICE</Text><Text style={styles.body}>No warm-up? Use Advice Only. Keep the first swing simple: target, lie, club, picture, commit.</Text></Card>
+    <Button label="START ROUND" onPress={()=>setTab('Round')}/>
+  </View>;
 
-        <View style={styles.liveSystemStatusBadge}>
-          <View style={[styles.statusDot, isListening && styles.statusDotPulseActive]} />
-          <Text style={styles.statusBadgeTextValue}>{isListening ? "RECORDING" : "CADDIE LIVE"}</Text>
-        </View>
-      </View>
+  const Round=()=> <View>
+    <View style={styles.rowBetween}><View><Text style={styles.pageTitle}>HOLE {hole}</Text><Text style={styles.pageSub}>{course} • Par 5 • S.I. 5</Text></View><View style={styles.holeNav}><Button small secondary label="‹" onPress={()=>setHole(Math.max(1,hole-1))}/><Text style={styles.holeNum}>{hole}</Text><Button small secondary label="›" onPress={()=>setHole(Math.min(18,hole+1))}/></View></View>
+    <TouchableOpacity style={styles.mapThumb} onPress={()=>setMapOpen(v=>!v)}><Text style={styles.mapTitle}>{mapOpen?'CLOSE HOLE VIEW':'TAP FOR HOLE VIEW'}</Text>{mapOpen&&<View style={styles.mapInside}><View style={styles.fairway}/><View style={styles.green}/><View style={styles.bunker}/><Text style={styles.mapLabel}>TEE  •  FAIRWAY  •  GREEN</Text></View>}</TouchableOpacity>
+    <View style={styles.grid3}>{[['FRONT',480],['CENTRE',498],['BACK',512]].map(([l,n])=><Card key={l} style={styles.distanceCard}><Text style={styles.eyebrow}>{l}</Text><Text style={styles.distance}>{displayDistance(n)}</Text><Text style={styles.unit}>{unitLabel}</Text></Card>)}</View>
+    <Card><View style={styles.rowBetween}><Text style={styles.sectionTitle}>ASK {caddieName.toUpperCase()}</Text><Text style={styles.live}>{listening?'LISTENING':'READY'}</Text></View><Text style={styles.heard}>{heard}</Text><Text style={styles.advice}>{advice}</Text><Button label={listening?'STOP MIC':'🎙  ASK CADDIE'} onPress={askCaddie}/></Card>
+    <Card><Text style={styles.sectionTitle}>HOLE SCORE</Text><View style={styles.scoreRow}><View><Text style={styles.scoreLabel}>SCORE</Text><Stepper value={score} onMinus={()=>setScore(Math.max(0,score-1))} onPlus={()=>setScore(score+1)}/></View><View><Text style={styles.scoreLabel}>PUTTS</Text><Stepper value={putts} onMinus={()=>setPutts(Math.max(0,putts-1))} onPlus={()=>setPutts(putts+1)}/></View></View><View style={styles.toggleRow}><Button small secondary label={`GIR ${gir?'✓':'—'}`} onPress={()=>setGir(!gir)}/><Button small secondary label={`FW ${fw?'✓':'—'}`} onPress={()=>setFw(!fw)}/><Button small secondary label={`PEN ${penalty}`} onPress={()=>setPenalty(penalty+1)}/></View></Card>
+  </View>;
 
-      <ScrollView contentContainerStyle={styles.scrollWindowView} showsVerticalScrollIndicator={false}>
-        
-        {/* INTERACTIVE MODULE VIEW A: INTEGRATED GPS PLAYBOARD */}
-        {activeTab === 'dashboard' && (
-          <View>
-            <View style={styles.locationSummaryMetaLine}>
-              <Text style={styles.mainHoleTextDisplay}>Hole 1 <Text style={styles.parMetaInlineSub}>• Par 5 • S.I. 5</Text></Text>
-              <Text style={styles.courseLocationHeaderLabel}>Yeppoon Golf Club</Text>
-            </View>
+  const Caddie=()=> <View><Text style={styles.pageTitle}>CADDIE</Text><Text style={styles.pageSub}>Tap only when you want advice.</Text><Card style={styles.micCard}><TouchableOpacity onPress={askCaddie} style={[styles.mic,listening&&styles.micLive]}><Text style={styles.micText}>🎙</Text></TouchableOpacity><Text style={styles.micName}>ASK {caddieName.toUpperCase()}</Text><Text style={styles.heard}>{heard}</Text><Text style={styles.adviceLarge}>{advice}</Text></Card><Card><Text style={styles.sectionTitle}>CURRENT SHOT</Text><Text style={styles.body}>180 {unitLabel} • Light rough • Slight headwind</Text><Text style={styles.clubBig}>{bestClub.name}</Text></Card></View>;
 
-            {/* DYNAMIC PIVOTING FAIRWAY MAP COMPONENT CONTAINER */}
-            <TouchableOpacity 
-              style={[styles.collapsibleMapToggleBanner, isMapExpanded && styles.mapBannerExpandedBorderColor]} 
-              activeOpacity={0.9}
-              onPress={() => setIsMapExpanded(!isMapExpanded)}
-            >
-              <View style={styles.bannerHeaderFlexRow}>
-                <Text style={styles.bannerHeadingText}>🗺️ {isMapExpanded ? "CLOSE HOLE MAP DIAGRAM" : "TAP TO EXPAND INTERACTIVE HOLE MAP"}</Text>
-                <Text style={styles.bannerStatusArrowIndicator}>{isMapExpanded ? "▲" : "▼"}</Text>
-              </View>
+  const Bag=()=> <View><Text style={styles.pageTitle}>MY BAG</Text><Text style={styles.pageSub}>14 clubs. Set your real carry distances.</Text>{clubs.map(c=><View key={c.id} style={styles.clubRow}><Text style={styles.clubName}>{c.name}</Text><Stepper value={`${displayDistance(c.distance)} ${unitLabel}`} onMinus={()=>adjustClub(c.id,-1)} onPlus={()=>adjustClub(c.id,1)}/></View>)}</View>;
 
-              {isMapExpanded && (
-                <View style={styles.matteGraphicMapWrapper}>
-                  <View style={styles.matteVectorFairwayBar}>
-                    <View style={styles.greenZonePatch}><Text style={styles.vectorLabelStringText}>🚩 Pin: 498m Target</Text></View>
-                    <View style={styles.bunkerHazardBlock} />
-                    <View style={styles.layupTargetSegment}><Text style={styles.vectorLabelStringText}>🔸 Layup: 280m Vector</Text></View>
-                    <View style={styles.teeBoxZonePatch}><Text style={styles.vectorLabelStringText}>🔵 Tee Box: 230m Carry</Text></View>
-                  </View>
-                  <Text style={styles.antiGlareSystemIndicatorText}>Matte Vector Display • Anti-Glare Engine Active</Text>
-                </View>
-              )}
-            </TouchableOpacity>
+  const Course=()=> <View><Text style={styles.pageTitle}>COURSE</Text><Text style={styles.pageSub}>Course setup and information.</Text><Card><Text style={styles.sectionTitle}>COURSE SETUP</Text><TextInput style={styles.input} value={course} onChangeText={setCourse}/><View style={styles.teeRow}>{['BLACK','BLUE','WHITE','RED','YELLOW'].map(x=><TouchableOpacity key={x} onPress={()=>setTee(x)} style={[styles.teeBtn,tee===x&&styles.teeBtnActive]}><Text style={[styles.teeText,tee===x&&styles.teeTextActive]}>{x}</Text></TouchableOpacity>)}</View></Card><Card><Text style={styles.sectionTitle}>COURSE INFO</Text><Text style={styles.body}>Yeppoon Golf Club</Text><Text style={styles.infoLine}>Phone: Club contact</Text><Text style={styles.infoLine}>Email: Club email</Text><Text style={styles.infoLine}>Membership: Available</Text><Text style={styles.infoLine}>Cart hire: Yes</Text><Text style={styles.infoLine}>Club hire: Yes</Text><Text style={styles.infoLine}>Pro shop: Yes</Text><Text style={styles.infoLine}>Golf professional: Club professional</Text></Card></View>;
 
-            {/* MAIN PERFORMANCE DISTANCE INFORMATION FIELDS */}
-            <View style={styles.metricsTwoColumnDashboardGrid}>
-              <View style={styles.flatAntiGlareDataCard}>
-                <Text style={styles.metricLabelTinyCapText}>TO CENTRE</Text>
-                <Text style={styles.primaryMetricDigitDisplay}>498</Text>
-                <Text style={styles.goldMetricUnitText}>METRES</Text>
-                <View style={styles.cardInternalBorderDivider} />
-                <View style={styles.inlineStatsFlexRow}>
-                  <Text style={styles.monospaceSubStatText}>F: 480m</Text>
-                  <Text style={styles.monospaceSubStatText}>B: 512m</Text>
-                </View>
-              </View>
+  const More=()=> <View><Text style={styles.pageTitle}>MORE</Text><Card><Text style={styles.sectionTitle}>SETTINGS</Text><View style={styles.settingRow}><Text style={styles.body}>Units</Text><Button small secondary label={units} onPress={()=>setUnits(units==='METRES'?'YARDS':'METRES')}/></View><Text style={styles.inputLabel}>Caddie name</Text><TextInput style={styles.input} value={caddieName} onChangeText={setCaddieName}/><Text style={styles.inputLabel}>Handicap</Text><TextInput style={styles.input} value={handicap} onChangeText={setHandicap} keyboardType="numeric"/></Card>{['Advice Only','Practice','Warm-Up','Routines','Round Summary','How To / FAQ'].map(x=><TouchableOpacity key={x} style={styles.menuRow}><Text style={styles.menuText}>{x}</Text><Text style={styles.chev}>›</Text></TouchableOpacity>)}</View>;
 
-              <View style={styles.flatAntiGlareDataCard}>
-                <Text style={styles.metricLabelTinyCapText}>WEATHER VECTOR</Text>
-                <Text style={styles.greenWindDigitDisplay}>8 <Text style={styles.windSubLabelUnitString}>km/h</Text></Text>
-                <Text style={styles.windDirectionStringLabel}>💨 HEADWIND • NE</Text>
-                <View style={styles.cardInternalBorderDivider} />
-                <View style={styles.inlineStatsFlexRow}>
-                  <Text style={styles.monospaceSubStatText}>Slope: 0°</Text>
-                  <Text style={styles.monospaceSubStatText}>Temp: 24°C</Text>
-                </View>
-              </View>
-            </View>
+  const render=()=>({Home:<Home/>,Round:<Round/>,Caddie:<Caddie/>,Bag:<Bag/>,Course:<Course/>,More:<More/>}[tab]);
 
-            {/* AI CADDIES SYSTEM ADVICE MODULE */}
-            <View style={styles.aiAssistantCaddieModuleBox}>
-              <View style={styles.aiCaddieHeaderLineRow}>
-                <Text style={styles.aiModuleBadgeTitle}>🎙️ DEPLOY PETE</Text>
-                <Text style={[styles.aiModuleStatusTextValue, isListening && styles.aiModuleStatusTextValueRecording]}>
-                  {isListening ? "PROCESSING VOICE DATA..." : "CALCULATIONS ACTIVE"}
-                </Text>
-              </View>
-              <Text style={styles.aiOutputAdviceParagraphString}>{peteResponse}</Text>
-              
-              <TouchableOpacity 
-                style={[styles.voiceMicInteractionButton, isListening && styles.voiceMicInteractionButtonRecordingColor]} 
-                activeOpacity={0.85}
-                onPress={handleVoiceTrigger}
-              >
-                <Text style={styles.voiceMicInteractionButtonTextString}>
-                  {isListening ? "🛑 DISCONNECT MIC INPUT CHANNEL" : "🎙️ HOLD TO TALK TO PETE"}
-                </Text>
-              </TouchableOpacity>
-            </View>
+  return <SafeAreaView style={styles.safe}><StatusBar style="dark"/><Header/><ScrollView style={styles.scroll} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>{render()}</ScrollView><View style={styles.nav}>{tabs.map(t=><TouchableOpacity key={t} onPress={()=>setTab(t)} style={styles.navItem}><Text style={[styles.navText,tab===t&&styles.navTextActive]}>{t}</Text>{tab===t&&<View style={styles.navDot}/>}</TouchableOpacity>)}</View></SafeAreaView>;
+}
 
-            {/* DYNAMIC SHOT TRACKING LOG INPUT CARD COUNTER ELEMENT ROW */}
-            <View style={styles.liveScoreTrackerContainerBlockCard}>
-              <Text style={styles.scoreTrackerHeadlineBlockLabel}>LIVE HOLE SCORE CONSOLE COUNTERS</Text>
-              
-              <View style={styles.scoreCounterAdjustmentFlexRowTrack}>
-                {/* Score Stepper */}
-                <View style={styles.individualMetricStepperCellBox}>
-                  <Text style={styles.stepperCellMetaLabel}>SCORE</Text>
-                  <Text style={styles.stepperCellNumericOutputDisplay}>{scoreCount}</Text>
-                  <View style={styles.stepperControlPadsFlexRow}>
-                    <TouchableOpacity style={styles.stepperTouchPadButton} onPress={() => setScoreCount(Math.max(0, scoreCount - 1))}><Text style={styles.stepperControlBtnLabelText}>-</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.stepperTouchPadButton} onPress={() => setScoreCount(scoreCount + 1)}><Text style={styles.stepperControlBtnLabelText}>+</Text></TouchableOpacity>
-                  </View>
-                </View>
-
-                {/* Putts Stepper */}
-                <View style={styles.individualMetricStepperCellBox}>
-                  <Text style={styles.stepperCellMetaLabel}>PUTTS</Text>
-                  <Text style={styles.stepperCellNumericOutputDisplay}>{puttsCount}</Text>
+const styles=StyleSheet.create({
+  safe:{flex:1,backgroundColor:C.bg},scroll:{flex:1},content:{padding:14,paddingBottom:22},
+  header:{backgroundColor:C.bg2,borderBottomWidth:1,borderColor:C.line,paddingHorizontal:16,paddingTop:8,paddingBottom:10,flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
+  logo:{fontSize:31,fontWeight:'900',letterSpacing:2,color:C.blue2,lineHeight:32},logoSub:{fontSize:13,fontWeight:'800',letterSpacing:1.4,color:C.blue},tagline:{fontSize:10,color:C.muted,marginTop:2},
+  hdcBox:{alignItems:'center'},hdcLabel:{fontSize:9,fontWeight:'800',color:C.blue},hdcInput:{width:46,height:34,borderWidth:1,borderColor:C.blue,borderRadius:8,textAlign:'center',color:C.blue2,fontWeight:'900',backgroundColor:C.white},
+  card:{backgroundColor:C.panel,borderWidth:1,borderColor:C.line,borderRadius:14,padding:14,marginBottom:12},heroCard:{paddingVertical:18},eyebrow:{fontSize:10,fontWeight:'900',letterSpacing:1.1,color:C.blue},heroTitle:{fontSize:24,fontWeight:'900',color:C.blue2,marginTop:4},heroMeta:{fontSize:12,color:C.muted,marginTop:5},
+  grid2:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'},homeTile:{width:'48.5%',backgroundColor:C.panel,borderWidth:1,borderColor:C.line,borderRadius:14,padding:14,marginBottom:10,minHeight:94},homeTileText:{fontSize:16,fontWeight:'900',color:C.blue2},homeTileSub:{fontSize:11,color:C.muted,marginTop:5},
+  button:{backgroundColor:C.blue2,borderRadius:11,minHeight:46,alignItems:'center',justifyContent:'center',paddingHorizontal:14,marginTop:8},buttonSecondary:{backgroundColor:C.panel2,borderWidth:1,borderColor:C.blue},buttonSmall:{minHeight:34,paddingHorizontal:10,marginTop:0},buttonText:{color:C.white,fontWeight:'900',letterSpacing:.5,fontSize:13},buttonTextSecondary:{color:C.blue2},buttonTextSmall:{fontSize:11},
+  sectionTitle:{fontSize:12,fontWeight:'900',letterSpacing:.8,color:C.blue2,marginBottom:8},body:{fontSize:13,lineHeight:19,color:C.blue2},pageTitle:{fontSize:24,fontWeight:'900',color:C.blue2},pageSub:{fontSize:12,color:C.muted,marginTop:2,marginBottom:12},rowBetween:{flexDirection:'row',alignItems:'center',justifyContent:'space-between'},
+  holeNav:{flexDirection:'row',alignItems:'center',gap:6},holeNum:{fontSize:18,fontWeight:'900',color:C.blue2,minWidth:26,textAlign:'center'},
+  mapThumb:{backgroundColor:C.panel2,borderWidth:1,borderColor:C.line,borderRadius:14,padding:12,marginBottom:12},mapTitle:{fontSize:11,fontWeight:'900',color:C.blue2,textAlign:'center'},mapInside:{height:130,marginTop:10,borderRadius:10,backgroundColor:'#B8B19F',overflow:'hidden'},fairway:{position:'absolute',left:'43%',top:14,width:'18%',height:100,borderRadius:30,backgroundColor:'#738A65'},green:{position:'absolute',left:'37%',top:5,width:'30%',height:28,borderRadius:20,backgroundColor:'#81966F'},bunker:{position:'absolute',left:'28%',top:45,width:30,height:18,borderRadius:12,backgroundColor:'#D8C59A'},mapLabel:{position:'absolute',bottom:7,width:'100%',textAlign:'center',fontSize:9,fontWeight:'800',color:C.blue2},
+  grid3:{flexDirection:'row',gap:8},distanceCard:{flex:1,alignItems:'center',paddingVertical:11},distance:{fontSize:28,fontWeight:'900',color:C.blue2,lineHeight:31},unit:{fontSize:10,fontWeight:'800',color:C.blue},live:{fontSize:9,fontWeight:'900',color:C.good},heard:{fontSize:11,color:C.muted,marginBottom:8},advice:{fontSize:15,fontWeight:'800',lineHeight:21,color:C.blue2},adviceLarge:{fontSize:18,fontWeight:'900',lineHeight:25,color:C.blue2,textAlign:'center',marginTop:10},
+  scoreRow:{flexDirection:'row',justifyContent:'space-between',gap:14},scoreLabel:{fontSize:10,fontWeight:'900',color:C.blue,marginBottom:5},stepper:{flexDirection:'row',alignItems:'center',gap:5},stepBtn:{width:34,height:34,borderRadius:8,backgroundColor:C.blue2,alignItems:'center',justifyContent:'center'},stepTxt:{color:C.white,fontSize:22,fontWeight:'800',lineHeight:23},valueBox:{minWidth:48,height:34,paddingHorizontal:8,borderWidth:1,borderColor:C.line,borderRadius:8,backgroundColor:C.white,alignItems:'center',justifyContent:'center'},valueTxt:{fontSize:14,fontWeight:'900',color:C.blue2},toggleRow:{flexDirection:'row',gap:8,marginTop:12},
+  micCard:{alignItems:'center',paddingVertical:20},mic:{width:94,height:94,borderRadius:47,backgroundColor:C.blue2,alignItems:'center',justifyContent:'center',marginBottom:10},micLive:{backgroundColor:C.good},micText:{fontSize:42},micName:{fontSize:13,fontWeight:'900',color:C.blue2,marginBottom:12},clubBig:{fontSize:28,fontWeight:'900',color:C.blue2,marginTop:6},
+  clubRow:{backgroundColor:C.panel,borderWidth:1,borderColor:C.line,borderRadius:12,padding:10,marginBottom:7,flexDirection:'row',alignItems:'center',justifyContent:'space-between'},clubName:{fontSize:14,fontWeight:'900',color:C.blue2,minWidth:74},
+  input:{height:42,borderWidth:1,borderColor:C.line,borderRadius:9,backgroundColor:C.white,paddingHorizontal:10,color:C.blue2,fontWeight:'700',marginBottom:10},inputLabel:{fontSize:10,fontWeight:'900',color:C.blue,marginBottom:4},teeRow:{flexDirection:'row',flexWrap:'wrap',gap:6},teeBtn:{paddingVertical:7,paddingHorizontal:9,borderRadius:8,borderWidth:1,borderColor:C.line,backgroundColor:C.panel2},teeBtnActive:{backgroundColor:C.blue2,borderColor:C.blue2},teeText:{fontSize:9,fontWeight:'900',color:C.blue2},teeTextActive:{color:C.white},infoLine:{fontSize:12,color:C.blue2,marginTop:5},settingRow:{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:10},
+  menuRow:{minHeight:48,borderBottomWidth:1,borderColor:C.line,flexDirection:'row',alignItems:'center',justifyContent:'space-between'},menuText:{fontSize:14,fontWeight:'800',color:C.blue2},chev:{fontSize:26,color:C.blue},
+  nav:{minHeight:58,backgroundColor:C.bg2,borderTopWidth:1,borderColor:C.line,flexDirection:'row',justifyContent:'space-around',alignItems:'center',paddingBottom:3},navItem:{flex:1,alignItems:'center',justifyContent:'center'},navText:{fontSize:10,fontWeight:'800',color:C.muted},navTextActive:{color:C.blue2},navDot:{width:18,height:3,borderRadius:2,backgroundColor:C.blue2,marginTop:4},
+});
