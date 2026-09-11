@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "expo": "~55.0.0",
+    "expo-location": "~55.1.14",
     "expo-status-bar": "~3.0.0",
     "react": "19.2.0",
-    "react-native": "0.83.10"
+    "react-native": "0.83.10",
+    "react-native-maps": "1.27.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2"
