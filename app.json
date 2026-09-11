@@ -4,8 +4,10 @@
     "slug": "drc-virtual-golf",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#D8D0C2"
     },
@@ -23,9 +25,9 @@
         "RECORD_AUDIO"
       ],
       "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#D8D0C2"
       }
-    },
-    "web": {}
+    }
   }
 }
