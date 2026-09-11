@@ -5,26 +5,26 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./drc-virtual-golf-icon.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "#080C14"
+      "backgroundColor": "#D8D0C2"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dalecopeland53.drcvirtualgolf"
     },
     "android": {
       "package": "com.dalecopeland53.drcvirtualgolf",
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "RECORD_AUDIO"],
       "adaptiveIcon": {
-        "backgroundColor": "#080C14"
+        "foregroundImage": "./drc-virtual-golf-icon.png",
+        "backgroundColor": "#D8D0C2"
       }
     },
     "web": {
       "favicon": "./drc-virtual-golf-icon.png"
     }
   }
-}
 }
