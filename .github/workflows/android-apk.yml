@@ -4,7 +4,7 @@ on:
 
 jobs:
   build:
-    name: build
+    name: Package Standalone Application
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code Repository
@@ -13,33 +13,13 @@ jobs:
       - name: Setup Node Environment
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      - name: Force Core Dependencies
-        run: |
-          npm install react react-native expo
-          npm install -g expo-cli
+      - name: Install Direct Core Project Dependencies
+        run: npm install
 
-      - name: Export Native Project Layout
-        run: npx expo export:embed --platform android --dev false --entry-file App.js --bundle-output index.android.bundle --assets-dest res
+      - name: Install Global EAS Command Tool
+        run: npm install -g eas-cli
 
-      - name: Set Up Java JDK Environment
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Setup Android Build SDK Tools
-        uses: android-actions/setup-android@v3
-
-      - name: Compile Standalone Release APK
-        run: |
-          mkdir -p android/app/src/main/assets
-          cp index.android.bundle android/app/src/main/assets/
-          cd android && ./gradlew assembleRelease --no-daemon || true
-
-      - name: Upload Finished App Package
-        uses: actions/upload-artifact@v4
-        with:
-          name: drc-virtual-golf-elite
-          path: android/app/build/outputs/apk/release/*.apk
+      - name: Package Standalone Android App
+        run: eas build --platform android --profile preview --local --non-interactive
