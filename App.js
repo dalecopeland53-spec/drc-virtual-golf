@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { 
   SafeAreaView, 
   ScrollView, 
@@ -91,13 +91,6 @@ export default function App() {
   // Target Constants for Caddie Logic Calculations
   const CURRENT_TARGET_DISTANCE = 498; 
 
-  const best = useMemo(() => {
-    return clubs.reduce((prev, curr) => 
-      Math.abs(curr.distance - CURRENT_TARGET_DISTANCE) < Math.abs(prev.distance - CURRENT_TARGET_DISTANCE) ? curr : prev, 
-      clubs[0]
-    );
-  }, [clubs]);
-
   // View Navigation Controllers
   const go = t => { setMore(null); setTab(t); };
   const open = p => { setTab('More'); setMore(p); };
@@ -110,7 +103,7 @@ export default function App() {
     setTimeout(() => {
       setListening(false);
       setHeard(`Heard: ${CURRENT_TARGET_DISTANCE} metres to green, light rough, slight headwind.`);
-      setAdvice(`${best.name}. Play it as ${dist(CURRENT_TARGET_DISTANCE + 9)} ${ul}. Smooth swing, centre target, commit.`);
+      setAdvice(`Driver. Play it as ${dist(CURRENT_TARGET_DISTANCE + 9)} ${ul}. Smooth swing, centre target, commit.`);
     }, 1200);
   };
 
@@ -134,7 +127,7 @@ export default function App() {
     </View>
   );
 
-  const HomeView = () => (
+  const Home = () => (
     <View>
       <Card>
         <Text style={s.eye}>READY TO PLAY</Text>
@@ -158,7 +151,7 @@ export default function App() {
     </View>
   );
 
-  const RoundView = () => (
+  const Round = () => (
     <View>
       <View style={s.row}>
         <View>
@@ -226,7 +219,7 @@ export default function App() {
     </View>
   );
 
-  const CaddieView = () => (
+  const Caddie = () => (
     <View style={s.center}>
       <Text style={s.page}>CADDIE</Text>
       <Text style={s.sub}>Tap only when you want advice.</Text>
@@ -241,7 +234,7 @@ export default function App() {
     </View>
   );
 
-  const BagView = () => (
+  const Bag = () => (
     <View>
       <Text style={s.page}>MY BAG</Text>
       <Text style={s.sub}>14 clubs • real carry distances</Text>
@@ -258,7 +251,7 @@ export default function App() {
     </View>
   );
 
-  const CourseView = () => (
+  const Course = () => (
     <View>
       <Text style={s.page}>COURSE</Text>
       <Card>
@@ -274,14 +267,25 @@ export default function App() {
       </Card>
       <Card>
         <Text style={s.title}>COURSE INFO</Text>
-        <Text style={s.body}>{course}{'\n'}Phone • Email • Membership • Cart hire • Club hire • Pro shop • Golf professional</Text>
+        <Text style={s.body}>{course}{'\n'}Phone • Email • Membership • Cart hire • Club hire • Pro shop</Text>
       </Card>
     </View>
   );
 
-  const MoreView = () => (
+  const Detail = ({ name }) => (
     <View>
-      <Text style={s.page}>SETTINGS & MORE</Text>
+      <TouchableOpacity onPress={() => setMore(null)}>
+        <Text style={s.back}>‹ BACK</Text>
+      </TouchableOpacity>
+      <Text style={s.page}>{name.toUpperCase()}</Text>
       <Card>
-        <Text style={s.title}>DISTANCE UNITS</Text>
-        <View style={s.row}>
+        <Text style={s.body}>Virtual Golf subsystem module for {name}. Reality tracking running active diagnostic states.</Text>
+      </Card>
+    </View>
+  );
+
+  return (
+    <SafeAreaView style={s.safe}>
+      <StatusBar style="dark" />
+      <Header />
+      <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
