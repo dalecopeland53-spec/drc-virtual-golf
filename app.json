@@ -5,20 +5,27 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./Screenshot_20260911_210040_Google.jpg",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./Screenshot_20260911_210040_Google.jpg",
       "resizeMode": "contain",
-      "backgroundColor": "#0F172A"
+      "backgroundColor": "#E9E4D9"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.drc.virtualgolfelite"
+      "bundleIdentifier": "com.drc.virtualgolfelite",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "DRC Virtual Golf uses your location to calculate live golf distances on the course."
+      }
     },
     "android": {
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./Screenshot_20260911_210040_Google.jpg",
-        "backgroundColor": "#1E293B"
+        "backgroundColor": "#E9E4D9"
       },
       "package": "com.drc.virtualgolfelite"
     },
