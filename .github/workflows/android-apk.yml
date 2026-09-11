@@ -27,16 +27,16 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    # Added --no-install to prevent the workflow from hanging or breaking on the server
     - name: Generate Native Android Directory
-      run: npx expo prebuild --platform android
+      run: npx expo prebuild --platform android --no-install
 
-    # Changed from assembleDebug to assembleRelease
     - name: Build Android APK via Gradle
       run: |
         cd android
         ./gradlew assembleRelease
 
-    # Updated path to grab the release APK instead of the debug one
+    # This will cleanly upload your standalone offline APK
     - name: Upload Finished APK Asset
       uses: actions/upload-artifact@v4
       with:
