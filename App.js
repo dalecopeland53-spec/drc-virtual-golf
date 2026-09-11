@@ -8,6 +8,7 @@ import {
   TouchableOpacity, 
   View, 
   Platform, 
+  Image,
   StatusBar as RNStatusBar 
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -91,8 +92,7 @@ export default function App() {
   // Target Constants for Caddie Logic Calculations
   const CURRENT_TARGET_DISTANCE = 498; 
 
-  // FIXED LOGIC BUG: No longer locks calculations statically to 180m.
-  // It now automatically selects the most optimal club matching your real remaining target distance.
+  // Selects the most optimal club matching your real remaining target distance
   const best = useMemo(() => {
     return clubs.reduce((prev, curr) => 
       Math.abs(curr.distance - CURRENT_TARGET_DISTANCE) < Math.abs(prev.distance - CURRENT_TARGET_DISTANCE) ? curr : prev, 
@@ -120,7 +120,7 @@ export default function App() {
   const Header = () => (
     <View style={s.header}>
       <View>
-        <Text style={s.logo}>DRC</Text>
+        <Text style={s.logoText}>DRC</Text>
         <Text style={s.logoSub}>VIRTUAL GOLF ELITE</Text>
         <Text style={s.tag}>Your caddie. Your game.</Text>
       </View>
@@ -138,8 +138,12 @@ export default function App() {
 
   const Home = () => (
     <View>
-      <Card>
-        <Text style={s.eye}>READY TO PLAY</Text>
+      <Card style={s.brandCard}>
+        <Image 
+          source={require('./assets/icon.png')} 
+          style={s.brandLogo} 
+          resizeMode="contain" 
+        />
         <Text style={s.hero}>{course}</Text>
         <Text style={s.sub}>Handicap {hdc} • {units}</Text>
       </Card>
@@ -210,11 +214,11 @@ export default function App() {
       <Card>
         <Text style={s.title}>HOLE SCORE</Text>
         <View style={s.scoreRow}>
-          <View>
+          <View style={s.scoreCol}>
             <Text style={s.eye}>SCORE</Text>
             <Step value={score} minus={() => setScore(Math.max(0, score - 1))} plus={() => setScore(score + 1)} />
           </View>
-          <View>
+          <View style={s.scoreCol}>
             <Text style={s.eye}>PUTTS</Text>
             <Step value={putts} minus={() => setPutts(Math.max(0, putts - 1))} plus={() => setPutts(putts + 1)} />
           </View>
@@ -228,11 +232,11 @@ export default function App() {
     </View>
   );
 
-  const Caddie = () => (
-    <View style={s.center}>
+  const CaddieView = () => (
+    <View style={s.centerContainer}>
       <Text style={s.page}>CADDIE</Text>
       <Text style={s.sub}>Tap only when you want advice.</Text>
-      <Card style={s.center}>
+      <Card style={s.centerCard}>
         <TouchableOpacity onPress={ask} style={s.mic}>
           <Text style={s.micT}>🎙</Text>
         </TouchableOpacity>
@@ -243,7 +247,7 @@ export default function App() {
     </View>
   );
 
-  const Bag = () => (
+  const BagView = () => (
     <View>
       <Text style={s.page}>MY BAG</Text>
       <Text style={s.sub}>14 clubs • real carry distances</Text>
@@ -260,7 +264,7 @@ export default function App() {
     </View>
   );
 
-  const Course = () => (
+  const CourseView = () => (
     <View>
       <Text style={s.page}>COURSE</Text>
       <Card>
@@ -276,12 +280,12 @@ export default function App() {
       </Card>
       <Card>
         <Text style={s.title}>COURSE INFO</Text>
-        <Text style={s.body}>{course}{'\n'}Phone • Email • Membership • Cart hire • Club hire • Pro shop • Golf professional</Text>
+        <Text style={s.body}>{course}{'\n'}Phone • Email • Membership • Cart hire • Club hire • Pro shop</Text>
       </Card>
     </View>
   );
 
-  const Detail = ({ name, children }) => (
+  const MoreView = () => (
     <View>
-      <TouchableOpacity onPress={() => setMore(null)}>
-        <Text style={s.back}>‹ MORE</Text>
+      {more ? (
+        <View>
