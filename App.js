@@ -1,32 +1,219 @@
-import React,{useState}from'react';
-import{SafeAreaView,StatusBar,StyleSheet,Text,TouchableOpacity,View,ScrollView,TextInput}from'react-native';
-const C={bg:'#E9E4D9',paper:'#F7F4EC',panel:'#F0ECE2',navy:'#0B2945',blue:'#184E78',gold:'#B88A35',ink:'#102C43',muted:'#65727C',line:'#C7BFAF',white:'#FFFDF8',green:'#B8C7A5',sand:'#E5D2A1'};
-const CLUBS=[['Driver',230],['3 Wood',210],['5 Wood',195],['4 Iron',180],['5 Iron',170],['6 Iron',160],['7 Iron',150],['8 Iron',140],['9 Iron',130],['PW',115],['GW',100],['SW',85],['LW',70],['Putter',0]];
-const WARM=['Loosen Up','Short Wedges','Mid Irons','Long Irons','Fairway Woods','Chipping','Putting','Ready'],ROUT=['Target','Lie','Club','Picture','Commit','Breathe','Reset','Next'],PRACT=['Wedges','Irons','Driver','Chipping','Bunker','Putting'];
-function Logo({secret,small}){return <TouchableOpacity activeOpacity={1} onLongPress={secret} delayLongPress={1200} style={s.logo}><Text style={[s.drc,small&&{fontSize:22}]}>DRC</Text><Text style={[s.vg,small&&{fontSize:8}]}>VIRTUAL GOLF</Text><Text style={s.elite}>ELITE</Text></TouchableOpacity>}
-function HeroBrand(){return <View style={s.heroCompact}><Text style={s.brand}>DRC VIRTUAL GOLF</Text><Text style={s.subbrand}>ELITE</Text><Text style={s.brandTag}>THE APP THAT SACKED THE CADDIES</Text><Text style={s.premiumTag}>BUILT FOR SERIOUS GOLF</Text></View>}
-function Btn({children,onPress,light}){return <TouchableOpacity onPress={onPress} style={[s.btn,light&&s.btnLight]}><Text style={[s.btnT,light&&{color:C.navy}]}>{children}</Text></TouchableOpacity>}
-function Top({title,back,secret}){return <View style={s.top}><TouchableOpacity onPress={back} style={s.back}><Text style={s.backT}>‹</Text></TouchableOpacity><Logo small secret={secret}/><Text style={s.topTitle}>{title}</Text><View style={{width:32}}/></View>}
-function Bottom({go,active}){return <View style={s.bottom}>{[['⌂','Home','home'],['●','Round','round'],['♣','My Bag','bag'],['▣','Course','course'],['•••','More','more']].map(x=><TouchableOpacity key={x[2]} onPress={()=>go(x[2])} style={s.nav}><Text style={[s.navI,active===x[2]&&s.on]}>{x[0]}</Text><Text style={[s.navT,active===x[2]&&s.on]}>{x[1]}</Text></TouchableOpacity>)}</View>}
-function HoleArt({full}){return <View style={[s.holeArt,full&&s.holeFull]}><View style={[s.fway,full&&s.fwayFull]}><View style={s.green}/><View style={s.bunker1}/><View style={s.bunker2}/><View style={s.pin}/><View style={s.player}/></View></View>}
-export default function App(){
-const[screen,setScreen]=useState('login'),[email,setEmail]=useState(''),[pass,setPass]=useState(''),[units,setUnits]=useState('METRES'),[clubs,setClubs]=useState(CLUBS.map(x=>[...x]));
-const go=x=>setScreen(x);
-const Login=()=> <View style={s.login}><HeroBrand/><View style={s.loginCard}><Text style={s.welcome}>WELCOME BACK</Text><Text style={s.signSub}>Sign in to continue</Text><Text style={s.lab}>EMAIL ADDRESS</Text><TextInput style={s.input} value={email} onChangeText={setEmail} placeholder="you@example.com" placeholderTextColor={C.muted}/><Text style={s.lab}>PASSWORD</Text><TextInput style={s.input} value={pass} onChangeText={setPass} secureTextEntry placeholder="••••••••" placeholderTextColor={C.muted}/><Text style={s.forgot}>Forgot password?</Text><Btn onPress={()=>go('home')}>SIGN IN</Btn><View style={s.or}><View style={s.orLine}/><Text style={s.orT}>OR CONTINUE WITH</Text><View style={s.orLine}/></View><View style={s.social}><TouchableOpacity style={s.socialB}><Text style={s.socialT}>G  Google</Text></TouchableOpacity><TouchableOpacity style={s.socialB}><Text style={s.socialT}>●  Apple</Text></TouchableOpacity></View><Text style={s.create}>New to DRC?  <Text style={{color:C.gold,fontWeight:'900'}}>Create an account</Text></Text></View><Text style={s.help}>Help • Support • Privacy</Text><Text style={s.play}>PLAY SMARTER   /   PLAY BETTER</Text></View>;
-const Home=()=> <View style={s.page}><View style={s.homeHead}><Logo small secret={()=>go('secret')}/><View style={{flex:1}}><Text style={s.hello}>GOOD MORNING, DALE</Text><Text style={s.ready}>Ready for your round?</Text></View><View style={s.avatar}><Text style={s.avatarT}>D</Text></View></View><TouchableOpacity style={s.hero} onPress={()=>go('round')}><View style={s.heroShade}><HeroBrand/><Text style={s.heroTitle}>START ROUND</Text><Text style={s.heroSub}>Your caddie is ready.</Text><View style={s.heroBtn}><Text style={s.heroBtnT}>START ROUND  ›</Text></View></View></TouchableOpacity><View style={s.grid}>{[['ROUTINES','Pre-shot & reset','routines','◎'],['WARM-UP','8 step warm-up','warmup','♨'],['PRACTICE','Purposeful sessions','practice','⌁'],['SCORECARD','18 hole scoring','scorecard','▦']].map(x=><TouchableOpacity key={x[0]} onPress={()=>go(x[2])} style={s.tile}><Text style={s.tileIcon}>{x[3]}</Text><Text style={s.tileTitle}>{x[0]}</Text><Text style={s.tileSub}>{x[1]}</Text></TouchableOpacity>)}</View><Bottom go={go} active="home"/></View>;
-const More=()=> <View style={s.page}><Top title="MORE" back={()=>go('home')} secret={()=>go('secret')}/><View style={s.profile}><View style={s.avatarBig}><Text style={s.avatarT}>D</Text></View><View><Text style={s.profileName}>Dale</Text><Text style={s.profileSub}>Caddie: Pete</Text></View><Text style={s.chev}>›</Text></View><Text style={s.section}>YOUR GAME</Text><View style={s.grid}>{[['⚙','Settings','Preferences & units','settings'],['▣','Course','Course & tee setup','course'],['?','How To','Quick guide & FAQ','howto'],['◉','Game Report','Round history & stats','report']].map(x=><TouchableOpacity key={x[1]} onPress={()=>go(x[3])} style={s.tile}><Text style={s.tileIcon}>{x[0]}</Text><Text style={s.tileTitle}>{x[1]}</Text><Text style={s.tileSub}>{x[2]}</Text></TouchableOpacity>)}</View><Text style={s.section}>APP & SUPPORT</Text><View style={s.rows}>{[['?','Help & Support','howto'],['ⓘ','About DRC',null],['↪','Sign Out','login']].map(x=><TouchableOpacity key={x[1]} onPress={()=>x[2]&&go(x[2])} style={s.row}><Text style={s.rowIcon}>{x[0]}</Text><Text style={s.rowText}>{x[1]}</Text><Text style={s.chev}>›</Text></TouchableOpacity>)}</View><Text style={s.version}>DRC Virtual Golf • Version 1.0.0</Text><Bottom go={go} active="more"/></View>;
-const Bag=()=> <View style={s.page}><Top title="MY BAG" back={()=>go('home')} secret={()=>go('secret')}/><View style={s.bagLine}><Text style={s.bagCount}>14 CLUBS</Text><View style={s.toggle}><TouchableOpacity onPress={()=>setUnits('METRES')} style={[s.tog,units==='METRES'&&s.togOn]}><Text style={[s.togT,units==='METRES'&&s.togOnT]}>METRES</Text></TouchableOpacity><TouchableOpacity onPress={()=>setUnits('YARDS')} style={[s.tog,units==='YARDS'&&s.togOn]}><Text style={[s.togT,units==='YARDS'&&s.togOnT]}>YARDS</Text></TouchableOpacity></View></View><ScrollView contentContainerStyle={s.clubGrid}>{clubs.map((c,i)=><View style={s.club} key={c[0]}><Text style={s.clubPic}>{i<3?'♠':'♣'}</Text><Text style={s.clubName}>{c[0]}</Text><View style={s.stepper}><TouchableOpacity onPress={()=>setClubs(a=>a.map((v,j)=>j===i?[v[0],Math.max(0,v[1]-1)]:v))}><Text style={s.step}>−</Text></TouchableOpacity><Text style={s.dist}>{c[0]==='Putter'?'—':c[1]}</Text><TouchableOpacity onPress={()=>setClubs(a=>a.map((v,j)=>j===i?[v[0],v[1]+1]:v))}><Text style={s.step}>+</Text></TouchableOpacity></View></View>)}</ScrollView><View style={s.bagFoot}><Text style={s.driverLabel}>DRIVER DISTANCE</Text><Text style={s.driverVal}>{clubs[0][1]} {units==='METRES'?'m':'yd'}</Text><Btn onPress={()=>go('home')}>SAVE BAG</Btn></View><Bottom go={go} active="bag"/></View>;
-const Round=()=> <View style={s.page}><Top title="ROUND" back={()=>go('home')} secret={()=>go('secret')}/><View style={s.roundMain}><TouchableOpacity style={s.mapLeft} onPress={()=>go('gps')}><HoleArt full/><Text style={s.mapTap}>TAP FOR FULL GPS + MIC</Text></TouchableOpacity><View style={s.roundRight}><Text style={s.holeNo}>HOLE 1</Text><Text style={s.par}>PAR 4 • SI 7</Text><View style={s.distanceBox}><Text style={s.dLabel}>FRONT   CENTRE   BACK</Text><Text style={s.dBig}>146   154   162</Text><Text style={s.dUnit}>{units==='METRES'?'METRES':'YARDS'}</Text></View><View style={s.pete}><Text style={s.peteName}>PETE</Text><TouchableOpacity style={s.mic}><Text style={s.micT}>🎤</Text></TouchableOpacity></View><View style={s.reco}><Text style={s.recoLab}>RECOMMENDATION</Text><Text style={s.recoClub}>6 IRON</Text><Text style={s.recoText}>Playing 160. Middle of green. Commit.</Text></View><View style={s.last}><Text style={s.recoLab}>LAST SHOT</Text><Text style={s.lastText}>—</Text></View></View></View><View style={s.scoreStrip}><Text style={s.scoreTitle}>SCORE HOLE 1</Text><View style={s.scoreFields}>{['SCORE','PUTTS','GIR','FW','PEN'].map(x=><View key={x} style={s.scoreField}><Text style={s.scoreLab}>{x}</Text><Text style={s.scoreVal}>—</Text></View>)}</View></View><View style={s.twoBtns}><Btn light onPress={()=>go('scorecard')}>VIEW SCORECARD</Btn><Btn onPress={()=>go('round')}>NEXT HOLE</Btn></View><Bottom go={go} active="round"/></View>;
-const Report=()=> <View style={s.page}><Top title="GAME REPORT" back={()=>go('more')} secret={()=>go('secret')}/><Text style={s.reportCourse}>YEPPOON GOLF CLUB</Text><Text style={s.reportDate}>TODAY • WHITE TEES</Text><View style={s.stats}>{[['72','SCORE'],['E','TO PAR'],['31','PUTTS'],['61%','GIR']].map(x=><View style={s.stat} key={x[1]}><Text style={s.statBig}>{x[0]}</Text><Text style={s.statLab}>{x[1]}</Text></View>)}</View><ScrollView horizontal showsHorizontalScrollIndicator={false} style={s.holes}>{Array.from({length:18},(_,i)=><View style={s.holeChip} key={i}><Text style={s.holeChipN}>{i+1}</Text><Text style={s.holeChipS}>—</Text></View>)}</ScrollView><ScrollView style={{flex:1}}><View style={s.reportCard}><HoleArt/><View style={{flex:1}}><Text style={s.reportHole}>HOLE 1 • PAR 4</Text><Text style={s.reportQ}>Asked: “154, light rough, headwind.”</Text><Text style={s.reportPete}>Pete: Smooth 6 iron. Middle green.</Text><Text style={s.reportResult}>Result: —     Score: —</Text></View></View><View style={s.reportCard}><HoleArt/><View style={{flex:1}}><Text style={s.reportHole}>HOLE 2 • PAR 4</Text><Text style={s.reportQ}>Asked: —</Text><Text style={s.reportPete}>Pete: —</Text><Text style={s.reportResult}>Result: —     Score: —</Text></View></View><Btn light>VIEW ALL 18 HOLES</Btn></ScrollView><Bottom go={go} active="more"/></View>;
-const Course=()=> <View style={s.page}><Top title="COURSE" back={()=>go('home')} secret={()=>go('secret')}/><Text style={s.section}>COURSE SETUP</Text><View style={s.infoCard}><Text style={s.lab}>COURSE NAME</Text><Text style={s.infoBig}>Yeppoon Golf Club</Text><View style={s.line}/><Text style={s.lab}>TEE</Text><Text style={s.infoBig}>MEN • WHITE</Text></View><View style={s.twoBtns}><Btn onPress={()=>go('courseinfo')}>COURSE INFO</Btn><Btn light onPress={()=>go('gps')}>GPS HOLE</Btn></View><View style={s.infoCard}><Text style={s.section}>COURSE MAPPER</Text><Text style={s.infoText}>Hole 1 • Front / Centre / Back</Text><Text style={s.mapper}>0 / 54 POINTS CAPTURED</Text></View><Bottom go={go} active="course"/></View>;
-const CourseInfo=()=> <View style={s.page}><Top title="COURSE INFO" back={()=>go('course')} secret={()=>go('secret')}/><Text style={s.reportCourse}>YEPPOON GOLF CLUB</Text><Text style={s.reportDate}>COURSE INFORMATION</Text><View style={s.infoCard}>{[['PHONE','(07) 4939 1056'],['EMAIL','club@course.com.au'],['ADDRESS','Yeppoon, Queensland'],['MEMBERSHIP','Membership information'],['CARTS','Available'],['CLUB HIRE','Available'],['PRO SHOP','Open'],['GOLF PROFESSIONAL','Club Professional']].map(x=><View style={s.infoRow} key={x[0]}><Text style={s.infoKey}>{x[0]}</Text><Text style={s.infoValue}>{x[1]}</Text></View>)}</View><Text style={s.note}>Course contact details can be updated from Course Setup.</Text><Bottom go={go} active="course"/></View>;
-const GPS=()=> <View style={s.page}><Top title="HOLE 1 • GPS" back={()=>go('round')} secret={()=>go('secret')}/><View style={s.gpsMap}><HoleArt full/><View style={s.gpsNumbers}><Text style={s.gpsBig}>154</Text><Text style={s.gpsUnit}>{units==='METRES'?'METRES':'YARDS'} TO CENTRE</Text><Text style={s.gpsSmall}>146 FRONT     162 BACK</Text></View></View><View style={s.gpsCaddie}><TouchableOpacity style={s.gpsMic}><Text style={s.gpsMicIcon}>🎤</Text><Text style={s.gpsMicText}>ASK PETE</Text></TouchableOpacity><View style={{flex:1}}><Text style={s.recoLab}>CADDIE RESPONSE</Text><Text style={s.gpsAdvice}>Playing 160. Smooth 6 iron. Middle of the green. Commit.</Text></View></View><Btn onPress={()=>go('round')}>BACK TO ROUND</Btn></View>;
-const Secret=()=> <View style={s.page}><Top title="SECRET MAP" back={()=>go('home')} secret={()=>go('secret')}/><View style={s.secretHead}><Text style={s.secretTitle}>QUICK MAP ACCESS</Text><Text style={s.secretSub}>Private on-course shortcut</Text></View><TouchableOpacity style={s.secretMap} onPress={()=>go('gps')}><HoleArt full/><Text style={s.secretTap}>OPEN FULL GPS + MIC ›</Text></TouchableOpacity><View style={s.infoCard}><Text style={s.lab}>CURRENT HOLE</Text><Text style={s.infoBig}>HOLE 1 • PAR 4 • SI 7</Text><Text style={s.infoText}>Front 146 • Centre 154 • Back 162</Text></View><Btn onPress={()=>go('round')}>GO TO ROUND</Btn></View>;
-const HowTo=()=> <View style={s.page}><Top title="HOW TO" back={()=>go('more')} secret={()=>go('secret')}/><Text style={s.section}>QUICK GUIDE</Text><ScrollView>{[['1','SET YOUR GAME','Choose handicap, units and your 14-club bag.'],['2','SET YOUR COURSE','Choose course, tee and course information.'],['3','START ROUND','Use the Round screen for hole, distances and scoring.'],['4','ASK PETE','Tap the microphone whenever you want caddie advice.'],['5','FULL GPS','Tap the hole map for the full-screen GPS + mic page.'],['6','SCORE','Enter score, putts, GIR, fairway and penalties.'],['7','SECRET BUTTON','Long-press the DRC logo for quick map access.']].map(x=><View style={s.guide} key={x[0]}><View style={s.guideN}><Text style={s.guideNT}>{x[0]}</Text></View><View style={{flex:1}}><Text style={s.guideTitle}>{x[1]}</Text><Text style={s.guideText}>{x[2]}</Text></View></View>)}</ScrollView></View>;
-const SimpleList=({title,items})=> <View style={s.page}><Top title={title} back={()=>go('home')} secret={()=>go('secret')}/><ScrollView>{items.map((x,i)=><View style={s.guide} key={x}><View style={s.guideN}><Text style={s.guideNT}>{i+1}</Text></View><Text style={s.guideTitle}>{x}</Text></View>)}</ScrollView>{title==='WARM-UP'&&<Btn light>ADVICE ONLY</Btn>}</View>;
-const Scorecard=()=> <View style={s.page}><Top title="SCORECARD" back={()=>go('home')} secret={()=>go('secret')}/><View style={s.scHead}>{['H','PAR','SCORE','PUTTS','GIR'].map(x=><Text style={s.scH} key={x}>{x}</Text>)}</View><ScrollView>{Array.from({length:18},(_,i)=><View style={s.scRow} key={i}><Text style={s.scC}>{i+1}</Text><Text style={s.scC}>{[4,4,3,5][i%4]}</Text><TextInput style={s.scIn} keyboardType="number-pad" placeholder="—"/><TextInput style={s.scIn} keyboardType="number-pad" placeholder="—"/><TouchableOpacity style={s.scTouch}><Text style={s.scC}>—</Text></TouchableOpacity></View>)}</ScrollView></View>;
-let body=screen==='login'?<Login/>:screen==='home'?<Home/>:screen==='more'?<More/>:screen==='bag'?<Bag/>:screen==='round'?<Round/>:screen==='report'?<Report/>:screen==='course'?<Course/>:screen==='courseinfo'?<CourseInfo/>:screen==='gps'?<GPS/>:screen==='secret'?<Secret/>:screen==='howto'?<HowTo/>:screen==='routines'?<SimpleList title="ROUTINES" items={ROUT}/>:screen==='warmup'?<SimpleList title="WARM-UP" items={WARM}/>:screen==='practice'?<SimpleList title="PRACTICE" items={PRACT}/>:screen==='scorecard'?<Scorecard/>:<More/>;
-return <SafeAreaView style={s.safe}><StatusBar barStyle="dark-content" backgroundColor={C.bg}/>{body}</SafeAreaView>}
-const s=StyleSheet.create({
-safe:{flex:1,backgroundColor:C.bg},page:{flex:1,paddingHorizontal:14,paddingTop:4},logo:{alignItems:'center'},drc:{fontSize:32,fontWeight:'900',color:C.navy,letterSpacing:3,lineHeight:34},vg:{fontSize:12,fontWeight:'900',color:C.navy,letterSpacing:2},elite:{fontSize:8,fontWeight:'900',color:C.gold,letterSpacing:4},heroCompact:{alignItems:'center',paddingVertical:5},brand:{fontSize:18,fontWeight:'900',color:C.navy,letterSpacing:1.6},subbrand:{fontSize:10,fontWeight:'900',color:C.gold,letterSpacing:4,marginTop:1},brandTag:{fontSize:9,fontWeight:'900',color:C.navy,letterSpacing:.7,marginTop:5,textAlign:'center'},premiumTag:{fontSize:7,fontWeight:'900',color:C.gold,letterSpacing:1.4,marginTop:2,textAlign:'center'},tag:{textAlign:'center',fontSize:9,fontWeight:'800',color:C.muted,letterSpacing:1.4,marginTop:4,marginBottom:12},login:{flex:1,width:'88%',maxWidth:360,alignSelf:'center',paddingTop:18},loginCard:{backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:18,padding:16,marginTop:8},welcome:{fontSize:20,fontWeight:'900',color:C.navy,textAlign:'center'},signSub:{fontSize:10,color:C.muted,textAlign:'center',marginBottom:12},lab:{fontSize:8,fontWeight:'900',color:C.navy,letterSpacing:1,marginBottom:4},input:{height:38,borderWidth:1,borderColor:C.line,borderRadius:9,backgroundColor:C.white,paddingHorizontal:11,fontSize:12,color:C.ink,marginBottom:9},forgot:{fontSize:9,fontWeight:'800',color:C.gold,textAlign:'right',marginBottom:8},btn:{flex:1,minHeight:38,borderRadius:9,backgroundColor:C.navy,alignItems:'center',justifyContent:'center',borderWidth:1,borderColor:C.navy},btnLight:{backgroundColor:C.paper,borderColor:C.navy},btnT:{fontSize:11,fontWeight:'900',color:C.white,letterSpacing:.8},or:{flexDirection:'row',alignItems:'center',marginVertical:10},orLine:{flex:1,height:1,backgroundColor:C.line},orT:{fontSize:7,fontWeight:'800',color:C.muted,marginHorizontal:7},social:{flexDirection:'row',gap:8},socialB:{flex:1,height:35,borderWidth:1,borderColor:C.line,borderRadius:8,alignItems:'center',justifyContent:'center',backgroundColor:C.white},socialT:{fontSize:10,fontWeight:'800',color:C.ink},create:{fontSize:9,color:C.muted,textAlign:'center',marginTop:10},help:{fontSize:8,color:C.muted,textAlign:'center',marginTop:10},play:{fontSize:9,fontWeight:'900',color:C.navy,textAlign:'center',letterSpacing:1.8,marginTop:14},top:{height:52,flexDirection:'row',alignItems:'center',borderBottomWidth:1,borderBottomColor:C.line,marginBottom:8},back:{width:32,height:32,borderRadius:8,borderWidth:1,borderColor:C.line,alignItems:'center',justifyContent:'center'},backT:{fontSize:24,color:C.navy,lineHeight:25},topTitle:{flex:1,textAlign:'center',fontSize:17,fontWeight:'900',color:C.navy,letterSpacing:.8},homeHead:{height:60,flexDirection:'row',alignItems:'center',gap:10},hello:{fontSize:9,fontWeight:'900',color:C.muted},ready:{fontSize:17,fontWeight:'900',color:C.navy},avatar:{width:34,height:34,borderRadius:17,backgroundColor:C.navy,alignItems:'center',justifyContent:'center'},avatarBig:{width:48,height:48,borderRadius:24,backgroundColor:C.navy,alignItems:'center',justifyContent:'center',marginRight:12},avatarT:{color:C.white,fontWeight:'900'},hero:{height:215,borderRadius:18,overflow:'hidden',backgroundColor:C.green,marginVertical:8,borderWidth:1,borderColor:C.line},heroShade:{flex:1,justifyContent:'flex-end',padding:18,backgroundColor:'rgba(11,41,69,0.18)'},heroSmall:{fontSize:8,fontWeight:'900',color:C.navy},heroTitle:{fontSize:27,fontWeight:'900',color:C.navy},heroSub:{fontSize:10,fontWeight:'700',color:C.ink},heroBtn:{height:38,borderRadius:9,backgroundColor:C.navy,alignItems:'center',justifyContent:'center',marginTop:10},heroBtnT:{color:C.white,fontWeight:'900',fontSize:11},grid:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'},tile:{width:'48.7%',height:92,borderWidth:1,borderColor:C.line,borderRadius:13,backgroundColor:C.paper,padding:11,marginBottom:8},tileIcon:{fontSize:20,color:C.gold,fontWeight:'900'},tileTitle:{fontSize:13,fontWeight:'900',color:C.navy,marginTop:4},tileSub:{fontSize:9,color:C.muted,marginTop:2},bottom:{height:58,flexDirection:'row',borderTopWidth:1,borderTopColor:C.line,backgroundColor:C.paper,marginHorizontal:-14,marginTop:'auto'},nav:{flex:1,alignItems:'center',justifyContent:'center'},navI:{fontSize:16,color:C.muted,fontWeight:'900'},navT:{fontSize:7,color:C.muted,fontWeight:'800',marginTop:2},on:{color:C.gold},profile:{height:72,flexDirection:'row',alignItems:'center',backgroundColor:C.paper,borderRadius:13,borderWidth:1,borderColor:C.line,padding:11,marginBottom:10},profileName:{fontSize:16,fontWeight:'900',color:C.navy},profileSub:{fontSize:9,color:C.muted},chev:{marginLeft:'auto',fontSize:22,color:C.gold},section:{fontSize:9,fontWeight:'900',color:C.muted,letterSpacing:1.4,marginVertical:7},rows:{borderWidth:1,borderColor:C.line,borderRadius:12,overflow:'hidden',backgroundColor:C.paper},row:{height:46,flexDirection:'row',alignItems:'center',paddingHorizontal:12,borderBottomWidth:1,borderBottomColor:C.line},rowIcon:{width:28,fontSize:15,color:C.gold,fontWeight:'900'},rowText:{fontSize:11,fontWeight:'800',color:C.ink},version:{fontSize:8,color:C.muted,textAlign:'center',marginTop:8},bagLine:{height:42,flexDirection:'row',alignItems:'center',justifyContent:'space-between'},bagCount:{fontSize:10,fontWeight:'900',color:C.navy},toggle:{flexDirection:'row',borderWidth:1,borderColor:C.line,borderRadius:8,overflow:'hidden'},tog:{paddingHorizontal:11,paddingVertical:6,backgroundColor:C.paper},togOn:{backgroundColor:C.navy},togT:{fontSize:8,fontWeight:'900',color:C.navy},togOnT:{color:C.white},clubGrid:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between',paddingBottom:6},club:{width:'48.8%',height:86,borderWidth:1,borderColor:C.line,borderRadius:12,backgroundColor:C.paper,alignItems:'center',justifyContent:'center',marginBottom:7},clubPic:{fontSize:19,color:C.navy},clubName:{fontSize:10,fontWeight:'900',color:C.navy},stepper:{flexDirection:'row',alignItems:'center',marginTop:3},step:{fontSize:18,fontWeight:'900',color:C.gold,paddingHorizontal:12},dist:{fontSize:11,fontWeight:'900',color:C.ink,minWidth:30,textAlign:'center'},bagFoot:{paddingBottom:6},driverLabel:{fontSize:8,fontWeight:'900',color:C.muted},driverVal:{fontSize:15,fontWeight:'900',color:C.navy,marginBottom:5},roundMain:{flex:1,flexDirection:'row',gap:8},mapLeft:{width:'52%',borderRadius:14,overflow:'hidden',backgroundColor:C.panel,borderWidth:1,borderColor:C.line,padding:6},roundRight:{flex:1},holeNo:{fontSize:23,fontWeight:'900',color:C.navy},par:{fontSize:9,fontWeight:'800',color:C.muted,marginBottom:7},distanceBox:{backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:10,padding:7,marginBottom:6},dLabel:{fontSize:6,fontWeight:'900',color:C.muted},dBig:{fontSize:15,fontWeight:'900',color:C.navy,marginTop:3},dUnit:{fontSize:7,fontWeight:'800',color:C.gold},pete:{height:44,flexDirection:'row',alignItems:'center',justifyContent:'space-between',backgroundColor:C.paper,borderRadius:10,paddingHorizontal:9,borderWidth:1,borderColor:C.line,marginBottom:6},peteName:{fontSize:13,fontWeight:'900',color:C.navy},mic:{width:31,height:31,borderRadius:16,backgroundColor:C.navy,alignItems:'center',justifyContent:'center'},micT:{fontSize:15},reco:{backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:10,padding:8,marginBottom:6},recoLab:{fontSize:7,fontWeight:'900',color:C.muted,letterSpacing:.7},recoClub:{fontSize:18,fontWeight:'900',color:C.gold},recoText:{fontSize:9,fontWeight:'700',color:C.ink},last:{backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:10,padding:8},lastText:{fontSize:14,fontWeight:'900',color:C.navy},scoreStrip:{backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:11,padding:8,marginVertical:7},scoreTitle:{fontSize:9,fontWeight:'900',color:C.navy,marginBottom:5},scoreFields:{flexDirection:'row'},scoreField:{flex:1,alignItems:'center'},scoreLab:{fontSize:6,fontWeight:'900',color:C.muted},scoreVal:{fontSize:13,fontWeight:'900',color:C.navy},twoBtns:{flexDirection:'row',gap:7,marginBottom:6},holeArt:{width:75,height:55,backgroundColor:'#D7DECC',borderRadius:9,alignItems:'center',justifyContent:'center',marginRight:9,overflow:'hidden'},holeFull:{width:'100%',height:'100%',marginRight:0},fway:{width:42,height:50,borderRadius:20,backgroundColor:C.green,position:'relative'},fwayFull:{width:'55%',height:'92%',borderRadius:60},green:{position:'absolute',top:3,left:'25%',width:'50%',height:'18%',borderRadius:20,backgroundColor:'#95AF7F'},bunker1:{position:'absolute',top:'28%',left:-3,width:18,height:30,borderRadius:12,backgroundColor:C.sand},bunker2:{position:'absolute',top:'50%',right:-3,width:17,height:27,borderRadius:12,backgroundColor:C.sand},pin:{position:'absolute',top:'7%',left:'50%',width:2,height:25,backgroundColor:C.navy},player:{position:'absolute',bottom:'5%',left:'47%',width:9,height:9,borderRadius:5,backgroundColor:C.gold},mapTap:{position:'absolute',bottom:9,alignSelf:'center',fontSize:7,fontWeight:'900',color:C.navy,backgroundColor:C.paper,padding:4,borderRadius:5},reportCourse:{fontSize:19,fontWeight:'900',color:C.navy,textAlign:'center',marginTop:3},reportDate:{fontSize:8,fontWeight:'800',color:C.muted,textAlign:'center',marginBottom:8},stats:{flexDirection:'row',backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:12,marginBottom:8},stat:{flex:1,alignItems:'center',paddingVertical:9},statBig:{fontSize:18,fontWeight:'900',color:C.navy},statLab:{fontSize:6,fontWeight:'900',color:C.muted},holes:{maxHeight:47,marginBottom:7},holeChip:{width:38,height:42,borderWidth:1,borderColor:C.line,backgroundColor:C.paper,alignItems:'center',justifyContent:'center',marginRight:4,borderRadius:7},holeChipN:{fontSize:7,color:C.muted},holeChipS:{fontSize:11,fontWeight:'900',color:C.navy},reportCard:{minHeight:108,flexDirection:'row',alignItems:'center',backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:12,padding:8,marginBottom:7},reportHole:{fontSize:11,fontWeight:'900',color:C.navy},reportQ:{fontSize:8,color:C.muted,marginTop:4},reportPete:{fontSize:9,fontWeight:'800',color:C.ink,marginTop:3},reportResult:{fontSize:8,fontWeight:'900',color:C.gold,marginTop:4},infoCard:{backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:13,padding:12,marginBottom:9},infoBig:{fontSize:15,fontWeight:'900',color:C.navy,marginBottom:5},line:{height:1,backgroundColor:C.line,marginVertical:7},infoText:{fontSize:10,color:C.ink,marginTop:4},mapper:{fontSize:10,fontWeight:'900',color:C.gold,marginTop:12},infoRow:{minHeight:45,borderBottomWidth:1,borderBottomColor:C.line,justifyContent:'center'},infoKey:{fontSize:7,fontWeight:'900',color:C.muted},infoValue:{fontSize:12,fontWeight:'800',color:C.navy},note:{fontSize:8,color:C.muted,textAlign:'center'},gpsMap:{flex:1,borderRadius:15,overflow:'hidden',borderWidth:1,borderColor:C.line,backgroundColor:C.panel,position:'relative'},gpsNumbers:{position:'absolute',top:12,right:12,backgroundColor:'rgba(247,244,236,0.94)',borderRadius:11,padding:9,alignItems:'center'},gpsBig:{fontSize:32,fontWeight:'900',color:C.navy},gpsUnit:{fontSize:7,fontWeight:'900',color:C.gold},gpsSmall:{fontSize:7,fontWeight:'800',color:C.ink,marginTop:3},gpsCaddie:{minHeight:82,flexDirection:'row',alignItems:'center',gap:11,backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:13,padding:10,marginVertical:8},gpsMic:{width:56,height:56,borderRadius:28,backgroundColor:C.navy,alignItems:'center',justifyContent:'center'},gpsMicIcon:{fontSize:23},gpsMicText:{fontSize:6,fontWeight:'900',color:C.white},gpsAdvice:{fontSize:12,fontWeight:'800',color:C.navy,marginTop:4},secretHead:{alignItems:'center',marginVertical:8},secretTitle:{fontSize:18,fontWeight:'900',color:C.navy},secretSub:{fontSize:9,color:C.muted},secretMap:{flex:1,borderWidth:1,borderColor:C.line,borderRadius:15,overflow:'hidden',marginBottom:8},secretTap:{position:'absolute',bottom:12,alignSelf:'center',fontSize:9,fontWeight:'900',color:C.white,backgroundColor:C.navy,paddingHorizontal:13,paddingVertical:7,borderRadius:8},guide:{minHeight:62,flexDirection:'row',alignItems:'center',backgroundColor:C.paper,borderWidth:1,borderColor:C.line,borderRadius:11,padding:9,marginBottom:6},guideN:{width:31,height:31,borderRadius:16,backgroundColor:C.navy,alignItems:'center',justifyContent:'center',marginRight:10},guideNT:{color:C.white,fontSize:11,fontWeight:'900'},guideTitle:{fontSize:11,fontWeight:'900',color:C.navy},guideText:{fontSize:9,color:C.muted,marginTop:2},scHead:{height:30,flexDirection:'row',alignItems:'center',backgroundColor:C.navy,borderTopLeftRadius:8,borderTopRightRadius:8},scH:{flex:1,textAlign:'center',fontSize:8,fontWeight:'900',color:C.white},scRow:{height:31,flexDirection:'row',alignItems:'center',backgroundColor:C.paper,borderBottomWidth:1,borderBottomColor:C.line},scC:{flex:1,textAlign:'center',fontSize:9,fontWeight:'800',color:C.ink},scIn:{flex:1,height:29,textAlign:'center',fontSize:9,fontWeight:'900',color:C.navy,padding:0},scTouch:{flex:1,alignItems:'center'}
-});
+import React, { useState, useEffect, useRef } from 'react';
+import { SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View, ScrollView, TextInput, Animated, Easing, ActivityIndicator, Dimensions } from 'react-native';
+import * as Location from 'expo-location';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+
+// Premium Metallic Luxury Theme Palette
+const C = {
+  bg: '#E2E8F0', paper: '#FFFFFF', panel: '#F8FAFC',
+  navy: '#061F3E', blue: '#0F4C81', sky: '#3A8BCD',
+  gold: '#B88A30', steel: '#64748B', lightSteel: '#CBD5E1',
+  white: '#FFFFFF', textDark: '#0F172A', textMuted: '#475569',
+  green: '#10B981', pin: '#EF4444', glass: 'rgba(255,255,255,0.85)'
+};
+
+const CLUBS = [
+  ['Driver', 230], ['3 Wood', 210], ['5 Wood', 195],
+  ['4 Iron', 180], ['5 Iron', 170], ['6 Iron', 160],
+  ['7 Iron', 150], ['8 Iron', 140], ['9 Iron', 130],
+  ['PW', 115], ['GW', 100], ['SW', 85], ['LW', 70], ['Putter', 0]
+];
+
+const WARM = ['Loosen Up Elasticity Stretch', 'Short Wedge Fluidity Scans', 'Mid Iron Tempo Drills', 'Long Iron Core Stability Passes', 'Fairway Wood Sweeps', 'Green-side Chipping Arc Scans', 'Putting Distance Control Calibration', 'Ready Protocol Engaged'];
+const ROUT = ['Define Target Apex', 'Scan Lie & Turf Density', 'Calculate Adjusted Wind Clubbing', 'Visualize Flight Path & Apex', 'Full Trust & Commitment Check', 'Breathe & Diaphragm Release', 'Execute & Monitor Output', 'Reset Focus for Next Sequence'];
+const PRACT = ['Wedges', 'Irons', 'Driver', 'Chipping', 'Bunker', 'Putting'];
+
+// Clean, Universal 18-Hole Layout Database (Using generic placeholders)
+const COURSE_DATABASE = {
+  1: { par: 4, si: 7, targetLat: -27.4512, targetLon: 153.0251, meters: 364, front: 354, centre: 364, back: 374 },
+  2: { par: 5, si: 3, targetLat: -27.4519, targetLon: 153.0265, meters: 470, front: 460, centre: 470, back: 480 },
+  3: { par: 3, si: 18, targetLat: -27.4528, targetLon: 153.0242, meters: 127, front: 119, centre: 127, back: 135 },
+  4: { par: 4, si: 11, targetLat: -27.4535, targetLon: 153.0231, meters: 340, front: 330, centre: 340, back: 350 },
+  5: { par: 4, si: 1, targetLat: -27.4542, targetLon: 153.0258, meters: 410, front: 400, centre: 410, back: 420 },
+  6: { par: 3, si: 15, targetLat: -27.4550, targetLon: 153.0260, meters: 160, front: 150, centre: 160, back: 170 },
+  7: { par: 5, si: 9, targetLat: -27.4560, targetLon: 153.0270, meters: 490, front: 480, centre: 490, back: 500 },
+  8: { par: 4, si: 5, targetLat: -27.4570, targetLon: 153.0280, meters: 375, front: 365, centre: 375, back: 385 },
+  9: { par: 4, si: 13, targetLat: -27.4580, targetLon: 153.0290, meters: 315, front: 305, centre: 315, back: 325 },
+  10: { par: 4, si: 8, targetLat: -27.4590, targetLon: 153.0300, meters: 355, front: 345, centre: 355, back: 365 },
+  11: { par: 4, si: 4, targetLat: -27.4600, targetLon: 153.0310, meters: 395, front: 385, centre: 395, back: 405 },
+  12: { par: 3, si: 16, targetLat: -27.4610, targetLon: 153.0320, meters: 135, front: 125, centre: 135, back: 145 },
+  13: { par: 5, si: 12, targetLat: -27.4620, targetLon: 153.0330, meters: 475, front: 465, centre: 475, back: 485 },
+  14: { par: 4, si: 2, targetLat: -27.4630, targetLon: 153.0340, meters: 420, front: 410, centre: 420, back: 430 },
+  15: { par: 4, si: 14, targetLat: -27.4640, targetLon: 153.0350, meters: 330, front: 320, centre: 330, back: 340 },
+  16: { par: 3, si: 17, targetLat: -27.4650, targetLon: 153.0360, meters: 145, front: 135, centre: 145, back: 155 },
+  17: { par: 5, si: 6, targetLat: -27.4660, targetLon: 153.0370, meters: 515, front: 505, centre: 515, back: 525 },
+  18: { par: 4, si: 10, targetLat: -27.4670, targetLon: 153.0380, meters: 380, front: 370, centre: 380, back: 390 }
+};
+
+const calculateDistanceMatrix = (lat1, lon1, lat2, lon2, targetUnit) => {
+  if (!lat1 || !lon1 || !lat2 || !lon2) return null;
+  const R = 6371e3;
+  const phi1 = (lat1 * Math.PI) / 180;
+  const phi2 = (lat2 * Math.PI) / 180;
+  const deltaPhi = ((lat2 - lat1) * Math.PI) / 180;
+  const deltaLambda = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+            Math.cos(phi1) * Math.cos(phi2) *
+            Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distanceInMetres = R * c;
+
+  return targetUnit === 'YARDS' ? Math.round(distanceInMetres * 1.09361) : Math.round(distanceInMetres);
+};
+
+const getWindDirection = (deg) => {
+  const src = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  return src[Math.round(deg / 22.5) % 16];
+};
+
+export default function App() {
+  const [screen, setScreen] = useState('login');
+  const [holeNo, setHoleNo] = useState(1);
+  const [units, setUnits] = useState('METRES');
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  
+  // Game Scores Arrays
+  const [scores, setScores] = useState(Array(18).fill(''));
+  
+  // Core Tracking Telemetry
+  const [coords, setCoords] = useState({ latitude: -27.4512, longitude: 153.0251 });
+  const [weather, setWeather] = useState({ temp: '24', windSpeed: 12, windDir: 45, cardinal: 'NNE' });
+  const [loadingWeather, setLoadingWeather] = useState(false);
+  const [caddieSpeech, setCaddieSpeech] = useState("Aim at the left centre. Smooth driver. Commit.");
+  const [isListening, setIsListening] = useState(false);
+  const [calculatedDistances, setCalculatedDistances] = useState({ front: 354, centre: 364, back: 374, dynamicMode: false });
+
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+  const windAnim = useRef(new Animated.Value(0)).current;
+  const currentHoleConfig = COURSE_DATABASE[holeNo];
+
+  // Hardware Location Hooks
+  useEffect(() => {
+    let subscription;
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status === 'granted') {
+        subscription = await Location.watchPositionAsync(
+          { accuracy: Location.Accuracy.High, distanceInterval: 2 },
+          (loc) => {
+            setCoords({ latitude: loc.coords.latitude, longitude: loc.coords.longitude });
+          }
+        );
+      }
+    })();
+    return () => subscription && subscription.remove();
+  }, []);
+
+  // Distance Delta Calculation Engine
+  useEffect(() => {
+    if (!coords.latitude) return;
+
+    const realTimeDistance = calculateDistanceMatrix(
+      coords.latitude,
+      coords.longitude,
+      currentHoleConfig.targetLat,
+      currentHoleConfig.targetLon,
+      units
+    );
+
+    if (realTimeDistance && realTimeDistance < 5000) {
+      setCalculatedDistances({
+        front: Math.max(10, realTimeDistance - 10),
+        centre: realTimeDistance,
+        back: realTimeDistance + 10,
+        dynamicMode: true
+      });
+    } else {
+      setCalculatedDistances({
+        front: currentHoleConfig.defaultFront || currentHoleConfig.front,
+        centre: currentHoleConfig.defaultCentre || currentHoleConfig.centre,
+        back: currentHoleConfig.defaultBack || currentHoleConfig.back,
+        dynamicMode: false
+      });
+    }
+  }, [coords, holeNo, units]);
+
+  // Weather Satellite System Sync
+  useEffect(() => {
+    if (!coords.latitude) return;
+
+    const fetchLiveMetrics = async () => {
+      setLoadingWeather(true);
+      try {
+        const response = await fetch(
+          `https://open-meteo.com{coords.latitude}&longitude=${coords.longitude}&current=temperature_2m,wind_speed_10m,wind_direction_10m`
+        );
+        const data = await response.json();
+        if (data && data.current) {
+          const wSpeed = Math.round(data.current.wind_speed_10m);
+          const wDir = data.current.wind_direction_10m;
+          const temp = Math.round(data.current.temperature_2m);
+          const card = getWindDirection(wDir);
+
+          setWeather({ temp, windSpeed: wSpeed, windDir: wDir, cardinal: card });
+          setCaddieSpeech(`Aim at the left centre. Wind is ${wSpeed} km/h from ${card}. Smooth swing.`);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoadingWeather(false);
+      }
+    };
+    fetchLiveMetrics();
+  }, [coords]);
+
+  // Visual Animation Pulse Effects Loops
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, { toValue: 1.12, duration: 1500, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 1.0, duration: 1500, useNativeDriver: true })
+      ])
+    ).start();
+  }, [pulseAnim]);
+
+  useEffect(() => {
+    windAnim.setValue(0);
+    Animated.timing(windAnim, { toValue: weather.windDir, duration: 1200, useNativeDriver: true }).start();
+  }, [weather.windDir]);
+
+  const windRotation = windAnim.interpolate({
+    inputRange:,
+    outputRange: ['0deg', '360deg']
+  });
+
+  const fireVoiceSimulation = () => {
+    setIsListening(true);
+    setCaddieSpeech("Heard: Recalculating aerodynamic trajectories...");
+    setTimeout(() => {
+      setIsListening(false);
+      setCaddieSpeech(`Advice: Adjusted playing center is ${calculatedDistances.centre} ${units.toLowerCase()}. Smooth cut down the fairway line.`);
+    }, 2000);
+  };
+
+  const handleScoreInput = (index, value) => {
+    const updated = [...scores];
+    updated[index] = value;
+    setScores(updated);
+  };
+
+  const calculateTotals = () => {
+    let grossOut = 0;
+    let grossIn = 0;
+    for (let i = 0; i < 9; i++) grossOut += parseInt(scores[i]) || 0;
+    for (let i = 9; i < 18; i++) grossIn += parseInt(scores[i]) || 0;
+    return { out: grossOut, in: grossIn, total: grossOut + grossIn };
+  };
+
+  const totals = calculateTotals();
+
+  // Screen Layout Definitions
+  const LoginView = () => (
+    <View style={ss.container}>
+      <View style={ss.loginHeader}>
+        <View style={ss.metallicIconBorder}>
+          <Text style={ss.logoTextMain}>DRC</Text>
+          <Text style={ss.logoTextSub}>VIRTUAL GOLF</Text>
+          <Text style={ss.logoTextElite}>E L I T E</Text>
