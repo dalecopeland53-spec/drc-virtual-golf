@@ -12,7 +12,7 @@ const C = {
   gold: '#F59E0B', steel: '#94A3B8', lightSteel: '#E2E8F0',
   white: '#FFFFFF', textDark: '#F1F5F9', textMuted: '#64748B',
   green: '#10B981', pin: '#EF4444', neonCyan: '#06B6D4',
-  hazard Pond: '#1E3A8A', warningRed: '#DC2626'
+  hazardPond: '#1E3A8A', warningRed: '#DC2626'
 };
 
 const DEFAULT_CLUBS = [
@@ -133,7 +133,7 @@ export default function App() {
     const streamMeteorology = async () => {
       setTelemetryLoading(true);
       try {
-        const query = await fetch(`https://open-meteo.com{playerCoords.latitude}&longitude=${playerCoords.longitude}&current=temperature_2m,wind_speed_10m,wind_direction_10m`);
+        const query = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${playerCoords.latitude}&longitude=${playerCoords.longitude}&current=temperature_2m,wind_speed_10m,wind_direction_10m`);
         const payload = await query.json();
         if (payload && payload.current) {
           const deg = payload.current.wind_direction_10m;
