@@ -103,9 +103,9 @@ function Bottom({ go, active }) {
         ['📡', 'Live GPS', 'gps'],
         ['•••', 'More', 'more']
       ].map(x => (
-        <TouchableOpacity key={x[1]} onPress={() => go(x[2])} style={s.nav}>
-          <Text style={[s.navI, active === x[2] && s.on]}>{x[0]}</Text>
-          <Text style={[s.navT, active === x && s.on]}>{x[1]}</Text>
+        <TouchableOpacity key={x} onPress={() => go(x)} style={s.nav}>
+          <Text style={[s.navI, active === x && s.on]}>{x}</Text>
+          <Text style={[s.navT, active === x && s.on]}>{x}</Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -128,7 +128,7 @@ export default function App() {
   const [calculatedDistances, setCalculatedDistances] = useState({ front: 146, centre: 154, back: 162, dynamicMode: false });
 
   const windAnim = useRef(new Animated.Value(0)).current;
-  const currentCourseConfig = COURSE_DATABASE[holeNo] || COURSE_DATABASE[1];
+  const currentCourseConfig = COURSE_DATABASE[holeNo] || COURSE_DATABASE;
 
   useEffect(() => {
     let subscription;
@@ -226,7 +226,7 @@ export default function App() {
   }, [weather.windDir]);
 
   const windRotation = windAnim.interpolate({
-    inputRange: [0, 360],
+    inputRange:,
     outputRange: ['0deg', '360deg']
   });
 
