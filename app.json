@@ -26,12 +26,7 @@
         "ACCESS_FINE_LOCATION",
         "RECORD_AUDIO"
       ],
-      "package": "com.drc.virtualgolfelite",
-      "adaptiveIcon": {
-        "foregroundImage": "./drc-virtual-golf-icon.png",
-        "backgroundColor": "#031827"
-      }
-    },
-    "icon": "./drc-virtual-golf-icon.png"
+      "package": "com.drc.virtualgolfelite"
+    }
   }
 }
