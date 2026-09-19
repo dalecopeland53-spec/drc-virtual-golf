@@ -11,7 +11,8 @@
         {
           "locationWhenInUsePermission": "DRC Virtual Golf uses your location to calculate live on-course distances and show your position on the golf hole."
         }
-      ]
+      ],
+      "expo-speech-recognition"
     ],
     "ios": {
       "supportsTablet": true,
