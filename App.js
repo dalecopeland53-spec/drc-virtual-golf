@@ -1,58 +1,447 @@
-import React,{useState}from'react';
-import{SafeAreaView,StatusBar,StyleSheet,Text,TouchableOpacity,View,ScrollView,TextInput,Switch}from'react-native';
+import React, { useState } from 'react';
+import { 
+  StyleSheet, Text, View, TextInput, TouchableOpacity, 
+  ScrollView, Switch, Dimensions 
+} from 'react-native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const C={bg:'#DDE7EF',white:'#F8FBFD',ink:'#14263A',muted:'#66798B',blue:'#075B96',blue2:'#0B78B8',line:'#AFC1CF',gold:'#C8A44A',green:'#4D7D3B'};
-const PAGES=['SIGN IN','HOME','COURSE SELECT','ACTIVE GPS PLAY','AI CADDIE','SCORECARD','PERFORMANCE','TOURNAMENTS','MY GEAR','PROFILE','COURSE INFO','PRACTICE','WARM-UP','ROUTINES','ROUND SUMMARY','SETTINGS / HELP','COURSE MAPPER'];
-const clubs=[['Driver','245 Yds'],['3-Wood','215 Yds'],['7-Iron','155 Yds'],['PW','115 Yds'],['SW','85 Yds']];
-const holes=Array.from({length:9},(_,i)=>({h:i+1,p:[4,4,3,4,5,3,4,4,5][i],s:['+1','E','E','-1','-1','-1','E','+1','+3'][i]}));
+const { width } = Dimensions.get('window');
 
-function Button({children,onPress,small=false}){return <TouchableOpacity onPress={onPress} style={[s.btn,small&&s.btnSmall]}><Text style={s.btnText}>{children}</Text></TouchableOpacity>}
-function Card({children,style}){return <View style={[s.card,style]}>{children}</View>}
-function Header(){return <><View style={s.header}><View style={s.logo}><Text style={s.logoBig}>DRC</Text><Text style={s.logoTiny}>VIRTUAL GOLF ELITE</Text></View><View style={{flex:1}}/><Text style={s.hello}>Hello, Andrew!</Text><Text style={s.icon}>♟</Text><Text style={s.icon}>⚙</Text></View><Text style={s.tag}>YOUR CADDIE. YOUR GAME.</Text></>}
-function Tabs({go,active}){return <View style={s.tabs}>{[['⌂','Home','HOME'],['⚑','Play','ACTIVE GPS PLAY'],['▥','Stats','PERFORMANCE'],['◉','Caddie','AI CADDIE'],['●','Profile','PROFILE']].map(([ic,n,p])=><TouchableOpacity key={n} onPress={()=>go(p)} style={[s.tab,active===p&&s.tabOn]}><Text style={[s.tabIcon,active===p&&s.tabTextOn]}>{ic}</Text><Text style={[s.tabText,active===p&&s.tabTextOn]}>{n}</Text></TouchableOpacity>)}</View>}
-function Shell({title,page,go,children,noHeader=false}){return <SafeAreaView style={s.safe}><StatusBar barStyle="dark-content" backgroundColor={C.bg}/><View style={s.phone}>{!noHeader&&<Header/>}{title&&<Text style={s.title}>{title}</Text>}<ScrollView contentContainerStyle={s.body} showsVerticalScrollIndicator={false}>{children}</ScrollView><Tabs go={go} active={page}/></View></SafeAreaView>}
+const GolfAppTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    background: '#0F172A',
+    card: '#1E293B',
+    text: '#FFFFFF',
+    primary: '#3B82F6',
+  },
+};
 
-function SignIn({go}){return <SafeAreaView style={s.safe}><View style={[s.phone,{paddingHorizontal:18}]}><View style={{alignItems:'center',marginTop:30}}><View style={[s.logo,{width:104,height:100}]}><Text style={[s.logoBig,{fontSize:32}]}>DRC</Text><Text style={s.logoTiny}>VIRTUAL GOLF ELITE</Text></View><Text style={[s.tag,{marginTop:12}]}>Your Caddie. Your Game.</Text></View><Card style={{marginTop:20}}><Text style={s.bigTitle}>Welcome Back</Text><TextInput placeholder="Email" placeholderTextColor={C.muted} style={s.input}/><TextInput placeholder="Password" placeholderTextColor={C.muted} secureTextEntry style={s.input}/><Text style={s.forgot}>Forgot Password?</Text><Button onPress={()=>go('HOME')}>SIGN IN</Button><Text style={s.or}>────────  OR  ────────</Text><Button>G  Continue with Google</Button><Button>●  Continue with Apple</Button><Text style={s.footerText}>Create Account   |   Help & Support</Text></Card></View></SafeAreaView>}
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-function Home({go}){return <Shell page="HOME" go={go}><Button onPress={()=>go('COURSE SELECT')}>START NEW ROUND   ◉</Button><Card><Text style={s.cardTitle}>YOUR VIRTUAL CADDIE</Text><Text style={s.small}>Course-aware advice for every shot.</Text></Card><View style={s.grid}><Tile t="MY PERFORMANCE" on={()=>go('PERFORMANCE')}/><Tile t="DRC TOURNAMENTS" on={()=>go('TOURNAMENTS')}/><Tile t="COURSE MAPS" on={()=>go('COURSE SELECT')}/><Tile t="MY GEAR" on={()=>go('MY GEAR')}/><Tile t="SCORECARD" on={()=>go('SCORECARD')}/><Tile t="PRACTICE" on={()=>go('PRACTICE')}/><Tile t="WARM-UP" on={()=>go('WARM-UP')}/><Tile t="ROUTINES" on={()=>go('ROUTINES')}/><Tile t="COURSE INFO" on={()=>go('COURSE INFO')}/><Tile t="SETTINGS" on={()=>go('SETTINGS / HELP')}/><Tile t="COURSE MAPPER" on={()=>go('COURSE MAPPER')}/><Tile t="ROUND SUMMARY" on={()=>go('ROUND SUMMARY')}/></View></Shell>}
-function Tile({t,on}){return <TouchableOpacity onPress={on} style={s.tile}><Text style={s.tileText}>{t}</Text></TouchableOpacity>}
+export default function App() {
+  return (
+    <NavigationContainer theme={GolfAppTheme}>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarActiveTintColor: '#3B82F6',
+          tabBarInactiveTintColor: '#64748B',
+          tabBarStyle: { backgroundColor: '#1E293B', borderTopWidth: 0, height: 60, paddingBottom: 8 },
+        })}
+      >
+        <Tab.Screen name="Auth" component={AuthStack} options={{ tabBarLabel: 'Sign In', tabBarIcon: ({color, size}) => <Ionicons name="log-in-outline" color={color} size={size}/> }} />
+        <Tab.Screen name="Dashboard" component={DashboardStack} options={{ tabBarLabel: 'Home', tabBarIcon: ({color, size}) => <Ionicons name="home-outline" color={color} size={size}/> }} />
+        <Tab.Screen name="PlayRound" component={PlayRoundStack} options={{ tabBarLabel: 'Golf GPS', tabBarIcon: ({color, size}) => <Ionicons name="golf-outline" color={color} size={size}/> }} />
+        <Tab.Screen name="Analytics" component={AnalyticsStack} options={{ tabBarLabel: 'Stats', tabBarIcon: ({color, size}) => <Ionicons name="bar-chart-outline" color={color} size={size}/> }} />
+        <Tab.Screen name="AppControl" component={AppControlStack} options={{ tabBarLabel: 'System', tabBarIcon: ({color, size}) => <Ionicons name="options-outline" color={color} size={size}/> }} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
 
-function CourseSelect({go}){return <Shell title="COURSE SELECT" page="COURSE SELECT" go={go}><TextInput placeholder="⌕  Search courses" style={s.input}/>{[['Pebble Beach','215 Yds | Par 4'],['St Andrews','255 Yds | Par 4'],['Royal Melbourne','Par 72']].map((x,i)=><Card key={x[0]}><View style={[s.coursePic,{backgroundColor:i===0?'#7194A8':i===1?'#788E65':'#9B875F'}]}><Text style={s.picText}>GOLF COURSE</Text></View><View style={s.row}><View style={{flex:1}}><Text style={s.cardTitle}>{x[0]}</Text><Text style={s.small}>{x[1]}</Text></View><Button small onPress={()=>go('ACTIVE GPS PLAY')}>PLAY NOW</Button></View></Card>)}</Shell>}
+function AuthStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#0F172A' }, headerTintColor: '#FFF', headerTitleAlign: 'center' }}>
+      <Stack.Screen name="SignIn" component={Screen01_SignIn} options={{ title: 'DRC LOGIN' }} />
+    </Stack.Navigator>
+  );
+}
 
-function GPS({go}){return <Shell page="ACTIVE GPS PLAY" go={go}><View style={s.gpsTop}><View style={s.bubble}><Text style={s.bubbleBig}>12</Text><Text style={s.bubbleSmall}>mph NW</Text></View><View style={s.distance}><Text style={s.distanceBig}>345</Text><Text style={s.distanceSmall}>Yds to Pin</Text></View><View style={s.bubble}><Text style={s.bubbleBig}>12</Text><Text style={s.bubbleSmall}>HOLE</Text></View></View><View style={s.holeMap}><Text style={s.tree}>♣  ♣     ♣</Text><View style={s.fairway}><Text style={s.flag}>⚑</Text><View style={s.line}/><Text style={s.ball}>●</Text></View><Text style={s.tree}>♣     ♣  ♣</Text><View style={s.mapLabel}><Text style={s.mapLabelBig}>345 Yds</Text><Text style={s.mapLabelSmall}>335 to Pin</Text></View></View><View style={s.row}><Button small>💡</Button><Button small onPress={()=>go('AI CADDIE')}>◉ CADDIE</Button><Button small>↻</Button></View><View style={s.holeBar}><Text>Par 4</Text><Text style={s.holePill}>Hole 12</Text><Text>Par 4</Text></View></Shell>}
+function DashboardStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#0F172A' }, headerTintColor: '#FFF', headerTitleAlign: 'center' }}>
+      <Stack.Screen name="Home" component={Screen02_Home} options={{ title: 'YOUR CADDIE. YOUR GAME.' }} />
+      <Stack.Screen name="MyGear" component={Screen09_MyGear} options={{ title: 'MY GEAR DETAILS' }} />
+      <Stack.Screen name="Profile" component={Screen10_Profile} options={{ title: 'MY PROFILE INSIGHTS' }} />
+    </Stack.Navigator>
+  );
+}
 
-function Caddie({go}){return <Shell title="Your AI Caddie Advice" page="AI CADDIE" go={go}><Card><Text style={s.cardTitle}>⚑ Club Suggestion: 7 Iron</Text></Card><Text style={s.section}>Expected Distance: 155 Yds</Text><View style={s.shotPic}><Text style={{fontSize:48}}>⛳</Text><Text style={s.small}>Target line • landing area • shot shape</Text></View><View style={s.row}><Button small>≋ Wind Factor</Button><Button small>◒ Slope Factor</Button></View><Card><Text style={s.cardTitle}>Swing Tips</Text><Text style={s.small}>Use your normal pre-shot routine. Pick the target, picture the shot and commit.</Text></Card></Shell>}
+function PlayRoundStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#0F172A' }, headerTintColor: '#FFF', headerTitleAlign: 'center' }}>
+      <Stack.Screen name="CourseSelect" component={Screen03_CourseSelect} options={{ title: 'SELECT COURSE' }} />
+      <Stack.Screen name="CourseInfo" component={Screen11_CourseInfo} options={{ title: 'COURSE OVERVIEW' }} />
+      <Stack.Screen name="ActivePlay" component={Screen04_ActiveGPSPlay} options={{ title: 'ACTIVE LIVE PLAY' }} />
+      <Stack.Screen name="AICaddie" component={Screen05_AICaddie} options={{ title: 'AI REAL-TIME CADDIE' }} />
+      <Stack.Screen name="RoundSummary" component={Screen15_RoundSummary} options={{ title: 'ROUND PERFORMANCE OVERVIEW' }} />
+      <Stack.Screen name="CourseMapper" component={Screen17_CourseMapper} options={{ title: 'GPS COURSE MAPPER' }} />
+    </Stack.Navigator>
+  );
+}
 
-function Score({go}){return <Shell title="Scorecard" page="SCORECARD" go={go}><Text style={s.section}>Digital / Golfer</Text><View style={s.table}><View style={s.tr}><Text style={s.th}>Hole</Text>{holes.map(x=><Text key={x.h} style={s.td}>{x.h}</Text>)}</View><View style={s.tr}><Text style={s.th}>Par</Text>{holes.map(x=><Text key={x.h} style={s.td}>{x.p}</Text>)}</View><View style={s.tr}><Text style={s.th}>Score</Text>{holes.map(x=><Text key={x.h} style={s.td}>{x.s}</Text>)}</View><View style={s.tr}><Text style={s.th}>Putts</Text>{holes.map(x=><Text key={x.h} style={s.td}>1</Text>)}</View></View><View style={s.scoreVisual}><Text style={s.smallWhite}>Visual</Text><Text style={s.scoreBig}>+3</Text><Text style={s.smallWhite}>thru 9</Text></View></Shell>}
+function AnalyticsStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#0F172A' }, headerTintColor: '#FFF', headerTitleAlign: 'center' }}>
+      <Stack.Screen name="Scorecard" component={Screen06_Scorecard} options={{ title: 'DIGITAL SCORECARD' }} />
+      <Stack.Screen name="Performance" component={Screen07_Performance} options={{ title: 'DATA PERFORMANCE' }} />
+      <Stack.Screen name="Tournaments" component={Screen08_Tournaments} options={{ title: 'ELITE TOURNAMENTS' }} />
+    </Stack.Navigator>
+  );
+}
 
-function Performance({go}){return <Shell title="Analytics" page="PERFORMANCE" go={go}><View style={s.segment}><Text style={s.segmentOn}>Data Analytics</Text><Text style={s.segmentOff}>Data Analytics</Text></View><Card><Text style={s.cardTitle}>Handicap Trend (12.4)</Text><View style={s.chart}><Text style={s.chartLine}>╲__╱╲__╱</Text></View></Card><Card><Text style={s.cardTitle}>Driving Accuracy</Text><View style={s.bars}>{[45,68,62,58,82,38].map((h,i)=><View key={i} style={[s.bar,{height:h}]}/>)}</View></Card><View style={s.row}><Card style={{flex:1}}><Text style={s.small}>Average Putts</Text><Text style={s.metric}>1.4</Text></Card><Card style={{flex:1}}><Text style={s.small}>Green in Regulation</Text><Text style={s.metric}>GR%</Text></Card></View></Shell>}
+function AppControlStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#0F172A' }, headerTintColor: '#FFF', headerTitleAlign: 'center' }}>
+      <Stack.Screen name="Practice" component={Screen12_Practice} options={{ title: 'TRAINING HUBS' }} />
+      <Stack.Screen name="WarmUp" component={Screen13_WarmUp} options={{ title: 'PRE-ROUND PREPARATION' }} />
+      <Stack.Screen name="Routines" component={Screen14_Routines} options={{ title: 'PSYCHOLOGICAL PRESETS' }} />
+      <Stack.Screen name="SettingsHelp" component={Screen16_SettingsHelp} options={{ title: 'DEVICE CONTROL PANEL' }} />
+    </Stack.Navigator>
+  );
+}
 
-function Tournaments({go}){return <Shell title="Elite Tournaments" page="TOURNAMENTS" go={go}><Text style={s.section}>Featured Events</Text><Card style={s.blueCard}><Text style={s.whiteTitle}>🏆 DRC Elite Open</Text><Text style={s.smallWhite}>Active event • 7th Sep</Text></Card><Card><Text style={s.cardTitle}>DRC Elite Open</Text>{['Andrew','Korton','Starlen','Sandons','Stobha','Kanie','Marlestia','Dana','Maniary','Mator'].map((n,i)=><View key={n} style={s.leader}><Text style={s.rank}>{i+1}</Text><Text style={{flex:1,fontWeight:'700'}}>{n}</Text><Text style={{fontWeight:'900'}}>+2</Text><Text style={{color:C.green,fontWeight:'900'}}>  -3</Text></View>)}</Card></Shell>}
+function Screen01_SignIn({ navigation }) {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>01. SIGN IN</Text>
+        <View style={styles.logoPlaceholder}><Text style={styles.logoText}>DRC</Text></View>
+        <Text style={styles.titleText}>Welcome Back</Text>
+        <TextInput style={styles.input} placeholder="Email Address" placeholderTextColor="#64748B" />
+        <TextInput style={styles.input} placeholder="Password" secureTextEntry placeholderTextColor="#64748B" />
+        <TouchableOpacity style={styles.blueButton} onPress={() => navigation.navigate('Dashboard', { screen: 'Home' })}>
+          <Text style={styles.btnText}>SIGN IN</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+}
 
-function Gear({go}){return <Shell title="My Gear" page="MY GEAR" go={go}><Text style={s.section}>My Gear / Club Bag</Text><View style={s.clubArt}><Text style={{fontSize:72}}>🏌️</Text><Text style={s.cardTitle}>Your Club Bag</Text></View>{clubs.map(x=><Card key={x[0]} style={s.clubRow}><Text style={s.clubName}>◒  {x[0]}</Text><Text style={s.clubDist}>{x[1]}</Text></Card>)}<Button>Club Specs Adjustment  ›</Button></Shell>}
+function Screen02_Home({ navigation }) {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>02. HOME SCREEN</Text>
+        <Text style={styles.welcomeTitle}>Hello, Andrew!</Text>
+        <TouchableOpacity style={styles.blueButton} onPress={() => navigation.navigate('PlayRound', { screen: 'CourseSelect' })}>
+          <Text style={styles.btnText}>START NEW ROUND</Text>
+        </TouchableOpacity>
+        <View style={[styles.innerCard, { borderLeftWidth: 4, borderLeftColor: '#3B82F6' }]}>
+          <Text style={styles.accentText}>YOUR VIRTUAL CADDIE</Text>
+          <Text style={styles.bodyText}>Caddie Advice: Expect crosswinds blowing on hole 4 today.</Text>
+        </View>
+        <View style={styles.rowSpace}>
+          <TouchableOpacity style={styles.miniCard} onPress={() => navigation.navigate('MyGear')}>
+            <Text style={styles.accentText}>MY GEAR</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.miniCard} onPress={() => navigation.navigate('Profile')}>
+            <Text style={styles.accentText}>PROFILE</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
 
-function Profile({go}){return <Shell page="PROFILE" go={go}><View style={{alignItems:'center',marginVertical:10}}><View style={s.avatar}><Text style={{fontSize:40}}>🙂</Text></View><Text style={s.bigTitle}>Andrew!</Text><Text style={s.section}>Handicap Index: 12.4</Text></View><Text style={s.section}>Badge Achievements</Text><View style={s.badges}>{['🏆','♢','🏅','🥇'].map((x,i)=><View key={i} style={s.badge}><Text style={{fontSize:30}}>{x}</Text></View>)}</View><Text style={s.section}>Round History</Text>{['Recent Games 1','Recent Games 2','Recent Games 3'].map(x=><Card key={x}><Text style={s.cardTitle}>{x}   ›</Text><Text style={s.small}>Par 4, Sr 3</Text></Card>)}</Shell>}
+function Screen03_CourseSelect({ navigation }) {
+  const courses = [
+    { id: '1', name: 'Pebble Beach', details: '235 Yds | Par 4' },
+    { id: '2', name: 'St Andrews', details: '255 Yds | Par 4' }
+  ];
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>03. COURSE SELECT</Text>
+        <TextInput style={styles.input} placeholder="Search courses globally..." placeholderTextColor="#64748B" />
+        {courses.map(course => (
+          <View key={course.id} style={styles.listItem}>
+            <View>
+              <Text style={styles.itemTitle}>{course.name}</Text>
+              <Text style={styles.subText}>{course.details}</Text>
+            </View>
+            <TouchableOpacity style={styles.greenButton} onPress={() => navigation.navigate('CourseInfo')}>
+              <Text style={styles.btnText}>PLAY NOW</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
 
-function CourseInfo({go}){return <Shell page="COURSE INFO" go={go}><Card style={s.blueCard}><Text style={s.whiteTitle}>The Club at Pebble Beach</Text><Text style={s.smallWhite}>☎ (769) 336-7880</Text><Text style={s.smallWhite}>✉ golf@club.example</Text><Text style={s.smallWhite}>⌖ 200 50th at Pebble Beach</Text><Text style={s.smallWhite}>Golf Pro: John Smith, PGA</Text><Text style={s.smallWhite}>Pro Shop Hours: 6AM - 6PM</Text></Card><Card><Text style={s.cardTitle}>🚙 Cart & Club Hire</Text><Text style={s.small}>$45 Cart / $60 TaylorMade set</Text></Card><Card><Text style={s.cardTitle}>Membership Details</Text><Text style={s.small}>Elite • Seasonal • Club information</Text><Button>Inquire Online</Button></Card></Shell>}
+function Screen04_ActiveGPSPlay({ navigation }) {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>04. ACTIVE GPS PLAY</Text>
+        <View style={styles.mapGraphicPlaceholder}>
+          <Text style={styles.mapText}>[ Live Aerial Mapping View Overlay ]</Text>
+          <View style={styles.badgeOverlay}><Text style={styles.btnText}>345 Yds to Pin</Text></View>
+        </View>
+        <View style={styles.rowSpace}>
+          <Text style={styles.bodyText}>Par 4</Text>
+          <Text style={styles.itemTitle}>Hole 12</Text>
+          <Text style={styles.bodyText}>Par 4</Text>
+        </View>
+        <TouchableOpacity style={styles.blueButton} onPress={() => navigation.navigate('AICaddie')}>
+          <Text style={styles.btnText}>CONSULT AI CADDIE</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+}
 
-function Practice({go}){return <Shell page="PRACTICE" go={go}><View style={s.grid}>{[['Wedges','Mini training'],['Irons','Mini training'],['Driver','Speed & flight'],['Chipping','Touch'],['Bunker','Sand saves'],['Putting','Pace']].map(x=><Card key={x[0]} style={s.practice}><Text style={s.practiceIcon}>🏌</Text><Text style={s.cardTitle}>{x[0]}</Text><Text style={s.small}>{x[1]}</Text><Button small>START</Button></Card>)}</View></Shell>}
+function Screen05_AICaddie({ navigation }) {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>05. AI CADDIE ADVICE</Text>
+        <Text style={styles.accentText}>Club Suggestion: 7 Iron</Text>
+        <Text style={styles.titleText}>Expected Distance: 155 Yds</Text>
+        <View style={styles.rowSpace}>
+          <View style={styles.pill}><Text style={styles.subText}>💨 Wind Vector Enabled</Text></View>
+          <View style={styles.pill}><Text style={styles.subText}>📐 Slope Factor Comp</Text></View>
+        </View>
+        <TouchableOpacity style={styles.blueButton} onPress={() => navigation.navigate('RoundSummary')}>
+          <Text style={styles.btnText}>PROCEED TO HOLE SUMMARY</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+}
 
-function Warmup({go}){return <Shell page="WARM-UP" go={go}><Text style={s.bigTitle}>Pre-round Routine</Text>{['Joint Mobilization','Dynamic Stretching','Swing Tempo','Wedge Feel','Iron Precision','Driver Confidence','Chipping Touch','Putting Pace'].map((x,i)=><View key={x} style={s.checkRow}><Text style={s.check}>{i<4?'☑':'☐'}</Text><Text style={s.checkText}>{i+1}. {x}</Text></View>)}<Card style={s.blueCard}><Text style={s.whiteTitle}>◉ Advice Only:</Text><Text style={s.smallWhite}>Get AI mental and strategy tips</Text></Card></Shell>}
+function Screen06_Scorecard() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>06. SCORECARD</Text>
+        <View style={styles.tableRow}>
+          <Text style={[styles.tableHeader, { flex: 2 }]}>Hole Grid</Text>
+          <Text style={styles.tableHeader}>1</Text>
+          <Text style={styles.tableHeader}>2</Text>
+          <Text style={styles.tableHeader}>3</Text>
+          <Text style={styles.tableHeader}>4</Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text style={[styles.bodyText, { flex: 2 }]}>Par Limits</Text>
+          <Text style={styles.bodyText}>4</Text>
+          <Text style={styles.bodyText}>4</Text>
+          <Text style={styles.bodyText}>3</Text>
+          <Text style={styles.bodyText}>5</Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text style={[styles.accentText, { flex: 2 }]}>Player Net</Text>
+          <Text style={styles.accentText}>+1</Text>
+          <Text style={styles.accentText}>E</Text>
+          <Text style={styles.accentText}>E</Text>
+          <Text style={styles.redText}>-1</Text>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
 
-function Routines({go}){return <Shell page="ROUTINES" go={go}><Text style={s.bigTitle}>Psychological Focus</Text><View style={s.grid}>{[['1. Target','Guiding our needs of target'],['2. Lie','Read the lie'],['3. Club','Select your club'],['4. Picture','Visualise ball flight'],['5. Commit','100% committed'],['6. Breathe','Settle and breathe'],['7. Reset','Reset after the shot'],['8. Next','Move to next shot']].map(x=><Card key={x[0]} style={s.routine}><Text style={s.cardTitle}>{x[0]}</Text><Text style={s.small}>{x[1]}</Text></Card>)}</View></Shell>}
+function Screen07_Performance() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>07. PERFORMANCE ANALYTICS</Text>
+        <Text style={styles.titleText}>Handicap Trend Status (12.4)</Text>
+        <View style={styles.graphPlaceholder}><Text style={styles.subText}>[ Active fl_chart Vector Graph Display ]</Text></View>
+        <View style={styles.rowSpace}>
+          <Text style={styles.bodyText}>Avg Putts: 1.4</Text>
+          <Text style={styles.accentText}>GIR Rank: 68%</Text>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
 
-function Summary({go}){return <Shell page="ROUND SUMMARY" go={go}><View style={s.blueHead}><Text style={s.whiteTitle}>Round Summary - Hole 4</Text></View><Card><Text style={s.cardTitle}>Situation:</Text><Text>Par 4, uphill dogleg right</Text></Card><Card><Text style={s.cardTitle}>Caddie Advice:</Text><Text>Trust 3-Wood, wind right</Text></Card><Card><Text style={s.cardTitle}>Club:</Text><Text>3-Wood</Text><Text style={[s.cardTitle,{marginTop:8}]}>Result:</Text><Text>Fairway Center</Text></Card><View style={s.row}><Card style={{flex:1}}><Text style={s.cardTitle}>Score:</Text><Text>Par (4)</Text></Card><Card style={{flex:1}}><Text style={s.cardTitle}>Score:</Text><Text style={s.metric}>4</Text></Card></View><View style={s.row}><Button>‹</Button><Button>▶</Button><Button>›</Button></View></Shell>}
+function Screen08_Tournaments() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>08. TOURNAMENTS METRICS</Text>
+        <Text style={styles.titleText}>DRC Elite Open Standings</Text>
+        <View style={styles.listItem}>
+          <Text style={styles.bodyText}>1st Pl. Andrew</Text>
+          <Text style={styles.redText}>-3 Net Score</Text>
+        </View>
+        <View style={styles.listItem}>
+          <Text style={styles.bodyText}>2nd Pl. Korton</Text>
+          <Text style={styles.redText}>-3 Net Score</Text>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
 
-function Settings({go}){const[on,setOn]=useState(true);return <Shell page="SETTINGS / HELP" go={go}><View style={s.blueHead}><Text style={s.whiteTitle}>Settings</Text></View>{[['System Units','Yards/Meters'],['Caddie Voice & Name','AI Caddie “Alex” • Voice: British'],['Accessibility','High Contrast, Audio Cues'],['Permissions','GPS, Motion']].map(x=><Card key={x[0]} style={s.setting}><View style={{flex:1}}><Text style={s.cardTitle}>{x[0]}</Text><Text style={s.small}>{x[1]}</Text></View><Switch value={on} onValueChange={setOn}/></Card>)}<Card><Text style={s.cardTitle}>Help & FAQ / How-To   ›</Text><Text style={s.small}>Guides, Support</Text></Card></Shell>}
+function Screen09_MyGear() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>09. MY GEAR PROFILES</Text>
+        <View style={styles.listItem}>
+          <Text style={styles.bodyText}>Driver Performance Max</Text>
+          <Text style={styles.itemTitle}>245 Yds Avg</Text>
+        </View>
+        <View style={styles.listItem}>
+          <Text style={styles.bodyText}>7-Iron Track Range</Text>
+          <Text style={styles.itemTitle}>155 Yds Avg</Text>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
 
-function Mapper({go}){return <Shell page="COURSE MAPPER" go={go}><Text style={s.bigTitle}>Setup & Tee Selection</Text><View style={s.tees}><Text style={s.tee}>📍{'
-'}Blue</Text><Text style={s.tee}>⚪{'
-'}White</Text><Text style={s.tee}>🔴{'
-'}Red</Text></View><Button>Start Mapping</Button><Card><Text style={s.bigTitle}>Capture GPS Positions</Text><View style={s.row}><Button small>Front{'
-'}of green</Button><Button small>Centre{'
-'}of green</Button><Button small>Back{'
-'}of green</Button></View><Text style={s.coords}>48.470° Latitude     28.370° Longitude</Text></Card><Button>Map UI   🗺</Button></Shell>}
+function Screen10_Profile() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>10. PROFILE OVERVIEW</Text>
+        <Text style={styles.welcomeTitle}>Andrew</Text>
+        <Text style={styles.subText}>Global Handicap Registry Index: 12.4</Text>
+        <View style={styles.rowSpace}>
+          <View style={styles.pill}><Text style={styles.subText}>🏅 Badge Earned</Text></View>
+          <View style={styles.pill}><Text style={styles.subText}>🏆 Leaderboard Tier</Text></View>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
 
-export default function App(){const[page,setPage]=useState('SIGN IN');const go=p=>setPage(p);const props={go};switch(page){case'SIGN IN':return <SignIn {...props}/>;case'HOME':return <Home {...props}/>;case'COURSE SELECT':return <CourseSelect {...props}/>;case'ACTIVE GPS PLAY':return <GPS {...props}/>;case'AI CADDIE':return <Caddie {...props}/>;case'SCORECARD':return <Score {...props}/>;case'PERFORMANCE':return <Performance {...props}/>;case'TOURNAMENTS':return <Tournaments {...props}/>;case'MY GEAR':return <Gear {...props}/>;case'PROFILE':return <Profile {...props}/>;case'COURSE INFO':return <CourseInfo {...props}/>;case'PRACTICE':return <Practice {...props}/>;case'WARM-UP':return <Warmup {...props}/>;case'ROUTINES':return <Routines {...props}/>;case'ROUND SUMMARY':return <Summary {...props}/>;case'SETTINGS / HELP':return <Settings {...props}/>;case'COURSE MAPPER':return <Mapper {...props}/>;default:return <Home {...props}/>}}
+function Screen11_CourseInfo({ navigation }) {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>11. COURSE INFO REGISTRY</Text>
+        <Text style={styles.titleText}>The Club at Pebble Beach</Text>
+        <Text style={styles.accentText}>Line: (769) 336-7890</Text>
+        <Text style={styles.bodyText}>Cart & Equipment Packages: $45 Vehicle Fee / $60 TaylorMade Premium Hardware Sets</Text>
+        <TouchableOpacity style={styles.blueButton} onPress={() => navigation.navigate('ActivePlay')}>
+          <Text style={styles.btnText}>LAUNCH LIVE MONITORING</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+}
 
-const s=StyleSheet.create({safe:{flex:1,backgroundColor:'#071827'},phone:{flex:1,backgroundColor:C.bg,paddingHorizontal:10,paddingTop:6},header:{height:48,flexDirection:'row',alignItems:'center'},logo:{width:56,height:46,borderRadius:9,borderWidth:1,borderColor:C.line,backgroundColor:C.white,alignItems:'center',justifyContent:'center'},logoBig:{fontSize:19,fontWeight:'900',color:C.blue,fontStyle:'italic'},logoTiny:{fontSize:5,fontWeight:'900',color:C.ink},hello:{fontSize:11,fontWeight:'800',color:C.ink,marginRight:8},icon:{fontSize:16,marginLeft:6,color:C.muted},tag:{textAlign:'center',fontSize:13,fontWeight:'900',color:C.ink,letterSpacing:.5,marginBottom:7},title:{fontSize:20,fontWeight:'900',color:C.ink,textAlign:'center',marginVertical:6},body:{paddingBottom:18},card:{backgroundColor:C.white,borderWidth:1,borderColor:C.line,borderRadius:10,padding:11,marginBottom:8,shadowColor:'#000',shadowOpacity:.08,shadowRadius:3,shadowOffset:{width:0,height:2}},cardTitle:{fontSize:15,fontWeight:'900',color:C.ink},small:{fontSize:11,color:C.muted,marginTop:2},btn:{backgroundColor:C.blue,borderRadius:9,paddingVertical:12,paddingHorizontal:14,alignItems:'center',justifyContent:'center',marginVertical:4,minWidth:62},btnSmall:{paddingVertical:7,paddingHorizontal:10},btnText:{color:C.white,fontWeight:'900',fontSize:12,textAlign:'center'},bigTitle:{fontSize:20,fontWeight:'900',color:C.ink,marginBottom:9},input:{height:42,borderWidth:1,borderColor:C.line,borderRadius:8,backgroundColor:C.white,paddingHorizontal:12,color:C.ink,marginBottom:8},forgot:{fontSize:9,color:C.blue,textAlign:'right',marginBottom:5},or:{textAlign:'center',color:C.muted,fontSize:10,marginVertical:8},footerText:{textAlign:'center',fontSize:9,color:C.blue,marginTop:8},grid:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'},tile:{width:'49%',height:55,borderRadius:9,borderWidth:1,borderColor:C.line,backgroundColor:C.white,alignItems:'center',justifyContent:'center',marginBottom:7},tileText:{fontSize:11,fontWeight:'900',color:C.ink,textAlign:'center'},coursePic:{height:74,borderRadius:7,alignItems:'center',justifyContent:'center',marginBottom:8},picText:{color:C.white,fontSize:12,fontWeight:'900'},row:{flexDirection:'row',gap:7,alignItems:'center'},gpsTop:{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:8},bubble:{width:66,height:66,borderRadius:33,backgroundColor:C.blue,alignItems:'center',justifyContent:'center',borderWidth:3,borderColor:'#79A8C7'},bubbleBig:{color:C.white,fontSize:17,fontWeight:'900'},bubbleSmall:{color:C.white,fontSize:9,textAlign:'center'},distance:{backgroundColor:C.blue,borderRadius:8,padding:8,alignItems:'center'},distanceBig:{color:C.white,fontSize:20,fontWeight:'900'},distanceSmall:{color:C.white,fontSize:9},holeMap:{height:385,backgroundColor:'#628E43',borderRadius:15,overflow:'hidden',alignItems:'center',justifyContent:'center',borderWidth:2,borderColor:'#416C31'},fairway:{width:90,height:320,backgroundColor:'#8BBE5A',borderRadius:45,alignItems:'center',justifyContent:'space-between',paddingVertical:18},tree:{position:'absolute',color:'#315D2B',fontSize:32,left:8},flag:{fontSize:25},ball:{fontSize:17,color:C.white},line:{height:230,width:3,backgroundColor:C.white},mapLabel:{position:'absolute',right:12,top:120,backgroundColor:C.blue,borderRadius:8,padding:8},mapLabelBig:{color:C.white,fontSize:18,fontWeight:'900'},mapLabelSmall:{color:C.white,fontSize:9},holeBar:{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:7,paddingHorizontal:12},holePill:{backgroundColor:C.blue,color:C.white,paddingHorizontal:20,paddingVertical:6,borderRadius:7,fontWeight:'900'},section:{fontSize:13,fontWeight:'800',color:C.ink,marginVertical:7},shotPic:{height:150,borderRadius:10,backgroundColor:'#8CB66B',alignItems:'center',justifyContent:'center',marginBottom:8,borderWidth:1,borderColor:C.line},table:{backgroundColor:C.white,borderWidth:1,borderColor:C.line,marginBottom:10},tr:{flexDirection:'row',borderBottomWidth:1,borderBottomColor:C.line},th:{width:54,paddingVertical:8,paddingHorizontal:4,backgroundColor:C.blue,color:C.white,fontSize:10,fontWeight:'900'},td:{flex:1,textAlign:'center',paddingVertical:8,fontSize:10,fontWeight:'800',color:C.ink},scoreVisual:{height:190,backgroundColor:C.blue,borderRadius:10,alignItems:'center',justifyContent:'center'},scoreBig:{fontSize:54,fontWeight:'900',color:C.white},smallWhite:{fontSize:11,color:C.white},segment:{flexDirection:'row',backgroundColor:C.white,borderRadius:8,marginBottom:8,padding:3},segmentOn:{flex:1,textAlign:'center',backgroundColor:C.blue,color:C.white,borderRadius:6,padding:7,fontSize:10,fontWeight:'900'},segmentOff:{flex:1,textAlign:'center',padding:7,fontSize:10,color:C.muted},chart:{height:110,justifyContent:'center',alignItems:'center'},chartLine:{fontSize:42,color:C.blue},bars:{height:110,flexDirection:'row',alignItems:'flex-end',justifyContent:'space-around'},bar:{width:24,backgroundColor:C.blue},metric:{fontSize:30,fontWeight:'900',color:C.ink,textAlign:'center',marginTop:8},blueCard:{backgroundColor:C.blue},whiteTitle:{color:C.white,fontSize:16,fontWeight:'900'},leader:{flexDirection:'row',paddingVertical:5,borderBottomWidth:1,borderBottomColor:C.line},rank:{width:28,fontWeight:'900',color:C.gold},clubArt:{height:150,alignItems:'center',justifyContent:'center'},clubRow:{flexDirection:'row',alignItems:'center'},clubName:{flex:1,fontSize:17,fontWeight:'900',color:C.ink},clubDist:{fontSize:16,fontWeight:'900',color:C.ink},avatar:{width:78,height:78,borderRadius:39,backgroundColor:C.white,borderWidth:4,borderColor:C.line,alignItems:'center',justifyContent:'center'},badges:{flexDirection:'row',justifyContent:'space-around',marginVertical:10},badge:{width:58,height:58,borderRadius:29,backgroundColor:C.white,borderWidth:2,borderColor:C.line,alignItems:'center',justifyContent:'center'},practice:{width:'49%',alignItems:'center',minHeight:150},practiceIcon:{fontSize:34},checkRow:{flexDirection:'row',alignItems:'center',backgroundColor:C.white,borderWidth:1,borderColor:C.line,borderRadius:7,padding:10,marginBottom:6},check:{fontSize:17,color:C.blue,width:28},checkText:{fontSize:14,fontWeight:'800',color:C.ink},routine:{width:'49%',minHeight:96},blueHead:{backgroundColor:C.blue,borderRadius:9,padding:10,marginBottom:8},setting:{flexDirection:'row',alignItems:'center'},tees:{flexDirection:'row',justifyContent:'space-around',marginVertical:14},tee:{fontSize:18,fontWeight:'800',textAlign:'center',lineHeight:34},coords:{fontSize:10,color:C.muted,textAlign:'center',marginTop:8},tabs:{height:58,flexDirection:'row',backgroundColor:C.white,borderTopWidth:1,borderTopColor:C.line,borderRadius:10,overflow:'hidden'},tab:{flex:1,alignItems:'center',justifyContent:'center'},tabOn:{backgroundColor:C.blue},tabIcon:{fontSize:17,color:C.muted},tabText:{fontSize:8,fontWeight:'800',color:C.muted,marginTop:1},tabTextOn:{color:C.white}});
+function Screen12_Practice() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>12. PRACTICE MODULE TRACKS</Text>
+        <View style={styles.rowSpace}>
+          <View style={styles.miniCard}><Text style={styles.btnText}>Wedges Track (85%)</Text></View>
+          <View style={styles.miniCard}><Text style={styles.btnText}>Chipping Drills (43%)</Text></View>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+// 13. WARM-UP
+function Screen13_WarmUp() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>13. PRE-ROUND WARM-UP DRILLS</Text>
+        <Text style={styles.bodyText}>✅ 1. Joint Mobilization Drill Completed</Text>
+        <Text style={styles.bodyText}>✅ 2. Dynamic Stretching Sequences Matrix</Text>
+        <Text style={styles.bodyText}>⬜ 3. Swing Tempo Calibration Review</Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+// 14. ROUTINES
+function Screen14_Routines() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>14. COGNITIVE / PSYCHOLOGICAL ROUTINES</Text>
+        <Text style={styles.accentText}>Focus Pillar 1: Target Isolation</Text>
+        <Text style={styles.subText}>Lock target coordinates before executing your stance setup.</Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+// 15. ROUND SUMMARY
+function Screen15_RoundSummary({ navigation }) {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>15. HOLE METRICS SUMMARY</Text>
+        <Text style={styles.titleText}>Round Context: Hole 4</Text>
+        <Text style={styles.bodyText}>Environmental Factor: Par 4, Uphill Dogleg Route Right</Text>
+        <Text style={styles.accentText}>Final Ball State: Fairway Center Area</Text>
+        <Text style={styles.bodyText}>Par Target: 4</Text>
+        <Text style={styles.itemTitle}>Strokes Logged: 4</Text>
+        <TouchableOpacity style={styles.blueButton} onPress={() => navigation.navigate('CourseMapper')}>
+          <Text style={styles.btnText}>PROCEED TO SYSTEM MAPPER</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+}
+
+// 16. SETTINGS / HELP
+function Screen16_SettingsHelp() {
+  const [metricUnit, setMetricUnit] = useState(true);
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>16. SETTINGS PANEL</Text>
+        <View style={styles.rowSpace}>
+          <Text style={styles.bodyText}>Display Metrics in Yards/Imperial</Text>
+          <Switch value={metricUnit} onValueChange={setMetricUnit} />
+        </View>
+        <Text style={styles.subText}>AI Voice Core Assistant Profile Accent: British English</Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+// 17. COURSE MAPPER
+function Screen17_CourseMapper() {
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.cardContainer}>
+        <Text style={styles.screenLabel}>17. GEO-LOCATIONAL COURSE MAPPER</Text>
+        <Text style={styles.titleText}>Capture Coordinates Framework</Text>
+        <View style={styles.rowSpace}>
+          <View style={styles.miniCard}><Text style={styles.subText}>Green Front Edge Edge</Text></View>
+          <View style={styles.miniCard}><Text style={styles.subText}>Pin Center Tracking</Text></View>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 12, backgroundColor: '#0F172A' },
+  cardContainer: { backgroundColor: '#1E293B', padding: 16, borderRadius: 12, marginBottom: 15, borderWidth: 1, borderColor: '#334155' },
+  screenLabel: { color: '#64748B', fontSize: 11, fontWeight: '800', marginBottom: 12, letterSpacing: 1.5 },
+  titleText: { color: '#FFF', fontSize: 18, fontWeight: '700', marginBottom: 10 },
+  welcomeTitle: { color: '#FFF', fontSize: 24, fontWeight: 'bold', marginBottom: 6 },
+  bodyText: { color: '#E2E8F0', fontSize: 14, marginVertical: 4, lineHeight: 20 },
+  accentText: { color: '#3B82F6', fontWeight: '700', fontSize: 15, marginVertical: 4 },
+  subText: { color: '#94A3B8', fontSize: 13, marginBottom: 6 },
+  redText: { color: '#EF4444', fontWeight: '700' },
+  itemTitle: { color: '#FFF', fontSize: 16, fontWeight: '600' },
+  input: { backgroundColor: '#0F172A', color: '#FFF', padding: 12, borderRadius: 8, marginVertical: 8, borderWidth: 1, borderColor: '#334155' },
+  blueButton: { backgroundColor: '#2563EB', padding: 14, borderRadius: 8, alignItems: 'center', marginVertical: 10 },
+  greenButton: { backgroundColor: '#10B981', paddingHorizontal: 14, paddingVertical: 8, borderRadius: 6 },
+  btnText: { color: '#FFF', fontWeight: '700', fontSize: 13 },
+  innerCard: { backgroundColor: '#0F172A', padding: 12, borderRadius: 8, marginTop: 12 },
+  listItem: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#0F172A', padding: 12, borderRadius: 8, marginVertical: 6 },
+  rowSpace: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 8 },
+  miniCard: { backgroundColor: '#0F172A', padding: 14, borderRadius: 8, flex: 1, marginHorizontal: 4, alignItems: 'center' },
+  pill: { backgroundColor: '#334155', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20, marginHorizontal: 2 },
+  logoPlaceholder: { width: 54, height: 54, borderRadius: 27, backgroundColor: '#3B82F6', justifyContent: 'center', alignItems: 'center', marginBottom: 12 },
+  logoText: { color: '#FFF', fontWeight: '900', fontSize: 16 },
+  mapGraphicPlaceholder: { height: 160, backgroundColor: '#15803D', borderRadius: 8, justifyContent: 'center', alignItems: 'center', marginVertical: 12, position: 'relative' },
+  mapText: { color: '#FFF', fontWeight: '600', opacity: 0.8, fontSize: 13 },
+  badgeOverlay: { position: 'absolute', top: 10, right: 10, backgroundColor: '#1E293B', padding: 6, borderRadius: 4 },
+  graphPlaceholder: { height: 100, backgroundColor: '#0F172A', borderRadius: 8, justifyContent: 'center', alignItems: 'center', marginVertical: 12, borderStyle: 'dashed', borderWidth: 1, borderColor: '#475569' },
+  tableRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#334155' },
+  tableHeader: { color: '#64748B', fontWeight: '700' },
+});
