@@ -1,49 +1,11 @@
-name: Build Android APK
+name: Android APK Legacy Workflow Disabled
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
-  build:
+  notice:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build web app
-        run: npm run build
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "21"
-
-      - name: Sync Capacitor Android
-        run: npx cap sync android
-
-      - name: Make Gradle executable
-        run: chmod +x android/gradlew
-
-      - name: Build Android APK
-        working-directory: android
-        run: ./gradlew assembleDebug
-
-      - name: Upload Finished APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: CaddieOS-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: error
+      - name: Use the Expo Android workflow
+        run: echo "This legacy Capacitor workflow is disabled for push builds. Use .github/workflows/build.yml for the Expo React Native APK."
